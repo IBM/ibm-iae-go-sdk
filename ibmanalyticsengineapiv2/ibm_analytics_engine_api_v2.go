@@ -19,9 +19,9 @@ package ibmanalyticsengineapiv2
 
 import (
 	"fmt"
-	common "github.com/IBM/cloud-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v3/core"
 	"github.com/go-openapi/strfmt"
+	common "github.ibm.com/IBM/ibm-iae-go-sdk/common"
 )
 
 // IbmAnalyticsEngineApiV2 : With IBM Analytics Engine you can create Apache Spark and Apache Hadoop clusters and
