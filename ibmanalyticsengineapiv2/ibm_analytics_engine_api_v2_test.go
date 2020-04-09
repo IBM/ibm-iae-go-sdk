@@ -23,7 +23,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.ibm.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
+	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
 	"io"
 	"io/ioutil"
 	"net/http"

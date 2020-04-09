@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"github.com/IBM/go-sdk-core/v3/core"
 	"github.com/go-openapi/strfmt"
-	common "github.ibm.com/IBM/ibm-iae-go-sdk/common"
+	common "github.com/IBM/ibm-iae-go-sdk/common"
 )
 
 // IbmAnalyticsEngineApiV2 : With IBM Analytics Engine you can create Apache Spark and Apache Hadoop clusters and
@@ -37,7 +37,7 @@ type IbmAnalyticsEngineApiV2 struct {
 const DefaultServiceURL = "https://ibm-analytics-engine-api-docs.cloud.ibm.com/"
 
 // DefaultServiceName is the default key used to find external configuration information.
-const DefaultServiceName = "ibm_analytics_engine_api_docs"
+const DefaultServiceName = "ibm_analytics_engine_api"
 
 // IbmAnalyticsEngineApiV2Options : Service options
 type IbmAnalyticsEngineApiV2Options struct {
@@ -47,7 +47,7 @@ type IbmAnalyticsEngineApiV2Options struct {
 }
 
 // NewIbmAnalyticsEngineApiV2UsingExternalConfig : constructs an instance of IbmAnalyticsEngineApiV2 with passed in options and external configuration.
-func NewIbmAnalyticsEngineApiV2UsingExternalConfig(options *IbmAnalyticsEngineApiV2Options) (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2, err error) {
+func NewIbmAnalyticsEngineApiV2UsingExternalConfig(options *IbmAnalyticsEngineApiV2Options) (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2, err error) {
 	if options.ServiceName == "" {
 		options.ServiceName = DefaultServiceName
 	}
@@ -59,18 +59,18 @@ func NewIbmAnalyticsEngineApiV2UsingExternalConfig(options *IbmAnalyticsEngineAp
 		}
 	}
 
-	ibmAnalyticsEngineApiDocs, err = NewIbmAnalyticsEngineApiV2(options)
+	ibmAnalyticsEngineApi, err = NewIbmAnalyticsEngineApiV2(options)
 	if err != nil {
 		return
 	}
 
-	err = ibmAnalyticsEngineApiDocs.Service.ConfigureService(options.ServiceName)
+	err = ibmAnalyticsEngineApi.Service.ConfigureService(options.ServiceName)
 	if err != nil {
 		return
 	}
 
 	if options.URL != "" {
-		err = ibmAnalyticsEngineApiDocs.Service.SetServiceURL(options.URL)
+		err = ibmAnalyticsEngineApi.Service.SetServiceURL(options.URL)
 	}
 	return
 }
@@ -102,15 +102,15 @@ func NewIbmAnalyticsEngineApiV2(options *IbmAnalyticsEngineApiV2Options) (servic
 }
 
 // SetServiceURL sets the service URL
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) SetServiceURL(url string) error {
-	return ibmAnalyticsEngineApiDocs.Service.SetServiceURL(url)
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) SetServiceURL(url string) error {
+	return ibmAnalyticsEngineApi.Service.SetServiceURL(url)
 }
 
 // GetAllAnalyticsEngines : List all Analytics Engines
 // Currently, you cannot fetch the list of all IBM Analytics Engine service instances through this REST API. You should
 // use the IBM Cloud CLI instead.  For example, ```ibmcloud resource service-instances --service-name
 // ibmanalyticsengine```.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines(getAllAnalyticsEnginesOptions *GetAllAnalyticsEnginesOptions) (response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines(getAllAnalyticsEnginesOptions *GetAllAnalyticsEnginesOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getAllAnalyticsEnginesOptions, "getAllAnalyticsEnginesOptions")
 	if err != nil {
 		return
@@ -120,7 +120,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines
 	pathParameters := []string{}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -129,7 +129,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetAllAnalyticsEngines")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetAllAnalyticsEngines")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -139,7 +139,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, nil)
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
 
 	return
 }
@@ -152,7 +152,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines
 //
 //  **NOTE:** No credentials are returned. You can get the IBM Analytics Engine service instance credentials by invoking
 // the reset_password REST API.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(getAnalyticsEngineByIdOptions *GetAnalyticsEngineByIdOptions) (result *AnalyticsEngine, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(getAnalyticsEngineByIdOptions *GetAnalyticsEngineByIdOptions) (result *AnalyticsEngine, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAnalyticsEngineByIdOptions, "getAnalyticsEngineByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -166,7 +166,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID
 	pathParameters := []string{*getAnalyticsEngineByIdOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -175,7 +175,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetAnalyticsEngineByID")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetAnalyticsEngineByID")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -186,7 +186,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -208,7 +208,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID
 // * Failed : A cluster couldn't be created.
 // * Expired : The service instance has expired. The cluster has been deleted.
 // * ResizeFailed : The cluster couldn't be resized. The cluster will be reactivated based on the old settings.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByID(getAnalyticsEngineStateByIdOptions *GetAnalyticsEngineStateByIdOptions) (result *AnalyticsEngineState, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByID(getAnalyticsEngineStateByIdOptions *GetAnalyticsEngineStateByIdOptions) (result *AnalyticsEngineState, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAnalyticsEngineStateByIdOptions, "getAnalyticsEngineStateByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -222,7 +222,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStat
 	pathParameters := []string{*getAnalyticsEngineStateByIdOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -231,7 +231,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStat
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetAnalyticsEngineStateByID")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetAnalyticsEngineStateByID")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -242,7 +242,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStat
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -259,7 +259,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStat
 // CreateCustomizationRequest : Create an adhoc customization request
 // Creates a new adhoc customization request. Adhoc customization scripts can be run only once. They are not persisted
 // with the cluster and are not run automatically when more nodes are added to the cluster.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) CreateCustomizationRequest(createCustomizationRequestOptions *CreateCustomizationRequestOptions) (result *AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest(createCustomizationRequestOptions *CreateCustomizationRequestOptions) (result *AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createCustomizationRequestOptions, "createCustomizationRequestOptions cannot be nil")
 	if err != nil {
 		return
@@ -273,7 +273,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) CreateCustomizationReq
 	pathParameters := []string{*createCustomizationRequestOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -282,7 +282,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) CreateCustomizationReq
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "CreateCustomizationRequest")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "CreateCustomizationRequest")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -306,7 +306,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) CreateCustomizationReq
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -322,7 +322,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) CreateCustomizationReq
 
 // GetAllCustomizationRequests : Get all customization requests run on an Analytics Engine cluster
 // Retrieves the request_id of all customization requests submitted to the specified Analytics Engine cluster.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result *[]interface{}, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result *[]AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAllCustomizationRequestsOptions, "getAllCustomizationRequestsOptions cannot be nil")
 	if err != nil {
 		return
@@ -336,7 +336,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllCustomizationReq
 	pathParameters := []string{*getAllCustomizationRequestsOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -345,7 +345,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllCustomizationReq
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetAllCustomizationRequests")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetAllCustomizationRequests")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -356,14 +356,14 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllCustomizationReq
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make([]map[string]interface{}, 1))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make([]map[string]interface{}, 1))
 	if err == nil {
 		s, ok := response.Result.([]interface{})
 		if !ok {
 			err = fmt.Errorf("an error occurred while processing the operation response")
 			return
 		}
-		slice, e := Unmarshalinterface{}Slice(s)
+		slice, e := UnmarshalAnalyticsEngineCreateCustomizationResponseSlice(s)
 		result = &slice
 		err = e
 		response.Result = result
@@ -375,7 +375,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetAllCustomizationReq
 // GetCustomizationRequestByID : Retrieve details of specified customization request ID
 // Retrieves the status of the specified customization request, along with pointers to log files generated during the
 // run.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetCustomizationRequestByID(getCustomizationRequestByIdOptions *GetCustomizationRequestByIdOptions) (result *AnalyticsEngineCustomizationRunDetails, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByID(getCustomizationRequestByIdOptions *GetCustomizationRequestByIdOptions) (result *AnalyticsEngineCustomizationRunDetails, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getCustomizationRequestByIdOptions, "getCustomizationRequestByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -389,7 +389,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetCustomizationReques
 	pathParameters := []string{*getCustomizationRequestByIdOptions.InstanceGuid, *getCustomizationRequestByIdOptions.RequestID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -398,7 +398,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetCustomizationReques
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetCustomizationRequestByID")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetCustomizationRequestByID")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -409,7 +409,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetCustomizationReques
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -429,7 +429,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetCustomizationReques
 // **Note:** You can't resize the cluster if the software package on the cluster is deprecated or if the software
 // package doesn't permit cluster resizing. See
 // [here](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-unsupported-operations).
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResizeCluster(resizeClusterOptions *ResizeClusterOptions) (result *AnalyticsEngineResizeClusterResponse, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeClusterOptions *ResizeClusterOptions) (result *AnalyticsEngineResizeClusterResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(resizeClusterOptions, "resizeClusterOptions cannot be nil")
 	if err != nil {
 		return
@@ -443,7 +443,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCl
 	pathParameters := []string{*resizeClusterOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -452,7 +452,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCl
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "ResizeCluster")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "ResizeCluster")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -473,7 +473,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCl
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -491,7 +491,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCl
 // Resets the cluster's password to a new system-generated crytographically strong value.  The new password is included
 // in the response and you should make a note of it.  This password is displayed only once here and cannot be retrieved
 // later.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResetClusterPassword(resetClusterPasswordOptions *ResetClusterPasswordOptions) (result *AnalyticsEngineResetClusterPasswordResponse, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPassword(resetClusterPasswordOptions *ResetClusterPasswordOptions) (result *AnalyticsEngineResetClusterPasswordResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(resetClusterPasswordOptions, "resetClusterPasswordOptions cannot be nil")
 	if err != nil {
 		return
@@ -505,7 +505,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResetClusterPassword(r
 	pathParameters := []string{*resetClusterPasswordOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -514,7 +514,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResetClusterPassword(r
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "ResetClusterPassword")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "ResetClusterPassword")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -525,7 +525,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResetClusterPassword(r
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -544,7 +544,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ResetClusterPassword(r
 // * IBM Analytics Engine daemon logs, for example those for Spark, Hive, Yarn, and Knox on the management and data
 // nodes
 // * Yarn application job logs.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ConfigureLogging(configureLoggingOptions *ConfigureLoggingOptions) (response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ConfigureLogging(configureLoggingOptions *ConfigureLoggingOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(configureLoggingOptions, "configureLoggingOptions cannot be nil")
 	if err != nil {
 		return
@@ -558,7 +558,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ConfigureLogging(confi
 	pathParameters := []string{*configureLoggingOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -567,7 +567,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ConfigureLogging(confi
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "ConfigureLogging")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "ConfigureLogging")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -590,14 +590,14 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) ConfigureLogging(confi
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, nil)
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
 
 	return
 }
 
 // GetLoggingConfig : Retrieve the status of log configuration
 // Retrieves the status and details of the log configuration for your cluster.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggingConfigOptions *GetLoggingConfigOptions) (result *AnalyticsEngineLoggingConfigDetails, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggingConfigOptions *GetLoggingConfigOptions) (result *AnalyticsEngineLoggingConfigDetails, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getLoggingConfigOptions, "getLoggingConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -611,7 +611,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLo
 	pathParameters := []string{*getLoggingConfigOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -620,7 +620,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLo
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "GetLoggingConfig")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "GetLoggingConfig")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -631,7 +631,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLo
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, make(map[string]interface{}))
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
 	if err == nil {
 		m, ok := response.Result.(map[string]interface{})
 		if !ok {
@@ -647,7 +647,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLo
 
 // DeleteLoggingConfig : Delete the log configuration
 // Deletes the log configuration. This operation stops sending logs to the centralized log server.
-func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(deleteLoggingConfigOptions *DeleteLoggingConfigOptions) (response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(deleteLoggingConfigOptions *DeleteLoggingConfigOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteLoggingConfigOptions, "deleteLoggingConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -661,7 +661,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(de
 	pathParameters := []string{*deleteLoggingConfigOptions.InstanceGuid}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApiDocs.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -670,7 +670,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(de
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api_docs", "V2", "DeleteLoggingConfig")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "DeleteLoggingConfig")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -680,7 +680,7 @@ func (ibmAnalyticsEngineApiDocs *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(de
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApiDocs.Service.Request(request, nil)
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
 
 	return
 }
