@@ -34,7 +34,7 @@ type IbmAnalyticsEngineApiV2 struct {
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://ibm-analytics-engine-api-docs.cloud.ibm.com/"
+const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com/"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "ibm_analytics_engine_api"
@@ -322,7 +322,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest
 
 // GetAllCustomizationRequests : Get all customization requests run on an Analytics Engine cluster
 // Retrieves the request_id of all customization requests submitted to the specified Analytics Engine cluster.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result *[]AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result *[]AnalyticsEngineCustomizationRequestCollectionItem, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAllCustomizationRequestsOptions, "getAllCustomizationRequestsOptions cannot be nil")
 	if err != nil {
 		return
@@ -363,7 +363,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequest
 			err = fmt.Errorf("an error occurred while processing the operation response")
 			return
 		}
-		slice, e := UnmarshalAnalyticsEngineCreateCustomizationResponseSlice(s)
+		slice, e := UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(s)
 		result = &slice
 		err = e
 		response.Result = result
@@ -859,7 +859,7 @@ func UnmarshalAnalyticsEngineSliceAsProperty(m map[string]interface{}, propertyN
 // AnalyticsEngineClusterNode : Cluster node details.
 type AnalyticsEngineClusterNode struct {
 	// Node ID.
-	ID *string `json:"id,omitempty"`
+	ID *float64 `json:"id,omitempty"`
 
 	// Fully qualified domain name.
 	Fqdn *string `json:"fqdn,omitempty"`
@@ -887,7 +887,7 @@ type AnalyticsEngineClusterNode struct {
 // UnmarshalAnalyticsEngineClusterNode constructs an instance of AnalyticsEngineClusterNode from the specified map.
 func UnmarshalAnalyticsEngineClusterNode(m map[string]interface{}) (result *AnalyticsEngineClusterNode, err error) {
 	obj := new(AnalyticsEngineClusterNode)
-	obj.ID, err = core.UnmarshalString(m, "id")
+	obj.ID, err = core.UnmarshalFloat64(m, "id")
 	if err != nil {
 		return
 	}
@@ -974,14 +974,14 @@ func UnmarshalAnalyticsEngineClusterNodeSliceAsProperty(m map[string]interface{}
 // AnalyticsEngineCreateCustomizationResponse : Create customization request response.
 type AnalyticsEngineCreateCustomizationResponse struct {
 	// Customization request ID.
-	RequestID *string `json:"request_id,omitempty"`
+	RequestID *float64 `json:"request_id,omitempty"`
 }
 
 
 // UnmarshalAnalyticsEngineCreateCustomizationResponse constructs an instance of AnalyticsEngineCreateCustomizationResponse from the specified map.
 func UnmarshalAnalyticsEngineCreateCustomizationResponse(m map[string]interface{}) (result *AnalyticsEngineCreateCustomizationResponse, err error) {
 	obj := new(AnalyticsEngineCreateCustomizationResponse)
-	obj.RequestID, err = core.UnmarshalString(m, "request_id")
+	obj.RequestID, err = core.UnmarshalFloat64(m, "request_id")
 	if err != nil {
 		return
 	}
@@ -1225,6 +1225,72 @@ func UnmarshalAnalyticsEngineCustomActionScriptSliceAsProperty(m map[string]inte
 			return
 		}
 		slice, err = UnmarshalAnalyticsEngineCustomActionScriptSlice(vSlice)
+	}
+	return
+}
+
+// AnalyticsEngineCustomizationRequestCollectionItem : AnalyticsEngineCustomizationRequestCollectionItem struct
+type AnalyticsEngineCustomizationRequestCollectionItem struct {
+	// Customization request ID.
+	ID *string `json:"id,omitempty"`
+}
+
+
+// UnmarshalAnalyticsEngineCustomizationRequestCollectionItem constructs an instance of AnalyticsEngineCustomizationRequestCollectionItem from the specified map.
+func UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(m map[string]interface{}) (result *AnalyticsEngineCustomizationRequestCollectionItem, err error) {
+	obj := new(AnalyticsEngineCustomizationRequestCollectionItem)
+	obj.ID, err = core.UnmarshalString(m, "id")
+	if err != nil {
+		return
+	}
+	result = obj
+	return
+}
+
+// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice unmarshals a slice of AnalyticsEngineCustomizationRequestCollectionItem instances from the specified list of maps.
+func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(s []interface{}) (slice []AnalyticsEngineCustomizationRequestCollectionItem, err error) {
+	for _, v := range s {
+		objMap, ok := v.(map[string]interface{})
+		if !ok {
+			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'")
+			return
+		}
+		obj, e := UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(objMap)
+		if e != nil {
+			err = e
+			return
+		}
+		slice = append(slice, *obj)
+	}
+	return
+}
+
+// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemAsProperty unmarshals an instance of AnalyticsEngineCustomizationRequestCollectionItem that is stored as a property
+// within the specified map.
+func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomizationRequestCollectionItem, err error) {
+	v, foundIt := m[propertyName]
+	if foundIt && v != nil {
+		objMap, ok := v.(map[string]interface{})
+		if !ok {
+			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'", propertyName)
+			return
+		}
+		result, err = UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(objMap)
+	}
+	return
+}
+
+// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSliceAsProperty unmarshals a slice of AnalyticsEngineCustomizationRequestCollectionItem instances that are stored as a property
+// within the specified map.
+func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomizationRequestCollectionItem, err error) {
+	v, foundIt := m[propertyName]
+	if foundIt && v != nil {
+		vSlice, ok := v.([]interface{})
+		if !ok {
+			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'", propertyName)
+			return
+		}
+		slice, err = UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(vSlice)
 	}
 	return
 }

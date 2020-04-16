@@ -28,10 +28,111 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"time"
 )
 
 var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
+    Describe(`Service constructor tests`, func() {
+        It(`Instantiate service client`, func() {
+            testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                Authenticator: &core.NoAuthAuthenticator{},
+            })
+            Expect(testService).ToNot(BeNil())
+            Expect(testServiceErr).To(BeNil())
+        })
+        It(`Instantiate service client with error: Invalid URL`, func() {
+            testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                URL: "{{BAD_URL_STRING",
+            })
+            Expect(testService).To(BeNil())
+            Expect(testServiceErr).ToNot(BeNil())
+        })
+        It(`Instantiate service client with error: Invalid Auth`, func() {
+            testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                URL: "https://ibmanalyticsengineapiv2/api",
+                Authenticator: &core.BasicAuthenticator{
+                    Username: "",
+                    Password: "",
+                },
+            })
+            Expect(testService).To(BeNil())
+            Expect(testServiceErr).ToNot(BeNil())
+        })
+    })
+    Describe(`Service constructor tests using external config`, func() {
+        Context(`Using external config, construct service client instances`, func() {
+            // Map containing environment variables used in testing.
+            var testEnvironment = map[string]string{
+                "IBM_ANALYTICS_ENGINE_API_URL": "https://ibmanalyticsengineapiv2/api",
+                "IBM_ANALYTICS_ENGINE_API_AUTH_TYPE": "noauth",
+            }
+            
+            It(`Create service client using external config successfully`, func() {
+                SetTestEnvironment(testEnvironment)
+                testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2UsingExternalConfig(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                })
+                Expect(testService).ToNot(BeNil())
+                Expect(testServiceErr).To(BeNil())
+                ClearTestEnvironment(testEnvironment)
+            })
+            It(`Create service client using external config and set url from constructor successfully`, func() {
+                SetTestEnvironment(testEnvironment)
+                testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2UsingExternalConfig(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                    URL: "https://testService/api",
+                })
+                Expect(testService).ToNot(BeNil())
+                Expect(testServiceErr).To(BeNil())
+                Expect(testService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+                ClearTestEnvironment(testEnvironment)
+            })
+            It(`Create service client using external config and set url programatically successfully`, func() {
+                SetTestEnvironment(testEnvironment)
+                testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2UsingExternalConfig(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                })
+                err := testService.SetServiceURL("https://testService/api")
+                Expect(err).To(BeNil())
+                Expect(testService).ToNot(BeNil())
+                Expect(testServiceErr).To(BeNil())
+                Expect(testService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+                ClearTestEnvironment(testEnvironment)
+            })
+        })
+        Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
+            // Map containing environment variables used in testing.
+            var testEnvironment = map[string]string{
+                "IBM_ANALYTICS_ENGINE_API_URL": "https://ibmanalyticsengineapiv2/api",
+                "IBM_ANALYTICS_ENGINE_API_AUTH_TYPE": "someOtherAuth",
+            }
+            
+            SetTestEnvironment(testEnvironment)
+            testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2UsingExternalConfig(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+            })
+            
+            It(`Instantiate service client with error`, func() {
+                Expect(testService).To(BeNil())
+                Expect(testServiceErr).ToNot(BeNil())
+                ClearTestEnvironment(testEnvironment)
+            })
+	    })
+        Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
+            // Map containing environment variables used in testing.
+            var testEnvironment = map[string]string{
+                "IBM_ANALYTICS_ENGINE_API_AUTH_TYPE":   "NOAuth",
+            }
+            
+            SetTestEnvironment(testEnvironment)
+            testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2UsingExternalConfig(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+                URL: "{{BAD_URL_STRING",
+            })
+            
+            It(`Instantiate service client with error`, func() {
+                Expect(testService).To(BeNil())
+                Expect(testServiceErr).ToNot(BeNil())
+                ClearTestEnvironment(testEnvironment)
+            })
+        })
+    })
 	Describe(`GetAllAnalyticsEngines(getAllAnalyticsEnginesOptions *GetAllAnalyticsEnginesOptions)`, func() {
 		getAllAnalyticsEnginesPath := "/v2/analytics_engines"
 		Context(`Using mock server endpoint`, func() {
@@ -79,7 +180,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 				Expect(req.Method).To(Equal("GET"))
 				res.Header().Set("Content-type", "application/json")
 				res.WriteHeader(200)
-				fmt.Fprintf(res, `{"id": "ID", "name": "Name", "service_plan": "ServicePlan", "hardware_size": "HardwareSize", "software_package": "SoftwarePackage", "domain": "Domain", "creation_time": "2019-01-01T12:00:00", "commision_time": "2019-01-01T12:00:00", "decommision_time": "2019-01-01T12:00:00", "deletion_time": "2019-01-01T12:00:00", "state_change_time": "2019-01-01T12:00:00", "state": "State", "nodes": [{"id": "ID", "fqdn": "Fqdn", "type": "Type", "state": "State", "public_ip": "PublicIp", "private_ip": "PrivateIp", "state_change_time": "2019-01-01T12:00:00", "commission_time": "2019-01-01T12:00:00"}], "user_credentials": {"user": "User"}, "service_endpoints": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}, "service_endpoints_ip": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}}`)
+				fmt.Fprintf(res, `{"id": "ID", "name": "Name", "service_plan": "ServicePlan", "hardware_size": "HardwareSize", "software_package": "SoftwarePackage", "domain": "Domain", "creation_time": "2019-01-01T12:00:00", "commision_time": "2019-01-01T12:00:00", "decommision_time": "2019-01-01T12:00:00", "deletion_time": "2019-01-01T12:00:00", "state_change_time": "2019-01-01T12:00:00", "state": "State", "nodes": [{"id": 2, "fqdn": "Fqdn", "type": "Type", "state": "State", "public_ip": "PublicIp", "private_ip": "PrivateIp", "state_change_time": "2019-01-01T12:00:00", "commission_time": "2019-01-01T12:00:00"}], "user_credentials": {"user": "User"}, "service_endpoints": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}, "service_endpoints_ip": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}}`)
 			}))
 			It(`Invoke GetAnalyticsEngineByID successfully`, func() {
 				defer testServer.Close()
@@ -161,7 +262,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 				Expect(req.Method).To(Equal("POST"))
 				res.Header().Set("Content-type", "application/json")
 				res.WriteHeader(200)
-				fmt.Fprintf(res, `{"request_id": "RequestID"}`)
+				fmt.Fprintf(res, `{"request_id": 9}`)
 			}))
 			It(`Invoke CreateCustomizationRequest successfully`, func() {
 				defer testServer.Close()
@@ -217,7 +318,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 				Expect(req.Method).To(Equal("GET"))
 				res.Header().Set("Content-type", "application/json")
 				res.WriteHeader(200)
-				fmt.Fprintf(res, `[{}]`)
+				fmt.Fprintf(res, `[{"id": "ID"}]`)
 			}))
 			It(`Invoke GetAllCustomizationRequests successfully`, func() {
 				defer testServer.Close()
@@ -503,7 +604,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 		})
 	})
 	Describe(`Model constructor tests`, func() {
-		Context(`Using a sample service client instance`, func() {
+		Context(`Using a service client instance`, func() {
 			testService, _ := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
 				URL:           "http://ibmanalyticsengineapiv2modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
@@ -592,4 +693,16 @@ func CreateMockDate() *strfmt.Date {
 func CreateMockDateTime() *strfmt.DateTime {
 	d := strfmt.DateTime(time.Now())
 	return &d
+}
+
+func SetTestEnvironment(testEnvironment map[string]string) {
+	for key, value := range testEnvironment {
+		os.Setenv(key, value)
+	}
+}
+
+func ClearTestEnvironment(testEnvironment map[string]string) {
+	for key := range testEnvironment {
+		os.Unsetenv(key)
+	}
 }
