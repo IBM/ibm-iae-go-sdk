@@ -56,7 +56,7 @@ Use this command to download and install the SDK to allow your Go application to
 use it:
 
 ```
-go get -u github.ibm.com/IBM/ibm-iae-go-sdk
+go get -u github.com/IBM/ibm-iae-go-sdk
 ```
 
 #### Go modules  
@@ -65,7 +65,7 @@ Go application, like this:
 
 ```go
 import (
-	"github.ibm.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
+	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
 )
 ```
 
@@ -78,7 +78,7 @@ to your `Gopkg.toml` file.  Here is an example:
 
 ```
 [[constraint]]
-  name = "github.ibm.com/IBM/ibm-iae-go-sdk"
+  name = "github.com/IBM/ibm-iae-go-sdk"
   version = "0.0.1"
 
 ```
