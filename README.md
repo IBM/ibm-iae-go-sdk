@@ -1,5 +1,5 @@
 # IBM Cloud Analytics Engine Go SDK
-Go client library to interact with the various [IBM Cloud MySDK Service APIs](https://cloud.ibm.com/apidocs/ibm-analytics-engine).
+Go client library to interact with the various [IBM Analytics Engine APIs](https://cloud.ibm.com/apidocs/ibm-analytics-engine).
 
 ## Table of Contents
 <!--
@@ -31,7 +31,7 @@ Go client library to interact with the various [IBM Cloud MySDK Service APIs](ht
 
 ## Overview
 
-The IBM Cloud MySDK Go SDK allows developers to programmatically interact with the following IBM Cloud services:
+The IBM Cloud IBM Analytics Engine API Go SDK allows developers to programmatically interact with the following IBM Cloud services:
 
 Service Name | Package name 
 --- | --- 
@@ -48,7 +48,7 @@ Service Name | Package name
 ## Installation
 The current version of this SDK: 0.0.1
 
-There are a few different ways to download and install the MySDK Go SDK project for use by your
+There are a few different ways to download and install the IBM Analytics Engine API Go SDK project for use by your
 Go application:
 
 #### `go get` command  
