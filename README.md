@@ -43,7 +43,7 @@ Service Name | Package name
 
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.12 or above.
+* Go version 1.13 or above.
 
 ## Installation
 The current version of this SDK: 0.0.1
@@ -52,16 +52,21 @@ There are a few different ways to download and install the IBM Analytics Engine 
 Go application:
 
 #### `go get` command  
-Use this command to download and install the SDK to allow your Go application to
-use it:
+Use this command to download and install the SDK (along with its dependencies) to allow your Go application to use it:
 
 ```
-go get -u github.com/IBM/ibm-iae-go-sdk
+go get -u github.com/IBM/ibm-iae-go-sdk/...
+```
+
+If you are creating a new go project then create a folder inside $GOPATH and install packages. For example:
+```
+mkdir -p ~/go/src/go-test
+cd ~/go/src/go-test
+go get -u github.com/IBM/ibm-iae-go-sdk/...
 ```
 
 #### Go modules  
-If your application is using Go modules, you can add a suitable import to your
-Go application, like this:
+If your application is using Go modules, you can add a suitable import to your Go application, like this:
 
 ```go
 import (
@@ -69,21 +74,15 @@ import (
 )
 ```
 
-then run `go mod tidy` to download and install the new dependency and update your Go application's
-`go.mod` file.
+then run `go mod tidy` to download and install the new dependency and update your Go application's `go.mod` file.
 
-#### `dep` dependency manager  
-If your application is using the `dep` dependency management tool, you can add a dependency
-to your `Gopkg.toml` file.  Here is an example:
-
+If you are creating a new go project then create a folder outside $GOPATH, init module, and install packages. For example:
 ```
-[[constraint]]
-  name = "github.com/IBM/ibm-iae-go-sdk"
-  version = "0.0.1"
-
+mkdir -p ~/go-test
+cd ~/go-test
+go mod init <some-name>
+go get -u github.com/IBM/ibm-iae-go-sdk
 ```
-
-then run `dep ensure`.
 
 ## Using the SDK
 For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md)
