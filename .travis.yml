@@ -23,7 +23,7 @@ script:
 - go test `go list ./...` -tags integration
 - golangci-lint run
 
-To enable semantic-release, uncomment these sections.
+# To enable semantic-release, uncomment these sections.
 before_deploy:
 - pip install --user bump2version
 - npm install @semantic-release/changelog
