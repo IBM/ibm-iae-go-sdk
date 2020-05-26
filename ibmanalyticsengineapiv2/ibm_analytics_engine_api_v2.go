@@ -20,8 +20,8 @@ package ibmanalyticsengineapiv2
 import (
 	"fmt"
 	"github.com/IBM/go-sdk-core/v3/core"
-	"github.com/go-openapi/strfmt"
 	common "github.com/IBM/ibm-iae-go-sdk/common"
+	"github.com/go-openapi/strfmt"
 )
 
 // IbmAnalyticsEngineApiV2 : With IBM Analytics Engine you can create Apache Spark and Apache Hadoop clusters and
@@ -685,6 +685,70 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(delete
 	return
 }
 
+// UpdatePrivateEndpointWhitelist : Update private endpoint whitelist
+// Updates the list of whitelisted private endpoints. This operation either adds ip ranges to the whitelist or deletes
+// them.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptions *UpdatePrivateEndpointWhitelistOptions) (result *AnalyticsEngineWhitelistResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updatePrivateEndpointWhitelistOptions, "updatePrivateEndpointWhitelistOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updatePrivateEndpointWhitelistOptions, "updatePrivateEndpointWhitelistOptions")
+	if err != nil {
+		return
+	}
+
+	pathSegments := []string{"v2/analytics_engines", "private_endpoint_whitelist"}
+	pathParameters := []string{*updatePrivateEndpointWhitelistOptions.InstanceGuid}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updatePrivateEndpointWhitelistOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V2", "UpdatePrivateEndpointWhitelist")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updatePrivateEndpointWhitelistOptions.IpRanges != nil {
+		body["ip_ranges"] = updatePrivateEndpointWhitelistOptions.IpRanges
+	}
+	if updatePrivateEndpointWhitelistOptions.Action != nil {
+		body["action"] = updatePrivateEndpointWhitelistOptions.Action
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
+	if err == nil {
+		m, ok := response.Result.(map[string]interface{})
+		if !ok {
+			err = fmt.Errorf("an error occurred while processing the operation response")
+			return
+		}
+		result, err = UnmarshalAnalyticsEngineWhitelistResponse(m)
+		response.Result = result
+	}
+
+	return
+}
+
 // AnalyticsEngine : Analytics Engine cluster details.
 type AnalyticsEngine struct {
 	// Instance GUID.
@@ -734,6 +798,9 @@ type AnalyticsEngine struct {
 
 	// Service endpoint URLs with host IPS. Endpoints will vary based on software package chosen for the cluster.
 	ServiceEndpointsIp *ServiceEndpoints `json:"service_endpoints_ip,omitempty"`
+
+	// Whitelisted IP Ranges for Analytics Engine Service with private endpoints.
+	PrivateEndpointWhitelist []string `json:"private_endpoint_whitelist,omitempty"`
 }
 
 
@@ -801,6 +868,10 @@ func UnmarshalAnalyticsEngine(m map[string]interface{}) (result *AnalyticsEngine
 		return
 	}
 	obj.ServiceEndpointsIp, err = UnmarshalServiceEndpointsAsProperty(m, "service_endpoints_ip")
+	if err != nil {
+		return
+	}
+	obj.PrivateEndpointWhitelist, err = core.UnmarshalStringSlice(m, "private_endpoint_whitelist")
 	if err != nil {
 		return
 	}
@@ -2291,6 +2362,72 @@ func UnmarshalAnalyticsEngineUserCredentialsSliceAsProperty(m map[string]interfa
 	return
 }
 
+// AnalyticsEngineWhitelistResponse : Whitelisted IP Ranges.
+type AnalyticsEngineWhitelistResponse struct {
+	// Whitelisted IP Ranges.
+	PrivateEndpointWhitelist []string `json:"private_endpoint_whitelist,omitempty"`
+}
+
+
+// UnmarshalAnalyticsEngineWhitelistResponse constructs an instance of AnalyticsEngineWhitelistResponse from the specified map.
+func UnmarshalAnalyticsEngineWhitelistResponse(m map[string]interface{}) (result *AnalyticsEngineWhitelistResponse, err error) {
+	obj := new(AnalyticsEngineWhitelistResponse)
+	obj.PrivateEndpointWhitelist, err = core.UnmarshalStringSlice(m, "private_endpoint_whitelist")
+	if err != nil {
+		return
+	}
+	result = obj
+	return
+}
+
+// UnmarshalAnalyticsEngineWhitelistResponseSlice unmarshals a slice of AnalyticsEngineWhitelistResponse instances from the specified list of maps.
+func UnmarshalAnalyticsEngineWhitelistResponseSlice(s []interface{}) (slice []AnalyticsEngineWhitelistResponse, err error) {
+	for _, v := range s {
+		objMap, ok := v.(map[string]interface{})
+		if !ok {
+			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineWhitelistResponse'")
+			return
+		}
+		obj, e := UnmarshalAnalyticsEngineWhitelistResponse(objMap)
+		if e != nil {
+			err = e
+			return
+		}
+		slice = append(slice, *obj)
+	}
+	return
+}
+
+// UnmarshalAnalyticsEngineWhitelistResponseAsProperty unmarshals an instance of AnalyticsEngineWhitelistResponse that is stored as a property
+// within the specified map.
+func UnmarshalAnalyticsEngineWhitelistResponseAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineWhitelistResponse, err error) {
+	v, foundIt := m[propertyName]
+	if foundIt && v != nil {
+		objMap, ok := v.(map[string]interface{})
+		if !ok {
+			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineWhitelistResponse'", propertyName)
+			return
+		}
+		result, err = UnmarshalAnalyticsEngineWhitelistResponse(objMap)
+	}
+	return
+}
+
+// UnmarshalAnalyticsEngineWhitelistResponseSliceAsProperty unmarshals a slice of AnalyticsEngineWhitelistResponse instances that are stored as a property
+// within the specified map.
+func UnmarshalAnalyticsEngineWhitelistResponseSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineWhitelistResponse, err error) {
+	v, foundIt := m[propertyName]
+	if foundIt && v != nil {
+		vSlice, ok := v.([]interface{})
+		if !ok {
+			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineWhitelistResponse'", propertyName)
+			return
+		}
+		slice, err = UnmarshalAnalyticsEngineWhitelistResponseSlice(vSlice)
+	}
+	return
+}
+
 // ConfigureLoggingOptions : The ConfigureLogging options.
 type ConfigureLoggingOptions struct {
 	// GUID of the service instance.
@@ -2790,4 +2927,59 @@ func UnmarshalServiceEndpointsSliceAsProperty(m map[string]interface{}, property
 		slice, err = UnmarshalServiceEndpointsSlice(vSlice)
 	}
 	return
+}
+
+// UpdatePrivateEndpointWhitelistOptions : The UpdatePrivateEndpointWhitelist options.
+type UpdatePrivateEndpointWhitelistOptions struct {
+	// GUID of the service instance.
+	InstanceGuid *string `json:"instance_guid" validate:"required"`
+
+	// List of IP ranges to add to or remove from the whitelist.
+	IpRanges []string `json:"ip_ranges" validate:"required"`
+
+	// Update Whitelist IP ranges. Add (or) Delete.
+	Action *string `json:"action" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the UpdatePrivateEndpointWhitelistOptions.Action property.
+// Update Whitelist IP ranges. Add (or) Delete.
+const (
+	UpdatePrivateEndpointWhitelistOptions_Action_Add = "add"
+	UpdatePrivateEndpointWhitelistOptions_Action_Delete = "delete"
+)
+
+// NewUpdatePrivateEndpointWhitelistOptions : Instantiate UpdatePrivateEndpointWhitelistOptions
+func (*IbmAnalyticsEngineApiV2) NewUpdatePrivateEndpointWhitelistOptions(instanceGuid string, ipRanges []string, action string) *UpdatePrivateEndpointWhitelistOptions {
+	return &UpdatePrivateEndpointWhitelistOptions{
+		InstanceGuid: core.StringPtr(instanceGuid),
+		IpRanges: ipRanges,
+		Action: core.StringPtr(action),
+	}
+}
+
+// SetInstanceGuid : Allow user to set InstanceGuid
+func (options *UpdatePrivateEndpointWhitelistOptions) SetInstanceGuid(instanceGuid string) *UpdatePrivateEndpointWhitelistOptions {
+	options.InstanceGuid = core.StringPtr(instanceGuid)
+	return options
+}
+
+// SetIpRanges : Allow user to set IpRanges
+func (options *UpdatePrivateEndpointWhitelistOptions) SetIpRanges(ipRanges []string) *UpdatePrivateEndpointWhitelistOptions {
+	options.IpRanges = ipRanges
+	return options
+}
+
+// SetAction : Allow user to set Action
+func (options *UpdatePrivateEndpointWhitelistOptions) SetAction(action string) *UpdatePrivateEndpointWhitelistOptions {
+	options.Action = core.StringPtr(action)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdatePrivateEndpointWhitelistOptions) SetHeaders(param map[string]string) *UpdatePrivateEndpointWhitelistOptions {
+	options.Headers = param
+	return options
 }

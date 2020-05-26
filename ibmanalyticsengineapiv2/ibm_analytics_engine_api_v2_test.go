@@ -20,10 +20,10 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/IBM/go-sdk-core/v3/core"
+	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -180,7 +180,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 				Expect(req.Method).To(Equal("GET"))
 				res.Header().Set("Content-type", "application/json")
 				res.WriteHeader(200)
-				fmt.Fprintf(res, `{"id": "ID", "name": "Name", "service_plan": "ServicePlan", "hardware_size": "HardwareSize", "software_package": "SoftwarePackage", "domain": "Domain", "creation_time": "2019-01-01T12:00:00", "commision_time": "2019-01-01T12:00:00", "decommision_time": "2019-01-01T12:00:00", "deletion_time": "2019-01-01T12:00:00", "state_change_time": "2019-01-01T12:00:00", "state": "State", "nodes": [{"id": 2, "fqdn": "Fqdn", "type": "Type", "state": "State", "public_ip": "PublicIp", "private_ip": "PrivateIp", "state_change_time": "2019-01-01T12:00:00", "commission_time": "2019-01-01T12:00:00"}], "user_credentials": {"user": "User"}, "service_endpoints": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}, "service_endpoints_ip": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}}`)
+				fmt.Fprintf(res, `{"id": "ID", "name": "Name", "service_plan": "ServicePlan", "hardware_size": "HardwareSize", "software_package": "SoftwarePackage", "domain": "Domain", "creation_time": "2019-01-01T12:00:00", "commision_time": "2019-01-01T12:00:00", "decommision_time": "2019-01-01T12:00:00", "deletion_time": "2019-01-01T12:00:00", "state_change_time": "2019-01-01T12:00:00", "state": "State", "nodes": [{"id": 2, "fqdn": "Fqdn", "type": "Type", "state": "State", "public_ip": "PublicIp", "private_ip": "PrivateIp", "state_change_time": "2019-01-01T12:00:00", "commission_time": "2019-01-01T12:00:00"}], "user_credentials": {"user": "User"}, "service_endpoints": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}, "service_endpoints_ip": {"phoenix_jdbc": "PhoenixJdbc", "ambari_console": "AmbariConsole", "livy": "Livy", "spark_history_server": "SparkHistoryServer", "oozie_rest": "OozieRest", "hive_jdbc": "HiveJdbc", "notebook_gateway_websocket": "NotebookGatewayWebsocket", "notebook_gateway": "NotebookGateway", "webhdfs": "Webhdfs", "ssh": "Ssh", "spark_sql": "SparkSql"}, "private_endpoint_whitelist": ["PrivateEndpointWhitelist"]}`)
 			}))
 			It(`Invoke GetAnalyticsEngineByID successfully`, func() {
 				defer testServer.Close()
@@ -600,6 +600,49 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 				response, operationErr = testService.DeleteLoggingConfig(deleteLoggingConfigOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+			})
+		})
+	})
+	Describe(`UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptions *UpdatePrivateEndpointWhitelistOptions)`, func() {
+		updatePrivateEndpointWhitelistPath := "/v2/analytics_engines/testString/private_endpoint_whitelist"
+		Context(`Using mock server endpoint`, func() {
+			testServer := httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+				defer GinkgoRecover()
+
+				// Verify the contents of the request
+				Expect(req.URL.Path).To(Equal(updatePrivateEndpointWhitelistPath))
+				Expect(req.Method).To(Equal("PATCH"))
+				res.Header().Set("Content-type", "application/json")
+				res.WriteHeader(200)
+				fmt.Fprintf(res, `{"private_endpoint_whitelist": ["PrivateEndpointWhitelist"]}`)
+			}))
+			It(`Invoke UpdatePrivateEndpointWhitelist successfully`, func() {
+				defer testServer.Close()
+
+				testService, testServiceErr := ibmanalyticsengineapiv2.NewIbmAnalyticsEngineApiV2(&ibmanalyticsengineapiv2.IbmAnalyticsEngineApiV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(testServiceErr).To(BeNil())
+				Expect(testService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := testService.UpdatePrivateEndpointWhitelist(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdatePrivateEndpointWhitelistOptions model
+				updatePrivateEndpointWhitelistOptionsModel := new(ibmanalyticsengineapiv2.UpdatePrivateEndpointWhitelistOptions)
+				updatePrivateEndpointWhitelistOptionsModel.InstanceGuid = core.StringPtr("testString")
+				updatePrivateEndpointWhitelistOptionsModel.IpRanges = []string{"testString"}
+				updatePrivateEndpointWhitelistOptionsModel.Action = core.StringPtr("add")
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = testService.UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
 			})
 		})
 	})

@@ -274,4 +274,23 @@ var _ = Describe(`IbmAnalyticsEngineApiV2`, func() {
 			Expect(response.StatusCode).To(Equal(202))
 		})
 	})
+
+	Describe(`UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptions *UpdatePrivateEndpointWhitelistOptions)`, func() {
+		It(`Invoke UpdatePrivateEndpointWhitelist successfully`, func() {
+			shouldSkipTest()
+
+			// Construct an instance of the UpdatePrivateEndpointWhitelistOptions model
+			updatePrivateEndpointWhitelistOptionsModel := new(ibmanalyticsengineapiv2.UpdatePrivateEndpointWhitelistOptions)
+			updatePrivateEndpointWhitelistOptionsModel.InstanceGuid = core.StringPtr(instanceGuid)
+			updatePrivateEndpointWhitelistOptionsModel.IpRanges = []string{"testString"}
+			updatePrivateEndpointWhitelistOptionsModel.Action = core.StringPtr("add")
+
+			// Invoke operation with valid options model (positive test)
+			result, response, err := service.UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptionsModel)
+			Expect(err).To(BeNil())
+			Expect(response).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
+		})
+	})
 })
