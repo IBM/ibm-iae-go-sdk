@@ -1,5 +1,7 @@
 language: go
 
+go: "1.16.3"
+
 dist: xenial
 
 notifications:
@@ -17,7 +19,7 @@ before_install:
 #- '[ "${TRAVIS_PULL_REQUEST}" == "false" ] && openssl aes-256-cbc -K $my_key -iv $my_iv -in myservice.env.enc -out myservice.env -d || true'
 
 install:
-- curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.21.0
+- curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.39.0
 
 script:
 - go test `go list ./...` -tags integration
