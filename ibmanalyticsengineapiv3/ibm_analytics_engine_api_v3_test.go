@@ -365,17 +365,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the ApplicationRequestApplicationDetails model
-				applicationRequestApplicationDetailsModel := new(ibmanalyticsengineapiv3.ApplicationRequestApplicationDetails)
-				applicationRequestApplicationDetailsModel.Application = core.StringPtr("testString")
-				applicationRequestApplicationDetailsModel.ApplicationArguments = []string{"testString"}
-				applicationRequestApplicationDetailsModel.Conf = make(map[string]interface{})
-				applicationRequestApplicationDetailsModel.Env = make(map[string]interface{})
-
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
-				createApplicationOptionsModel.ApplicationDetails = applicationRequestApplicationDetailsModel
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
+				createApplicationOptionsModel.Conf = make(map[string]interface{})
+				createApplicationOptionsModel.Env = make(map[string]interface{})
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptionsModel)
@@ -441,17 +437,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
 
-				// Construct an instance of the ApplicationRequestApplicationDetails model
-				applicationRequestApplicationDetailsModel := new(ibmanalyticsengineapiv3.ApplicationRequestApplicationDetails)
-				applicationRequestApplicationDetailsModel.Application = core.StringPtr("testString")
-				applicationRequestApplicationDetailsModel.ApplicationArguments = []string{"testString"}
-				applicationRequestApplicationDetailsModel.Conf = make(map[string]interface{})
-				applicationRequestApplicationDetailsModel.Env = make(map[string]interface{})
-
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
-				createApplicationOptionsModel.ApplicationDetails = applicationRequestApplicationDetailsModel
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
+				createApplicationOptionsModel.Conf = make(map[string]interface{})
+				createApplicationOptionsModel.Env = make(map[string]interface{})
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -524,17 +516,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the ApplicationRequestApplicationDetails model
-				applicationRequestApplicationDetailsModel := new(ibmanalyticsengineapiv3.ApplicationRequestApplicationDetails)
-				applicationRequestApplicationDetailsModel.Application = core.StringPtr("testString")
-				applicationRequestApplicationDetailsModel.ApplicationArguments = []string{"testString"}
-				applicationRequestApplicationDetailsModel.Conf = make(map[string]interface{})
-				applicationRequestApplicationDetailsModel.Env = make(map[string]interface{})
-
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
-				createApplicationOptionsModel.ApplicationDetails = applicationRequestApplicationDetailsModel
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
+				createApplicationOptionsModel.Conf = make(map[string]interface{})
+				createApplicationOptionsModel.Env = make(map[string]interface{})
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -552,17 +540,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the ApplicationRequestApplicationDetails model
-				applicationRequestApplicationDetailsModel := new(ibmanalyticsengineapiv3.ApplicationRequestApplicationDetails)
-				applicationRequestApplicationDetailsModel.Application = core.StringPtr("testString")
-				applicationRequestApplicationDetailsModel.ApplicationArguments = []string{"testString"}
-				applicationRequestApplicationDetailsModel.Conf = make(map[string]interface{})
-				applicationRequestApplicationDetailsModel.Env = make(map[string]interface{})
-
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
-				createApplicationOptionsModel.ApplicationDetails = applicationRequestApplicationDetailsModel
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
+				createApplicationOptionsModel.Conf = make(map[string]interface{})
+				createApplicationOptionsModel.Env = make(map[string]interface{})
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -1208,27 +1192,21 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			It(`Invoke NewCreateApplicationOptions successfully`, func() {
-				// Construct an instance of the ApplicationRequestApplicationDetails model
-				applicationRequestApplicationDetailsModel := new(ibmanalyticsengineapiv3.ApplicationRequestApplicationDetails)
-				Expect(applicationRequestApplicationDetailsModel).ToNot(BeNil())
-				applicationRequestApplicationDetailsModel.Application = core.StringPtr("testString")
-				applicationRequestApplicationDetailsModel.ApplicationArguments = []string{"testString"}
-				applicationRequestApplicationDetailsModel.Conf = make(map[string]interface{})
-				applicationRequestApplicationDetailsModel.Env = make(map[string]interface{})
-				Expect(applicationRequestApplicationDetailsModel.Application).To(Equal(core.StringPtr("testString")))
-				Expect(applicationRequestApplicationDetailsModel.ApplicationArguments).To(Equal([]string{"testString"}))
-				Expect(applicationRequestApplicationDetailsModel.Conf).To(Equal(make(map[string]interface{})))
-				Expect(applicationRequestApplicationDetailsModel.Env).To(Equal(make(map[string]interface{})))
-
 				// Construct an instance of the CreateApplicationOptions model
 				instanceID := "testString"
 				createApplicationOptionsModel := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(instanceID)
 				createApplicationOptionsModel.SetInstanceID("testString")
-				createApplicationOptionsModel.SetApplicationDetails(applicationRequestApplicationDetailsModel)
+				createApplicationOptionsModel.SetApplication("testString")
+				createApplicationOptionsModel.SetApplicationArguments([]string{"testString"})
+				createApplicationOptionsModel.SetConf(make(map[string]interface{}))
+				createApplicationOptionsModel.SetEnv(make(map[string]interface{}))
 				createApplicationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.ApplicationDetails).To(Equal(applicationRequestApplicationDetailsModel))
+				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("testString")))
+				Expect(createApplicationOptionsModel.ApplicationArguments).To(Equal([]string{"testString"}))
+				Expect(createApplicationOptionsModel.Conf).To(Equal(make(map[string]interface{})))
+				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))
 				Expect(createApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteApplicationByIdOptions successfully`, func() {

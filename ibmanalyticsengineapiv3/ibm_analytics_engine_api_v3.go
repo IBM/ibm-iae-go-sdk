@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.29.1-b338fb38-20210313-010605
+ * IBM OpenAPI SDK Code Generator Version: 3.29.0-cd9ba74f-20210305-183535
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -260,9 +260,25 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if createApplicationOptions.ApplicationDetails != nil {
-		body["application_details"] = createApplicationOptions.ApplicationDetails
+
+	// construct application_details property from exploded vars
+	application_details := make(map[string]interface{})
+	if createApplicationOptions.Application != nil {
+		application_details["application"] = createApplicationOptions.Application
 	}
+	if createApplicationOptions.ApplicationArguments != nil {
+		application_details["application_arguments"] = createApplicationOptions.ApplicationArguments
+	}
+	if createApplicationOptions.Conf != nil {
+		application_details["conf"] = createApplicationOptions.Conf
+	}
+	if createApplicationOptions.Env != nil {
+		application_details["env"] = createApplicationOptions.Env
+	}
+	if len(application_details) > 0 {
+		body["application_details"] = application_details
+	}
+
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
 		return
@@ -774,8 +790,21 @@ type CreateApplicationOptions struct {
 	// The identifier of the instance where the Spark application is submitted.
 	InstanceID *string `validate:"required,ne="`
 
-	// Application details.
-	ApplicationDetails *ApplicationRequestApplicationDetails
+	// Application name.
+	Application *string
+
+	// Application arguments.
+	ApplicationArguments []string
+
+	// Application configurations to override. See [Spark environment
+	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
+	// supported variables.
+	Conf map[string]interface{}
+
+	// Application environment configurations to override. See [Spark environment
+	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
+	// supported variables.
+	Env map[string]interface{}
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -794,9 +823,27 @@ func (options *CreateApplicationOptions) SetInstanceID(instanceID string) *Creat
 	return options
 }
 
-// SetApplicationDetails : Allow user to set ApplicationDetails
-func (options *CreateApplicationOptions) SetApplicationDetails(applicationDetails *ApplicationRequestApplicationDetails) *CreateApplicationOptions {
-	options.ApplicationDetails = applicationDetails
+// SetApplication : Allow user to set Application
+func (options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
+	options.Application = core.StringPtr(application)
+	return options
+}
+
+// SetApplicationArguments : Allow user to set ApplicationArguments
+func (options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
+	options.ApplicationArguments = applicationArguments
+	return options
+}
+
+// SetConf : Allow user to set Conf
+func (options *CreateApplicationOptions) SetConf(conf map[string]interface{}) *CreateApplicationOptions {
+	options.Conf = conf
+	return options
+}
+
+// SetEnv : Allow user to set Env
+func (options *CreateApplicationOptions) SetEnv(env map[string]interface{}) *CreateApplicationOptions {
+	options.Env = env
 	return options
 }
 
