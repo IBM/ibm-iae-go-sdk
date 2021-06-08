@@ -303,7 +303,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	return
 }
 
-// GetApplications : Gets all applications submitted in an instance with a specified instance_id
+// GetApplications : Gets all applications submitted in an instance with a specified inst_id
 // Returns a list of all applications submitted in the specified instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplications(getApplicationsOptions *GetApplicationsOptions) (result *ApplicationCollection, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationsWithContext(context.Background(), getApplicationsOptions)
@@ -361,7 +361,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationsWithContext
 	return
 }
 
-// GetApplicationByID : Gets the details of the application identified by the application_id identifier
+// GetApplicationByID : Gets the details of the application identified by the app_id identifier
 // Returns the details related to the configuration and state of a submitted Spark application.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions) (result *ApplicationGetResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationByIDWithContext(context.Background(), getApplicationByIdOptions)
@@ -421,8 +421,8 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByIDWithCont
 }
 
 // DeleteApplicationByID : Stops the specified application
-// Stops a running application identified by the application_id identifier. This is an idempotent operation. Performs no
-// action if the requested application is already stopped or completed.
+// Stops a running application identified by the app_id identifier. This is an idempotent operation. Performs no action
+// if the requested application is already stopped or completed.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationByID(deleteApplicationByIdOptions *DeleteApplicationByIdOptions) (response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.DeleteApplicationByIDWithContext(context.Background(), deleteApplicationByIdOptions)
 }
@@ -470,8 +470,8 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationByIDWithC
 	return
 }
 
-// GetApplicationState : Gets the status of the application identified by the application_id identifier
-// Returns the status of the application identified by the application_id identifier.
+// GetApplicationState : Gets the status of the application identified by the app_id identifier
+// Returns the status of the application identified by the app_id identifier.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationState(getApplicationStateOptions *GetApplicationStateOptions) (result *ApplicationGetStateResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationStateWithContext(context.Background(), getApplicationStateOptions)
 }
