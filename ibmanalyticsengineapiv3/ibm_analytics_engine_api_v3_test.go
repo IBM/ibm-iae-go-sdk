@@ -1353,6 +1353,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 
 				// Invoke operation
 				result, response, operationErr := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptionsModel)
+				fmt.Fprintf(operationErr, `} Print operationErr output  {`)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
