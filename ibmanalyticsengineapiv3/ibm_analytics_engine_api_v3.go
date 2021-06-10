@@ -42,7 +42,7 @@ type IbmAnalyticsEngineApiV3 struct {
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com"
+const DefaultServiceURL = "https://api.us-south.ae.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "ibm_analytics_engine_api"
@@ -111,7 +111,15 @@ func NewIbmAnalyticsEngineApiV3(options *IbmAnalyticsEngineApiV3Options) (servic
 
 // GetServiceURLForRegion returns the service URL to be used for the specified region
 func GetServiceURLForRegion(region string) (string, error) {
-	return "", fmt.Errorf("service does not support regional URLs")
+	var endpoints = map[string]string{
+		"us-south": "https://api.us-south.ae.cloud.ibm.com",
+		"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
+	}
+
+	if url, ok := endpoints[region]; ok {
+		return url, nil
+	}
+	return "", fmt.Errorf("service URL for region '%s' not found", region)
 }
 
 // Clone makes a copy of "ibmAnalyticsEngineApi" suitable for processing requests.
