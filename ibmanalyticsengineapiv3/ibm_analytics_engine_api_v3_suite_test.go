@@ -17,9 +17,10 @@
 package ibmanalyticsengineapiv3_test
 
 import (
+	"testing"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"testing"
 )
 
 func TestIbmAnalyticsEngineApiV3(t *testing.T) {

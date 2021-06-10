@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.29.0-cd9ba74f-20210305-183535
+ * IBM OpenAPI SDK Code Generator Version: 3.33.0-caf29bd0-20210603-225214
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -25,12 +25,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/IBM/go-sdk-core/v5/core"
-	common "github.com/IBM/ibm-iae-go-sdk/common"
-	"github.com/go-openapi/strfmt"
 	"net/http"
 	"reflect"
 	"time"
+
+	"github.com/IBM/go-sdk-core/v5/core"
+	common "github.com/IBM/ibm-iae-go-sdk/common"
+	"github.com/go-openapi/strfmt"
 )
 
 // IbmAnalyticsEngineApiV3 : With IBM Analytics Engine you can create Apache Spark and Apache Hadoop clusters and
@@ -42,7 +43,7 @@ type IbmAnalyticsEngineApiV3 struct {
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com"
+const DefaultServiceURL = "https://api.us-south.ae.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "ibm_analytics_engine_api"
@@ -111,7 +112,17 @@ func NewIbmAnalyticsEngineApiV3(options *IbmAnalyticsEngineApiV3Options) (servic
 
 // GetServiceURLForRegion returns the service URL to be used for the specified region
 func GetServiceURLForRegion(region string) (string, error) {
-	return "", fmt.Errorf("service does not support regional URLs")
+	var endpoints = map[string]string{
+		"us-south": "https://api.us-south.ae.cloud.ibm.com",
+		//"us-east": "https://api.us-east.ae.cloud.ibm.com",
+		//"eu-gb": "https://api.eu-gb.ae.cloud.ibm.com",
+		//"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
+	}
+
+	if url, ok := endpoints[region]; ok {
+		return url, nil
+	}
+	return "", fmt.Errorf("service URL for region '%s' not found", region)
 }
 
 // Clone makes a copy of "ibmAnalyticsEngineApi" suitable for processing requests.
@@ -209,11 +220,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceByIDWithContext
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceDetails)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceDetails)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -294,11 +307,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -352,11 +367,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationsWithContext
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationCollection)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationCollection)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -411,11 +428,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByIDWithCont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -520,11 +539,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetStateResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetStateResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -818,33 +839,33 @@ func (*IbmAnalyticsEngineApiV3) NewCreateApplicationOptions(instanceID string) *
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *CreateApplicationOptions) SetInstanceID(instanceID string) *CreateApplicationOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *CreateApplicationOptions) SetInstanceID(instanceID string) *CreateApplicationOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplication : Allow user to set Application
-func (options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
-	options.Application = core.StringPtr(application)
-	return options
+func (_options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
+	_options.Application = core.StringPtr(application)
+	return _options
 }
 
 // SetApplicationArguments : Allow user to set ApplicationArguments
-func (options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
-	options.ApplicationArguments = applicationArguments
-	return options
+func (_options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
+	_options.ApplicationArguments = applicationArguments
+	return _options
 }
 
 // SetConf : Allow user to set Conf
-func (options *CreateApplicationOptions) SetConf(conf map[string]interface{}) *CreateApplicationOptions {
-	options.Conf = conf
-	return options
+func (_options *CreateApplicationOptions) SetConf(conf map[string]interface{}) *CreateApplicationOptions {
+	_options.Conf = conf
+	return _options
 }
 
 // SetEnv : Allow user to set Env
-func (options *CreateApplicationOptions) SetEnv(env map[string]interface{}) *CreateApplicationOptions {
-	options.Env = env
-	return options
+func (_options *CreateApplicationOptions) SetEnv(env map[string]interface{}) *CreateApplicationOptions {
+	_options.Env = env
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -874,15 +895,15 @@ func (*IbmAnalyticsEngineApiV3) NewDeleteApplicationByIdOptions(instanceID strin
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *DeleteApplicationByIdOptions) SetInstanceID(instanceID string) *DeleteApplicationByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *DeleteApplicationByIdOptions) SetInstanceID(instanceID string) *DeleteApplicationByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *DeleteApplicationByIdOptions) SetApplicationID(applicationID string) *DeleteApplicationByIdOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *DeleteApplicationByIdOptions) SetApplicationID(applicationID string) *DeleteApplicationByIdOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -912,15 +933,15 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationByIdOptions(instanceID string, 
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationByIdOptions) SetInstanceID(instanceID string) *GetApplicationByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationByIdOptions) SetInstanceID(instanceID string) *GetApplicationByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *GetApplicationByIdOptions) SetApplicationID(applicationID string) *GetApplicationByIdOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *GetApplicationByIdOptions) SetApplicationID(applicationID string) *GetApplicationByIdOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -950,15 +971,15 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationStateOptions(instanceID string,
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationStateOptions) SetInstanceID(instanceID string) *GetApplicationStateOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationStateOptions) SetInstanceID(instanceID string) *GetApplicationStateOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *GetApplicationStateOptions) SetApplicationID(applicationID string) *GetApplicationStateOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *GetApplicationStateOptions) SetApplicationID(applicationID string) *GetApplicationStateOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -984,9 +1005,9 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationsOptions(instanceID string) *Ge
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationsOptions) SetInstanceID(instanceID string) *GetApplicationsOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationsOptions) SetInstanceID(instanceID string) *GetApplicationsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -1012,9 +1033,9 @@ func (*IbmAnalyticsEngineApiV3) NewGetInstanceByIdOptions(instanceID string) *Ge
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetInstanceByIdOptions) SetInstanceID(instanceID string) *GetInstanceByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetInstanceByIdOptions) SetInstanceID(instanceID string) *GetInstanceByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
