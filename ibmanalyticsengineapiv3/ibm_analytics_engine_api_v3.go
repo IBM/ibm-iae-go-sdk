@@ -114,9 +114,7 @@ func NewIbmAnalyticsEngineApiV3(options *IbmAnalyticsEngineApiV3Options) (servic
 func GetServiceURLForRegion(region string) (string, error) {
 	var endpoints = map[string]string{
 		"us-south": "https://api.us-south.ae.cloud.ibm.com",
-		//"us-east": "https://api.us-east.ae.cloud.ibm.com",
-		//"eu-gb": "https://api.eu-gb.ae.cloud.ibm.com",
-		//"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
+		"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
 	}
 
 	if url, ok := endpoints[region]; ok {
