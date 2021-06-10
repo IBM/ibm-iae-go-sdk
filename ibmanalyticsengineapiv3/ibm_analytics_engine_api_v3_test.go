@@ -158,14 +158,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 		It(`GetServiceURLForRegion(region string)`, func() {
 			var url string
 			var err error
-			url, err = ibmanalyticsengineapiv3.GetServiceURLForRegion("us-south")
-			Expect(url).To(Equal("https://api.us-south.ae.cloud.ibm.com"))
-			Expect(err).To(BeNil())
-
-			url, err = ibmanalyticsengineapiv3.GetServiceURLForRegion("eu-de")
-			Expect(url).To(Equal("https://api.eu-de.ae.cloud.ibm.com"))
-			Expect(err).To(BeNil())
-
 			url, err = ibmanalyticsengineapiv3.GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
@@ -1353,7 +1345,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 
 				// Invoke operation
 				result, response, operationErr := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptionsModel)
-				fmt.Fprintf(operationErr, `} Print operationErr output  {`)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
