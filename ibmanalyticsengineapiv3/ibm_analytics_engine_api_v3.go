@@ -311,7 +311,6 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	return
 }
 
-// GetApplications : Gets all applications submitted in an instance with a specified inst_id
 // Retrieve all Spark applications run on a given instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplications(getApplicationsOptions *GetApplicationsOptions) (result *ApplicationCollection, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationsWithContext(context.Background(), getApplicationsOptions)
@@ -369,8 +368,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationsWithContext
 	return
 }
 
-// GetApplicationByID : Gets the details of the application identified by the app_id identifier
-// Retrieve the details of a given Spark application.
+// Returns the details related to the configuration and state of a submitted Spark application.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions) (result *ApplicationGetResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationByIDWithContext(context.Background(), getApplicationByIdOptions)
 }
