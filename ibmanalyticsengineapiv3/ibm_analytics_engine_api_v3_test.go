@@ -161,10 +161,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			Expect(url).To(Equal("https://api.us-south.ae.cloud.ibm.com"))
 			Expect(err).To(BeNil())
 
-			url, err = ibmanalyticsengineapiv3.GetServiceURLForRegion("eu-de")
-			Expect(url).To(Equal("https://api.eu-de.ae.cloud.ibm.com"))
-			Expect(err).To(BeNil())
-
 			url, err = ibmanalyticsengineapiv3.GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
@@ -377,6 +373,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
 				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -449,6 +446,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
 				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -528,6 +526,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
 				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -552,6 +551,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("testString")
 				createApplicationOptionsModel.Application = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.ApplicationArguments = []string{"testString"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -820,7 +820,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application_details": {"application": "Application", "application_arguments": ["ApplicationArguments"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}}, "mode": "Mode", "application_id": "ApplicationID", "state": "State", "start_time": "StartTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application_details": {"application": "Application", "class": "Class", "application_arguments": ["ApplicationArguments"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}}, "mode": "Mode", "application_id": "ApplicationID", "state": "State", "start_time": "StartTime", "finish_time": "FinishTime"}`)
 				}))
 			})
 			It(`Invoke GetApplicationByID successfully with retries`, func() {
@@ -875,7 +875,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application_details": {"application": "Application", "application_arguments": ["ApplicationArguments"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}}, "mode": "Mode", "application_id": "ApplicationID", "state": "State", "start_time": "StartTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application_details": {"application": "Application", "class": "Class", "application_arguments": ["ApplicationArguments"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}}, "mode": "Mode", "application_id": "ApplicationID", "state": "State", "start_time": "StartTime", "finish_time": "FinishTime"}`)
 				}))
 			})
 			It(`Invoke GetApplicationByID successfully`, func() {
@@ -1205,6 +1205,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(instanceID)
 				createApplicationOptionsModel.SetInstanceID("testString")
 				createApplicationOptionsModel.SetApplication("testString")
+				createApplicationOptionsModel.SetClass("testString")
 				createApplicationOptionsModel.SetApplicationArguments([]string{"testString"})
 				createApplicationOptionsModel.SetConf(make(map[string]interface{}))
 				createApplicationOptionsModel.SetEnv(make(map[string]interface{}))
@@ -1212,6 +1213,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("testString")))
+				Expect(createApplicationOptionsModel.Class).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.ApplicationArguments).To(Equal([]string{"testString"}))
 				Expect(createApplicationOptionsModel.Conf).To(Equal(make(map[string]interface{})))
 				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))

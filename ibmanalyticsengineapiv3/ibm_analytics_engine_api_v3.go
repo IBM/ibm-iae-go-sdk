@@ -33,8 +33,7 @@ import (
 	"time"
 )
 
-// IbmAnalyticsEngineApiV3 : With IBM Analytics Engine you can create Apache Spark and Apache Hadoop clusters and
-// customize these clusters by using scripts. You can work with data in IBM Cloud Object Storage.
+// IbmAnalyticsEngineApiV3 : Create and manage serverless Spark instances and run applications.
 //
 // Version: 3.0.0
 type IbmAnalyticsEngineApiV3 struct {
@@ -113,7 +112,6 @@ func NewIbmAnalyticsEngineApiV3(options *IbmAnalyticsEngineApiV3Options) (servic
 func GetServiceURLForRegion(region string) (string, error) {
 	var endpoints = map[string]string{
 		"us-south": "https://api.us-south.ae.cloud.ibm.com",
-		"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
 	}
 
 	if url, ok := endpoints[region]; ok {
@@ -169,7 +167,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DisableRetries() {
 }
 
 // GetInstanceByID : Find instance by id
-// Returns details of a single instance.
+// Retrieve the details of a single instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceByID(getInstanceByIdOptions *GetInstanceByIdOptions) (result *InstanceDetails, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetInstanceByIDWithContext(context.Background(), getInstanceByIdOptions)
 }
@@ -227,8 +225,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceByIDWithContext
 }
 
 // CreateApplication : Deploys a Spark application in the Analytics Engine instance
-// Creates a Spark application based on the requested specification and returns the details of the submitted
-// application.
+// Deploy a Spark application on a given serverless Spark instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplication(createApplicationOptions *CreateApplicationOptions) (result *ApplicationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.CreateApplicationWithContext(context.Background(), createApplicationOptions)
 }
@@ -274,6 +271,9 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	if createApplicationOptions.Application != nil {
 		application_details["application"] = createApplicationOptions.Application
 	}
+	if createApplicationOptions.Class != nil {
+		application_details["class"] = createApplicationOptions.Class
+	}
 	if createApplicationOptions.ApplicationArguments != nil {
 		application_details["application_arguments"] = createApplicationOptions.ApplicationArguments
 	}
@@ -311,8 +311,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	return
 }
 
-// GetApplications : Gets all applications submitted in an instance with a specified inst_id
-// Returns a list of all applications submitted in the specified instance.
+// Retrieve all Spark applications run on a given instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplications(getApplicationsOptions *GetApplicationsOptions) (result *ApplicationCollection, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationsWithContext(context.Background(), getApplicationsOptions)
 }
@@ -369,7 +368,6 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationsWithContext
 	return
 }
 
-// GetApplicationByID : Gets the details of the application identified by the app_id identifier
 // Returns the details related to the configuration and state of a submitted Spark application.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions) (result *ApplicationGetResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetApplicationByIDWithContext(context.Background(), getApplicationByIdOptions)
@@ -711,12 +709,14 @@ type ApplicationRequestApplicationDetails struct {
 	// Application name.
 	Application *string `json:"application,omitempty"`
 
+	// The entry point for your application.
+	Class *string `json:"class,omitempty"`
+
 	// Application arguments.
 	ApplicationArguments []string `json:"application_arguments,omitempty"`
 
-	// Application configurations to override. See [Spark environment
-	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
-	// supported variables.
+	// Application configurations to override. See [Spark environment variables](
+	// https://spark.apache.org/docs/latest/configuration.html#available-properties) for a list of the supported variables.
 	Conf map[string]interface{} `json:"conf,omitempty"`
 
 	// Application environment configurations to override. See [Spark environment
@@ -729,6 +729,10 @@ type ApplicationRequestApplicationDetails struct {
 func UnmarshalApplicationRequestApplicationDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApplicationRequestApplicationDetails)
 	err = core.UnmarshalPrimitive(m, "application", &obj.Application)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "class", &obj.Class)
 	if err != nil {
 		return
 	}
@@ -801,12 +805,14 @@ type CreateApplicationOptions struct {
 	// Application name.
 	Application *string
 
+	// The entry point for your application.
+	Class *string
+
 	// Application arguments.
 	ApplicationArguments []string
 
-	// Application configurations to override. See [Spark environment
-	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
-	// supported variables.
+	// Application configurations to override. See [Spark environment variables](
+	// https://spark.apache.org/docs/latest/configuration.html#available-properties) for a list of the supported variables.
 	Conf map[string]interface{}
 
 	// Application environment configurations to override. See [Spark environment
@@ -837,6 +843,12 @@ func (options *CreateApplicationOptions) SetApplication(application string) *Cre
 	return options
 }
 
+// SetClass : Allow user to set Class
+func (options *CreateApplicationOptions) SetClass(class string) *CreateApplicationOptions {
+	options.Class = core.StringPtr(class)
+	return options
+}
+
 // SetApplicationArguments : Allow user to set ApplicationArguments
 func (options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
 	options.ApplicationArguments = applicationArguments
@@ -863,7 +875,7 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 
 // DeleteApplicationByIdOptions : The DeleteApplicationByID options.
 type DeleteApplicationByIdOptions struct {
-	// Identifier of the instance to which the applications belongs.
+	// Identifier of the instance to which the application belongs.
 	InstanceID *string `validate:"required,ne="`
 
 	// Identifier of the application that needs to be stopped.
@@ -901,7 +913,7 @@ func (options *DeleteApplicationByIdOptions) SetHeaders(param map[string]string)
 
 // GetApplicationByIdOptions : The GetApplicationByID options.
 type GetApplicationByIdOptions struct {
-	// Identifier of the instance where the application runs.
+	// Identifier of the instance to which the application belongs.
 	InstanceID *string `validate:"required,ne="`
 
 	// Identifier of the application for which details are requested.
