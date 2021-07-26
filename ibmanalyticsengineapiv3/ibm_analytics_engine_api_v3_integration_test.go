@@ -39,7 +39,6 @@ func shouldSkipTest() {
     }
 }
 
-
 var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
     It("Successfully load the configuration", func() {
         err = godotenv.Load(externalConfigFile)
