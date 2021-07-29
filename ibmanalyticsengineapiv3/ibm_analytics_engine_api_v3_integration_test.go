@@ -130,44 +130,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 				
 				
 			}
-
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
-			//fmt.Printf("TESTINGTESTING")
-			//fmt.Println(applicationResponse)
-			//t.Log("TESTINGTESTING")
-			//t.Log(applicationResponse)
-			//application_id=applicationResponse.get('application_id')
-			
-			
-			
-			
-			fmt.Printf("Type of applicationResponse: %v \n",reflect.TypeOf(applicationResponse).String())
-			
-
-	
-			
-			
-			fooType := reflect.TypeOf(applicationResponse)
-		
-            for i := 0; i < fooType.NumMethod(); i++ {
-              method := fooType.Method(i)
-              //fmt.Println(method.Name)
-              
-              
-              fmt.Printf("applicationResponse method.Name: %v \n", method.Name)
-            }
-			//fmt.Fprint(os.Stdout, fmt.Sprintf("%v", applicationResponse))
-			
-			//serviceURL   application_id
-			//var application_id = applicationResponse["application_id"] 
-			
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())			
 			Expect(err).To(BeNil())
 			applicationId = *applicationResponse.ApplicationID
-			fmt.Printf("applicationResponse application_id : %v \n",applicationId)
-			
-
+			fmt.Printf("applicationResponse application_id : %v \n",applicationId)			
 		})
 	})
 
