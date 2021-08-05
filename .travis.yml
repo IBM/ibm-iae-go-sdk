@@ -10,7 +10,7 @@ notifications:
 env:
   global:
     - GO111MODULE=on
-    - GH_TOKEN=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
+   
 
 before_install:
 - sudo apt-get update
