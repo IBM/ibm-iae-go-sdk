@@ -10,6 +10,7 @@ notifications:
 env:
   global:
     - GO111MODULE=on
+   
 
 before_install:
 - sudo apt-get update
