@@ -35,7 +35,6 @@ import (
  *
  * The integration test will automatically skip tests if the required config file is not available.
  */
-
 var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 	const externalConfigFile = "../ibmanalyticsengine-service.env"
