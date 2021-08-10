@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
+/*
+ * IBM OpenAPI SDK Code Generator Version: 3.37.0-a85661cd-20210802-190136
+ */
+
 // Package ibmanalyticsengineapiv2 : Operations and models for the IbmAnalyticsEngineApiV2 service
 package ibmanalyticsengineapiv2
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
-	"github.com/IBM/go-sdk-core/v3/core"
+	"net/http"
+	"reflect"
+	"time"
+
+	"github.com/IBM/go-sdk-core/v5/core"
 	common "github.com/IBM/ibm-iae-go-sdk/common"
 	"github.com/go-openapi/strfmt"
 )
@@ -34,7 +44,7 @@ type IbmAnalyticsEngineApiV2 struct {
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com/"
+const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "ibm_analytics_engine_api"
@@ -101,9 +111,55 @@ func NewIbmAnalyticsEngineApiV2(options *IbmAnalyticsEngineApiV2Options) (servic
 	return
 }
 
+// GetServiceURLForRegion returns the service URL to be used for the specified region
+func GetServiceURLForRegion(region string) (string, error) {
+	return "", fmt.Errorf("service does not support regional URLs")
+}
+
+// Clone makes a copy of "ibmAnalyticsEngineApi" suitable for processing requests.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) Clone() *IbmAnalyticsEngineApiV2 {
+	if core.IsNil(ibmAnalyticsEngineApi) {
+		return nil
+	}
+	clone := *ibmAnalyticsEngineApi
+	clone.Service = ibmAnalyticsEngineApi.Service.Clone()
+	return &clone
+}
+
 // SetServiceURL sets the service URL
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) SetServiceURL(url string) error {
 	return ibmAnalyticsEngineApi.Service.SetServiceURL(url)
+}
+
+// GetServiceURL returns the service URL
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetServiceURL() string {
+	return ibmAnalyticsEngineApi.Service.GetServiceURL()
+}
+
+// SetDefaultHeaders sets HTTP headers to be sent in every request
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) SetDefaultHeaders(headers http.Header) {
+	ibmAnalyticsEngineApi.Service.SetDefaultHeaders(headers)
+}
+
+// SetEnableGzipCompression sets the service's EnableGzipCompression field
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) SetEnableGzipCompression(enableGzip bool) {
+	ibmAnalyticsEngineApi.Service.SetEnableGzipCompression(enableGzip)
+}
+
+// GetEnableGzipCompression returns the service's EnableGzipCompression field
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetEnableGzipCompression() bool {
+	return ibmAnalyticsEngineApi.Service.GetEnableGzipCompression()
+}
+
+// EnableRetries enables automatic retries for requests invoked for this service instance.
+// If either parameter is specified as 0, then a default value is used instead.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) EnableRetries(maxRetries int, maxRetryInterval time.Duration) {
+	ibmAnalyticsEngineApi.Service.EnableRetries(maxRetries, maxRetryInterval)
+}
+
+// DisableRetries disables automatic retries for requests invoked for this service instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DisableRetries() {
+	ibmAnalyticsEngineApi.Service.DisableRetries()
 }
 
 // GetAllAnalyticsEngines : List all Analytics Engines
@@ -111,16 +167,20 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) SetServiceURL(url string) 
 // use the IBM Cloud CLI instead.  For example, ```ibmcloud resource service-instances --service-name
 // ibmanalyticsengine```.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines(getAllAnalyticsEnginesOptions *GetAllAnalyticsEnginesOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetAllAnalyticsEnginesWithContext(context.Background(), getAllAnalyticsEnginesOptions)
+}
+
+// GetAllAnalyticsEnginesWithContext is an alternate form of the GetAllAnalyticsEngines method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllAnalyticsEnginesWithContext(ctx context.Context, getAllAnalyticsEnginesOptions *GetAllAnalyticsEnginesOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getAllAnalyticsEnginesOptions, "getAllAnalyticsEnginesOptions")
 	if err != nil {
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines`, nil)
 	if err != nil {
 		return
 	}
@@ -153,6 +213,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllAnalyticsEngines(get
 //  **NOTE:** No credentials are returned. You can get the IBM Analytics Engine service instance credentials by invoking
 // the reset_password REST API.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(getAnalyticsEngineByIdOptions *GetAnalyticsEngineByIdOptions) (result *AnalyticsEngine, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetAnalyticsEngineByIDWithContext(context.Background(), getAnalyticsEngineByIdOptions)
+}
+
+// GetAnalyticsEngineByIDWithContext is an alternate form of the GetAnalyticsEngineByID method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByIDWithContext(ctx context.Context, getAnalyticsEngineByIdOptions *GetAnalyticsEngineByIdOptions) (result *AnalyticsEngine, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAnalyticsEngineByIdOptions, "getAnalyticsEngineByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -162,11 +227,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(get
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines"}
-	pathParameters := []string{*getAnalyticsEngineByIdOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *getAnalyticsEngineByIdOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -186,14 +254,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(get
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngine)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngine(m)
 		response.Result = result
 	}
 
@@ -209,6 +279,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(get
 // * Expired : The service instance has expired. The cluster has been deleted.
 // * ResizeFailed : The cluster couldn't be resized. The cluster will be reactivated based on the old settings.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByID(getAnalyticsEngineStateByIdOptions *GetAnalyticsEngineStateByIdOptions) (result *AnalyticsEngineState, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetAnalyticsEngineStateByIDWithContext(context.Background(), getAnalyticsEngineStateByIdOptions)
+}
+
+// GetAnalyticsEngineStateByIDWithContext is an alternate form of the GetAnalyticsEngineStateByID method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByIDWithContext(ctx context.Context, getAnalyticsEngineStateByIdOptions *GetAnalyticsEngineStateByIdOptions) (result *AnalyticsEngineState, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAnalyticsEngineStateByIdOptions, "getAnalyticsEngineStateByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -218,11 +293,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByI
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "state"}
-	pathParameters := []string{*getAnalyticsEngineStateByIdOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *getAnalyticsEngineStateByIdOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/state`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -242,14 +320,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByI
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineState)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineState(m)
 		response.Result = result
 	}
 
@@ -260,6 +340,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineStateByI
 // Creates a new adhoc customization request. Adhoc customization scripts can be run only once. They are not persisted
 // with the cluster and are not run automatically when more nodes are added to the cluster.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest(createCustomizationRequestOptions *CreateCustomizationRequestOptions) (result *AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.CreateCustomizationRequestWithContext(context.Background(), createCustomizationRequestOptions)
+}
+
+// CreateCustomizationRequestWithContext is an alternate form of the CreateCustomizationRequest method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequestWithContext(ctx context.Context, createCustomizationRequestOptions *CreateCustomizationRequestOptions) (result *AnalyticsEngineCreateCustomizationResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createCustomizationRequestOptions, "createCustomizationRequestOptions cannot be nil")
 	if err != nil {
 		return
@@ -269,11 +354,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "customization_requests"}
-	pathParameters := []string{*createCustomizationRequestOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *createCustomizationRequestOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/customization_requests`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -306,14 +394,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineCreateCustomizationResponse)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineCreateCustomizationResponse(m)
 		response.Result = result
 	}
 
@@ -322,7 +412,12 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) CreateCustomizationRequest
 
 // GetAllCustomizationRequests : Get all customization requests run on an Analytics Engine cluster
 // Retrieves the request_id of all customization requests submitted to the specified Analytics Engine cluster.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result *[]AnalyticsEngineCustomizationRequestCollectionItem, response *core.DetailedResponse, err error) {
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequests(getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result []AnalyticsEngineCustomizationRequestCollectionItem, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetAllCustomizationRequestsWithContext(context.Background(), getAllCustomizationRequestsOptions)
+}
+
+// GetAllCustomizationRequestsWithContext is an alternate form of the GetAllCustomizationRequests method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequestsWithContext(ctx context.Context, getAllCustomizationRequestsOptions *GetAllCustomizationRequestsOptions) (result []AnalyticsEngineCustomizationRequestCollectionItem, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAllCustomizationRequestsOptions, "getAllCustomizationRequestsOptions cannot be nil")
 	if err != nil {
 		return
@@ -332,11 +427,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequest
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "customization_requests"}
-	pathParameters := []string{*getAllCustomizationRequestsOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *getAllCustomizationRequestsOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/customization_requests`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -356,16 +454,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequest
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make([]map[string]interface{}, 1))
-	if err == nil {
-		s, ok := response.Result.([]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse []json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineCustomizationRequestCollectionItem)
+		if err != nil {
 			return
 		}
-		slice, e := UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(s)
-		result = &slice
-		err = e
 		response.Result = result
 	}
 
@@ -376,6 +474,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllCustomizationRequest
 // Retrieves the status of the specified customization request, along with pointers to log files generated during the
 // run.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByID(getCustomizationRequestByIdOptions *GetCustomizationRequestByIdOptions) (result *AnalyticsEngineCustomizationRunDetails, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetCustomizationRequestByIDWithContext(context.Background(), getCustomizationRequestByIdOptions)
+}
+
+// GetCustomizationRequestByIDWithContext is an alternate form of the GetCustomizationRequestByID method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByIDWithContext(ctx context.Context, getCustomizationRequestByIdOptions *GetCustomizationRequestByIdOptions) (result *AnalyticsEngineCustomizationRunDetails, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getCustomizationRequestByIdOptions, "getCustomizationRequestByIdOptions cannot be nil")
 	if err != nil {
 		return
@@ -385,11 +488,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByI
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "customization_requests"}
-	pathParameters := []string{*getCustomizationRequestByIdOptions.InstanceGuid, *getCustomizationRequestByIdOptions.RequestID}
+	pathParamsMap := map[string]string{
+		"instance_guid": *getCustomizationRequestByIdOptions.InstanceGuid,
+		"request_id": *getCustomizationRequestByIdOptions.RequestID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/customization_requests/{request_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -409,27 +516,42 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByI
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineCustomizationRunDetails)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineCustomizationRunDetails(m)
 		response.Result = result
 	}
 
 	return
 }
 
-// ResizeCluster : Add nodes to the cluster
-// Resizes the cluster by adding compute nodes.
+// ResizeCluster : Resize the cluster
+// Resizes the cluster by adjusting the number of compute and task nodes. Task nodes can be added and removed. Compute
+// nodes, once added, can't be removed.
 //
-// **Note:** You can't resize the cluster if the software package on the cluster is deprecated or if the software
-// package doesn't permit cluster resizing. See
-// [here](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-unsupported-operations).
+// **Note:**
+//
+//  1. You can't modify the number of compute nodes and tasks nodes in the same request.
+//
+// 2. You can't modify the number of task nodes if you enabled auto scaling when you created the cluster.
+//
+// 3. Task nodes are not supported on Lite plan clusters.
+//
+// 4. You can't resize the cluster if the software package on the cluster is deprecated or doesn't permit cluster
+// resizing. See [here](https://cloud.ibm.com/docs/AnalyticsEngine?topic=AnalyticsEngine-unsupported-operations).
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeClusterOptions *ResizeClusterOptions) (result *AnalyticsEngineResizeClusterResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ResizeClusterWithContext(context.Background(), resizeClusterOptions)
+}
+
+// ResizeClusterWithContext is an alternate form of the ResizeCluster method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeClusterWithContext(ctx context.Context, resizeClusterOptions *ResizeClusterOptions) (result *AnalyticsEngineResizeClusterResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(resizeClusterOptions, "resizeClusterOptions cannot be nil")
 	if err != nil {
 		return
@@ -439,11 +561,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCluste
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "resize"}
-	pathParameters := []string{*resizeClusterOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *resizeClusterOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/resize`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -459,11 +584,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCluste
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	body := make(map[string]interface{})
-	if resizeClusterOptions.ComputeNodesCount != nil {
-		body["compute_nodes_count"] = resizeClusterOptions.ComputeNodesCount
-	}
-	_, err = builder.SetBodyContentJSON(body)
+	_, err = builder.SetBodyContentJSON(resizeClusterOptions.Body)
 	if err != nil {
 		return
 	}
@@ -473,14 +594,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCluste
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineResizeClusterResponse)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineResizeClusterResponse(m)
 		response.Result = result
 	}
 
@@ -492,6 +615,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResizeCluster(resizeCluste
 // in the response and you should make a note of it.  This password is displayed only once here and cannot be retrieved
 // later.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPassword(resetClusterPasswordOptions *ResetClusterPasswordOptions) (result *AnalyticsEngineResetClusterPasswordResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ResetClusterPasswordWithContext(context.Background(), resetClusterPasswordOptions)
+}
+
+// ResetClusterPasswordWithContext is an alternate form of the ResetClusterPassword method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPasswordWithContext(ctx context.Context, resetClusterPasswordOptions *ResetClusterPasswordOptions) (result *AnalyticsEngineResetClusterPasswordResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(resetClusterPasswordOptions, "resetClusterPasswordOptions cannot be nil")
 	if err != nil {
 		return
@@ -501,11 +629,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPassword(reset
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "reset_password"}
-	pathParameters := []string{*resetClusterPasswordOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *resetClusterPasswordOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/reset_password`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -525,14 +656,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPassword(reset
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineResetClusterPasswordResponse)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineResetClusterPasswordResponse(m)
 		response.Result = result
 	}
 
@@ -541,10 +674,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ResetClusterPassword(reset
 
 // ConfigureLogging : Configure log aggregation
 // Collects the logs for the following components in an IBM Analytics Engine cluster:
-// * IBM Analytics Engine daemon logs, for example those for Spark, Hive, Yarn, and Knox on the management and data
-// nodes
+// * IBM Analytics Engine daemon logs, for example those for Spark, Hive, Yarn, and Knox on the management, data and
+// task nodes
 // * Yarn application job logs.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ConfigureLogging(configureLoggingOptions *ConfigureLoggingOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ConfigureLoggingWithContext(context.Background(), configureLoggingOptions)
+}
+
+// ConfigureLoggingWithContext is an alternate form of the ConfigureLogging method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ConfigureLoggingWithContext(ctx context.Context, configureLoggingOptions *ConfigureLoggingOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(configureLoggingOptions, "configureLoggingOptions cannot be nil")
 	if err != nil {
 		return
@@ -554,11 +692,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ConfigureLogging(configure
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "log_config"}
-	pathParameters := []string{*configureLoggingOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *configureLoggingOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/log_config`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -598,6 +739,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) ConfigureLogging(configure
 // GetLoggingConfig : Retrieve the status of log configuration
 // Retrieves the status and details of the log configuration for your cluster.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggingConfigOptions *GetLoggingConfigOptions) (result *AnalyticsEngineLoggingConfigDetails, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetLoggingConfigWithContext(context.Background(), getLoggingConfigOptions)
+}
+
+// GetLoggingConfigWithContext is an alternate form of the GetLoggingConfig method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfigWithContext(ctx context.Context, getLoggingConfigOptions *GetLoggingConfigOptions) (result *AnalyticsEngineLoggingConfigDetails, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getLoggingConfigOptions, "getLoggingConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -607,11 +753,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggin
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "log_config"}
-	pathParameters := []string{*getLoggingConfigOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *getLoggingConfigOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/log_config`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -631,14 +780,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggin
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineLoggingConfigDetails)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineLoggingConfigDetails(m)
 		response.Result = result
 	}
 
@@ -648,6 +799,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetLoggingConfig(getLoggin
 // DeleteLoggingConfig : Delete the log configuration
 // Deletes the log configuration. This operation stops sending logs to the centralized log server.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(deleteLoggingConfigOptions *DeleteLoggingConfigOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.DeleteLoggingConfigWithContext(context.Background(), deleteLoggingConfigOptions)
+}
+
+// DeleteLoggingConfigWithContext is an alternate form of the DeleteLoggingConfig method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfigWithContext(ctx context.Context, deleteLoggingConfigOptions *DeleteLoggingConfigOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteLoggingConfigOptions, "deleteLoggingConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -657,11 +813,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(delete
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "log_config"}
-	pathParameters := []string{*deleteLoggingConfigOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *deleteLoggingConfigOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/log_config`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -689,6 +848,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) DeleteLoggingConfig(delete
 // Updates the list of whitelisted private endpoints. This operation either adds ip ranges to the whitelist or deletes
 // them.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) UpdatePrivateEndpointWhitelist(updatePrivateEndpointWhitelistOptions *UpdatePrivateEndpointWhitelistOptions) (result *AnalyticsEngineWhitelistResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.UpdatePrivateEndpointWhitelistWithContext(context.Background(), updatePrivateEndpointWhitelistOptions)
+}
+
+// UpdatePrivateEndpointWhitelistWithContext is an alternate form of the UpdatePrivateEndpointWhitelist method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) UpdatePrivateEndpointWhitelistWithContext(ctx context.Context, updatePrivateEndpointWhitelistOptions *UpdatePrivateEndpointWhitelistOptions) (result *AnalyticsEngineWhitelistResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updatePrivateEndpointWhitelistOptions, "updatePrivateEndpointWhitelistOptions cannot be nil")
 	if err != nil {
 		return
@@ -698,11 +862,14 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) UpdatePrivateEndpointWhite
 		return
 	}
 
-	pathSegments := []string{"v2/analytics_engines", "private_endpoint_whitelist"}
-	pathParameters := []string{*updatePrivateEndpointWhitelistOptions.InstanceGuid}
+	pathParamsMap := map[string]string{
+		"instance_guid": *updatePrivateEndpointWhitelistOptions.InstanceGuid,
+	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
-	_, err = builder.ConstructHTTPURL(ibmAnalyticsEngineApi.Service.Options.URL, pathSegments, pathParameters)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v2/analytics_engines/{instance_guid}/private_endpoint_whitelist`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -735,14 +902,16 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) UpdatePrivateEndpointWhite
 		return
 	}
 
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, make(map[string]interface{}))
-	if err == nil {
-		m, ok := response.Result.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("an error occurred while processing the operation response")
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAnalyticsEngineWhitelistResponse)
+		if err != nil {
 			return
 		}
-		result, err = UnmarshalAnalyticsEngineWhitelistResponse(m)
 		response.Result = result
 	}
 
@@ -803,134 +972,85 @@ type AnalyticsEngine struct {
 	PrivateEndpointWhitelist []string `json:"private_endpoint_whitelist,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngine constructs an instance of AnalyticsEngine from the specified map.
-func UnmarshalAnalyticsEngine(m map[string]interface{}) (result *AnalyticsEngine, err error) {
+// UnmarshalAnalyticsEngine unmarshals an instance of AnalyticsEngine from the specified map of raw messages.
+func UnmarshalAnalyticsEngine(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngine)
-	obj.ID, err = core.UnmarshalString(m, "id")
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
-	obj.Name, err = core.UnmarshalString(m, "name")
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
 	}
-	obj.ServicePlan, err = core.UnmarshalString(m, "service_plan")
+	err = core.UnmarshalPrimitive(m, "service_plan", &obj.ServicePlan)
 	if err != nil {
 		return
 	}
-	obj.HardwareSize, err = core.UnmarshalString(m, "hardware_size")
+	err = core.UnmarshalPrimitive(m, "hardware_size", &obj.HardwareSize)
 	if err != nil {
 		return
 	}
-	obj.SoftwarePackage, err = core.UnmarshalString(m, "software_package")
+	err = core.UnmarshalPrimitive(m, "software_package", &obj.SoftwarePackage)
 	if err != nil {
 		return
 	}
-	obj.Domain, err = core.UnmarshalString(m, "domain")
+	err = core.UnmarshalPrimitive(m, "domain", &obj.Domain)
 	if err != nil {
 		return
 	}
-	obj.CreationTime, err = core.UnmarshalDateTime(m, "creation_time")
+	err = core.UnmarshalPrimitive(m, "creation_time", &obj.CreationTime)
 	if err != nil {
 		return
 	}
-	obj.CommisionTime, err = core.UnmarshalDateTime(m, "commision_time")
+	err = core.UnmarshalPrimitive(m, "commision_time", &obj.CommisionTime)
 	if err != nil {
 		return
 	}
-	obj.DecommisionTime, err = core.UnmarshalDateTime(m, "decommision_time")
+	err = core.UnmarshalPrimitive(m, "decommision_time", &obj.DecommisionTime)
 	if err != nil {
 		return
 	}
-	obj.DeletionTime, err = core.UnmarshalDateTime(m, "deletion_time")
+	err = core.UnmarshalPrimitive(m, "deletion_time", &obj.DeletionTime)
 	if err != nil {
 		return
 	}
-	obj.StateChangeTime, err = core.UnmarshalDateTime(m, "state_change_time")
+	err = core.UnmarshalPrimitive(m, "state_change_time", &obj.StateChangeTime)
 	if err != nil {
 		return
 	}
-	obj.State, err = core.UnmarshalString(m, "state")
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		return
 	}
-	obj.Nodes, err = UnmarshalAnalyticsEngineClusterNodeSliceAsProperty(m, "nodes")
+	err = core.UnmarshalModel(m, "nodes", &obj.Nodes, UnmarshalAnalyticsEngineClusterNode)
 	if err != nil {
 		return
 	}
-	obj.UserCredentials, err = UnmarshalAnalyticsEngineUserCredentialsAsProperty(m, "user_credentials")
+	err = core.UnmarshalModel(m, "user_credentials", &obj.UserCredentials, UnmarshalAnalyticsEngineUserCredentials)
 	if err != nil {
 		return
 	}
-	obj.ServiceEndpoints, err = UnmarshalServiceEndpointsAsProperty(m, "service_endpoints")
+	err = core.UnmarshalModel(m, "service_endpoints", &obj.ServiceEndpoints, UnmarshalServiceEndpoints)
 	if err != nil {
 		return
 	}
-	obj.ServiceEndpointsIp, err = UnmarshalServiceEndpointsAsProperty(m, "service_endpoints_ip")
+	err = core.UnmarshalModel(m, "service_endpoints_ip", &obj.ServiceEndpointsIp, UnmarshalServiceEndpoints)
 	if err != nil {
 		return
 	}
-	obj.PrivateEndpointWhitelist, err = core.UnmarshalStringSlice(m, "private_endpoint_whitelist")
+	err = core.UnmarshalPrimitive(m, "private_endpoint_whitelist", &obj.PrivateEndpointWhitelist)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineSlice unmarshals a slice of AnalyticsEngine instances from the specified list of maps.
-func UnmarshalAnalyticsEngineSlice(s []interface{}) (slice []AnalyticsEngine, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngine'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngine(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineAsProperty unmarshals an instance of AnalyticsEngine that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngine, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngine'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngine(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineSliceAsProperty unmarshals a slice of AnalyticsEngine instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngine, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngine'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
 // AnalyticsEngineClusterNode : Cluster node details.
 type AnalyticsEngineClusterNode struct {
 	// Node ID.
-	ID *float64 `json:"id,omitempty"`
+	ID *int64 `json:"id,omitempty"`
 
 	// Fully qualified domain name.
 	Fqdn *string `json:"fqdn,omitempty"`
@@ -954,157 +1074,59 @@ type AnalyticsEngineClusterNode struct {
 	CommissionTime *strfmt.DateTime `json:"commission_time,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineClusterNode constructs an instance of AnalyticsEngineClusterNode from the specified map.
-func UnmarshalAnalyticsEngineClusterNode(m map[string]interface{}) (result *AnalyticsEngineClusterNode, err error) {
+// UnmarshalAnalyticsEngineClusterNode unmarshals an instance of AnalyticsEngineClusterNode from the specified map of raw messages.
+func UnmarshalAnalyticsEngineClusterNode(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineClusterNode)
-	obj.ID, err = core.UnmarshalFloat64(m, "id")
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
-	obj.Fqdn, err = core.UnmarshalString(m, "fqdn")
+	err = core.UnmarshalPrimitive(m, "fqdn", &obj.Fqdn)
 	if err != nil {
 		return
 	}
-	obj.Type, err = core.UnmarshalString(m, "type")
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		return
 	}
-	obj.State, err = core.UnmarshalString(m, "state")
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		return
 	}
-	obj.PublicIp, err = core.UnmarshalString(m, "public_ip")
+	err = core.UnmarshalPrimitive(m, "public_ip", &obj.PublicIp)
 	if err != nil {
 		return
 	}
-	obj.PrivateIp, err = core.UnmarshalString(m, "private_ip")
+	err = core.UnmarshalPrimitive(m, "private_ip", &obj.PrivateIp)
 	if err != nil {
 		return
 	}
-	obj.StateChangeTime, err = core.UnmarshalDateTime(m, "state_change_time")
+	err = core.UnmarshalPrimitive(m, "state_change_time", &obj.StateChangeTime)
 	if err != nil {
 		return
 	}
-	obj.CommissionTime, err = core.UnmarshalDateTime(m, "commission_time")
+	err = core.UnmarshalPrimitive(m, "commission_time", &obj.CommissionTime)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineClusterNodeSlice unmarshals a slice of AnalyticsEngineClusterNode instances from the specified list of maps.
-func UnmarshalAnalyticsEngineClusterNodeSlice(s []interface{}) (slice []AnalyticsEngineClusterNode, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineClusterNode'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineClusterNode(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineClusterNodeAsProperty unmarshals an instance of AnalyticsEngineClusterNode that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineClusterNodeAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineClusterNode, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineClusterNode'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineClusterNode(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineClusterNodeSliceAsProperty unmarshals a slice of AnalyticsEngineClusterNode instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineClusterNodeSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineClusterNode, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineClusterNode'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineClusterNodeSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
 // AnalyticsEngineCreateCustomizationResponse : Create customization request response.
 type AnalyticsEngineCreateCustomizationResponse struct {
 	// Customization request ID.
-	RequestID *float64 `json:"request_id,omitempty"`
+	RequestID *int64 `json:"request_id,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineCreateCustomizationResponse constructs an instance of AnalyticsEngineCreateCustomizationResponse from the specified map.
-func UnmarshalAnalyticsEngineCreateCustomizationResponse(m map[string]interface{}) (result *AnalyticsEngineCreateCustomizationResponse, err error) {
+// UnmarshalAnalyticsEngineCreateCustomizationResponse unmarshals an instance of AnalyticsEngineCreateCustomizationResponse from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCreateCustomizationResponse(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCreateCustomizationResponse)
-	obj.RequestID, err = core.UnmarshalFloat64(m, "request_id")
+	err = core.UnmarshalPrimitive(m, "request_id", &obj.RequestID)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCreateCustomizationResponseSlice unmarshals a slice of AnalyticsEngineCreateCustomizationResponse instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCreateCustomizationResponseSlice(s []interface{}) (slice []AnalyticsEngineCreateCustomizationResponse, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCreateCustomizationResponse'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCreateCustomizationResponse(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCreateCustomizationResponseAsProperty unmarshals an instance of AnalyticsEngineCreateCustomizationResponse that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCreateCustomizationResponseAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCreateCustomizationResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCreateCustomizationResponse'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCreateCustomizationResponse(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCreateCustomizationResponseSliceAsProperty unmarshals a slice of AnalyticsEngineCreateCustomizationResponse instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCreateCustomizationResponseSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCreateCustomizationResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCreateCustomizationResponse'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCreateCustomizationResponseSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1129,84 +1151,35 @@ const (
 	AnalyticsEngineCustomAction_Type_Bootstrap = "bootstrap"
 )
 
-
 // NewAnalyticsEngineCustomAction : Instantiate AnalyticsEngineCustomAction (Generic Model Constructor)
-func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineCustomAction(name string) (model *AnalyticsEngineCustomAction, err error) {
-	model = &AnalyticsEngineCustomAction{
+func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineCustomAction(name string) (_model *AnalyticsEngineCustomAction, err error) {
+	_model = &AnalyticsEngineCustomAction{
 		Name: core.StringPtr(name),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-// UnmarshalAnalyticsEngineCustomAction constructs an instance of AnalyticsEngineCustomAction from the specified map.
-func UnmarshalAnalyticsEngineCustomAction(m map[string]interface{}) (result *AnalyticsEngineCustomAction, err error) {
+// UnmarshalAnalyticsEngineCustomAction unmarshals an instance of AnalyticsEngineCustomAction from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCustomAction(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCustomAction)
-	obj.Name, err = core.UnmarshalString(m, "name")
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
 	}
-	obj.Type, err = core.UnmarshalString(m, "type")
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		return
 	}
-	obj.Script, err = UnmarshalAnalyticsEngineCustomActionScriptAsProperty(m, "script")
+	err = core.UnmarshalModel(m, "script", &obj.Script, UnmarshalAnalyticsEngineCustomActionScript)
 	if err != nil {
 		return
 	}
-	obj.ScriptParams, err = core.UnmarshalStringSlice(m, "script_params")
+	err = core.UnmarshalPrimitive(m, "script_params", &obj.ScriptParams)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionSlice unmarshals a slice of AnalyticsEngineCustomAction instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCustomActionSlice(s []interface{}) (slice []AnalyticsEngineCustomAction, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomAction'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCustomAction(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionAsProperty unmarshals an instance of AnalyticsEngineCustomAction that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomActionAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomAction, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomAction'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCustomAction(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionSliceAsProperty unmarshals a slice of AnalyticsEngineCustomAction instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomActionSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomAction, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomAction'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCustomActionSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1232,71 +1205,22 @@ const (
 	AnalyticsEngineCustomActionScript_SourceType_Softlayerswift = "SoftLayerSwift"
 )
 
-
-// UnmarshalAnalyticsEngineCustomActionScript constructs an instance of AnalyticsEngineCustomActionScript from the specified map.
-func UnmarshalAnalyticsEngineCustomActionScript(m map[string]interface{}) (result *AnalyticsEngineCustomActionScript, err error) {
+// UnmarshalAnalyticsEngineCustomActionScript unmarshals an instance of AnalyticsEngineCustomActionScript from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCustomActionScript(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCustomActionScript)
-	obj.SourceType, err = core.UnmarshalString(m, "source_type")
+	err = core.UnmarshalPrimitive(m, "source_type", &obj.SourceType)
 	if err != nil {
 		return
 	}
-	obj.ScriptPath, err = core.UnmarshalString(m, "script_path")
+	err = core.UnmarshalPrimitive(m, "script_path", &obj.ScriptPath)
 	if err != nil {
 		return
 	}
-	obj.SourceProps, err = core.UnmarshalAny(m, "source_props")
+	err = core.UnmarshalPrimitive(m, "source_props", &obj.SourceProps)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionScriptSlice unmarshals a slice of AnalyticsEngineCustomActionScript instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCustomActionScriptSlice(s []interface{}) (slice []AnalyticsEngineCustomActionScript, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomActionScript'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCustomActionScript(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionScriptAsProperty unmarshals an instance of AnalyticsEngineCustomActionScript that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomActionScriptAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomActionScript, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomActionScript'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCustomActionScript(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomActionScriptSliceAsProperty unmarshals a slice of AnalyticsEngineCustomActionScript instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomActionScriptSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomActionScript, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomActionScript'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCustomActionScriptSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1306,63 +1230,14 @@ type AnalyticsEngineCustomizationRequestCollectionItem struct {
 	ID *string `json:"id,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineCustomizationRequestCollectionItem constructs an instance of AnalyticsEngineCustomizationRequestCollectionItem from the specified map.
-func UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(m map[string]interface{}) (result *AnalyticsEngineCustomizationRequestCollectionItem, err error) {
+// UnmarshalAnalyticsEngineCustomizationRequestCollectionItem unmarshals an instance of AnalyticsEngineCustomizationRequestCollectionItem from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCustomizationRequestCollectionItem)
-	obj.ID, err = core.UnmarshalString(m, "id")
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice unmarshals a slice of AnalyticsEngineCustomizationRequestCollectionItem instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(s []interface{}) (slice []AnalyticsEngineCustomizationRequestCollectionItem, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemAsProperty unmarshals an instance of AnalyticsEngineCustomizationRequestCollectionItem that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomizationRequestCollectionItem, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCustomizationRequestCollectionItem(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSliceAsProperty unmarshals a slice of AnalyticsEngineCustomizationRequestCollectionItem instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomizationRequestCollectionItem, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomizationRequestCollectionItem'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCustomizationRequestCollectionItemSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1378,71 +1253,22 @@ type AnalyticsEngineCustomizationRunDetails struct {
 	RunDetails *AnalyticsEngineCustomizationRunDetailsRunDetails `json:"run_details,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineCustomizationRunDetails constructs an instance of AnalyticsEngineCustomizationRunDetails from the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetails(m map[string]interface{}) (result *AnalyticsEngineCustomizationRunDetails, err error) {
+// UnmarshalAnalyticsEngineCustomizationRunDetails unmarshals an instance of AnalyticsEngineCustomizationRunDetails from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCustomizationRunDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCustomizationRunDetails)
-	obj.ID, err = core.UnmarshalString(m, "id")
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
-	obj.RunStatus, err = core.UnmarshalString(m, "run_status")
+	err = core.UnmarshalPrimitive(m, "run_status", &obj.RunStatus)
 	if err != nil {
 		return
 	}
-	obj.RunDetails, err = UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsAsProperty(m, "run_details")
+	err = core.UnmarshalModel(m, "run_details", &obj.RunDetails, UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsSlice unmarshals a slice of AnalyticsEngineCustomizationRunDetails instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsSlice(s []interface{}) (slice []AnalyticsEngineCustomizationRunDetails, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomizationRunDetails'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCustomizationRunDetails(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsAsProperty unmarshals an instance of AnalyticsEngineCustomizationRunDetails that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomizationRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomizationRunDetails'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCustomizationRunDetails(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsSliceAsProperty unmarshals a slice of AnalyticsEngineCustomizationRunDetails instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomizationRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomizationRunDetails'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCustomizationRunDetailsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1455,67 +1281,18 @@ type AnalyticsEngineCustomizationRunDetailsRunDetails struct {
 	Details []AnalyticsEngineNodeLevelCustomizationRunDetails `json:"details,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails constructs an instance of AnalyticsEngineCustomizationRunDetailsRunDetails from the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails(m map[string]interface{}) (result *AnalyticsEngineCustomizationRunDetailsRunDetails, err error) {
+// UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails unmarshals an instance of AnalyticsEngineCustomizationRunDetailsRunDetails from the specified map of raw messages.
+func UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineCustomizationRunDetailsRunDetails)
-	obj.OverallStatus, err = core.UnmarshalString(m, "overall_status")
+	err = core.UnmarshalPrimitive(m, "overall_status", &obj.OverallStatus)
 	if err != nil {
 		return
 	}
-	obj.Details, err = UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSliceAsProperty(m, "details")
+	err = core.UnmarshalModel(m, "details", &obj.Details, UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsSlice unmarshals a slice of AnalyticsEngineCustomizationRunDetailsRunDetails instances from the specified list of maps.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsSlice(s []interface{}) (slice []AnalyticsEngineCustomizationRunDetailsRunDetails, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineCustomizationRunDetailsRunDetails'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsAsProperty unmarshals an instance of AnalyticsEngineCustomizationRunDetailsRunDetails that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineCustomizationRunDetailsRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineCustomizationRunDetailsRunDetails'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetails(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsSliceAsProperty unmarshals a slice of AnalyticsEngineCustomizationRunDetailsRunDetails instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineCustomizationRunDetailsRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineCustomizationRunDetailsRunDetails'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineCustomizationRunDetailsRunDetailsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1531,71 +1308,22 @@ type AnalyticsEngineLoggingConfigDetails struct {
 	LogConfigStatus []AnalyticsEngineLoggingConfigStatus `json:"log_config_status" validate:"required"`
 }
 
-
-// UnmarshalAnalyticsEngineLoggingConfigDetails constructs an instance of AnalyticsEngineLoggingConfigDetails from the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigDetails(m map[string]interface{}) (result *AnalyticsEngineLoggingConfigDetails, err error) {
+// UnmarshalAnalyticsEngineLoggingConfigDetails unmarshals an instance of AnalyticsEngineLoggingConfigDetails from the specified map of raw messages.
+func UnmarshalAnalyticsEngineLoggingConfigDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineLoggingConfigDetails)
-	obj.LogSpecs, err = UnmarshalAnalyticsEngineLoggingNodeSpecSliceAsProperty(m, "log_specs")
+	err = core.UnmarshalModel(m, "log_specs", &obj.LogSpecs, UnmarshalAnalyticsEngineLoggingNodeSpec)
 	if err != nil {
 		return
 	}
-	obj.LogServer, err = UnmarshalAnalyticsEngineLoggingServerAsProperty(m, "log_server")
+	err = core.UnmarshalModel(m, "log_server", &obj.LogServer, UnmarshalAnalyticsEngineLoggingServer)
 	if err != nil {
 		return
 	}
-	obj.LogConfigStatus, err = UnmarshalAnalyticsEngineLoggingConfigStatusSliceAsProperty(m, "log_config_status")
+	err = core.UnmarshalModel(m, "log_config_status", &obj.LogConfigStatus, UnmarshalAnalyticsEngineLoggingConfigStatus)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigDetailsSlice unmarshals a slice of AnalyticsEngineLoggingConfigDetails instances from the specified list of maps.
-func UnmarshalAnalyticsEngineLoggingConfigDetailsSlice(s []interface{}) (slice []AnalyticsEngineLoggingConfigDetails, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineLoggingConfigDetails'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineLoggingConfigDetails(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigDetailsAsProperty unmarshals an instance of AnalyticsEngineLoggingConfigDetails that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigDetailsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineLoggingConfigDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineLoggingConfigDetails'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineLoggingConfigDetails(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigDetailsSliceAsProperty unmarshals a slice of AnalyticsEngineLoggingConfigDetails instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigDetailsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineLoggingConfigDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineLoggingConfigDetails'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineLoggingConfigDetailsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1619,77 +1347,29 @@ type AnalyticsEngineLoggingConfigStatus struct {
 const (
 	AnalyticsEngineLoggingConfigStatus_NodeType_Data = "data"
 	AnalyticsEngineLoggingConfigStatus_NodeType_Management = "management"
+	AnalyticsEngineLoggingConfigStatus_NodeType_Task = "task"
 )
 
-
-// UnmarshalAnalyticsEngineLoggingConfigStatus constructs an instance of AnalyticsEngineLoggingConfigStatus from the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigStatus(m map[string]interface{}) (result *AnalyticsEngineLoggingConfigStatus, err error) {
+// UnmarshalAnalyticsEngineLoggingConfigStatus unmarshals an instance of AnalyticsEngineLoggingConfigStatus from the specified map of raw messages.
+func UnmarshalAnalyticsEngineLoggingConfigStatus(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineLoggingConfigStatus)
-	obj.NodeType, err = core.UnmarshalString(m, "node_type")
+	err = core.UnmarshalPrimitive(m, "node_type", &obj.NodeType)
 	if err != nil {
 		return
 	}
-	obj.NodeID, err = core.UnmarshalString(m, "node_id")
+	err = core.UnmarshalPrimitive(m, "node_id", &obj.NodeID)
 	if err != nil {
 		return
 	}
-	obj.Action, err = core.UnmarshalString(m, "action")
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
 	if err != nil {
 		return
 	}
-	obj.Status, err = core.UnmarshalString(m, "status")
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigStatusSlice unmarshals a slice of AnalyticsEngineLoggingConfigStatus instances from the specified list of maps.
-func UnmarshalAnalyticsEngineLoggingConfigStatusSlice(s []interface{}) (slice []AnalyticsEngineLoggingConfigStatus, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineLoggingConfigStatus'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineLoggingConfigStatus(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigStatusAsProperty unmarshals an instance of AnalyticsEngineLoggingConfigStatus that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigStatusAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineLoggingConfigStatus, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineLoggingConfigStatus'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineLoggingConfigStatus(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingConfigStatusSliceAsProperty unmarshals a slice of AnalyticsEngineLoggingConfigStatus instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingConfigStatusSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineLoggingConfigStatus, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineLoggingConfigStatus'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineLoggingConfigStatusSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1707,6 +1387,7 @@ type AnalyticsEngineLoggingNodeSpec struct {
 const (
 	AnalyticsEngineLoggingNodeSpec_NodeType_Data = "data"
 	AnalyticsEngineLoggingNodeSpec_NodeType_Management = "management"
+	AnalyticsEngineLoggingNodeSpec_NodeType_Task = "task"
 )
 
 // Constants associated with the AnalyticsEngineLoggingNodeSpec.Components property.
@@ -1716,85 +1397,39 @@ const (
 	AnalyticsEngineLoggingNodeSpec_Components_HadoopMapreduce = "hadoop-mapreduce"
 	AnalyticsEngineLoggingNodeSpec_Components_HadoopYarn = "hadoop-yarn"
 	AnalyticsEngineLoggingNodeSpec_Components_Hbase = "hbase"
+	AnalyticsEngineLoggingNodeSpec_Components_Hdfs = "hdfs"
+	AnalyticsEngineLoggingNodeSpec_Components_HdfsAudit = "hdfs-audit"
 	AnalyticsEngineLoggingNodeSpec_Components_Hive = "hive"
 	AnalyticsEngineLoggingNodeSpec_Components_Jnbg = "jnbg"
 	AnalyticsEngineLoggingNodeSpec_Components_Knox = "knox"
+	AnalyticsEngineLoggingNodeSpec_Components_KnoxAudit = "knox-audit"
 	AnalyticsEngineLoggingNodeSpec_Components_Livy2 = "livy2"
 	AnalyticsEngineLoggingNodeSpec_Components_Spark2 = "spark2"
 	AnalyticsEngineLoggingNodeSpec_Components_YarnApps = "yarn-apps"
 )
 
-
 // NewAnalyticsEngineLoggingNodeSpec : Instantiate AnalyticsEngineLoggingNodeSpec (Generic Model Constructor)
-func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingNodeSpec(nodeType string, components []string) (model *AnalyticsEngineLoggingNodeSpec, err error) {
-	model = &AnalyticsEngineLoggingNodeSpec{
+func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingNodeSpec(nodeType string, components []string) (_model *AnalyticsEngineLoggingNodeSpec, err error) {
+	_model = &AnalyticsEngineLoggingNodeSpec{
 		NodeType: core.StringPtr(nodeType),
 		Components: components,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-// UnmarshalAnalyticsEngineLoggingNodeSpec constructs an instance of AnalyticsEngineLoggingNodeSpec from the specified map.
-func UnmarshalAnalyticsEngineLoggingNodeSpec(m map[string]interface{}) (result *AnalyticsEngineLoggingNodeSpec, err error) {
+// UnmarshalAnalyticsEngineLoggingNodeSpec unmarshals an instance of AnalyticsEngineLoggingNodeSpec from the specified map of raw messages.
+func UnmarshalAnalyticsEngineLoggingNodeSpec(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineLoggingNodeSpec)
-	obj.NodeType, err = core.UnmarshalString(m, "node_type")
+	err = core.UnmarshalPrimitive(m, "node_type", &obj.NodeType)
 	if err != nil {
 		return
 	}
-	obj.Components, err = core.UnmarshalStringSlice(m, "components")
+	err = core.UnmarshalPrimitive(m, "components", &obj.Components)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingNodeSpecSlice unmarshals a slice of AnalyticsEngineLoggingNodeSpec instances from the specified list of maps.
-func UnmarshalAnalyticsEngineLoggingNodeSpecSlice(s []interface{}) (slice []AnalyticsEngineLoggingNodeSpec, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineLoggingNodeSpec'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineLoggingNodeSpec(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingNodeSpecAsProperty unmarshals an instance of AnalyticsEngineLoggingNodeSpec that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingNodeSpecAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineLoggingNodeSpec, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineLoggingNodeSpec'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineLoggingNodeSpec(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingNodeSpecSliceAsProperty unmarshals a slice of AnalyticsEngineLoggingNodeSpec instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingNodeSpecSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineLoggingNodeSpec, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineLoggingNodeSpec'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineLoggingNodeSpecSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1822,91 +1457,42 @@ const (
 	AnalyticsEngineLoggingServer_Type_Logdna = "logdna"
 )
 
-
 // NewAnalyticsEngineLoggingServer : Instantiate AnalyticsEngineLoggingServer (Generic Model Constructor)
-func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingServer(typeVar string, credential string, apiHost string, logHost string) (model *AnalyticsEngineLoggingServer, err error) {
-	model = &AnalyticsEngineLoggingServer{
+func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingServer(typeVar string, credential string, apiHost string, logHost string) (_model *AnalyticsEngineLoggingServer, err error) {
+	_model = &AnalyticsEngineLoggingServer{
 		Type: core.StringPtr(typeVar),
 		Credential: core.StringPtr(credential),
 		ApiHost: core.StringPtr(apiHost),
 		LogHost: core.StringPtr(logHost),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-// UnmarshalAnalyticsEngineLoggingServer constructs an instance of AnalyticsEngineLoggingServer from the specified map.
-func UnmarshalAnalyticsEngineLoggingServer(m map[string]interface{}) (result *AnalyticsEngineLoggingServer, err error) {
+// UnmarshalAnalyticsEngineLoggingServer unmarshals an instance of AnalyticsEngineLoggingServer from the specified map of raw messages.
+func UnmarshalAnalyticsEngineLoggingServer(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineLoggingServer)
-	obj.Type, err = core.UnmarshalString(m, "type")
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		return
 	}
-	obj.Credential, err = core.UnmarshalString(m, "credential")
+	err = core.UnmarshalPrimitive(m, "credential", &obj.Credential)
 	if err != nil {
 		return
 	}
-	obj.ApiHost, err = core.UnmarshalString(m, "api_host")
+	err = core.UnmarshalPrimitive(m, "api_host", &obj.ApiHost)
 	if err != nil {
 		return
 	}
-	obj.LogHost, err = core.UnmarshalString(m, "log_host")
+	err = core.UnmarshalPrimitive(m, "log_host", &obj.LogHost)
 	if err != nil {
 		return
 	}
-	obj.Owner, err = core.UnmarshalString(m, "owner")
+	err = core.UnmarshalPrimitive(m, "owner", &obj.Owner)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingServerSlice unmarshals a slice of AnalyticsEngineLoggingServer instances from the specified list of maps.
-func UnmarshalAnalyticsEngineLoggingServerSlice(s []interface{}) (slice []AnalyticsEngineLoggingServer, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineLoggingServer'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineLoggingServer(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingServerAsProperty unmarshals an instance of AnalyticsEngineLoggingServer that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingServerAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineLoggingServer, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineLoggingServer'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineLoggingServer(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineLoggingServerSliceAsProperty unmarshals a slice of AnalyticsEngineLoggingServer instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineLoggingServerSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineLoggingServer, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineLoggingServer'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineLoggingServerSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -1934,87 +1520,38 @@ type AnalyticsEngineNodeLevelCustomizationRunDetails struct {
 	LogFile *string `json:"log_file,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails constructs an instance of AnalyticsEngineNodeLevelCustomizationRunDetails from the specified map.
-func UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails(m map[string]interface{}) (result *AnalyticsEngineNodeLevelCustomizationRunDetails, err error) {
+// UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails unmarshals an instance of AnalyticsEngineNodeLevelCustomizationRunDetails from the specified map of raw messages.
+func UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineNodeLevelCustomizationRunDetails)
-	obj.NodeName, err = core.UnmarshalString(m, "node_name")
+	err = core.UnmarshalPrimitive(m, "node_name", &obj.NodeName)
 	if err != nil {
 		return
 	}
-	obj.NodeType, err = core.UnmarshalString(m, "node_type")
+	err = core.UnmarshalPrimitive(m, "node_type", &obj.NodeType)
 	if err != nil {
 		return
 	}
-	obj.StartTime, err = core.UnmarshalString(m, "start_time")
+	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
 	if err != nil {
 		return
 	}
-	obj.EndTime, err = core.UnmarshalString(m, "end_time")
+	err = core.UnmarshalPrimitive(m, "end_time", &obj.EndTime)
 	if err != nil {
 		return
 	}
-	obj.TimeTaken, err = core.UnmarshalString(m, "time_taken")
+	err = core.UnmarshalPrimitive(m, "time_taken", &obj.TimeTaken)
 	if err != nil {
 		return
 	}
-	obj.Status, err = core.UnmarshalString(m, "status")
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
-	obj.LogFile, err = core.UnmarshalString(m, "log_file")
+	err = core.UnmarshalPrimitive(m, "log_file", &obj.LogFile)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSlice unmarshals a slice of AnalyticsEngineNodeLevelCustomizationRunDetails instances from the specified list of maps.
-func UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSlice(s []interface{}) (slice []AnalyticsEngineNodeLevelCustomizationRunDetails, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineNodeLevelCustomizationRunDetails'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsAsProperty unmarshals an instance of AnalyticsEngineNodeLevelCustomizationRunDetails that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineNodeLevelCustomizationRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineNodeLevelCustomizationRunDetails'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetails(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSliceAsProperty unmarshals a slice of AnalyticsEngineNodeLevelCustomizationRunDetails instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineNodeLevelCustomizationRunDetails, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineNodeLevelCustomizationRunDetails'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineNodeLevelCustomizationRunDetailsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2027,67 +1564,18 @@ type AnalyticsEngineResetClusterPasswordResponse struct {
 	UserCredentials *AnalyticsEngineResetClusterPasswordResponseUserCredentials `json:"user_credentials,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponse constructs an instance of AnalyticsEngineResetClusterPasswordResponse from the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponse(m map[string]interface{}) (result *AnalyticsEngineResetClusterPasswordResponse, err error) {
+// UnmarshalAnalyticsEngineResetClusterPasswordResponse unmarshals an instance of AnalyticsEngineResetClusterPasswordResponse from the specified map of raw messages.
+func UnmarshalAnalyticsEngineResetClusterPasswordResponse(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineResetClusterPasswordResponse)
-	obj.ID, err = core.UnmarshalString(m, "id")
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
-	obj.UserCredentials, err = UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsAsProperty(m, "user_credentials")
+	err = core.UnmarshalModel(m, "user_credentials", &obj.UserCredentials, UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseSlice unmarshals a slice of AnalyticsEngineResetClusterPasswordResponse instances from the specified list of maps.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseSlice(s []interface{}) (slice []AnalyticsEngineResetClusterPasswordResponse, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineResetClusterPasswordResponse'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineResetClusterPasswordResponse(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseAsProperty unmarshals an instance of AnalyticsEngineResetClusterPasswordResponse that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineResetClusterPasswordResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineResetClusterPasswordResponse'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineResetClusterPasswordResponse(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseSliceAsProperty unmarshals a slice of AnalyticsEngineResetClusterPasswordResponse instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineResetClusterPasswordResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineResetClusterPasswordResponse'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineResetClusterPasswordResponseSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2100,67 +1588,18 @@ type AnalyticsEngineResetClusterPasswordResponseUserCredentials struct {
 	Password *string `json:"password,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials constructs an instance of AnalyticsEngineResetClusterPasswordResponseUserCredentials from the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials(m map[string]interface{}) (result *AnalyticsEngineResetClusterPasswordResponseUserCredentials, err error) {
+// UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials unmarshals an instance of AnalyticsEngineResetClusterPasswordResponseUserCredentials from the specified map of raw messages.
+func UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineResetClusterPasswordResponseUserCredentials)
-	obj.User, err = core.UnmarshalString(m, "user")
+	err = core.UnmarshalPrimitive(m, "user", &obj.User)
 	if err != nil {
 		return
 	}
-	obj.Password, err = core.UnmarshalString(m, "password")
+	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsSlice unmarshals a slice of AnalyticsEngineResetClusterPasswordResponseUserCredentials instances from the specified list of maps.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsSlice(s []interface{}) (slice []AnalyticsEngineResetClusterPasswordResponseUserCredentials, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineResetClusterPasswordResponseUserCredentials'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsAsProperty unmarshals an instance of AnalyticsEngineResetClusterPasswordResponseUserCredentials that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineResetClusterPasswordResponseUserCredentials, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineResetClusterPasswordResponseUserCredentials'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentials(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsSliceAsProperty unmarshals a slice of AnalyticsEngineResetClusterPasswordResponseUserCredentials instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineResetClusterPasswordResponseUserCredentials, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineResetClusterPasswordResponseUserCredentials'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineResetClusterPasswordResponseUserCredentialsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2170,63 +1609,14 @@ type AnalyticsEngineResizeClusterResponse struct {
 	RequestID *string `json:"request_id,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineResizeClusterResponse constructs an instance of AnalyticsEngineResizeClusterResponse from the specified map.
-func UnmarshalAnalyticsEngineResizeClusterResponse(m map[string]interface{}) (result *AnalyticsEngineResizeClusterResponse, err error) {
+// UnmarshalAnalyticsEngineResizeClusterResponse unmarshals an instance of AnalyticsEngineResizeClusterResponse from the specified map of raw messages.
+func UnmarshalAnalyticsEngineResizeClusterResponse(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineResizeClusterResponse)
-	obj.RequestID, err = core.UnmarshalString(m, "request_id")
+	err = core.UnmarshalPrimitive(m, "request_id", &obj.RequestID)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineResizeClusterResponseSlice unmarshals a slice of AnalyticsEngineResizeClusterResponse instances from the specified list of maps.
-func UnmarshalAnalyticsEngineResizeClusterResponseSlice(s []interface{}) (slice []AnalyticsEngineResizeClusterResponse, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineResizeClusterResponse'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineResizeClusterResponse(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResizeClusterResponseAsProperty unmarshals an instance of AnalyticsEngineResizeClusterResponse that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResizeClusterResponseAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineResizeClusterResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineResizeClusterResponse'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineResizeClusterResponse(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineResizeClusterResponseSliceAsProperty unmarshals a slice of AnalyticsEngineResizeClusterResponse instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineResizeClusterResponseSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineResizeClusterResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineResizeClusterResponse'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineResizeClusterResponseSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2236,63 +1626,14 @@ type AnalyticsEngineState struct {
 	State *string `json:"state" validate:"required"`
 }
 
-
-// UnmarshalAnalyticsEngineState constructs an instance of AnalyticsEngineState from the specified map.
-func UnmarshalAnalyticsEngineState(m map[string]interface{}) (result *AnalyticsEngineState, err error) {
+// UnmarshalAnalyticsEngineState unmarshals an instance of AnalyticsEngineState from the specified map of raw messages.
+func UnmarshalAnalyticsEngineState(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineState)
-	obj.State, err = core.UnmarshalString(m, "state")
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineStateSlice unmarshals a slice of AnalyticsEngineState instances from the specified list of maps.
-func UnmarshalAnalyticsEngineStateSlice(s []interface{}) (slice []AnalyticsEngineState, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineState'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineState(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineStateAsProperty unmarshals an instance of AnalyticsEngineState that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineStateAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineState, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineState'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineState(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineStateSliceAsProperty unmarshals a slice of AnalyticsEngineState instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineStateSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineState, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineState'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineStateSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2302,63 +1643,14 @@ type AnalyticsEngineUserCredentials struct {
 	User *string `json:"user,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineUserCredentials constructs an instance of AnalyticsEngineUserCredentials from the specified map.
-func UnmarshalAnalyticsEngineUserCredentials(m map[string]interface{}) (result *AnalyticsEngineUserCredentials, err error) {
+// UnmarshalAnalyticsEngineUserCredentials unmarshals an instance of AnalyticsEngineUserCredentials from the specified map of raw messages.
+func UnmarshalAnalyticsEngineUserCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineUserCredentials)
-	obj.User, err = core.UnmarshalString(m, "user")
+	err = core.UnmarshalPrimitive(m, "user", &obj.User)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineUserCredentialsSlice unmarshals a slice of AnalyticsEngineUserCredentials instances from the specified list of maps.
-func UnmarshalAnalyticsEngineUserCredentialsSlice(s []interface{}) (slice []AnalyticsEngineUserCredentials, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineUserCredentials'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineUserCredentials(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineUserCredentialsAsProperty unmarshals an instance of AnalyticsEngineUserCredentials that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineUserCredentialsAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineUserCredentials, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineUserCredentials'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineUserCredentials(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineUserCredentialsSliceAsProperty unmarshals a slice of AnalyticsEngineUserCredentials instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineUserCredentialsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineUserCredentials, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineUserCredentials'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineUserCredentialsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -2368,70 +1660,21 @@ type AnalyticsEngineWhitelistResponse struct {
 	PrivateEndpointWhitelist []string `json:"private_endpoint_whitelist,omitempty"`
 }
 
-
-// UnmarshalAnalyticsEngineWhitelistResponse constructs an instance of AnalyticsEngineWhitelistResponse from the specified map.
-func UnmarshalAnalyticsEngineWhitelistResponse(m map[string]interface{}) (result *AnalyticsEngineWhitelistResponse, err error) {
+// UnmarshalAnalyticsEngineWhitelistResponse unmarshals an instance of AnalyticsEngineWhitelistResponse from the specified map of raw messages.
+func UnmarshalAnalyticsEngineWhitelistResponse(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyticsEngineWhitelistResponse)
-	obj.PrivateEndpointWhitelist, err = core.UnmarshalStringSlice(m, "private_endpoint_whitelist")
+	err = core.UnmarshalPrimitive(m, "private_endpoint_whitelist", &obj.PrivateEndpointWhitelist)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalAnalyticsEngineWhitelistResponseSlice unmarshals a slice of AnalyticsEngineWhitelistResponse instances from the specified list of maps.
-func UnmarshalAnalyticsEngineWhitelistResponseSlice(s []interface{}) (slice []AnalyticsEngineWhitelistResponse, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'AnalyticsEngineWhitelistResponse'")
-			return
-		}
-		obj, e := UnmarshalAnalyticsEngineWhitelistResponse(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineWhitelistResponseAsProperty unmarshals an instance of AnalyticsEngineWhitelistResponse that is stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineWhitelistResponseAsProperty(m map[string]interface{}, propertyName string) (result *AnalyticsEngineWhitelistResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'AnalyticsEngineWhitelistResponse'", propertyName)
-			return
-		}
-		result, err = UnmarshalAnalyticsEngineWhitelistResponse(objMap)
-	}
-	return
-}
-
-// UnmarshalAnalyticsEngineWhitelistResponseSliceAsProperty unmarshals a slice of AnalyticsEngineWhitelistResponse instances that are stored as a property
-// within the specified map.
-func UnmarshalAnalyticsEngineWhitelistResponseSliceAsProperty(m map[string]interface{}, propertyName string) (slice []AnalyticsEngineWhitelistResponse, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'AnalyticsEngineWhitelistResponse'", propertyName)
-			return
-		}
-		slice, err = UnmarshalAnalyticsEngineWhitelistResponseSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
 // ConfigureLoggingOptions : The ConfigureLogging options.
 type ConfigureLoggingOptions struct {
 	// GUID of the service instance.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Logging specifications on each node.
 	LogSpecs []AnalyticsEngineLoggingNodeSpec `json:"log_specs" validate:"required"`
@@ -2453,21 +1696,21 @@ func (*IbmAnalyticsEngineApiV2) NewConfigureLoggingOptions(instanceGuid string, 
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *ConfigureLoggingOptions) SetInstanceGuid(instanceGuid string) *ConfigureLoggingOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *ConfigureLoggingOptions) SetInstanceGuid(instanceGuid string) *ConfigureLoggingOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetLogSpecs : Allow user to set LogSpecs
-func (options *ConfigureLoggingOptions) SetLogSpecs(logSpecs []AnalyticsEngineLoggingNodeSpec) *ConfigureLoggingOptions {
-	options.LogSpecs = logSpecs
-	return options
+func (_options *ConfigureLoggingOptions) SetLogSpecs(logSpecs []AnalyticsEngineLoggingNodeSpec) *ConfigureLoggingOptions {
+	_options.LogSpecs = logSpecs
+	return _options
 }
 
 // SetLogServer : Allow user to set LogServer
-func (options *ConfigureLoggingOptions) SetLogServer(logServer *AnalyticsEngineLoggingServer) *ConfigureLoggingOptions {
-	options.LogServer = logServer
-	return options
+func (_options *ConfigureLoggingOptions) SetLogServer(logServer *AnalyticsEngineLoggingServer) *ConfigureLoggingOptions {
+	_options.LogServer = logServer
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2479,7 +1722,7 @@ func (options *ConfigureLoggingOptions) SetHeaders(param map[string]string) *Con
 // CreateCustomizationRequestOptions : The CreateCustomizationRequest options.
 type CreateCustomizationRequestOptions struct {
 	// GUID of the service instance.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Type of nodes to target for this customization.
 	Target *string `json:"target" validate:"required"`
@@ -2497,6 +1740,7 @@ const (
 	CreateCustomizationRequestOptions_Target_All = "all"
 	CreateCustomizationRequestOptions_Target_Data = "data"
 	CreateCustomizationRequestOptions_Target_MasterManagement = "master-management"
+	CreateCustomizationRequestOptions_Target_Task = "task"
 )
 
 // NewCreateCustomizationRequestOptions : Instantiate CreateCustomizationRequestOptions
@@ -2509,21 +1753,21 @@ func (*IbmAnalyticsEngineApiV2) NewCreateCustomizationRequestOptions(instanceGui
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *CreateCustomizationRequestOptions) SetInstanceGuid(instanceGuid string) *CreateCustomizationRequestOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *CreateCustomizationRequestOptions) SetInstanceGuid(instanceGuid string) *CreateCustomizationRequestOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetTarget : Allow user to set Target
-func (options *CreateCustomizationRequestOptions) SetTarget(target string) *CreateCustomizationRequestOptions {
-	options.Target = core.StringPtr(target)
-	return options
+func (_options *CreateCustomizationRequestOptions) SetTarget(target string) *CreateCustomizationRequestOptions {
+	_options.Target = core.StringPtr(target)
+	return _options
 }
 
 // SetCustomActions : Allow user to set CustomActions
-func (options *CreateCustomizationRequestOptions) SetCustomActions(customActions []AnalyticsEngineCustomAction) *CreateCustomizationRequestOptions {
-	options.CustomActions = customActions
-	return options
+func (_options *CreateCustomizationRequestOptions) SetCustomActions(customActions []AnalyticsEngineCustomAction) *CreateCustomizationRequestOptions {
+	_options.CustomActions = customActions
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2535,7 +1779,7 @@ func (options *CreateCustomizationRequestOptions) SetHeaders(param map[string]st
 // DeleteLoggingConfigOptions : The DeleteLoggingConfig options.
 type DeleteLoggingConfigOptions struct {
 	// Service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2549,9 +1793,9 @@ func (*IbmAnalyticsEngineApiV2) NewDeleteLoggingConfigOptions(instanceGuid strin
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *DeleteLoggingConfigOptions) SetInstanceGuid(instanceGuid string) *DeleteLoggingConfigOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *DeleteLoggingConfigOptions) SetInstanceGuid(instanceGuid string) *DeleteLoggingConfigOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2581,7 +1825,7 @@ func (options *GetAllAnalyticsEnginesOptions) SetHeaders(param map[string]string
 // GetAllCustomizationRequestsOptions : The GetAllCustomizationRequests options.
 type GetAllCustomizationRequestsOptions struct {
 	// service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2595,9 +1839,9 @@ func (*IbmAnalyticsEngineApiV2) NewGetAllCustomizationRequestsOptions(instanceGu
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *GetAllCustomizationRequestsOptions) SetInstanceGuid(instanceGuid string) *GetAllCustomizationRequestsOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *GetAllCustomizationRequestsOptions) SetInstanceGuid(instanceGuid string) *GetAllCustomizationRequestsOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2609,7 +1853,7 @@ func (options *GetAllCustomizationRequestsOptions) SetHeaders(param map[string]s
 // GetAnalyticsEngineByIdOptions : The GetAnalyticsEngineByID options.
 type GetAnalyticsEngineByIdOptions struct {
 	// GUID of the service instance.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2623,9 +1867,9 @@ func (*IbmAnalyticsEngineApiV2) NewGetAnalyticsEngineByIdOptions(instanceGuid st
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *GetAnalyticsEngineByIdOptions) SetInstanceGuid(instanceGuid string) *GetAnalyticsEngineByIdOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *GetAnalyticsEngineByIdOptions) SetInstanceGuid(instanceGuid string) *GetAnalyticsEngineByIdOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2637,7 +1881,7 @@ func (options *GetAnalyticsEngineByIdOptions) SetHeaders(param map[string]string
 // GetAnalyticsEngineStateByIdOptions : The GetAnalyticsEngineStateByID options.
 type GetAnalyticsEngineStateByIdOptions struct {
 	// GUID of the service instance.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2651,9 +1895,9 @@ func (*IbmAnalyticsEngineApiV2) NewGetAnalyticsEngineStateByIdOptions(instanceGu
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *GetAnalyticsEngineStateByIdOptions) SetInstanceGuid(instanceGuid string) *GetAnalyticsEngineStateByIdOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *GetAnalyticsEngineStateByIdOptions) SetInstanceGuid(instanceGuid string) *GetAnalyticsEngineStateByIdOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2665,10 +1909,10 @@ func (options *GetAnalyticsEngineStateByIdOptions) SetHeaders(param map[string]s
 // GetCustomizationRequestByIdOptions : The GetCustomizationRequestByID options.
 type GetCustomizationRequestByIdOptions struct {
 	// Service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// customization request ID.
-	RequestID *string `json:"request_id" validate:"required"`
+	RequestID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2683,15 +1927,15 @@ func (*IbmAnalyticsEngineApiV2) NewGetCustomizationRequestByIdOptions(instanceGu
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *GetCustomizationRequestByIdOptions) SetInstanceGuid(instanceGuid string) *GetCustomizationRequestByIdOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *GetCustomizationRequestByIdOptions) SetInstanceGuid(instanceGuid string) *GetCustomizationRequestByIdOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetRequestID : Allow user to set RequestID
-func (options *GetCustomizationRequestByIdOptions) SetRequestID(requestID string) *GetCustomizationRequestByIdOptions {
-	options.RequestID = core.StringPtr(requestID)
-	return options
+func (_options *GetCustomizationRequestByIdOptions) SetRequestID(requestID string) *GetCustomizationRequestByIdOptions {
+	_options.RequestID = core.StringPtr(requestID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2703,7 +1947,7 @@ func (options *GetCustomizationRequestByIdOptions) SetHeaders(param map[string]s
 // GetLoggingConfigOptions : The GetLoggingConfig options.
 type GetLoggingConfigOptions struct {
 	// Service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2717,9 +1961,9 @@ func (*IbmAnalyticsEngineApiV2) NewGetLoggingConfigOptions(instanceGuid string) 
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *GetLoggingConfigOptions) SetInstanceGuid(instanceGuid string) *GetLoggingConfigOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *GetLoggingConfigOptions) SetInstanceGuid(instanceGuid string) *GetLoggingConfigOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2731,7 +1975,7 @@ func (options *GetLoggingConfigOptions) SetHeaders(param map[string]string) *Get
 // ResetClusterPasswordOptions : The ResetClusterPassword options.
 type ResetClusterPasswordOptions struct {
 	// Service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2745,9 +1989,9 @@ func (*IbmAnalyticsEngineApiV2) NewResetClusterPasswordOptions(instanceGuid stri
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *ResetClusterPasswordOptions) SetInstanceGuid(instanceGuid string) *ResetClusterPasswordOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *ResetClusterPasswordOptions) SetInstanceGuid(instanceGuid string) *ResetClusterPasswordOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2759,38 +2003,74 @@ func (options *ResetClusterPasswordOptions) SetHeaders(param map[string]string) 
 // ResizeClusterOptions : The ResizeCluster options.
 type ResizeClusterOptions struct {
 	// Service instance GUID.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
-	// Expected number of nodes in the cluster after the resize operation.
-	ComputeNodesCount *int64 `json:"compute_nodes_count,omitempty"`
+	// Expected size of the cluster after the resize operation. If the number of nodes in the cluster is 5 and you want to
+	// add 2 nodes, specify 7.
+	Body ResizeClusterRequestIntf `json:"body" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewResizeClusterOptions : Instantiate ResizeClusterOptions
-func (*IbmAnalyticsEngineApiV2) NewResizeClusterOptions(instanceGuid string) *ResizeClusterOptions {
+func (*IbmAnalyticsEngineApiV2) NewResizeClusterOptions(instanceGuid string, body ResizeClusterRequestIntf) *ResizeClusterOptions {
 	return &ResizeClusterOptions{
 		InstanceGuid: core.StringPtr(instanceGuid),
+		Body: body,
 	}
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *ResizeClusterOptions) SetInstanceGuid(instanceGuid string) *ResizeClusterOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *ResizeClusterOptions) SetInstanceGuid(instanceGuid string) *ResizeClusterOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
-// SetComputeNodesCount : Allow user to set ComputeNodesCount
-func (options *ResizeClusterOptions) SetComputeNodesCount(computeNodesCount int64) *ResizeClusterOptions {
-	options.ComputeNodesCount = core.Int64Ptr(computeNodesCount)
-	return options
+// SetBody : Allow user to set Body
+func (_options *ResizeClusterOptions) SetBody(body ResizeClusterRequestIntf) *ResizeClusterOptions {
+	_options.Body = body
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
 func (options *ResizeClusterOptions) SetHeaders(param map[string]string) *ResizeClusterOptions {
 	options.Headers = param
 	return options
+}
+
+// ResizeClusterRequest : ResizeClusterRequest struct
+// Models which "extend" this model:
+// - ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest
+// - ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest
+type ResizeClusterRequest struct {
+	// Expected number of compute nodes in the cluster after the resize operation.
+	ComputeNodesCount *int64 `json:"compute_nodes_count,omitempty"`
+
+	// Expected number of task nodes in the cluster after the resize operation.
+	TaskNodesCount *int64 `json:"task_nodes_count,omitempty"`
+}
+func (*ResizeClusterRequest) isaResizeClusterRequest() bool {
+	return true
+}
+
+type ResizeClusterRequestIntf interface {
+	isaResizeClusterRequest() bool
+}
+
+// UnmarshalResizeClusterRequest unmarshals an instance of ResizeClusterRequest from the specified map of raw messages.
+func UnmarshalResizeClusterRequest(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResizeClusterRequest)
+	err = core.UnmarshalPrimitive(m, "compute_nodes_count", &obj.ComputeNodesCount)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_nodes_count", &obj.TaskNodesCount)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // ServiceEndpoints : Service Endpoints.
@@ -2829,110 +2109,61 @@ type ServiceEndpoints struct {
 	SparkSql *string `json:"spark_sql,omitempty"`
 }
 
-
-// UnmarshalServiceEndpoints constructs an instance of ServiceEndpoints from the specified map.
-func UnmarshalServiceEndpoints(m map[string]interface{}) (result *ServiceEndpoints, err error) {
+// UnmarshalServiceEndpoints unmarshals an instance of ServiceEndpoints from the specified map of raw messages.
+func UnmarshalServiceEndpoints(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ServiceEndpoints)
-	obj.PhoenixJdbc, err = core.UnmarshalString(m, "phoenix_jdbc")
+	err = core.UnmarshalPrimitive(m, "phoenix_jdbc", &obj.PhoenixJdbc)
 	if err != nil {
 		return
 	}
-	obj.AmbariConsole, err = core.UnmarshalString(m, "ambari_console")
+	err = core.UnmarshalPrimitive(m, "ambari_console", &obj.AmbariConsole)
 	if err != nil {
 		return
 	}
-	obj.Livy, err = core.UnmarshalString(m, "livy")
+	err = core.UnmarshalPrimitive(m, "livy", &obj.Livy)
 	if err != nil {
 		return
 	}
-	obj.SparkHistoryServer, err = core.UnmarshalString(m, "spark_history_server")
+	err = core.UnmarshalPrimitive(m, "spark_history_server", &obj.SparkHistoryServer)
 	if err != nil {
 		return
 	}
-	obj.OozieRest, err = core.UnmarshalString(m, "oozie_rest")
+	err = core.UnmarshalPrimitive(m, "oozie_rest", &obj.OozieRest)
 	if err != nil {
 		return
 	}
-	obj.HiveJdbc, err = core.UnmarshalString(m, "hive_jdbc")
+	err = core.UnmarshalPrimitive(m, "hive_jdbc", &obj.HiveJdbc)
 	if err != nil {
 		return
 	}
-	obj.NotebookGatewayWebsocket, err = core.UnmarshalString(m, "notebook_gateway_websocket")
+	err = core.UnmarshalPrimitive(m, "notebook_gateway_websocket", &obj.NotebookGatewayWebsocket)
 	if err != nil {
 		return
 	}
-	obj.NotebookGateway, err = core.UnmarshalString(m, "notebook_gateway")
+	err = core.UnmarshalPrimitive(m, "notebook_gateway", &obj.NotebookGateway)
 	if err != nil {
 		return
 	}
-	obj.Webhdfs, err = core.UnmarshalString(m, "webhdfs")
+	err = core.UnmarshalPrimitive(m, "webhdfs", &obj.Webhdfs)
 	if err != nil {
 		return
 	}
-	obj.Ssh, err = core.UnmarshalString(m, "ssh")
+	err = core.UnmarshalPrimitive(m, "ssh", &obj.Ssh)
 	if err != nil {
 		return
 	}
-	obj.SparkSql, err = core.UnmarshalString(m, "spark_sql")
+	err = core.UnmarshalPrimitive(m, "spark_sql", &obj.SparkSql)
 	if err != nil {
 		return
 	}
-	result = obj
-	return
-}
-
-// UnmarshalServiceEndpointsSlice unmarshals a slice of ServiceEndpoints instances from the specified list of maps.
-func UnmarshalServiceEndpointsSlice(s []interface{}) (slice []ServiceEndpoints, err error) {
-	for _, v := range s {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("slice element should be a map containing an instance of 'ServiceEndpoints'")
-			return
-		}
-		obj, e := UnmarshalServiceEndpoints(objMap)
-		if e != nil {
-			err = e
-			return
-		}
-		slice = append(slice, *obj)
-	}
-	return
-}
-
-// UnmarshalServiceEndpointsAsProperty unmarshals an instance of ServiceEndpoints that is stored as a property
-// within the specified map.
-func UnmarshalServiceEndpointsAsProperty(m map[string]interface{}, propertyName string) (result *ServiceEndpoints, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		objMap, ok := v.(map[string]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a map containing an instance of 'ServiceEndpoints'", propertyName)
-			return
-		}
-		result, err = UnmarshalServiceEndpoints(objMap)
-	}
-	return
-}
-
-// UnmarshalServiceEndpointsSliceAsProperty unmarshals a slice of ServiceEndpoints instances that are stored as a property
-// within the specified map.
-func UnmarshalServiceEndpointsSliceAsProperty(m map[string]interface{}, propertyName string) (slice []ServiceEndpoints, err error) {
-	v, foundIt := m[propertyName]
-	if foundIt && v != nil {
-		vSlice, ok := v.([]interface{})
-		if !ok {
-			err = fmt.Errorf("map property '%s' should be a slice of maps, each containing an instance of 'ServiceEndpoints'", propertyName)
-			return
-		}
-		slice, err = UnmarshalServiceEndpointsSlice(vSlice)
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
 // UpdatePrivateEndpointWhitelistOptions : The UpdatePrivateEndpointWhitelist options.
 type UpdatePrivateEndpointWhitelistOptions struct {
 	// GUID of the service instance.
-	InstanceGuid *string `json:"instance_guid" validate:"required"`
+	InstanceGuid *string `json:"-" validate:"required,ne="`
 
 	// List of IP ranges to add to or remove from the whitelist.
 	IpRanges []string `json:"ip_ranges" validate:"required"`
@@ -2961,25 +2192,69 @@ func (*IbmAnalyticsEngineApiV2) NewUpdatePrivateEndpointWhitelistOptions(instanc
 }
 
 // SetInstanceGuid : Allow user to set InstanceGuid
-func (options *UpdatePrivateEndpointWhitelistOptions) SetInstanceGuid(instanceGuid string) *UpdatePrivateEndpointWhitelistOptions {
-	options.InstanceGuid = core.StringPtr(instanceGuid)
-	return options
+func (_options *UpdatePrivateEndpointWhitelistOptions) SetInstanceGuid(instanceGuid string) *UpdatePrivateEndpointWhitelistOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
 }
 
 // SetIpRanges : Allow user to set IpRanges
-func (options *UpdatePrivateEndpointWhitelistOptions) SetIpRanges(ipRanges []string) *UpdatePrivateEndpointWhitelistOptions {
-	options.IpRanges = ipRanges
-	return options
+func (_options *UpdatePrivateEndpointWhitelistOptions) SetIpRanges(ipRanges []string) *UpdatePrivateEndpointWhitelistOptions {
+	_options.IpRanges = ipRanges
+	return _options
 }
 
 // SetAction : Allow user to set Action
-func (options *UpdatePrivateEndpointWhitelistOptions) SetAction(action string) *UpdatePrivateEndpointWhitelistOptions {
-	options.Action = core.StringPtr(action)
-	return options
+func (_options *UpdatePrivateEndpointWhitelistOptions) SetAction(action string) *UpdatePrivateEndpointWhitelistOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
 func (options *UpdatePrivateEndpointWhitelistOptions) SetHeaders(param map[string]string) *UpdatePrivateEndpointWhitelistOptions {
 	options.Headers = param
 	return options
+}
+
+// ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest : Resize cluster request.
+// This model "extends" ResizeClusterRequest
+type ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest struct {
+	// Expected number of compute nodes in the cluster after the resize operation.
+	ComputeNodesCount *int64 `json:"compute_nodes_count,omitempty"`
+}
+
+func (*ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest) isaResizeClusterRequest() bool {
+	return true
+}
+
+// UnmarshalResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest unmarshals an instance of ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest from the specified map of raw messages.
+func UnmarshalResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResizeClusterRequestAnalyticsEngineResizeClusterByComputeNodesRequest)
+	err = core.UnmarshalPrimitive(m, "compute_nodes_count", &obj.ComputeNodesCount)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest : ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest struct
+// This model "extends" ResizeClusterRequest
+type ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest struct {
+	// Expected number of task nodes in the cluster after the resize operation.
+	TaskNodesCount *int64 `json:"task_nodes_count,omitempty"`
+}
+
+func (*ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest) isaResizeClusterRequest() bool {
+	return true
+}
+
+// UnmarshalResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest unmarshals an instance of ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest from the specified map of raw messages.
+func UnmarshalResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResizeClusterRequestAnalyticsEngineResizeClusterByTaskNodesRequest)
+	err = core.UnmarshalPrimitive(m, "task_nodes_count", &obj.TaskNodesCount)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
