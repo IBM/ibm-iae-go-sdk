@@ -22,7 +22,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
@@ -51,7 +50,7 @@ var (
 )
 
 func shouldSkipTest() {
-	if !configLoaded {
+	if !configLoaded { 
 		Skip("External configuration is not available, skipping tests...")
 	}
 }
@@ -148,6 +147,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 		})
 		It(`GetApplications request example`, func() {
 			fmt.Println("\nGetApplications() result:")
+
 			// begin-get_applications
 
 			getApplicationsOptions := ibmAnalyticsEngineApiService.NewGetApplicationsOptions(
@@ -169,8 +169,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 		})
 		It(`GetApplicationByID request example`, func() {
+
 			fmt.Println("\nGetApplicationByID() result:")
-			// begin-get_application_by_id
+
 
 			getApplicationByIdOptions := ibmAnalyticsEngineApiService.NewGetApplicationByIdOptions(
 				"testString",
@@ -229,6 +230,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 			// end-delete_application_by_id
 			fmt.Printf("\nDeleteApplicationByID() response status code: %d\n", response.StatusCode)
+
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

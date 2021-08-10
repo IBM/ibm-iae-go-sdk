@@ -21,7 +21,6 @@ package ibmanalyticsengineapiv3_test
 import (
 	"fmt"
 	"os"
-
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
