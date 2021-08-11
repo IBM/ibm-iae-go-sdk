@@ -21,11 +21,11 @@ package ibmanalyticsengineapiv3_test
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"os"
 )
 
 //
@@ -102,6 +102,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetInstanceByID request example`, func() {
+			fmt.Println("\nGetInstanceByID() result:")
 			// begin-get_instance_by_id
 
 			getInstanceByIdOptions := ibmAnalyticsEngineApiService.NewGetInstanceByIdOptions(
@@ -123,6 +124,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 		})
 		It(`CreateApplication request example`, func() {
+			fmt.Println("\nCreateApplication() result:")
 			// begin-create_application
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
@@ -144,6 +146,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 		})
 		It(`GetApplications request example`, func() {
+			fmt.Println("\nGetApplications() result:")
+
 			// begin-get_applications
 
 			getApplicationsOptions := ibmAnalyticsEngineApiService.NewGetApplicationsOptions(
@@ -165,7 +169,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 		})
 		It(`GetApplicationByID request example`, func() {
-			// begin-get_application_by_id
+
+			fmt.Println("\nGetApplicationByID() result:")
+
 
 			getApplicationByIdOptions := ibmAnalyticsEngineApiService.NewGetApplicationByIdOptions(
 				"testString",
@@ -187,6 +193,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 		})
 		It(`GetApplicationState request example`, func() {
+			fmt.Println("\nGetApplicationState() result:")
 			// begin-get_application_state
 
 			getApplicationStateOptions := ibmAnalyticsEngineApiService.NewGetApplicationStateOptions(
@@ -222,6 +229,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 
 			// end-delete_application_by_id
+			fmt.Printf("\nDeleteApplicationByID() response status code: %d\n", response.StatusCode)
+
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

@@ -20,17 +20,18 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
-	"github.com/go-openapi/strfmt"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"time"
+
+	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
+	"github.com/go-openapi/strfmt"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
 var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
@@ -169,7 +170,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 	})
 	Describe(`GetInstanceByID(getInstanceByIdOptions *GetInstanceByIdOptions) - Operation response error`, func() {
 		getInstanceByIDPath := "/v3/analytics_engines/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -212,7 +213,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-
 	Describe(`GetInstanceByID(getInstanceByIdOptions *GetInstanceByIdOptions)`, func() {
 		getInstanceByIDPath := "/v3/analytics_engines/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -348,7 +348,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 	})
 	Describe(`CreateApplication(createApplicationOptions *CreateApplicationOptions) - Operation response error`, func() {
 		createApplicationPath := "/v3/analytics_engines/testString/spark/applications"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -396,7 +396,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateApplication(createApplicationOptions *CreateApplicationOptions)`, func() {
 		createApplicationPath := "/v3/analytics_engines/testString/spark/applications"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -576,53 +575,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				testServer.Close()
 			})
 		})
+
 	})
-	Describe(`GetApplications(getApplicationsOptions *GetApplicationsOptions) - Operation response error`, func() {
-		getApplicationsPath := "/v3/analytics_engines/testString/spark/applications"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getApplicationsPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetApplications with error: Operation response processing error`, func() {
-				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
-
-				// Construct an instance of the GetApplicationsOptions model
-				getApplicationsOptionsModel := new(ibmanalyticsengineapiv3.GetApplicationsOptions)
-				getApplicationsOptionsModel.InstanceID = core.StringPtr("testString")
-				getApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := ibmAnalyticsEngineApiService.GetApplications(getApplicationsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
-				result, response, operationErr = ibmAnalyticsEngineApiService.GetApplications(getApplicationsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-
 	Describe(`GetApplications(getApplicationsOptions *GetApplicationsOptions)`, func() {
 		getApplicationsPath := "/v3/analytics_engines/testString/spark/applications"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -758,7 +712,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 	})
 	Describe(`GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions) - Operation response error`, func() {
 		getApplicationByIDPath := "/v3/analytics_engines/testString/spark/applications/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -802,7 +756,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-
 	Describe(`GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions)`, func() {
 		getApplicationByIDPath := "/v3/analytics_engines/testString/spark/applications/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -939,7 +892,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteApplicationByID(deleteApplicationByIdOptions *DeleteApplicationByIdOptions)`, func() {
 		deleteApplicationByIDPath := "/v3/analytics_engines/testString/spark/applications/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -1012,7 +964,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 	})
 	Describe(`GetApplicationState(getApplicationStateOptions *GetApplicationStateOptions) - Operation response error`, func() {
 		getApplicationStatePath := "/v3/analytics_engines/testString/spark/applications/testString/state"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1056,7 +1008,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-
 	Describe(`GetApplicationState(getApplicationStateOptions *GetApplicationStateOptions)`, func() {
 		getApplicationStatePath := "/v3/analytics_engines/testString/spark/applications/testString/state"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -1294,11 +1245,11 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			Expect(mockReader).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDate() successfully`, func() {
-			mockDate := CreateMockDate()
+			mockDate := CreateMockDate("2019-01-01")
 			Expect(mockDate).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDateTime() successfully`, func() {
-			mockDateTime := CreateMockDateTime()
+			mockDateTime := CreateMockDateTime("2019-01-01T12:00:00.000Z")
 			Expect(mockDateTime).ToNot(BeNil())
 		})
 	})
@@ -1323,13 +1274,19 @@ func CreateMockReader(mockData string) io.ReadCloser {
 	return ioutil.NopCloser(bytes.NewReader([]byte(mockData)))
 }
 
-func CreateMockDate() *strfmt.Date {
-	d := strfmt.Date(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDate(mockData string) *strfmt.Date {
+	d, err := core.ParseDate(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 
-func CreateMockDateTime() *strfmt.DateTime {
-	d := strfmt.DateTime(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDateTime(mockData string) *strfmt.DateTime {
+	d, err := core.ParseDateTime(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 

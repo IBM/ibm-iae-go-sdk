@@ -20,11 +20,11 @@ package ibmanalyticsengineapiv3_test
 
 import (
 	"fmt"
+	"os"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"os"
 )
 
 /**
@@ -34,7 +34,6 @@ import (
  *
  * The integration test will automatically skip tests if the required config file is not available.
  */
-
 var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 	const externalConfigFile = "../ibmanalyticsengine-service.env"
@@ -44,10 +43,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
 		serviceURL   string
 		config       map[string]string
-		// Retrieve any test-specific properties from the environment.
-        instanceGuid string
+		instanceGuid string
         applicationId string
-		
 	)
 
 	var shouldSkipTest = func() {
@@ -72,7 +69,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 			instanceGuid = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID")
 			fmt.Printf("Service URL: %s\n", serviceURL)
-			fmt.Printf("instanceGuid: %s\n", instanceGuid)
 			shouldSkipTest = func() {}
 		})
 	})
@@ -98,8 +94,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetInstanceByID(getInstanceByIdOptions *GetInstanceByIdOptions)`, func() {
-			fmt.Fprint(os.Stdout, fmt.Sprintf("instance id  value is - %v", instanceGuid))
-			
+
 			getInstanceByIdOptions := &ibmanalyticsengineapiv3.GetInstanceByIdOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 			}
@@ -126,15 +121,16 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 				ApplicationArguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
 				//Conf: make(map[string]interface{}),
 				//Env: make(map[string]interface{}),
-				
-				
 			}
+
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(applicationResponse).ToNot(BeNil())			
+
 			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(applicationResponse).ToNot(BeNil())
 			applicationId = *applicationResponse.ApplicationID
-			fmt.Printf("applicationResponse application_id : %v \n",applicationId)			
+			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
+
 		})
 	})
 

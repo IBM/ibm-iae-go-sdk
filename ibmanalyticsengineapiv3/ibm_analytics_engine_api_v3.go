@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.29.0-cd9ba74f-20210305-183535
+ * IBM OpenAPI SDK Code Generator Version: 3.37.0-a85661cd-20210802-190136
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -25,12 +25,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/IBM/go-sdk-core/v5/core"
-	common "github.com/IBM/ibm-iae-go-sdk/common"
-	"github.com/go-openapi/strfmt"
 	"net/http"
 	"reflect"
 	"time"
+
+	"github.com/IBM/go-sdk-core/v5/core"
+	common "github.com/IBM/ibm-iae-go-sdk/common"
+	"github.com/go-openapi/strfmt"
 )
 
 // IbmAnalyticsEngineApiV3 : Create and manage serverless Spark instances and run applications.
@@ -215,11 +216,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceByIDWithContext
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceDetails)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceDetails)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -302,11 +305,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -360,11 +365,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationsWithContext
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationCollection)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationCollection)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -419,11 +426,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationByIDWithCont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -528,11 +537,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetStateResponse)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApplicationGetStateResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -802,25 +813,25 @@ func UnmarshalApplicationResponse(m map[string]json.RawMessage, result interface
 // CreateApplicationOptions : The CreateApplication options.
 type CreateApplicationOptions struct {
 	// The identifier of the instance where the Spark application is submitted.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Application name.
-	Application *string
+	Application *string `json:"application,omitempty"`
 
 	// The entry point for your application.
-	Class *string
+	Class *string `json:"class,omitempty"`
 
 	// Application arguments.
-	ApplicationArguments []string
+	ApplicationArguments []string `json:"application_arguments,omitempty"`
 
 	// Application configurations to override. See [Spark environment variables](
 	// https://spark.apache.org/docs/latest/configuration.html#available-properties) for a list of the supported variables.
-	Conf map[string]interface{}
+	Conf map[string]interface{} `json:"conf,omitempty"`
 
 	// Application environment configurations to override. See [Spark environment
 	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
 	// supported variables.
-	Env map[string]interface{}
+	Env map[string]interface{} `json:"env,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -834,39 +845,39 @@ func (*IbmAnalyticsEngineApiV3) NewCreateApplicationOptions(instanceID string) *
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *CreateApplicationOptions) SetInstanceID(instanceID string) *CreateApplicationOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *CreateApplicationOptions) SetInstanceID(instanceID string) *CreateApplicationOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplication : Allow user to set Application
-func (options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
-	options.Application = core.StringPtr(application)
-	return options
+func (_options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
+	_options.Application = core.StringPtr(application)
+	return _options
 }
 
 // SetClass : Allow user to set Class
-func (options *CreateApplicationOptions) SetClass(class string) *CreateApplicationOptions {
-	options.Class = core.StringPtr(class)
-	return options
+func (_options *CreateApplicationOptions) SetClass(class string) *CreateApplicationOptions {
+	_options.Class = core.StringPtr(class)
+	return _options
 }
 
 // SetApplicationArguments : Allow user to set ApplicationArguments
-func (options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
-	options.ApplicationArguments = applicationArguments
-	return options
+func (_options *CreateApplicationOptions) SetApplicationArguments(applicationArguments []string) *CreateApplicationOptions {
+	_options.ApplicationArguments = applicationArguments
+	return _options
 }
 
 // SetConf : Allow user to set Conf
-func (options *CreateApplicationOptions) SetConf(conf map[string]interface{}) *CreateApplicationOptions {
-	options.Conf = conf
-	return options
+func (_options *CreateApplicationOptions) SetConf(conf map[string]interface{}) *CreateApplicationOptions {
+	_options.Conf = conf
+	return _options
 }
 
 // SetEnv : Allow user to set Env
-func (options *CreateApplicationOptions) SetEnv(env map[string]interface{}) *CreateApplicationOptions {
-	options.Env = env
-	return options
+func (_options *CreateApplicationOptions) SetEnv(env map[string]interface{}) *CreateApplicationOptions {
+	_options.Env = env
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -878,10 +889,10 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 // DeleteApplicationByIdOptions : The DeleteApplicationByID options.
 type DeleteApplicationByIdOptions struct {
 	// Identifier of the instance to which the application belongs.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Identifier of the application that needs to be stopped.
-	ApplicationID *string `validate:"required,ne="`
+	ApplicationID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -896,15 +907,15 @@ func (*IbmAnalyticsEngineApiV3) NewDeleteApplicationByIdOptions(instanceID strin
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *DeleteApplicationByIdOptions) SetInstanceID(instanceID string) *DeleteApplicationByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *DeleteApplicationByIdOptions) SetInstanceID(instanceID string) *DeleteApplicationByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *DeleteApplicationByIdOptions) SetApplicationID(applicationID string) *DeleteApplicationByIdOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *DeleteApplicationByIdOptions) SetApplicationID(applicationID string) *DeleteApplicationByIdOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -916,10 +927,10 @@ func (options *DeleteApplicationByIdOptions) SetHeaders(param map[string]string)
 // GetApplicationByIdOptions : The GetApplicationByID options.
 type GetApplicationByIdOptions struct {
 	// Identifier of the instance to which the application belongs.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Identifier of the application for which details are requested.
-	ApplicationID *string `validate:"required,ne="`
+	ApplicationID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -934,15 +945,15 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationByIdOptions(instanceID string, 
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationByIdOptions) SetInstanceID(instanceID string) *GetApplicationByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationByIdOptions) SetInstanceID(instanceID string) *GetApplicationByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *GetApplicationByIdOptions) SetApplicationID(applicationID string) *GetApplicationByIdOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *GetApplicationByIdOptions) SetApplicationID(applicationID string) *GetApplicationByIdOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -954,10 +965,10 @@ func (options *GetApplicationByIdOptions) SetHeaders(param map[string]string) *G
 // GetApplicationStateOptions : The GetApplicationState options.
 type GetApplicationStateOptions struct {
 	// Identifier of the instance to which the applications belongs.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Identifier of the application for which details are requested.
-	ApplicationID *string `validate:"required,ne="`
+	ApplicationID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -972,15 +983,15 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationStateOptions(instanceID string,
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationStateOptions) SetInstanceID(instanceID string) *GetApplicationStateOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationStateOptions) SetInstanceID(instanceID string) *GetApplicationStateOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (options *GetApplicationStateOptions) SetApplicationID(applicationID string) *GetApplicationStateOptions {
-	options.ApplicationID = core.StringPtr(applicationID)
-	return options
+func (_options *GetApplicationStateOptions) SetApplicationID(applicationID string) *GetApplicationStateOptions {
+	_options.ApplicationID = core.StringPtr(applicationID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -992,7 +1003,7 @@ func (options *GetApplicationStateOptions) SetHeaders(param map[string]string) *
 // GetApplicationsOptions : The GetApplications options.
 type GetApplicationsOptions struct {
 	// Identifier of the instance where the applications run.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1006,9 +1017,9 @@ func (*IbmAnalyticsEngineApiV3) NewGetApplicationsOptions(instanceID string) *Ge
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetApplicationsOptions) SetInstanceID(instanceID string) *GetApplicationsOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetApplicationsOptions) SetInstanceID(instanceID string) *GetApplicationsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -1020,7 +1031,7 @@ func (options *GetApplicationsOptions) SetHeaders(param map[string]string) *GetA
 // GetInstanceByIdOptions : The GetInstanceByID options.
 type GetInstanceByIdOptions struct {
 	// Identifier of the instance to retrieve.
-	InstanceID *string `validate:"required,ne="`
+	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1034,9 +1045,9 @@ func (*IbmAnalyticsEngineApiV3) NewGetInstanceByIdOptions(instanceID string) *Ge
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (options *GetInstanceByIdOptions) SetInstanceID(instanceID string) *GetInstanceByIdOptions {
-	options.InstanceID = core.StringPtr(instanceID)
-	return options
+func (_options *GetInstanceByIdOptions) SetInstanceID(instanceID string) *GetInstanceByIdOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
