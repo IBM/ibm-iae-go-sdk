@@ -1,3 +1,11 @@
+# [0.4.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.3.1...v0.4.0) (2021-08-11)
+
+
+### Features
+
+* added support for v3 api's ([59fec0e](https://github.com/IBM/ibm-iae-go-sdk/commit/59fec0ea955106cba3ee5ea8bbb7bf86b3285a24))
+* analytics engine v3 feature changes ([4f90700](https://github.com/IBM/ibm-iae-go-sdk/commit/4f90700e52d83d0719ecc8af443bb1de17494936))
+
 # [0.2.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.1.0...v0.2.0) (2021-05-03)
 
 
