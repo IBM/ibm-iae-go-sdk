@@ -38,7 +38,14 @@ The IBM Cloud IBM Analytics Engine API Go SDK allows developers to programmatica
 
 Service Name | Package name 
 --- | --- 
-[IBM Analytics Engine](https://cloud.ibm.com/apidocs/ibm-analytics-engine) | ibmanalyticsengineapiv2
+[IBM Analytics Engine v2](https://cloud.ibm.com/apidocs/ibm-analytics-engine/ibm-analytics-engine-v2) | ibmanalyticsengineapiv2
+[IBM Analytics Engine v3](https://cloud.ibm.com/apidocs/ibm-analytics-engine/ibm-analytics-engine-v3) | ibmanalyticsengineapiv3
+
+**NOTE**
+
+IBM Analytics Engine v2 is for the classic plans : Lite, Standard Hourly and Standard monthly
+
+IBM Analytics Engine v3 is for the Standard Serverless Spark plan
 
 ## Prerequisites
 
