@@ -20,7 +20,10 @@ package ibmanalyticsengineapiv3_test
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"time"
+
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
@@ -34,9 +37,10 @@ import (
  *
  * The integration test will automatically skip tests if the required config file is not available.
  */
+
 var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
-	const externalConfigFile = "../ibmanalyticsengine-service.env"
+	const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
 
 	var (
 		err          error
@@ -86,29 +90,34 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 			Expect(ibmAnalyticsEngineApiService.Service.Options.URL).To(Equal(serviceURL))
+
+			core.SetLogger(core.NewLogger(core.LevelDebug, log.New(GinkgoWriter, "", log.LstdFlags), log.New(GinkgoWriter, "", log.LstdFlags)))
+			ibmAnalyticsEngineApiService.EnableRetries(4, 30*time.Second)
 		})
 	})
 
-	Describe(`GetInstanceByID - Find instance by id`, func() {
+	Describe(`GetInstance - Find Analytics Engine by id`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetInstanceByID(getInstanceByIdOptions *GetInstanceByIdOptions)`, func() {
+		It(`GetInstance(getInstanceOptions *GetInstanceOptions)`, func() {
 
-			getInstanceByIdOptions := &ibmanalyticsengineapiv3.GetInstanceByIdOptions{
+			getInstanceOptions := &ibmanalyticsengineapiv3.GetInstanceOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 			}
 
-			instanceDetails, response, err := ibmAnalyticsEngineApiService.GetInstanceByID(getInstanceByIdOptions)
-
+			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
+			//fmt.Printf("GetInstance response: %s\n", response)
+			//fmt.Printf("GetInstance instance: %v\n", instance)
+			//fmt.Printf("GetInstance err: %s\n", err)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(instanceDetails).ToNot(BeNil())
+			Expect(instance).ToNot(BeNil())
 
 		})
 	})
 
-	Describe(`CreateApplication - Deploys a Spark application in the Analytics Engine instance`, func() {
+	Describe(`CreateApplication - Deploy a Spark application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -117,35 +126,41 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
-				//Class: core.StringPtr("testString"),
-				ApplicationArguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
+				//Class: core.StringPtr("com.company.path.ClassName"),
+				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
 				//Conf: make(map[string]interface{}),
 				//Env: make(map[string]interface{}),
 			}
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
 
+			//fmt.Printf("CreateApplication applicationResponse: %v\n", applicationResponse)
+			//fmt.Printf("CreateApplication response: %v\n", response)
+			//fmt.Printf("CreateApplication err: %s\n", err)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
-			applicationId = *applicationResponse.ApplicationID
+			applicationId = *applicationResponse.ID
 			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
-
+			
 		})
 	})
 
-	Describe(`GetApplications - Gets all applications submitted in an instance with a specified inst_id`, func() {
+	Describe(`ListApplications - Retrieve all Spark applications`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetApplications(getApplicationsOptions *GetApplicationsOptions)`, func() {
+		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions)`, func() {
 
-			getApplicationsOptions := &ibmanalyticsengineapiv3.GetApplicationsOptions{
+			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 			}
 
-			applicationCollection, response, err := ibmAnalyticsEngineApiService.GetApplications(getApplicationsOptions)
-
+			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
+			//fmt.Printf("ListApplications applicationCollection: %v\n", applicationCollection)
+			//fmt.Printf("ListApplications response: %s\n", response)
+			//fmt.Printf("ListApplications err: %s\n", err)
+			
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())
@@ -153,27 +168,30 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetApplicationByID - Gets the details of the application identified by the app_id identifier`, func() {
+	Describe(`GetApplication - Retrieve the details of a given Spark application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetApplicationByID(getApplicationByIdOptions *GetApplicationByIdOptions)`, func() {
+		It(`GetApplication(getApplicationOptions *GetApplicationOptions)`, func() {
 
-			getApplicationByIdOptions := &ibmanalyticsengineapiv3.GetApplicationByIdOptions{
+			getApplicationOptions := &ibmanalyticsengineapiv3.GetApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
-			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationByID(getApplicationByIdOptions)
+			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplication(getApplicationOptions)
 
+			//fmt.Printf("GetApplication applicationGetResponse: %v\n", applicationGetResponse)
+			//fmt.Printf("GetApplication response: %s\n", response)
+			//fmt.Printf("GetApplication err: %s\n", err)
+			
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetResponse).ToNot(BeNil())
-
 		})
 	})
 
-	Describe(`GetApplicationState - Gets the status of the application identified by the app_id identifier`, func() {
+	Describe(`GetApplicationState - Get the status of the application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -186,6 +204,11 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 			applicationGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptions)
 
+
+			//fmt.Printf("GetApplicationState applicationGetStateResponse: %v\n", applicationGetStateResponse)
+			//fmt.Printf("GetApplicationState response: %s\n", response)
+			//fmt.Printf("GetApplicationState err: %s\n", err)
+			
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetStateResponse).ToNot(BeNil())
@@ -193,7 +216,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteApplicationByID - Stops the specified application`, func() {
+	Describe(`DeleteApplicationByID - Stop application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -204,13 +227,20 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
+
+			
 			response, err := ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptions)
 
+			//fmt.Printf("DeleteApplicationByID response: %v\n", response)
+			//fmt.Printf("DeleteApplicationByID err: %s\n", err)
+			
+			
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 
 		})
 	})
+	
 })
 
 //
