@@ -216,31 +216,27 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteApplicationByID - Stop application`, func() {
+	Describe(`DeleteApplication - Stop application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteApplicationByID(deleteApplicationByIdOptions *DeleteApplicationByIdOptions)`, func() {
+		It(`DeleteApplication(deleteApplicationOptions *DeleteApplicationOptions)`, func() {
 
-			deleteApplicationByIdOptions := &ibmanalyticsengineapiv3.DeleteApplicationByIdOptions{
+			deleteApplicationOptions := &ibmanalyticsengineapiv3.DeleteApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
+			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
 
-			
-			response, err := ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 
 			//fmt.Printf("DeleteApplicationByID response: %v\n", response)
 			//fmt.Printf("DeleteApplicationByID err: %s\n", err)
 			
-			
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-
 		})
 	})
-	
 })
 
 //

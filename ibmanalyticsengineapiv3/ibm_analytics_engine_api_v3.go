@@ -437,27 +437,27 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationWithContext(
 	return
 }
 
-// DeleteApplicationByID : Stop application
+// DeleteApplication : Stop application
 // Stops a running application identified by the app_id identifier. This is an idempotent operation. Performs no action
 // if the requested application is already stopped or completed.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationByID(deleteApplicationByIdOptions *DeleteApplicationByIdOptions) (response *core.DetailedResponse, err error) {
-	return ibmAnalyticsEngineApi.DeleteApplicationByIDWithContext(context.Background(), deleteApplicationByIdOptions)
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplication(deleteApplicationOptions *DeleteApplicationOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.DeleteApplicationWithContext(context.Background(), deleteApplicationOptions)
 }
 
-// DeleteApplicationByIDWithContext is an alternate form of the DeleteApplicationByID method which supports a Context parameter
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationByIDWithContext(ctx context.Context, deleteApplicationByIdOptions *DeleteApplicationByIdOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(deleteApplicationByIdOptions, "deleteApplicationByIdOptions cannot be nil")
+// DeleteApplicationWithContext is an alternate form of the DeleteApplication method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationWithContext(ctx context.Context, deleteApplicationOptions *DeleteApplicationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteApplicationOptions, "deleteApplicationOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(deleteApplicationByIdOptions, "deleteApplicationByIdOptions")
+	err = core.ValidateStruct(deleteApplicationOptions, "deleteApplicationOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *deleteApplicationByIdOptions.InstanceID,
-		"application_id": *deleteApplicationByIdOptions.ApplicationID,
+		"instance_id": *deleteApplicationOptions.InstanceID,
+		"application_id": *deleteApplicationOptions.ApplicationID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -468,11 +468,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationByIDWithC
 		return
 	}
 
-	for headerName, headerValue := range deleteApplicationByIdOptions.Headers {
+	for headerName, headerValue := range deleteApplicationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DeleteApplicationByID")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DeleteApplication")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -875,8 +875,8 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 	return options
 }
 
-// DeleteApplicationByIdOptions : The DeleteApplicationByID options.
-type DeleteApplicationByIdOptions struct {
+// DeleteApplicationOptions : The DeleteApplication options.
+type DeleteApplicationOptions struct {
 	// Identifier of the instance to which the application belongs.
 	InstanceID *string `json:"-" validate:"required,ne="`
 
@@ -887,28 +887,28 @@ type DeleteApplicationByIdOptions struct {
 	Headers map[string]string
 }
 
-// NewDeleteApplicationByIdOptions : Instantiate DeleteApplicationByIdOptions
-func (*IbmAnalyticsEngineApiV3) NewDeleteApplicationByIdOptions(instanceID string, applicationID string) *DeleteApplicationByIdOptions {
-	return &DeleteApplicationByIdOptions{
+// NewDeleteApplicationOptions : Instantiate DeleteApplicationOptions
+func (*IbmAnalyticsEngineApiV3) NewDeleteApplicationOptions(instanceID string, applicationID string) *DeleteApplicationOptions {
+	return &DeleteApplicationOptions{
 		InstanceID: core.StringPtr(instanceID),
 		ApplicationID: core.StringPtr(applicationID),
 	}
 }
 
 // SetInstanceID : Allow user to set InstanceID
-func (_options *DeleteApplicationByIdOptions) SetInstanceID(instanceID string) *DeleteApplicationByIdOptions {
+func (_options *DeleteApplicationOptions) SetInstanceID(instanceID string) *DeleteApplicationOptions {
 	_options.InstanceID = core.StringPtr(instanceID)
 	return _options
 }
 
 // SetApplicationID : Allow user to set ApplicationID
-func (_options *DeleteApplicationByIdOptions) SetApplicationID(applicationID string) *DeleteApplicationByIdOptions {
+func (_options *DeleteApplicationOptions) SetApplicationID(applicationID string) *DeleteApplicationOptions {
 	_options.ApplicationID = core.StringPtr(applicationID)
 	return _options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *DeleteApplicationByIdOptions) SetHeaders(param map[string]string) *DeleteApplicationByIdOptions {
+func (options *DeleteApplicationOptions) SetHeaders(param map[string]string) *DeleteApplicationOptions {
 	options.Headers = param
 	return options
 }
