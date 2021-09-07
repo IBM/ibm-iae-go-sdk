@@ -22,6 +22,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
@@ -50,7 +51,7 @@ var (
 )
 
 func shouldSkipTest() {
-	if !configLoaded { 
+	if !configLoaded {
 		Skip("External configuration is not available, skipping tests...")
 	}
 }
@@ -101,26 +102,26 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetInstanceByID request example`, func() {
-			fmt.Println("\nGetInstanceByID() result:")
-			// begin-get_instance_by_id
+		It(`GetInstance request example`, func() {
+			fmt.Println("\nGetInstance() result:")
+			// begin-get_instance
 
-			getInstanceByIdOptions := ibmAnalyticsEngineApiService.NewGetInstanceByIdOptions(
-				"testString",
+			getInstanceOptions := ibmAnalyticsEngineApiService.NewGetInstanceOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
-			instanceDetails, response, err := ibmAnalyticsEngineApiService.GetInstanceByID(getInstanceByIdOptions)
+			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(instanceDetails, "", "  ")
+			b, _ := json.MarshalIndent(instance, "", "  ")
 			fmt.Println(string(b))
 
-			// end-get_instance_by_id
+			// end-get_instance
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(instanceDetails).ToNot(BeNil())
+			Expect(instance).ToNot(BeNil())
 
 		})
 		It(`CreateApplication request example`, func() {
@@ -128,7 +129,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-create_application
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
-				"testString",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
@@ -141,51 +142,49 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// end-create_application
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
+			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
 
 		})
-		It(`GetApplications request example`, func() {
-			fmt.Println("\nGetApplications() result:")
+		It(`ListApplications request example`, func() {
+			fmt.Println("\nListApplications() result:")
+			// begin-list_applications
 
-			// begin-get_applications
-
-			getApplicationsOptions := ibmAnalyticsEngineApiService.NewGetApplicationsOptions(
-				"testString",
+			listApplicationsOptions := ibmAnalyticsEngineApiService.NewListApplicationsOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
-			applicationCollection, response, err := ibmAnalyticsEngineApiService.GetApplications(getApplicationsOptions)
+			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
 			if err != nil {
 				panic(err)
 			}
 			b, _ := json.MarshalIndent(applicationCollection, "", "  ")
 			fmt.Println(string(b))
 
-			// end-get_applications
+			// end-list_applications
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())
 
 		})
-		It(`GetApplicationByID request example`, func() {
+		It(`GetApplication request example`, func() {
+			fmt.Println("\nGetApplication() result:")
+			// begin-get_application
 
-			fmt.Println("\nGetApplicationByID() result:")
-
-
-			getApplicationByIdOptions := ibmAnalyticsEngineApiService.NewGetApplicationByIdOptions(
-				"testString",
-				"testString",
+			getApplicationOptions := ibmAnalyticsEngineApiService.NewGetApplicationOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
-			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationByID(getApplicationByIdOptions)
+			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplication(getApplicationOptions)
 			if err != nil {
 				panic(err)
 			}
 			b, _ := json.MarshalIndent(applicationGetResponse, "", "  ")
 			fmt.Println(string(b))
 
-			// end-get_application_by_id
+			// end-get_application
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
@@ -197,8 +196,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_application_state
 
 			getApplicationStateOptions := ibmAnalyticsEngineApiService.NewGetApplicationStateOptions(
-				"testString",
-				"testString",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
 			applicationGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptions)
@@ -219,8 +218,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-delete_application_by_id
 
 			deleteApplicationByIdOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationByIdOptions(
-				"testString",
-				"testString",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
 			response, err := ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptions)
@@ -230,7 +229,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 			// end-delete_application_by_id
 			fmt.Printf("\nDeleteApplicationByID() response status code: %d\n", response.StatusCode)
-
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
