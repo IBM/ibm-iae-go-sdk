@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.0...v0.4.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **analytics engine:** fixed Spark application submit path and payload ([bd231ca](https://github.com/IBM/ibm-iae-go-sdk/commit/bd231ca7ee86e9604ee3e75763a4b9b3fa8eba12))
+
 # [0.4.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.3.1...v0.4.0) (2021-08-11)
 
 
