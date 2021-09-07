@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.1...v0.4.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* **analytics engine:** minor fix to an operation id ([926104f](https://github.com/IBM/ibm-iae-go-sdk/commit/926104fbfc2ab6868e8293aa6295df4eaac2c5e9))
+
 ## [0.4.1](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.0...v0.4.1) (2021-09-07)
 
 
