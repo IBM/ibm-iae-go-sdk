@@ -214,21 +214,21 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(applicationGetStateResponse).ToNot(BeNil())
 
 		})
-		It(`DeleteApplicationByID request example`, func() {
-			// begin-delete_application_by_id
+		It(`DeleteApplication request example`, func() {
+			// begin-delete_application
 
-			deleteApplicationByIdOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationByIdOptions(
+			deleteApplicationOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
-			response, err := ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptions)
+			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
 			if err != nil {
 				panic(err)
 			}
 
-			// end-delete_application_by_id
-			fmt.Printf("\nDeleteApplicationByID() response status code: %d\n", response.StatusCode)
+			// end-delete_application
+			fmt.Printf("\nDeleteApplication() response status code: %d\n", response.StatusCode)
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
