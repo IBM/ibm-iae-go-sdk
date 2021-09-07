@@ -1082,21 +1082,21 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-	Describe(`DeleteApplicationByID(deleteApplicationByIdOptions *DeleteApplicationByIdOptions)`, func() {
-		deleteApplicationByIDPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_applications/ff48cc19-0e7e-4627-aac6-0b4ad080397b"
+	Describe(`DeleteApplication(deleteApplicationOptions *DeleteApplicationOptions)`, func() {
+		deleteApplicationPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_applications/ff48cc19-0e7e-4627-aac6-0b4ad080397b"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteApplicationByIDPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteApplicationPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
 					res.WriteHeader(204)
 				}))
 			})
-			It(`Invoke DeleteApplicationByID successfully`, func() {
+			It(`Invoke DeleteApplication successfully`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1105,22 +1105,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := ibmAnalyticsEngineApiService.DeleteApplicationByID(nil)
+				response, operationErr := ibmAnalyticsEngineApiService.DeleteApplication(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 
-				// Construct an instance of the DeleteApplicationByIdOptions model
-				deleteApplicationByIdOptionsModel := new(ibmanalyticsengineapiv3.DeleteApplicationByIdOptions)
-				deleteApplicationByIdOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteApplicationByIdOptionsModel.ApplicationID = core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
-				deleteApplicationByIdOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the DeleteApplicationOptions model
+				deleteApplicationOptionsModel := new(ibmanalyticsengineapiv3.DeleteApplicationOptions)
+				deleteApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				deleteApplicationOptionsModel.ApplicationID = core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
+				deleteApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptionsModel)
+				response, operationErr = ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 			})
-			It(`Invoke DeleteApplicationByID with error: Operation validation and request error`, func() {
+			It(`Invoke DeleteApplication with error: Operation validation and request error`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1128,22 +1128,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the DeleteApplicationByIdOptions model
-				deleteApplicationByIdOptionsModel := new(ibmanalyticsengineapiv3.DeleteApplicationByIdOptions)
-				deleteApplicationByIdOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteApplicationByIdOptionsModel.ApplicationID = core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
-				deleteApplicationByIdOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the DeleteApplicationOptions model
+				deleteApplicationOptionsModel := new(ibmanalyticsengineapiv3.DeleteApplicationOptions)
+				deleteApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				deleteApplicationOptionsModel.ApplicationID = core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
+				deleteApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptionsModel)
+				response, operationErr := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
-				// Construct a second instance of the DeleteApplicationByIdOptions model with no property values
-				deleteApplicationByIdOptionsModelNew := new(ibmanalyticsengineapiv3.DeleteApplicationByIdOptions)
+				// Construct a second instance of the DeleteApplicationOptions model with no property values
+				deleteApplicationOptionsModelNew := new(ibmanalyticsengineapiv3.DeleteApplicationOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = ibmAnalyticsEngineApiService.DeleteApplicationByID(deleteApplicationByIdOptionsModelNew)
+				response, operationErr = ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 			})
@@ -1396,18 +1396,18 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))
 				Expect(createApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewDeleteApplicationByIdOptions successfully`, func() {
-				// Construct an instance of the DeleteApplicationByIdOptions model
+			It(`Invoke NewDeleteApplicationOptions successfully`, func() {
+				// Construct an instance of the DeleteApplicationOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
 				applicationID := "ff48cc19-0e7e-4627-aac6-0b4ad080397b"
-				deleteApplicationByIdOptionsModel := ibmAnalyticsEngineApiService.NewDeleteApplicationByIdOptions(instanceID, applicationID)
-				deleteApplicationByIdOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteApplicationByIdOptionsModel.SetApplicationID("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
-				deleteApplicationByIdOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteApplicationByIdOptionsModel).ToNot(BeNil())
-				Expect(deleteApplicationByIdOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
-				Expect(deleteApplicationByIdOptionsModel.ApplicationID).To(Equal(core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")))
-				Expect(deleteApplicationByIdOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+				deleteApplicationOptionsModel := ibmAnalyticsEngineApiService.NewDeleteApplicationOptions(instanceID, applicationID)
+				deleteApplicationOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				deleteApplicationOptionsModel.SetApplicationID("ff48cc19-0e7e-4627-aac6-0b4ad080397b")
+				deleteApplicationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteApplicationOptionsModel).ToNot(BeNil())
+				Expect(deleteApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(deleteApplicationOptionsModel.ApplicationID).To(Equal(core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")))
+				Expect(deleteApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetApplicationOptions successfully`, func() {
 				// Construct an instance of the GetApplicationOptions model
