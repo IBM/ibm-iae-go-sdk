@@ -130,6 +130,11 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				// "com.company.path.ClassName",
+				"/opt/ibm/spark/examples/src/main/python/wordcount.py",
+				"[/opt/ibm/spark/examples/src/main/resources/people.txt]",
+				//Conf: make(map[string]interface{}),
+				//Env: make(map[string]interface{}),
 			)
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
