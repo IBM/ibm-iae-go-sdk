@@ -1,3 +1,10 @@
+## [0.4.4](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.3...v0.4.4) (2021-09-09)
+
+
+### Bug Fixes
+
+* **analytics engine:** fixed Spark application get api response ([#13](https://github.com/IBM/ibm-iae-go-sdk/issues/13)) ([ec13d54](https://github.com/IBM/ibm-iae-go-sdk/commit/ec13d54b08f2fac72cd0adf899aafc206725a16c))
+
 ## [0.4.3](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.2...v0.4.3) (2021-09-09)
 
 
