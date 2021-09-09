@@ -1,3 +1,10 @@
+## [0.4.3](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.2...v0.4.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* **analytics engine:** fixed request payload for GO Examples ([#12](https://github.com/IBM/ibm-iae-go-sdk/issues/12)) ([c50eddd](https://github.com/IBM/ibm-iae-go-sdk/commit/c50eddd0b412ff2d08dd6c8587a5d4b92f7448a9))
+
 ## [0.4.2](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.1...v0.4.2) (2021-09-07)
 
 
