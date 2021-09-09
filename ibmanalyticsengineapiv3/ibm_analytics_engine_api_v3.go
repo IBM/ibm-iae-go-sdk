@@ -317,7 +317,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 }
 
 // ListApplications : Retrieve all Spark applications
-// Gets all applications submitted in an instance with a specified inst_id.
+// Gets all applications submitted in an instance with a specified instance-id.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplications(listApplicationsOptions *ListApplicationsOptions) (result *ApplicationCollection, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ListApplicationsWithContext(context.Background(), listApplicationsOptions)
 }
@@ -617,10 +617,59 @@ func UnmarshalApplicationCollection(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// ApplicationDetails : Application details.
+type ApplicationDetails struct {
+	// Path of the application to run.
+	Application *string `json:"application,omitempty"`
+
+	// Entry point for a Spark application bundled as a '.jar' file. This is applicable only for Java or Scala
+	// applications.
+	Class *string `json:"class,omitempty"`
+
+	// An array of arguments to be passed to the application.
+	Arguments []string `json:"arguments,omitempty"`
+
+	// Application configurations to override the value specified at instance level. See [Spark environment variables](
+	// https://spark.apache.org/docs/latest/configuration.html#available-properties) for a list of the supported variables.
+	Conf map[string]interface{} `json:"conf,omitempty"`
+
+	// Application environment configurations to use. See [Spark environment
+	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
+	// supported variables.
+	Env map[string]interface{} `json:"env,omitempty"`
+}
+
+// UnmarshalApplicationDetails unmarshals an instance of ApplicationDetails from the specified map of raw messages.
+func UnmarshalApplicationDetails(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ApplicationDetails)
+	err = core.UnmarshalPrimitive(m, "application", &obj.Application)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "class", &obj.Class)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "arguments", &obj.Arguments)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "conf", &obj.Conf)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "env", &obj.Env)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ApplicationGetResponse : Response of the Application Get API.
 type ApplicationGetResponse struct {
-	// Application request details.
-	ApplicationDetails *ApplicationRequest `json:"application_details,omitempty"`
+	// Application details.
+	ApplicationDetails *ApplicationDetails `json:"application_details,omitempty"`
 
 	// Application ID.
 	ID *string `json:"id,omitempty"`
@@ -638,7 +687,7 @@ type ApplicationGetResponse struct {
 // UnmarshalApplicationGetResponse unmarshals an instance of ApplicationGetResponse from the specified map of raw messages.
 func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApplicationGetResponse)
-	err = core.UnmarshalModel(m, "application_details", &obj.ApplicationDetails, UnmarshalApplicationRequest)
+	err = core.UnmarshalModel(m, "application_details", &obj.ApplicationDetails, UnmarshalApplicationDetails)
 	if err != nil {
 		return
 	}
@@ -693,72 +742,6 @@ func UnmarshalApplicationGetStateResponse(m map[string]json.RawMessage, result i
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "finish_time", &obj.FinishTime)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ApplicationRequest : Application request details.
-type ApplicationRequest struct {
-	// Application details.
-	ApplicationDetails *ApplicationRequestApplicationDetails `json:"application_details,omitempty"`
-}
-
-// UnmarshalApplicationRequest unmarshals an instance of ApplicationRequest from the specified map of raw messages.
-func UnmarshalApplicationRequest(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ApplicationRequest)
-	err = core.UnmarshalModel(m, "application_details", &obj.ApplicationDetails, UnmarshalApplicationRequestApplicationDetails)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ApplicationRequestApplicationDetails : Application details.
-type ApplicationRequestApplicationDetails struct {
-	// Path of the application to run.
-	Application *string `json:"application,omitempty"`
-
-	// Entry point for a Spark application bundled as a '.jar' file. This is applicable only for Java or Scala
-	// applications.
-	Class *string `json:"class,omitempty"`
-
-	// An array of arguments to be passed to the application.
-	Arguments []string `json:"arguments,omitempty"`
-
-	// Application configurations to override the value specified at instance level. See [Spark environment variables](
-	// https://spark.apache.org/docs/latest/configuration.html#available-properties) for a list of the supported variables.
-	Conf map[string]interface{} `json:"conf,omitempty"`
-
-	// Application environment configurations to use. See [Spark environment
-	// variables](https://spark.apache.org/docs/latest/configuration.html#environment-variables) for a list of the
-	// supported variables.
-	Env map[string]interface{} `json:"env,omitempty"`
-}
-
-// UnmarshalApplicationRequestApplicationDetails unmarshals an instance of ApplicationRequestApplicationDetails from the specified map of raw messages.
-func UnmarshalApplicationRequestApplicationDetails(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ApplicationRequestApplicationDetails)
-	err = core.UnmarshalPrimitive(m, "application", &obj.Application)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "class", &obj.Class)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "arguments", &obj.Arguments)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "conf", &obj.Conf)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "env", &obj.Env)
 	if err != nil {
 		return
 	}
