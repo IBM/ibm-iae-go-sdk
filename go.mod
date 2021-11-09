@@ -34,5 +34,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200605160147-a5ece683394c // indirect
 )
-
-replace github.com/IBM/ibm-iae-go-sdk v0.4.4 => /Users/shyamalagowri/git/ibm-iae-go-sdk
