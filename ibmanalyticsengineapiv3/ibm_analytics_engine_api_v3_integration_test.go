@@ -48,6 +48,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		config       map[string]string
 		instanceGuid string
         applicationId string
+		instanceGuidInstanceHome string
+		hmacAccessKey string
+		hmacSecretKey string
 	)
 
 	var shouldSkipTest = func() {
@@ -71,6 +74,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 				Skip("Unable to load service URL configuration property, skipping tests")
 			}
 			instanceGuid = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID")
+			instanceGuidInstanceHome = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME")
+			hmacAccessKey = os.Getenv("HMAC_ACCESS_KEY")
+			hmacSecretKey = os.Getenv("HMAC_SECRET_KEY")
 			fmt.Printf("Service URL: %s\n", serviceURL)
 			shouldSkipTest = func() {}
 		})
@@ -162,14 +168,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		It(`CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions)`, func() {
 
 			createInstanceHomeOptions := &ibmanalyticsengineapiv3.CreateInstanceHomeOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				NewInstanceID: core.StringPtr(instanceGuid),
+				InstanceID: core.StringPtr(instanceGuidInstanceHome),
+				NewInstanceID: core.StringPtr("testString"),
 				NewProvider: core.StringPtr("ibm-cos"),
 				NewType: core.StringPtr("objectstore"),
 				NewRegion: core.StringPtr("us-south"),
 				NewEndpoint: core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud"),
-				NewHmacAccessKey: core.StringPtr("821**********0ae"),
-				NewHmacSecretKey: core.StringPtr("03e****************4fc3"),
+				NewHmacAccessKey: core.StringPtr(hmacAccessKey),
+				NewHmacSecretKey: core.StringPtr(hmacSecretKey),
 			}
 
 			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptions)
