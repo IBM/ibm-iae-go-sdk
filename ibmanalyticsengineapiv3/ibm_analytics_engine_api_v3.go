@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.39.0-748eb4ca-20210917-165907
+ * IBM OpenAPI SDK Code Generator Version: 3.43.5-e0ec19e2-20220124-172004
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -421,24 +421,6 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	application_details := make(map[string]interface{})
 	if createApplicationOptions.Application != nil {
 		application_details["application"] = createApplicationOptions.Application
-	}
-	if createApplicationOptions.Jars != nil {
-		application_details["jars"] = createApplicationOptions.Jars
-	}
-	if createApplicationOptions.Packages != nil {
-		application_details["packages"] = createApplicationOptions.Packages
-	}
-	if createApplicationOptions.Repositories != nil {
-		application_details["repositories"] = createApplicationOptions.Repositories
-	}
-	if createApplicationOptions.Files != nil {
-		application_details["files"] = createApplicationOptions.Files
-	}
-	if createApplicationOptions.Archives != nil {
-		application_details["archives"] = createApplicationOptions.Archives
-	}
-	if createApplicationOptions.Name != nil {
-		application_details["name"] = createApplicationOptions.Name
 	}
 	if createApplicationOptions.Class != nil {
 		application_details["class"] = createApplicationOptions.Class
@@ -1036,24 +1018,6 @@ type ApplicationDetails struct {
 	// Path of the application to run.
 	Application *string `json:"application,omitempty"`
 
-	// Path of the jar files containing the application.
-	Jars *string `json:"jars,omitempty"`
-
-	// Package names.
-	Packages *string `json:"packages,omitempty"`
-
-	// Repositories names.
-	Repositories *string `json:"repositories,omitempty"`
-
-	// File names.
-	Files *string `json:"files,omitempty"`
-
-	// Archive Names.
-	Archives *string `json:"archives,omitempty"`
-
-	// Name of the application.
-	Name *string `json:"name,omitempty"`
-
 	// Entry point for a Spark application bundled as a '.jar' file. This is applicable only for Java or Scala
 	// applications.
 	Class *string `json:"class,omitempty"`
@@ -1075,30 +1039,6 @@ type ApplicationDetails struct {
 func UnmarshalApplicationDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApplicationDetails)
 	err = core.UnmarshalPrimitive(m, "application", &obj.Application)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "jars", &obj.Jars)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "packages", &obj.Packages)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "repositories", &obj.Repositories)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "files", &obj.Files)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "archives", &obj.Archives)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
 	}
@@ -1245,24 +1185,6 @@ type CreateApplicationOptions struct {
 	// Path of the application to run.
 	Application *string `json:"application,omitempty"`
 
-	// Path of the jar files containing the application.
-	Jars *string `json:"jars,omitempty"`
-
-	// Package names.
-	Packages *string `json:"packages,omitempty"`
-
-	// Repositories names.
-	Repositories *string `json:"repositories,omitempty"`
-
-	// File names.
-	Files *string `json:"files,omitempty"`
-
-	// Archive Names.
-	Archives *string `json:"archives,omitempty"`
-
-	// Name of the application.
-	Name *string `json:"name,omitempty"`
-
 	// Entry point for a Spark application bundled as a '.jar' file. This is applicable only for Java or Scala
 	// applications.
 	Class *string `json:"class,omitempty"`
@@ -1299,42 +1221,6 @@ func (_options *CreateApplicationOptions) SetInstanceID(instanceID string) *Crea
 // SetApplication : Allow user to set Application
 func (_options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
 	_options.Application = core.StringPtr(application)
-	return _options
-}
-
-// SetJars : Allow user to set Jars
-func (_options *CreateApplicationOptions) SetJars(jars string) *CreateApplicationOptions {
-	_options.Jars = core.StringPtr(jars)
-	return _options
-}
-
-// SetPackages : Allow user to set Packages
-func (_options *CreateApplicationOptions) SetPackages(packages string) *CreateApplicationOptions {
-	_options.Packages = core.StringPtr(packages)
-	return _options
-}
-
-// SetRepositories : Allow user to set Repositories
-func (_options *CreateApplicationOptions) SetRepositories(repositories string) *CreateApplicationOptions {
-	_options.Repositories = core.StringPtr(repositories)
-	return _options
-}
-
-// SetFiles : Allow user to set Files
-func (_options *CreateApplicationOptions) SetFiles(files string) *CreateApplicationOptions {
-	_options.Files = core.StringPtr(files)
-	return _options
-}
-
-// SetArchives : Allow user to set Archives
-func (_options *CreateApplicationOptions) SetArchives(archives string) *CreateApplicationOptions {
-	_options.Archives = core.StringPtr(archives)
-	return _options
-}
-
-// SetName : Allow user to set Name
-func (_options *CreateApplicationOptions) SetName(name string) *CreateApplicationOptions {
-	_options.Name = core.StringPtr(name)
 	return _options
 }
 

@@ -1,7 +1,7 @@
 // +build integration
 
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import (
 	"log"
 	"os"
 	"time"
+
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv3"
 	. "github.com/onsi/ginkgo"
@@ -112,9 +113,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
-			//fmt.Printf("GetInstance response: %s\n", response)
-			//fmt.Printf("GetInstance instance: %v\n", instance)
-			//fmt.Printf("GetInstance err: %s\n", err)
+
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instance).ToNot(BeNil())
@@ -206,10 +205,10 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
-				//Class: core.StringPtr("com.company.path.ClassName"),
+				// Class: core.StringPtr("com.company.path.ClassName"),
 				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
-				//Conf: make(map[string]interface{}),
-				//Env: make(map[string]interface{}),
+				// Conf: make(map[string]interface{}),
+				// Env: make(map[string]interface{}),
 			}
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
@@ -217,11 +216,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
-			
-			
+
 			applicationId = *applicationResponse.ID
 			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
-			
 
 			//
 			// The following status codes aren't covered by tests.
@@ -250,7 +247,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			//fmt.Printf("ListApplications applicationCollection: %v\n", applicationCollection)
 			//fmt.Printf("ListApplications response: %s\n", response)
 			//fmt.Printf("ListApplications err: %s\n", err)
-			
+
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())

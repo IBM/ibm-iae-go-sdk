@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -898,12 +898,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.Packages = core.StringPtr("testString")
-				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
-				createApplicationOptionsModel.Files = core.StringPtr("testString")
-				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
 				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
@@ -976,12 +970,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.Packages = core.StringPtr("testString")
-				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
-				createApplicationOptionsModel.Files = core.StringPtr("testString")
-				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
 				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
@@ -1062,12 +1050,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.Packages = core.StringPtr("testString")
-				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
-				createApplicationOptionsModel.Files = core.StringPtr("testString")
-				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
 				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
@@ -1093,12 +1075,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.Packages = core.StringPtr("testString")
-				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
-				createApplicationOptionsModel.Files = core.StringPtr("testString")
-				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
 				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
@@ -1145,12 +1121,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.Packages = core.StringPtr("testString")
-				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
-				createApplicationOptionsModel.Files = core.StringPtr("testString")
-				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
 				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
@@ -1445,7 +1415,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully with retries`, func() {
@@ -1500,7 +1470,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully`, func() {
@@ -2676,12 +2646,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(instanceID)
 				createApplicationOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.SetApplication("cos://bucket_name.my_cos/my_spark_app.py")
-				createApplicationOptionsModel.SetJars("cos://cloud-object-storage/jars/tests.jar")
-				createApplicationOptionsModel.SetPackages("testString")
-				createApplicationOptionsModel.SetRepositories("testString")
-				createApplicationOptionsModel.SetFiles("testString")
-				createApplicationOptionsModel.SetArchives("testString")
-				createApplicationOptionsModel.SetName("spark-app")
 				createApplicationOptionsModel.SetClass("com.company.path.ClassName")
 				createApplicationOptionsModel.SetArguments([]string{"[arg1, arg2, arg3]"})
 				createApplicationOptionsModel.SetConf(make(map[string]interface{}))
@@ -2690,12 +2654,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")))
-				Expect(createApplicationOptionsModel.Jars).To(Equal(core.StringPtr("cos://cloud-object-storage/jars/tests.jar")))
-				Expect(createApplicationOptionsModel.Packages).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.Repositories).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.Files).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.Archives).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.Name).To(Equal(core.StringPtr("spark-app")))
 				Expect(createApplicationOptionsModel.Class).To(Equal(core.StringPtr("com.company.path.ClassName")))
 				Expect(createApplicationOptionsModel.Arguments).To(Equal([]string{"[arg1, arg2, arg3]"}))
 				Expect(createApplicationOptionsModel.Conf).To(Equal(make(map[string]interface{})))
