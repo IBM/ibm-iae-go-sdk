@@ -1,7 +1,7 @@
 // +build examples
 
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -124,17 +124,56 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(instance).ToNot(BeNil())
 
 		})
+		It(`GetInstanceState request example`, func() {
+			fmt.Println("\nGetInstanceState() result:")
+			// begin-get_instance_state
+
+			getInstanceStateOptions := ibmAnalyticsEngineApiService.NewGetInstanceStateOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			instanceGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetInstanceState(getInstanceStateOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceGetStateResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_instance_state
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceGetStateResponse).ToNot(BeNil())
+
+		})
+		It(`CreateInstanceHome request example`, func() {
+			fmt.Println("\nCreateInstanceHome() result:")
+			// begin-create_instance_home
+
+			createInstanceHomeOptions := ibmAnalyticsEngineApiService.NewCreateInstanceHomeOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceHomeResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_instance_home
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceHomeResponse).ToNot(BeNil())
+
+		})
 		It(`CreateApplication request example`, func() {
 			fmt.Println("\nCreateApplication() result:")
 			// begin-create_application
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				// "com.company.path.ClassName",
-				"/opt/ibm/spark/examples/src/main/python/wordcount.py",
-				"[/opt/ibm/spark/examples/src/main/resources/people.txt]",
-				//Conf: make(map[string]interface{}),
-				//Env: make(map[string]interface{}),
 			)
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
@@ -217,6 +256,91 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetStateResponse).ToNot(BeNil())
+
+		})
+		It(`EnablePlatformLogging request example`, func() {
+			fmt.Println("\nEnablePlatformLogging() result:")
+			// begin-enable_platform_logging
+
+			enablePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewEnablePlatformLoggingOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.EnablePlatformLogging(enablePlatformLoggingOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(loggingConfigurationResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-enable_platform_logging
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(loggingConfigurationResponse).ToNot(BeNil())
+
+		})
+		It(`DisablePlatformLogging request example`, func() {
+			fmt.Println("\nDisablePlatformLogging() result:")
+			// begin-disable_platform_logging
+
+			disablePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewDisablePlatformLoggingOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.DisablePlatformLogging(disablePlatformLoggingOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(loggingConfigurationResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-disable_platform_logging
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(loggingConfigurationResponse).ToNot(BeNil())
+
+		})
+		It(`GetLoggingConfiguration request example`, func() {
+			fmt.Println("\nGetLoggingConfiguration() result:")
+			// begin-get_logging_configuration
+
+			getLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewGetLoggingConfigurationOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.GetLoggingConfiguration(getLoggingConfigurationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(loggingConfigurationResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_logging_configuration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(loggingConfigurationResponse).ToNot(BeNil())
+
+		})
+		It(`DeleteLoggingConfiguration request example`, func() {
+			// begin-delete_logging_configuration
+
+			deleteLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewDeleteLoggingConfigurationOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			response, err := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			// end-delete_logging_configuration
+			fmt.Printf("\nDeleteLoggingConfiguration() response status code: %d\n", response.StatusCode)
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 
 		})
 		It(`DeleteApplication request example`, func() {
