@@ -1,7 +1,7 @@
 [![Build Status](https://api.travis-ci.com/IBM/ibm-iae-go-sdk.svg?branch=master)](https://app.travis-ci.com/IBM/ibm-iae-go-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM Cloud Analytics Engine Go SDK Version 0.4.5
+# IBM Cloud Analytics Engine Go SDK Version 0.5.0
 Go client library to interact with the various [IBM Analytics Engine APIs](https://cloud.ibm.com/apidocs/ibm-analytics-engine).
 
 ## Table of Contents
@@ -56,7 +56,7 @@ IBM Analytics Engine v3 is for the Standard Serverless Spark plan
 * Go version 1.13 or above.
 
 ## Installation
-The current version of this SDK: 0.4.5
+The current version of this SDK: 0.5.0
 
 There are a few different ways to download and install the IBM Analytics Engine API Go SDK project for use by your
 Go application:
