@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
+ * IBM OpenAPI SDK Code Generator Version: 3.43.5-e0ec19e2-20220124-172004
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -218,6 +218,154 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceWithContext(ctx
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstance)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetInstanceState : Find Analytics Engine state by id
+// Retrieve the state of a single Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceState(getInstanceStateOptions *GetInstanceStateOptions) (result *InstanceGetStateResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetInstanceStateWithContext(context.Background(), getInstanceStateOptions)
+}
+
+// GetInstanceStateWithContext is an alternate form of the GetInstanceState method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceStateWithContext(ctx context.Context, getInstanceStateOptions *GetInstanceStateOptions) (result *InstanceGetStateResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getInstanceStateOptions, "getInstanceStateOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getInstanceStateOptions, "getInstanceStateOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getInstanceStateOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/state`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getInstanceStateOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetInstanceState")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceGetStateResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateInstanceHome : Edit Instance Home details
+// Instance details of the Object Storage instance that will be used as instance home.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.CreateInstanceHomeWithContext(context.Background(), createInstanceHomeOptions)
+}
+
+// CreateInstanceHomeWithContext is an alternate form of the CreateInstanceHome method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithContext(ctx context.Context, createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createInstanceHomeOptions, "createInstanceHomeOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createInstanceHomeOptions, "createInstanceHomeOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *createInstanceHomeOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/instance_home`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createInstanceHomeOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "CreateInstanceHome")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createInstanceHomeOptions.NewInstanceID != nil {
+		body["instance_id"] = createInstanceHomeOptions.NewInstanceID
+	}
+	if createInstanceHomeOptions.NewProvider != nil {
+		body["provider"] = createInstanceHomeOptions.NewProvider
+	}
+	if createInstanceHomeOptions.NewType != nil {
+		body["type"] = createInstanceHomeOptions.NewType
+	}
+	if createInstanceHomeOptions.NewRegion != nil {
+		body["region"] = createInstanceHomeOptions.NewRegion
+	}
+	if createInstanceHomeOptions.NewEndpoint != nil {
+		body["endpoint"] = createInstanceHomeOptions.NewEndpoint
+	}
+	if createInstanceHomeOptions.NewHmacAccessKey != nil {
+		body["hmac_access_key"] = createInstanceHomeOptions.NewHmacAccessKey
+	}
+	if createInstanceHomeOptions.NewHmacSecretKey != nil {
+		body["hmac_secret_key"] = createInstanceHomeOptions.NewHmacSecretKey
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceHomeResponse)
 		if err != nil {
 			return
 		}
@@ -548,6 +696,254 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	return
 }
 
+// EnablePlatformLogging : Enable/disable platform logging
+// Enable platform logging from IBM Analytics Engine.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) EnablePlatformLogging(enablePlatformLoggingOptions *EnablePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.EnablePlatformLoggingWithContext(context.Background(), enablePlatformLoggingOptions)
+}
+
+// EnablePlatformLoggingWithContext is an alternate form of the EnablePlatformLogging method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) EnablePlatformLoggingWithContext(ctx context.Context, enablePlatformLoggingOptions *EnablePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(enablePlatformLoggingOptions, "enablePlatformLoggingOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(enablePlatformLoggingOptions, "enablePlatformLoggingOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_guid": *enablePlatformLoggingOptions.InstanceGuid,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range enablePlatformLoggingOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "EnablePlatformLogging")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if enablePlatformLoggingOptions.Enable != nil {
+		body["enable"] = enablePlatformLoggingOptions.Enable
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLoggingConfigurationResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DisablePlatformLogging : Disable platform logging
+// Disable platform logging from IBM Analytics Engine.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DisablePlatformLogging(disablePlatformLoggingOptions *DisablePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.DisablePlatformLoggingWithContext(context.Background(), disablePlatformLoggingOptions)
+}
+
+// DisablePlatformLoggingWithContext is an alternate form of the DisablePlatformLogging method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DisablePlatformLoggingWithContext(ctx context.Context, disablePlatformLoggingOptions *DisablePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(disablePlatformLoggingOptions, "disablePlatformLoggingOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(disablePlatformLoggingOptions, "disablePlatformLoggingOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_guid": *disablePlatformLoggingOptions.InstanceGuid,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range disablePlatformLoggingOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DisablePlatformLogging")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if disablePlatformLoggingOptions.Enable != nil {
+		body["enable"] = disablePlatformLoggingOptions.Enable
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLoggingConfigurationResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetLoggingConfiguration : Find logging configuration by instance id
+// Retrieve the logging configuration of a single Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfiguration(getLoggingConfigurationOptions *GetLoggingConfigurationOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetLoggingConfigurationWithContext(context.Background(), getLoggingConfigurationOptions)
+}
+
+// GetLoggingConfigurationWithContext is an alternate form of the GetLoggingConfiguration method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfigurationWithContext(ctx context.Context, getLoggingConfigurationOptions *GetLoggingConfigurationOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getLoggingConfigurationOptions, "getLoggingConfigurationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getLoggingConfigurationOptions, "getLoggingConfigurationOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_guid": *getLoggingConfigurationOptions.InstanceGuid,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getLoggingConfigurationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetLoggingConfiguration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLoggingConfigurationResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteLoggingConfiguration : Delete logging configuration by instance id
+// Delete the logging configuration of a single Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfiguration(deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.DeleteLoggingConfigurationWithContext(context.Background(), deleteLoggingConfigurationOptions)
+}
+
+// DeleteLoggingConfigurationWithContext is an alternate form of the DeleteLoggingConfiguration method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfigurationWithContext(ctx context.Context, deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_guid": *deleteLoggingConfigurationOptions.InstanceGuid,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteLoggingConfigurationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DeleteLoggingConfiguration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
+
+	return
+}
+
 // Application : Details of a Spark application.
 type Application struct {
 	// Identifier provided by Analytics Engine service for the Spark application.
@@ -784,7 +1180,7 @@ func UnmarshalApplicationResponse(m map[string]json.RawMessage, result interface
 // CreateApplicationOptions : The CreateApplication options.
 type CreateApplicationOptions struct {
 	// The identifier of the instance where the Spark application is submitted.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Path of the application to run.
 	Application *string `json:"application,omitempty"`
@@ -858,13 +1254,104 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 	return options
 }
 
+// CreateInstanceHomeOptions : The CreateInstanceHome options.
+type CreateInstanceHomeOptions struct {
+	// The identifier of the instance details to be added.
+	InstanceID *string `json:"-" validate:"required,ne="`
+
+	// UUID of the instance home storage instance.
+	NewInstanceID *string `json:"instance_id,omitempty"`
+
+	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
+	NewProvider *string `json:"provider,omitempty"`
+
+	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
+	NewType *string `json:"type,omitempty"`
+
+	// Region of the Cloud Object Storage instance.
+	NewRegion *string `json:"region,omitempty"`
+
+	// Endpoint to access the Cloud Object Storage instance.
+	NewEndpoint *string `json:"endpoint,omitempty"`
+
+	// Cloud Object Storage access key.
+	NewHmacAccessKey *string `json:"hmac_access_key,omitempty"`
+
+	// Cloud Object Storage secret key.
+	NewHmacSecretKey *string `json:"hmac_secret_key,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateInstanceHomeOptions : Instantiate CreateInstanceHomeOptions
+func (*IbmAnalyticsEngineApiV3) NewCreateInstanceHomeOptions(instanceID string) *CreateInstanceHomeOptions {
+	return &CreateInstanceHomeOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *CreateInstanceHomeOptions) SetInstanceID(instanceID string) *CreateInstanceHomeOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetNewInstanceID : Allow user to set NewInstanceID
+func (_options *CreateInstanceHomeOptions) SetNewInstanceID(newInstanceID string) *CreateInstanceHomeOptions {
+	_options.NewInstanceID = core.StringPtr(newInstanceID)
+	return _options
+}
+
+// SetNewProvider : Allow user to set NewProvider
+func (_options *CreateInstanceHomeOptions) SetNewProvider(newProvider string) *CreateInstanceHomeOptions {
+	_options.NewProvider = core.StringPtr(newProvider)
+	return _options
+}
+
+// SetNewType : Allow user to set NewType
+func (_options *CreateInstanceHomeOptions) SetNewType(newType string) *CreateInstanceHomeOptions {
+	_options.NewType = core.StringPtr(newType)
+	return _options
+}
+
+// SetNewRegion : Allow user to set NewRegion
+func (_options *CreateInstanceHomeOptions) SetNewRegion(newRegion string) *CreateInstanceHomeOptions {
+	_options.NewRegion = core.StringPtr(newRegion)
+	return _options
+}
+
+// SetNewEndpoint : Allow user to set NewEndpoint
+func (_options *CreateInstanceHomeOptions) SetNewEndpoint(newEndpoint string) *CreateInstanceHomeOptions {
+	_options.NewEndpoint = core.StringPtr(newEndpoint)
+	return _options
+}
+
+// SetNewHmacAccessKey : Allow user to set NewHmacAccessKey
+func (_options *CreateInstanceHomeOptions) SetNewHmacAccessKey(newHmacAccessKey string) *CreateInstanceHomeOptions {
+	_options.NewHmacAccessKey = core.StringPtr(newHmacAccessKey)
+	return _options
+}
+
+// SetNewHmacSecretKey : Allow user to set NewHmacSecretKey
+func (_options *CreateInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey string) *CreateInstanceHomeOptions {
+	_options.NewHmacSecretKey = core.StringPtr(newHmacSecretKey)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateInstanceHomeOptions) SetHeaders(param map[string]string) *CreateInstanceHomeOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteApplicationOptions : The DeleteApplication options.
 type DeleteApplicationOptions struct {
 	// Identifier of the instance to which the application belongs.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Identifier of the application that needs to be stopped.
-	ApplicationID *string `json:"-" validate:"required,ne="`
+	ApplicationID *string `json:"application_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -896,13 +1383,115 @@ func (options *DeleteApplicationOptions) SetHeaders(param map[string]string) *De
 	return options
 }
 
+// DeleteLoggingConfigurationOptions : The DeleteLoggingConfiguration options.
+type DeleteLoggingConfigurationOptions struct {
+	// Identifier of the instance to which the application belongs.
+	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteLoggingConfigurationOptions : Instantiate DeleteLoggingConfigurationOptions
+func (*IbmAnalyticsEngineApiV3) NewDeleteLoggingConfigurationOptions(instanceGuid string) *DeleteLoggingConfigurationOptions {
+	return &DeleteLoggingConfigurationOptions{
+		InstanceGuid: core.StringPtr(instanceGuid),
+	}
+}
+
+// SetInstanceGuid : Allow user to set InstanceGuid
+func (_options *DeleteLoggingConfigurationOptions) SetInstanceGuid(instanceGuid string) *DeleteLoggingConfigurationOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteLoggingConfigurationOptions) SetHeaders(param map[string]string) *DeleteLoggingConfigurationOptions {
+	options.Headers = param
+	return options
+}
+
+// DisablePlatformLoggingOptions : The DisablePlatformLogging options.
+type DisablePlatformLoggingOptions struct {
+	// The identifier of the instance details to be added.
+	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
+
+	// enable platform logging.
+	Enable *bool `json:"enable,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDisablePlatformLoggingOptions : Instantiate DisablePlatformLoggingOptions
+func (*IbmAnalyticsEngineApiV3) NewDisablePlatformLoggingOptions(instanceGuid string) *DisablePlatformLoggingOptions {
+	return &DisablePlatformLoggingOptions{
+		InstanceGuid: core.StringPtr(instanceGuid),
+	}
+}
+
+// SetInstanceGuid : Allow user to set InstanceGuid
+func (_options *DisablePlatformLoggingOptions) SetInstanceGuid(instanceGuid string) *DisablePlatformLoggingOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
+}
+
+// SetEnable : Allow user to set Enable
+func (_options *DisablePlatformLoggingOptions) SetEnable(enable bool) *DisablePlatformLoggingOptions {
+	_options.Enable = core.BoolPtr(enable)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DisablePlatformLoggingOptions) SetHeaders(param map[string]string) *DisablePlatformLoggingOptions {
+	options.Headers = param
+	return options
+}
+
+// EnablePlatformLoggingOptions : The EnablePlatformLogging options.
+type EnablePlatformLoggingOptions struct {
+	// The identifier of the instance details to be added.
+	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
+
+	// enable platform logging.
+	Enable *bool `json:"enable,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewEnablePlatformLoggingOptions : Instantiate EnablePlatformLoggingOptions
+func (*IbmAnalyticsEngineApiV3) NewEnablePlatformLoggingOptions(instanceGuid string) *EnablePlatformLoggingOptions {
+	return &EnablePlatformLoggingOptions{
+		InstanceGuid: core.StringPtr(instanceGuid),
+	}
+}
+
+// SetInstanceGuid : Allow user to set InstanceGuid
+func (_options *EnablePlatformLoggingOptions) SetInstanceGuid(instanceGuid string) *EnablePlatformLoggingOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
+}
+
+// SetEnable : Allow user to set Enable
+func (_options *EnablePlatformLoggingOptions) SetEnable(enable bool) *EnablePlatformLoggingOptions {
+	_options.Enable = core.BoolPtr(enable)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *EnablePlatformLoggingOptions) SetHeaders(param map[string]string) *EnablePlatformLoggingOptions {
+	options.Headers = param
+	return options
+}
+
 // GetApplicationOptions : The GetApplication options.
 type GetApplicationOptions struct {
 	// Identifier of the instance to which the application belongs.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Identifier of the application for which details are requested.
-	ApplicationID *string `json:"-" validate:"required,ne="`
+	ApplicationID *string `json:"application_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -937,10 +1526,10 @@ func (options *GetApplicationOptions) SetHeaders(param map[string]string) *GetAp
 // GetApplicationStateOptions : The GetApplicationState options.
 type GetApplicationStateOptions struct {
 	// Identifier of the instance to which the applications belongs.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Identifier of the application for which details are requested.
-	ApplicationID *string `json:"-" validate:"required,ne="`
+	ApplicationID *string `json:"application_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -975,7 +1564,7 @@ func (options *GetApplicationStateOptions) SetHeaders(param map[string]string) *
 // GetInstanceOptions : The GetInstance options.
 type GetInstanceOptions struct {
 	// GUID of the Analytics Engine service instance to retrieve.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -996,6 +1585,62 @@ func (_options *GetInstanceOptions) SetInstanceID(instanceID string) *GetInstanc
 
 // SetHeaders : Allow user to set Headers
 func (options *GetInstanceOptions) SetHeaders(param map[string]string) *GetInstanceOptions {
+	options.Headers = param
+	return options
+}
+
+// GetInstanceStateOptions : The GetInstanceState options.
+type GetInstanceStateOptions struct {
+	// GUID of the Analytics Engine service instance to retrieve state.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetInstanceStateOptions : Instantiate GetInstanceStateOptions
+func (*IbmAnalyticsEngineApiV3) NewGetInstanceStateOptions(instanceID string) *GetInstanceStateOptions {
+	return &GetInstanceStateOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetInstanceStateOptions) SetInstanceID(instanceID string) *GetInstanceStateOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetInstanceStateOptions) SetHeaders(param map[string]string) *GetInstanceStateOptions {
+	options.Headers = param
+	return options
+}
+
+// GetLoggingConfigurationOptions : The GetLoggingConfiguration options.
+type GetLoggingConfigurationOptions struct {
+	// GUID of the Analytics Engine service instance to retrieve.
+	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetLoggingConfigurationOptions : Instantiate GetLoggingConfigurationOptions
+func (*IbmAnalyticsEngineApiV3) NewGetLoggingConfigurationOptions(instanceGuid string) *GetLoggingConfigurationOptions {
+	return &GetLoggingConfigurationOptions{
+		InstanceGuid: core.StringPtr(instanceGuid),
+	}
+}
+
+// SetInstanceGuid : Allow user to set InstanceGuid
+func (_options *GetLoggingConfigurationOptions) SetInstanceGuid(instanceGuid string) *GetLoggingConfigurationOptions {
+	_options.InstanceGuid = core.StringPtr(instanceGuid)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetLoggingConfigurationOptions) SetHeaders(param map[string]string) *GetLoggingConfigurationOptions {
 	options.Headers = param
 	return options
 }
@@ -1101,6 +1746,38 @@ func UnmarshalInstanceDefaultRuntime(m map[string]json.RawMessage, result interf
 	return
 }
 
+// InstanceGetStateResponse : State details of Analytics Engine instance.
+type InstanceGetStateResponse struct {
+	// GUID of the Analytics Engine instance.
+	ID *string `json:"id,omitempty"`
+
+	// Instance state.
+	State *string `json:"state,omitempty"`
+}
+
+// Constants associated with the InstanceGetStateResponse.State property.
+// Instance state.
+const (
+	InstanceGetStateResponse_State_Created = "created"
+	InstanceGetStateResponse_State_Deleted = "deleted"
+	InstanceGetStateResponse_State_Failed = "failed"
+)
+
+// UnmarshalInstanceGetStateResponse unmarshals an instance of InstanceGetStateResponse from the specified map of raw messages.
+func UnmarshalInstanceGetStateResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceGetStateResponse)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // InstanceHome : Object storage instance that acts as the home for custom libraries and Spark events.
 type InstanceHome struct {
 	// UUID of the instance home storage instance.
@@ -1167,10 +1844,69 @@ func UnmarshalInstanceHome(m map[string]json.RawMessage, result interface{}) (er
 	return
 }
 
+// InstanceHomeResponse : Response of Instance home API.
+type InstanceHomeResponse struct {
+	// UUID of the instance home storage instance.
+	InstanceID *string `json:"instance_id,omitempty"`
+
+	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
+	Provider *string `json:"provider,omitempty"`
+
+	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
+	Type *string `json:"type,omitempty"`
+
+	// Region of the Cloud Object Storage instance.
+	Region *string `json:"region,omitempty"`
+
+	// Endpoint to access the Cloud Object Storage instance.
+	Endpoint *string `json:"endpoint,omitempty"`
+
+	// Cloud Object Storage access key.
+	HmacAccessKey *string `json:"hmac_access_key,omitempty"`
+
+	// Cloud Object Storage secret key.
+	HmacSecretKey *string `json:"hmac_secret_key,omitempty"`
+}
+
+// UnmarshalInstanceHomeResponse unmarshals an instance of InstanceHomeResponse from the specified map of raw messages.
+func UnmarshalInstanceHomeResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceHomeResponse)
+	err = core.UnmarshalPrimitive(m, "instance_id", &obj.InstanceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "provider", &obj.Provider)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "endpoint", &obj.Endpoint)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "hmac_access_key", &obj.HmacAccessKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "hmac_secret_key", &obj.HmacSecretKey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ListApplicationsOptions : The ListApplications options.
 type ListApplicationsOptions struct {
 	// Identifier of the instance where the applications run.
-	InstanceID *string `json:"-" validate:"required,ne="`
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1193,4 +1929,51 @@ func (_options *ListApplicationsOptions) SetInstanceID(instanceID string) *ListA
 func (options *ListApplicationsOptions) SetHeaders(param map[string]string) *ListApplicationsOptions {
 	options.Headers = param
 	return options
+}
+
+// LoggingConfigurationResponse : Response of logging API.
+type LoggingConfigurationResponse struct {
+	// component array.
+	Components []string `json:"components,omitempty"`
+
+	LogServer *LoggingConfigurationResponseLogServer `json:"log_server,omitempty"`
+
+	// enable.
+	Enable *bool `json:"enable,omitempty"`
+}
+
+// UnmarshalLoggingConfigurationResponse unmarshals an instance of LoggingConfigurationResponse from the specified map of raw messages.
+func UnmarshalLoggingConfigurationResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LoggingConfigurationResponse)
+	err = core.UnmarshalPrimitive(m, "components", &obj.Components)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "log_server", &obj.LogServer, UnmarshalLoggingConfigurationResponseLogServer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enable", &obj.Enable)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// LoggingConfigurationResponseLogServer : LoggingConfigurationResponseLogServer struct
+type LoggingConfigurationResponseLogServer struct {
+	// type of log server.
+	Type *string `json:"type,omitempty"`
+}
+
+// UnmarshalLoggingConfigurationResponseLogServer unmarshals an instance of LoggingConfigurationResponseLogServer from the specified map of raw messages.
+func UnmarshalLoggingConfigurationResponseLogServer(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LoggingConfigurationResponseLogServer)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
