@@ -258,47 +258,25 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(applicationGetStateResponse).ToNot(BeNil())
 
 		})
-		It(`EnablePlatformLogging request example`, func() {
-			fmt.Println("\nEnablePlatformLogging() result:")
-			// begin-enable_platform_logging
+		It(`ConfigurePlatformLogging request example`, func() {
+			fmt.Println("\nConfigurePlatformLogging() result:")
+			// begin-configure_platform_logging
 
-			enablePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewEnablePlatformLoggingOptions(
+			configurePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewConfigurePlatformLoggingOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
-			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.EnablePlatformLogging(enablePlatformLoggingOptions)
+			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
 			if err != nil {
 				panic(err)
 			}
 			b, _ := json.MarshalIndent(loggingConfigurationResponse, "", "  ")
 			fmt.Println(string(b))
 
-			// end-enable_platform_logging
+			// end-configure_platform_logging
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
-		})
-		It(`DisablePlatformLogging request example`, func() {
-			fmt.Println("\nDisablePlatformLogging() result:")
-			// begin-disable_platform_logging
-
-			disablePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewDisablePlatformLoggingOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-			)
-
-			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.DisablePlatformLogging(disablePlatformLoggingOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(loggingConfigurationResponse, "", "  ")
-			fmt.Println(string(b))
-
-			// end-disable_platform_logging
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
 
 		})
