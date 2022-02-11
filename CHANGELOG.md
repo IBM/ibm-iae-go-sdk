@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.5...v0.5.0) (2022-02-11)
+
+
+### Features
+
+* v3 log config changes ([#17](https://github.com/IBM/ibm-iae-go-sdk/issues/17)) ([3d9e97a](https://github.com/IBM/ibm-iae-go-sdk/commit/3d9e97a3c2d8590a764dd76b5e83d40acdb3c0cd))
+
 ## [0.4.5](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.4...v0.4.5) (2022-02-11)
 
 
