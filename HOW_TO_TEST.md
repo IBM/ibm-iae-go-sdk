@@ -12,7 +12,7 @@
 6. export your HMAC Secret Key as `IBM_ANALYTICS_ENGINE_HMAC_KEY` environment variable.
 1. In root directory `ibm-iae-go-sdk/`. Run the following:
     ```
-    go test ./... -tags=integration
+    go test ./... -tags=integration -v
     ```
 
 ## Unit Tests

@@ -160,7 +160,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`CreateInstanceHome - Edit Instance Home details`, func() {
+	Describe(`CreateInstanceHome - Edit instance home details`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -205,6 +205,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
+				// Jars: core.StringPtr("cos://cloud-object-storage/jars/tests.jar"),
+				// Packages: core.StringPtr("testString"),
+				// Repositories: core.StringPtr("testString"),
+				// Files: core.StringPtr("testString"),
+				// Archives: core.StringPtr("testString"),
+				// Name: core.StringPtr("spark-app"),
 				// Class: core.StringPtr("com.company.path.ClassName"),
 				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
 				// Conf: make(map[string]interface{}),
@@ -219,7 +225,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 			applicationId = *applicationResponse.ID
 			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
-
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -244,9 +249,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
-			//fmt.Printf("ListApplications applicationCollection: %v\n", applicationCollection)
-			//fmt.Printf("ListApplications response: %s\n", response)
-			//fmt.Printf("ListApplications err: %s\n", err)
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
@@ -325,18 +327,18 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`EnablePlatformLogging - Enable/disable platform logging`, func() {
+	Describe(`ConfigurePlatformLogging - Enable or disable log fowarding`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`EnablePlatformLogging(enablePlatformLoggingOptions *EnablePlatformLoggingOptions)`, func() {
+		It(`ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions)`, func() {
 
-			enablePlatformLoggingOptions := &ibmanalyticsengineapiv3.EnablePlatformLoggingOptions{
+			configurePlatformLoggingOptions := &ibmanalyticsengineapiv3.ConfigurePlatformLoggingOptions{
 				InstanceGuid: core.StringPtr(instanceGuid),
 				Enable: core.BoolPtr(true),
 			}
 
-			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.EnablePlatformLogging(enablePlatformLoggingOptions)
+			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
@@ -355,37 +357,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DisablePlatformLogging - Disable platform logging`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`DisablePlatformLogging(disablePlatformLoggingOptions *DisablePlatformLoggingOptions)`, func() {
-
-			disablePlatformLoggingOptions := &ibmanalyticsengineapiv3.DisablePlatformLoggingOptions{
-				InstanceGuid: core.StringPtr(instanceGuid),
-				Enable: core.BoolPtr(true),
-			}
-
-			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.DisablePlatformLogging(disablePlatformLoggingOptions)
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
-		})
-	})
-
-	Describe(`GetLoggingConfiguration - Find logging configuration by instance id`, func() {
+	Describe(`GetLoggingConfiguration - Retrieve the logging configuration for a given instance id`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -414,7 +386,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteLoggingConfiguration - Delete logging configuration by instance id`, func() {
+	Describe(`DeleteLoggingConfiguration - Delete logging configuration of a given instance id`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
