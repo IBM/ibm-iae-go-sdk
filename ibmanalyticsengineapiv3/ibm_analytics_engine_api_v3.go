@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.5-e0ec19e2-20220124-172004
+ * IBM OpenAPI SDK Code Generator Version: 3.45.1-632ec580-20220210-190638
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -893,6 +893,174 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfiguration
 	return
 }
 
+// StartSparkHistoryServer : Start Spark history server
+// Start the Spark history server for a given serverless Spark instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) (result *SparkHistoryServerStartResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.StartSparkHistoryServerWithContext(context.Background(), startSparkHistoryServerOptions)
+}
+
+// StartSparkHistoryServerWithContext is an alternate form of the StartSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServerWithContext(ctx context.Context, startSparkHistoryServerOptions *StartSparkHistoryServerOptions) (result *SparkHistoryServerStartResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(startSparkHistoryServerOptions, "startSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(startSparkHistoryServerOptions, "startSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *startSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range startSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "StartSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSparkHistoryServerStartResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetSparkHistoryServer : Retrieve Spark history server details by ID
+// Retrieve the Spark history server details for an Analytics Engine instance by the instance ID.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetSparkHistoryServerWithContext(context.Background(), getSparkHistoryServerOptions)
+}
+
+// GetSparkHistoryServerWithContext is an alternate form of the GetSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServerWithContext(ctx context.Context, getSparkHistoryServerOptions *GetSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getSparkHistoryServerOptions, "getSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getSparkHistoryServerOptions, "getSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSparkHistoryServerResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// StopSparkHistoryServer : Stop Spark history server
+// Stop the Spark history server for a given serverless Spark instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.StopSparkHistoryServerWithContext(context.Background(), stopSparkHistoryServerOptions)
+}
+
+// StopSparkHistoryServerWithContext is an alternate form of the StopSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StopSparkHistoryServerWithContext(ctx context.Context, stopSparkHistoryServerOptions *StopSparkHistoryServerOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(stopSparkHistoryServerOptions, "stopSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(stopSparkHistoryServerOptions, "stopSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *stopSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range stopSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "StopSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
+
+	return
+}
+
 // Application : Details of a Spark application.
 type Application struct {
 	// Identifier provided by Analytics Engine service for the Spark application.
@@ -1653,6 +1821,34 @@ func (options *GetLoggingConfigurationOptions) SetHeaders(param map[string]strin
 	return options
 }
 
+// GetSparkHistoryServerOptions : The GetSparkHistoryServer options.
+type GetSparkHistoryServerOptions struct {
+	// The identifier of the instance for which the Spark history server is started.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetSparkHistoryServerOptions : Instantiate GetSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewGetSparkHistoryServerOptions(instanceID string) *GetSparkHistoryServerOptions {
+	return &GetSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetSparkHistoryServerOptions) SetInstanceID(instanceID string) *GetSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetSparkHistoryServerOptions) SetHeaders(param map[string]string) *GetSparkHistoryServerOptions {
+	options.Headers = param
+	return options
+}
+
 // Instance : Details of Analytics Engine instance.
 type Instance struct {
 	// GUID of the Analytics Engine instance.
@@ -1985,4 +2181,143 @@ func UnmarshalLoggingConfigurationResponseLogServer(m map[string]json.RawMessage
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// SparkHistoryServerResponse : State of Spark history server.
+type SparkHistoryServerResponse struct {
+	// State of Spark history server.
+	State *string `json:"state,omitempty"`
+
+	// Number of cores used for the Spark history server.
+	Cores *string `json:"cores,omitempty"`
+
+	// Memory used for the Spark history server.
+	Memory *string `json:"memory,omitempty"`
+
+	// Time when the Spark history server was started.
+	StartTime *string `json:"start_time,omitempty"`
+
+	// Time when the Spark history server was stopped.
+	StopTime *string `json:"stop_time,omitempty"`
+}
+
+// UnmarshalSparkHistoryServerResponse unmarshals an instance of SparkHistoryServerResponse from the specified map of raw messages.
+func UnmarshalSparkHistoryServerResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SparkHistoryServerResponse)
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cores", &obj.Cores)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "memory", &obj.Memory)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "stop_time", &obj.StopTime)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SparkHistoryServerStartResponse : Spark history server started response.
+type SparkHistoryServerStartResponse struct {
+	// State of Spark history server.
+	State *string `json:"state,omitempty"`
+
+	// Number of cores used for the Spark history server.
+	Cores *string `json:"cores,omitempty"`
+
+	// Memory used for the Spark history server.
+	Memory *string `json:"memory,omitempty"`
+
+	// Time when the Spark history server was started.
+	StartTime *string `json:"start_time,omitempty"`
+}
+
+// UnmarshalSparkHistoryServerStartResponse unmarshals an instance of SparkHistoryServerStartResponse from the specified map of raw messages.
+func UnmarshalSparkHistoryServerStartResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SparkHistoryServerStartResponse)
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cores", &obj.Cores)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "memory", &obj.Memory)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// StartSparkHistoryServerOptions : The StartSparkHistoryServer options.
+type StartSparkHistoryServerOptions struct {
+	// The identifier of the instance for which the Spark history server is started.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewStartSparkHistoryServerOptions : Instantiate StartSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewStartSparkHistoryServerOptions(instanceID string) *StartSparkHistoryServerOptions {
+	return &StartSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *StartSparkHistoryServerOptions) SetInstanceID(instanceID string) *StartSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StartSparkHistoryServerOptions) SetHeaders(param map[string]string) *StartSparkHistoryServerOptions {
+	options.Headers = param
+	return options
+}
+
+// StopSparkHistoryServerOptions : The StopSparkHistoryServer options.
+type StopSparkHistoryServerOptions struct {
+	// The identifier of the instance for which the Spark history server is stopped.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewStopSparkHistoryServerOptions : Instantiate StopSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewStopSparkHistoryServerOptions(instanceID string) *StopSparkHistoryServerOptions {
+	return &StopSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *StopSparkHistoryServerOptions) SetInstanceID(instanceID string) *StopSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StopSparkHistoryServerOptions) SetHeaders(param map[string]string) *StopSparkHistoryServerOptions {
+	options.Headers = param
+	return options
 }

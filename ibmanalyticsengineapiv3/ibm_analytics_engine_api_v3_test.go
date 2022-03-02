@@ -184,7 +184,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetInstance with error: Operation response processing error`, func() {
@@ -396,7 +396,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetInstanceState with error: Operation response processing error`, func() {
@@ -608,7 +608,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateInstanceHome with error: Operation response processing error`, func() {
@@ -887,7 +887,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateApplication with error: Operation response processing error`, func() {
@@ -1186,7 +1186,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListApplications with error: Operation response processing error`, func() {
@@ -1398,7 +1398,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetApplication with error: Operation response processing error`, func() {
@@ -1685,7 +1685,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetApplicationState with error: Operation response processing error`, func() {
@@ -1902,7 +1902,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ConfigurePlatformLogging with error: Operation response processing error`, func() {
@@ -2151,7 +2151,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetLoggingConfiguration with error: Operation response processing error`, func() {
@@ -2419,6 +2419,498 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
+	Describe(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) - Operation response error`, func() {
+		startSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions)`, func() {
+		startSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "State", "cores": "Cores", "memory": "Memory", "start_time": "StartTime"}`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServerWithContext(ctx, startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServerWithContext(ctx, startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "State", "cores": "Cores", "memory": "Memory", "start_time": "StartTime"}`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke StartSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the StartSparkHistoryServerOptions model with no property values
+				startSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions) - Operation response error`, func() {
+		getSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions)`, func() {
+		getSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "State", "cores": "Cores", "memory": "Memory", "start_time": "StartTime", "stop_time": "StopTime"}`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServerWithContext(ctx, getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServerWithContext(ctx, getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "State", "cores": "Cores", "memory": "Memory", "start_time": "StartTime", "stop_time": "StopTime"}`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSparkHistoryServerOptions model with no property values
+				getSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
+		stopSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke StopSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := ibmAnalyticsEngineApiService.StopSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				stopSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				stopSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke StopSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				stopSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				stopSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the StopSparkHistoryServerOptions model with no property values
+				stopSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			ibmAnalyticsEngineApiService, _ := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
@@ -2572,6 +3064,16 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(getLoggingConfigurationOptionsModel.InstanceGuid).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(getLoggingConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				getSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewGetSparkHistoryServerOptions(instanceID)
+				getSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(getSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(getSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListApplicationsOptions successfully`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
@@ -2581,6 +3083,26 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(listApplicationsOptionsModel).ToNot(BeNil())
 				Expect(listApplicationsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(listApplicationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewStartSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				startSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewStartSparkHistoryServerOptions(instanceID)
+				startSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(startSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(startSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(startSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewStopSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				stopSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewStopSparkHistoryServerOptions(instanceID)
+				stopSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(stopSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(stopSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(stopSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 		})
 	})

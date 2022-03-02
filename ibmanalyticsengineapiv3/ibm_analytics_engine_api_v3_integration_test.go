@@ -47,11 +47,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
 		serviceURL   string
 		config       map[string]string
+		// !!! Start of custom content to be copied !!!  
 		instanceGuid string
         applicationId string
 		instanceGuidInstanceHome string
 		hmacAccessKey string
 		hmacSecretKey string
+		// !!! End of custom content to be copied !!! 
 	)
 
 	var shouldSkipTest = func() {
@@ -74,10 +76,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			if serviceURL == "" {
 				Skip("Unable to load service URL configuration property, skipping tests")
 			}
+
+			// !!! Start of custom content to be copied !!!  
 			instanceGuid = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID")
 			instanceGuidInstanceHome = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME")
-			hmacAccessKey = os.Getenv("HMAC_ACCESS_KEY")
-			hmacSecretKey = os.Getenv("HMAC_SECRET_KEY")
+			hmacAccessKey = os.Getenv("IBM_ANALYTICS_ENGINE_HMAC_ACCESS_KEY")
+			hmacSecretKey = os.Getenv("IBM_ANALYTICS_ENGINE_HMAC_SECRET_KEY")
+			// !!! End of custom content to be copied !!! 
+
 			fmt.Printf("Service URL: %s\n", serviceURL)
 			shouldSkipTest = func() {}
 		})
@@ -117,7 +123,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instance).ToNot(BeNil())
-
+			
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -146,7 +152,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceGetStateResponse).ToNot(BeNil())
-
+			
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -182,7 +188,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceHomeResponse).ToNot(BeNil())
-
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -222,9 +227,11 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
-
+			// !!! Start of custom content to be copied !!! 
 			applicationId = *applicationResponse.ID
-			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
+			fmt.Printf("applicationResponse application_id : %v \n",applicationId)
+			// !!! End of custom content to be copied !!! 
+
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -249,7 +256,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
-
+			
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())
@@ -386,6 +393,92 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`StartSparkHistoryServer - Start Spark history server`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions)`, func() {
+
+			startSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StartSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			sparkHistoryServerStartResponse, response, err := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptions)
+			
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(sparkHistoryServerStartResponse).ToNot(BeNil())
+			
+			//
+			// The following status codes aren't covered by tests.
+			// Please provide integration tests for these too.
+			//
+			// 400
+			// 401
+			// 403
+			// 404
+			// 500
+			//
+		})
+	})
+
+	Describe(`GetSparkHistoryServer - Retrieve Spark history server details by ID`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions)`, func() {
+
+			getSparkHistoryServerOptions := &ibmanalyticsengineapiv3.GetSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptions)
+			
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(sparkHistoryServerResponse).ToNot(BeNil())
+
+			//
+			// The following status codes aren't covered by tests.
+			// Please provide integration tests for these too.
+			//
+			// 400
+			// 401
+			// 403
+			// 404
+			// 500
+			//
+		})
+	})
+
+	Describe(`StopSparkHistoryServer - Stop Spark history server`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
+
+			stopSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StopSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
+			
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+	
+			//
+			// The following status codes aren't covered by tests.
+			// Please provide integration tests for these too.
+			//
+			// 400
+			// 401
+			// 403
+			// 404
+			// 500
+			//
+		})
+	})
+
 	Describe(`DeleteLoggingConfiguration - Delete logging configuration of a given instance id`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -400,7 +493,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
-
+			
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
@@ -429,7 +522,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
-
+				
 			//
 			// The following status codes aren't covered by tests.
 			// Please provide integration tests for these too.
