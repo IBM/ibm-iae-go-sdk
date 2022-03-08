@@ -48,6 +48,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		serviceURL   string
 		config       map[string]string
 		// !!! Start of custom content to be copied !!!  
+		// Declartion of configuration variables
 		instanceGuid string
         applicationId string
 		instanceGuidInstanceHome string
@@ -78,6 +79,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			// !!! Start of custom content to be copied !!!  
+			// Assignment of configuration variables from environment
 			instanceGuid = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID")
 			instanceGuidInstanceHome = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME")
 			hmacAccessKey = os.Getenv("IBM_ANALYTICS_ENGINE_HMAC_ACCESS_KEY")
