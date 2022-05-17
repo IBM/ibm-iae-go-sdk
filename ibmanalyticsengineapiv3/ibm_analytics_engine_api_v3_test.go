@@ -596,22 +596,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-	Describe(`CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions) - Operation response error`, func() {
-		createInstanceHomePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
+	Describe(`SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions) - Operation response error`, func() {
+		setInstanceHomePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createInstanceHomePath))
+					Expect(req.URL.EscapedPath()).To(Equal(setInstanceHomePath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke CreateInstanceHome with error: Operation response processing error`, func() {
+			It(`Invoke SetInstanceHome with error: Operation response processing error`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -619,26 +619,26 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the CreateInstanceHomeOptions model
-				createInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
-				createInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
-				createInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
-				createInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
-				createInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
-				createInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				createInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
-				createInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SetInstanceHomeOptions model
+				setInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
+				setInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
+				setInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
+				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
+				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
+				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
-				result, response, operationErr = ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr = ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -648,15 +648,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-	Describe(`CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions)`, func() {
-		createInstanceHomePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
+	Describe(`SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions)`, func() {
+		setInstanceHomePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createInstanceHomePath))
+					Expect(req.URL.EscapedPath()).To(Equal(setInstanceHomePath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -684,7 +684,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					fmt.Fprintf(res, "%s", `{"instance_id": "InstanceID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}`)
 				}))
 			})
-			It(`Invoke CreateInstanceHome successfully with retries`, func() {
+			It(`Invoke SetInstanceHome successfully with retries`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -693,28 +693,28 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
 
-				// Construct an instance of the CreateInstanceHomeOptions model
-				createInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
-				createInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
-				createInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
-				createInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
-				createInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
-				createInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				createInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
-				createInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SetInstanceHomeOptions model
+				setInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
+				setInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
+				setInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
+				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
+				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
+				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHomeWithContext(ctx, createInstanceHomeOptionsModel)
+				_, _, operationErr := ibmAnalyticsEngineApiService.SetInstanceHomeWithContext(ctx, setInstanceHomeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				ibmAnalyticsEngineApiService.DisableRetries()
-				result, response, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -722,7 +722,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = ibmAnalyticsEngineApiService.CreateInstanceHomeWithContext(ctx, createInstanceHomeOptionsModel)
+				_, _, operationErr = ibmAnalyticsEngineApiService.SetInstanceHomeWithContext(ctx, setInstanceHomeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -736,7 +736,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createInstanceHomePath))
+					Expect(req.URL.EscapedPath()).To(Equal(setInstanceHomePath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -761,7 +761,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					fmt.Fprintf(res, "%s", `{"instance_id": "InstanceID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}`)
 				}))
 			})
-			It(`Invoke CreateInstanceHome successfully`, func() {
+			It(`Invoke SetInstanceHome successfully`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -770,31 +770,31 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHome(nil)
+				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the CreateInstanceHomeOptions model
-				createInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
-				createInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
-				createInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
-				createInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
-				createInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
-				createInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				createInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
-				createInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SetInstanceHomeOptions model
+				setInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
+				setInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
+				setInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
+				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
+				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
+				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr = ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke CreateInstanceHome with error: Operation validation and request error`, func() {
+			It(`Invoke SetInstanceHome with error: Operation validation and request error`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -802,29 +802,29 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the CreateInstanceHomeOptions model
-				createInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
-				createInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
-				createInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
-				createInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
-				createInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
-				createInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				createInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
-				createInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SetInstanceHomeOptions model
+				setInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
+				setInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
+				setInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
+				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
+				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
+				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the CreateInstanceHomeOptions model with no property values
-				createInstanceHomeOptionsModelNew := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
+				// Construct a second instance of the SetInstanceHomeOptions model with no property values
+				setInstanceHomeOptionsModelNew := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModelNew)
+				result, response, operationErr = ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -842,7 +842,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					res.WriteHeader(200)
 				}))
 			})
-			It(`Invoke CreateInstanceHome successfully`, func() {
+			It(`Invoke SetInstanceHome successfully`, func() {
 				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -850,20 +850,20 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
-				// Construct an instance of the CreateInstanceHomeOptions model
-				createInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.CreateInstanceHomeOptions)
-				createInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
-				createInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
-				createInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
-				createInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
-				createInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				createInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
-				createInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SetInstanceHomeOptions model
+				setInstanceHomeOptionsModel := new(ibmanalyticsengineapiv3.SetInstanceHomeOptions)
+				setInstanceHomeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.NewInstanceID = core.StringPtr("testString")
+				setInstanceHomeOptionsModel.NewProvider = core.StringPtr("ibm-cos")
+				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
+				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
+				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
-				result, response, operationErr := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptionsModel)
+				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -2351,74 +2351,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
-	Describe(`DeleteLoggingConfiguration(deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions)`, func() {
-		deleteLoggingConfigurationPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/logging"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteLoggingConfigurationPath))
-					Expect(req.Method).To(Equal("DELETE"))
-
-					res.WriteHeader(204)
-				}))
-			})
-			It(`Invoke DeleteLoggingConfiguration successfully`, func() {
-				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				response, operationErr := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-
-				// Construct an instance of the DeleteLoggingConfigurationOptions model
-				deleteLoggingConfigurationOptionsModel := new(ibmanalyticsengineapiv3.DeleteLoggingConfigurationOptions)
-				deleteLoggingConfigurationOptionsModel.InstanceGuid = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteLoggingConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				response, operationErr = ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-			})
-			It(`Invoke DeleteLoggingConfiguration with error: Operation validation and request error`, func() {
-				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
-
-				// Construct an instance of the DeleteLoggingConfigurationOptions model
-				deleteLoggingConfigurationOptionsModel := new(ibmanalyticsengineapiv3.DeleteLoggingConfigurationOptions)
-				deleteLoggingConfigurationOptionsModel.InstanceGuid = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteLoggingConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := ibmAnalyticsEngineApiService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				response, operationErr := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				// Construct a second instance of the DeleteLoggingConfigurationOptions model with no property values
-				deleteLoggingConfigurationOptionsModelNew := new(ibmanalyticsengineapiv3.DeleteLoggingConfigurationOptions)
-				// Invoke operation with invalid model (negative test)
-				response, operationErr = ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) - Operation response error`, func() {
 		startSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -2961,30 +2893,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))
 				Expect(createApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewCreateInstanceHomeOptions successfully`, func() {
-				// Construct an instance of the CreateInstanceHomeOptions model
-				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
-				createInstanceHomeOptionsModel := ibmAnalyticsEngineApiService.NewCreateInstanceHomeOptions(instanceID)
-				createInstanceHomeOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createInstanceHomeOptionsModel.SetNewInstanceID("testString")
-				createInstanceHomeOptionsModel.SetNewProvider("ibm-cos")
-				createInstanceHomeOptionsModel.SetNewType("objectstore")
-				createInstanceHomeOptionsModel.SetNewRegion("us-south")
-				createInstanceHomeOptionsModel.SetNewEndpoint("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				createInstanceHomeOptionsModel.SetNewHmacAccessKey("821**********0ae")
-				createInstanceHomeOptionsModel.SetNewHmacSecretKey("03e****************4fc3")
-				createInstanceHomeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createInstanceHomeOptionsModel).ToNot(BeNil())
-				Expect(createInstanceHomeOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
-				Expect(createInstanceHomeOptionsModel.NewInstanceID).To(Equal(core.StringPtr("testString")))
-				Expect(createInstanceHomeOptionsModel.NewProvider).To(Equal(core.StringPtr("ibm-cos")))
-				Expect(createInstanceHomeOptionsModel.NewType).To(Equal(core.StringPtr("objectstore")))
-				Expect(createInstanceHomeOptionsModel.NewRegion).To(Equal(core.StringPtr("us-south")))
-				Expect(createInstanceHomeOptionsModel.NewEndpoint).To(Equal(core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")))
-				Expect(createInstanceHomeOptionsModel.NewHmacAccessKey).To(Equal(core.StringPtr("821**********0ae")))
-				Expect(createInstanceHomeOptionsModel.NewHmacSecretKey).To(Equal(core.StringPtr("03e****************4fc3")))
-				Expect(createInstanceHomeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewDeleteApplicationOptions successfully`, func() {
 				// Construct an instance of the DeleteApplicationOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
@@ -2997,16 +2905,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(deleteApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(deleteApplicationOptionsModel.ApplicationID).To(Equal(core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b")))
 				Expect(deleteApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewDeleteLoggingConfigurationOptions successfully`, func() {
-				// Construct an instance of the DeleteLoggingConfigurationOptions model
-				instanceGuid := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
-				deleteLoggingConfigurationOptionsModel := ibmAnalyticsEngineApiService.NewDeleteLoggingConfigurationOptions(instanceGuid)
-				deleteLoggingConfigurationOptionsModel.SetInstanceGuid("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				deleteLoggingConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteLoggingConfigurationOptionsModel).ToNot(BeNil())
-				Expect(deleteLoggingConfigurationOptionsModel.InstanceGuid).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
-				Expect(deleteLoggingConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetApplicationOptions successfully`, func() {
 				// Construct an instance of the GetApplicationOptions model
@@ -3083,6 +2981,30 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(listApplicationsOptionsModel).ToNot(BeNil())
 				Expect(listApplicationsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(listApplicationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewSetInstanceHomeOptions successfully`, func() {
+				// Construct an instance of the SetInstanceHomeOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				setInstanceHomeOptionsModel := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(instanceID)
+				setInstanceHomeOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				setInstanceHomeOptionsModel.SetNewInstanceID("testString")
+				setInstanceHomeOptionsModel.SetNewProvider("ibm-cos")
+				setInstanceHomeOptionsModel.SetNewType("objectstore")
+				setInstanceHomeOptionsModel.SetNewRegion("us-south")
+				setInstanceHomeOptionsModel.SetNewEndpoint("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
+				setInstanceHomeOptionsModel.SetNewHmacAccessKey("821**********0ae")
+				setInstanceHomeOptionsModel.SetNewHmacSecretKey("03e****************4fc3")
+				setInstanceHomeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(setInstanceHomeOptionsModel).ToNot(BeNil())
+				Expect(setInstanceHomeOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(setInstanceHomeOptionsModel.NewInstanceID).To(Equal(core.StringPtr("testString")))
+				Expect(setInstanceHomeOptionsModel.NewProvider).To(Equal(core.StringPtr("ibm-cos")))
+				Expect(setInstanceHomeOptionsModel.NewType).To(Equal(core.StringPtr("objectstore")))
+				Expect(setInstanceHomeOptionsModel.NewRegion).To(Equal(core.StringPtr("us-south")))
+				Expect(setInstanceHomeOptionsModel.NewEndpoint).To(Equal(core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")))
+				Expect(setInstanceHomeOptionsModel.NewHmacAccessKey).To(Equal(core.StringPtr("821**********0ae")))
+				Expect(setInstanceHomeOptionsModel.NewHmacSecretKey).To(Equal(core.StringPtr("03e****************4fc3")))
+				Expect(setInstanceHomeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewStartSparkHistoryServerOptions successfully`, func() {
 				// Construct an instance of the StartSparkHistoryServerOptions model
