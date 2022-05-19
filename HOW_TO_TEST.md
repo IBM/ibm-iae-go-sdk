@@ -22,7 +22,7 @@ The Integration tests have to be run on the generated SDK not on the sdk from gi
 3. Create a `ibm_analytics_engine_api_v3.env` file in the `ibm-iae-go-sdk` directory using `ibmanalyticsengine-service.env.hide` as an example.
 4. Update `ibm_analytics_engine_api_v3.env` file with your own **APIKEY** and other details.
 5. export instance guid as `IBM_ANALYTICS_ENGINE_INSTANCE_GUID` environment variable.
-6. export instance guid to cretae instance home as `IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME` environment variable.
+6. export instance guid to set instance home as `IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME` environment variable.
 7. export HMAC access key as `IBM_ANALYTICS_ENGINE_HMAC_ACCESS_KEY` environment variable.
 8. export HMAC secret key as `IBM_ANALYTICS_ENGINE_HMAC_SECRET_KEY` environment variable.
 9. In root directory `ibm-iae-go-sdk/ibmanalyticsengineapiv3`. Run the following:

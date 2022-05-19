@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.45.1-632ec580-20220210-190638
+ * IBM OpenAPI SDK Code Generator Version: 3.49.0-be9b22fb-20220504-154308
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -288,25 +288,26 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceStateWithContex
 	return
 }
 
-// CreateInstanceHome : Edit instance home details
-// Update details of the Object Storage associated as 'instance home' for an Analytics Engine instance.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
-	return ibmAnalyticsEngineApi.CreateInstanceHomeWithContext(context.Background(), createInstanceHomeOptions)
+// SetInstanceHome : Set instance home
+// Provide the details of the Cloud Object Storage instance to associate with the Analytics Engine instance and use as
+// 'instance home' if 'instance home' has not already been set.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.SetInstanceHomeWithContext(context.Background(), setInstanceHomeOptions)
 }
 
-// CreateInstanceHomeWithContext is an alternate form of the CreateInstanceHome method which supports a Context parameter
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithContext(ctx context.Context, createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(createInstanceHomeOptions, "createInstanceHomeOptions cannot be nil")
+// SetInstanceHomeWithContext is an alternate form of the SetInstanceHome method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHomeWithContext(ctx context.Context, setInstanceHomeOptions *SetInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(setInstanceHomeOptions, "setInstanceHomeOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(createInstanceHomeOptions, "createInstanceHomeOptions")
+	err = core.ValidateStruct(setInstanceHomeOptions, "setInstanceHomeOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *createInstanceHomeOptions.InstanceID,
+		"instance_id": *setInstanceHomeOptions.InstanceID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -317,11 +318,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithCont
 		return
 	}
 
-	for headerName, headerValue := range createInstanceHomeOptions.Headers {
+	for headerName, headerValue := range setInstanceHomeOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "CreateInstanceHome")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "SetInstanceHome")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -329,26 +330,26 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithCont
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if createInstanceHomeOptions.NewInstanceID != nil {
-		body["instance_id"] = createInstanceHomeOptions.NewInstanceID
+	if setInstanceHomeOptions.NewInstanceID != nil {
+		body["instance_id"] = setInstanceHomeOptions.NewInstanceID
 	}
-	if createInstanceHomeOptions.NewProvider != nil {
-		body["provider"] = createInstanceHomeOptions.NewProvider
+	if setInstanceHomeOptions.NewProvider != nil {
+		body["provider"] = setInstanceHomeOptions.NewProvider
 	}
-	if createInstanceHomeOptions.NewType != nil {
-		body["type"] = createInstanceHomeOptions.NewType
+	if setInstanceHomeOptions.NewType != nil {
+		body["type"] = setInstanceHomeOptions.NewType
 	}
-	if createInstanceHomeOptions.NewRegion != nil {
-		body["region"] = createInstanceHomeOptions.NewRegion
+	if setInstanceHomeOptions.NewRegion != nil {
+		body["region"] = setInstanceHomeOptions.NewRegion
 	}
-	if createInstanceHomeOptions.NewEndpoint != nil {
-		body["endpoint"] = createInstanceHomeOptions.NewEndpoint
+	if setInstanceHomeOptions.NewEndpoint != nil {
+		body["endpoint"] = setInstanceHomeOptions.NewEndpoint
 	}
-	if createInstanceHomeOptions.NewHmacAccessKey != nil {
-		body["hmac_access_key"] = createInstanceHomeOptions.NewHmacAccessKey
+	if setInstanceHomeOptions.NewHmacAccessKey != nil {
+		body["hmac_access_key"] = setInstanceHomeOptions.NewHmacAccessKey
 	}
-	if createInstanceHomeOptions.NewHmacSecretKey != nil {
-		body["hmac_secret_key"] = createInstanceHomeOptions.NewHmacSecretKey
+	if setInstanceHomeOptions.NewHmacSecretKey != nil {
+		body["hmac_secret_key"] = setInstanceHomeOptions.NewHmacSecretKey
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -715,7 +716,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	return
 }
 
-// ConfigurePlatformLogging : Enable or disable log fowarding
+// ConfigurePlatformLogging : Enable or disable log forwarding
 // Enable or disable log forwarding from IBM Analytics Engine to IBM Log Analysis server.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ConfigurePlatformLoggingWithContext(context.Background(), configurePlatformLoggingOptions)
@@ -845,56 +846,8 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfigurationWit
 	return
 }
 
-// DeleteLoggingConfiguration : Delete logging configuration of a given instance id
-// Delete the logging configuration of a given Analytics Engine instance.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfiguration(deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
-	return ibmAnalyticsEngineApi.DeleteLoggingConfigurationWithContext(context.Background(), deleteLoggingConfigurationOptions)
-}
-
-// DeleteLoggingConfigurationWithContext is an alternate form of the DeleteLoggingConfiguration method which supports a Context parameter
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfigurationWithContext(ctx context.Context, deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"instance_guid": *deleteLoggingConfigurationOptions.InstanceGuid,
-	}
-
-	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range deleteLoggingConfigurationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DeleteLoggingConfiguration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
-
-	return
-}
-
 // StartSparkHistoryServer : Start Spark history server
-// Start the Spark history server for a given serverless Spark instance.
+// Start the Spark history server for the given Analytics Engine instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) (result *SparkHistoryServerStartResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.StartSparkHistoryServerWithContext(context.Background(), startSparkHistoryServerOptions)
 }
@@ -953,8 +906,8 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServerWit
 	return
 }
 
-// GetSparkHistoryServer : Retrieve Spark history server details by ID
-// Retrieve the Spark history server details for an Analytics Engine instance by the instance ID.
+// GetSparkHistoryServer : Retrieve Spark history server details
+// Get the details of the Spark history server of the given Analytics Engine instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetSparkHistoryServerWithContext(context.Background(), getSparkHistoryServerOptions)
 }
@@ -1014,7 +967,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServerWithC
 }
 
 // StopSparkHistoryServer : Stop Spark history server
-// Stop the Spark history server for a given serverless Spark instance.
+// Stop the Spark history server of the given Analytics Engine instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions) (response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.StopSparkHistoryServerWithContext(context.Background(), stopSparkHistoryServerOptions)
 }
@@ -1504,97 +1457,6 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 	return options
 }
 
-// CreateInstanceHomeOptions : The CreateInstanceHome options.
-type CreateInstanceHomeOptions struct {
-	// GUID of the Analytics Engine instance for which 'instance home' is to be updated.
-	InstanceID *string `json:"-" validate:"required,ne="`
-
-	// UUID of the instance home storage instance.
-	NewInstanceID *string `json:"instance_id,omitempty"`
-
-	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
-	NewProvider *string `json:"provider,omitempty"`
-
-	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
-	NewType *string `json:"type,omitempty"`
-
-	// Region of the Cloud Object Storage instance.
-	NewRegion *string `json:"region,omitempty"`
-
-	// Endpoint to access the Cloud Object Storage instance.
-	NewEndpoint *string `json:"endpoint,omitempty"`
-
-	// Cloud Object Storage access key.
-	NewHmacAccessKey *string `json:"hmac_access_key,omitempty"`
-
-	// Cloud Object Storage secret key.
-	NewHmacSecretKey *string `json:"hmac_secret_key,omitempty"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewCreateInstanceHomeOptions : Instantiate CreateInstanceHomeOptions
-func (*IbmAnalyticsEngineApiV3) NewCreateInstanceHomeOptions(instanceID string) *CreateInstanceHomeOptions {
-	return &CreateInstanceHomeOptions{
-		InstanceID: core.StringPtr(instanceID),
-	}
-}
-
-// SetInstanceID : Allow user to set InstanceID
-func (_options *CreateInstanceHomeOptions) SetInstanceID(instanceID string) *CreateInstanceHomeOptions {
-	_options.InstanceID = core.StringPtr(instanceID)
-	return _options
-}
-
-// SetNewInstanceID : Allow user to set NewInstanceID
-func (_options *CreateInstanceHomeOptions) SetNewInstanceID(newInstanceID string) *CreateInstanceHomeOptions {
-	_options.NewInstanceID = core.StringPtr(newInstanceID)
-	return _options
-}
-
-// SetNewProvider : Allow user to set NewProvider
-func (_options *CreateInstanceHomeOptions) SetNewProvider(newProvider string) *CreateInstanceHomeOptions {
-	_options.NewProvider = core.StringPtr(newProvider)
-	return _options
-}
-
-// SetNewType : Allow user to set NewType
-func (_options *CreateInstanceHomeOptions) SetNewType(newType string) *CreateInstanceHomeOptions {
-	_options.NewType = core.StringPtr(newType)
-	return _options
-}
-
-// SetNewRegion : Allow user to set NewRegion
-func (_options *CreateInstanceHomeOptions) SetNewRegion(newRegion string) *CreateInstanceHomeOptions {
-	_options.NewRegion = core.StringPtr(newRegion)
-	return _options
-}
-
-// SetNewEndpoint : Allow user to set NewEndpoint
-func (_options *CreateInstanceHomeOptions) SetNewEndpoint(newEndpoint string) *CreateInstanceHomeOptions {
-	_options.NewEndpoint = core.StringPtr(newEndpoint)
-	return _options
-}
-
-// SetNewHmacAccessKey : Allow user to set NewHmacAccessKey
-func (_options *CreateInstanceHomeOptions) SetNewHmacAccessKey(newHmacAccessKey string) *CreateInstanceHomeOptions {
-	_options.NewHmacAccessKey = core.StringPtr(newHmacAccessKey)
-	return _options
-}
-
-// SetNewHmacSecretKey : Allow user to set NewHmacSecretKey
-func (_options *CreateInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey string) *CreateInstanceHomeOptions {
-	_options.NewHmacSecretKey = core.StringPtr(newHmacSecretKey)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *CreateInstanceHomeOptions) SetHeaders(param map[string]string) *CreateInstanceHomeOptions {
-	options.Headers = param
-	return options
-}
-
 // DeleteApplicationOptions : The DeleteApplication options.
 type DeleteApplicationOptions struct {
 	// Identifier of the instance to which the application belongs.
@@ -1629,34 +1491,6 @@ func (_options *DeleteApplicationOptions) SetApplicationID(applicationID string)
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteApplicationOptions) SetHeaders(param map[string]string) *DeleteApplicationOptions {
-	options.Headers = param
-	return options
-}
-
-// DeleteLoggingConfigurationOptions : The DeleteLoggingConfiguration options.
-type DeleteLoggingConfigurationOptions struct {
-	// GUID of the instance for which log configuration is to be deleted.
-	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewDeleteLoggingConfigurationOptions : Instantiate DeleteLoggingConfigurationOptions
-func (*IbmAnalyticsEngineApiV3) NewDeleteLoggingConfigurationOptions(instanceGuid string) *DeleteLoggingConfigurationOptions {
-	return &DeleteLoggingConfigurationOptions{
-		InstanceGuid: core.StringPtr(instanceGuid),
-	}
-}
-
-// SetInstanceGuid : Allow user to set InstanceGuid
-func (_options *DeleteLoggingConfigurationOptions) SetInstanceGuid(instanceGuid string) *DeleteLoggingConfigurationOptions {
-	_options.InstanceGuid = core.StringPtr(instanceGuid)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *DeleteLoggingConfigurationOptions) SetHeaders(param map[string]string) *DeleteLoggingConfigurationOptions {
 	options.Headers = param
 	return options
 }
@@ -1823,7 +1657,7 @@ func (options *GetLoggingConfigurationOptions) SetHeaders(param map[string]strin
 
 // GetSparkHistoryServerOptions : The GetSparkHistoryServer options.
 type GetSparkHistoryServerOptions struct {
-	// The identifier of the instance for which the Spark history server is started.
+	// The ID of the Analytics Engine instance to which the Spark history server belongs.
 	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
@@ -2183,15 +2017,106 @@ func UnmarshalLoggingConfigurationResponseLogServer(m map[string]json.RawMessage
 	return
 }
 
-// SparkHistoryServerResponse : State of Spark history server.
+// SetInstanceHomeOptions : The SetInstanceHome options.
+type SetInstanceHomeOptions struct {
+	// GUID of the Analytics Engine instance for which 'instance home' is to be set.
+	InstanceID *string `json:"-" validate:"required,ne="`
+
+	// UUID of the instance home storage instance.
+	NewInstanceID *string `json:"instance_id,omitempty"`
+
+	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
+	NewProvider *string `json:"provider,omitempty"`
+
+	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
+	NewType *string `json:"type,omitempty"`
+
+	// Region of the Cloud Object Storage instance.
+	NewRegion *string `json:"region,omitempty"`
+
+	// Endpoint to access the Cloud Object Storage instance.
+	NewEndpoint *string `json:"endpoint,omitempty"`
+
+	// Cloud Object Storage access key.
+	NewHmacAccessKey *string `json:"hmac_access_key,omitempty"`
+
+	// Cloud Object Storage secret key.
+	NewHmacSecretKey *string `json:"hmac_secret_key,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewSetInstanceHomeOptions : Instantiate SetInstanceHomeOptions
+func (*IbmAnalyticsEngineApiV3) NewSetInstanceHomeOptions(instanceID string) *SetInstanceHomeOptions {
+	return &SetInstanceHomeOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *SetInstanceHomeOptions) SetInstanceID(instanceID string) *SetInstanceHomeOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetNewInstanceID : Allow user to set NewInstanceID
+func (_options *SetInstanceHomeOptions) SetNewInstanceID(newInstanceID string) *SetInstanceHomeOptions {
+	_options.NewInstanceID = core.StringPtr(newInstanceID)
+	return _options
+}
+
+// SetNewProvider : Allow user to set NewProvider
+func (_options *SetInstanceHomeOptions) SetNewProvider(newProvider string) *SetInstanceHomeOptions {
+	_options.NewProvider = core.StringPtr(newProvider)
+	return _options
+}
+
+// SetNewType : Allow user to set NewType
+func (_options *SetInstanceHomeOptions) SetNewType(newType string) *SetInstanceHomeOptions {
+	_options.NewType = core.StringPtr(newType)
+	return _options
+}
+
+// SetNewRegion : Allow user to set NewRegion
+func (_options *SetInstanceHomeOptions) SetNewRegion(newRegion string) *SetInstanceHomeOptions {
+	_options.NewRegion = core.StringPtr(newRegion)
+	return _options
+}
+
+// SetNewEndpoint : Allow user to set NewEndpoint
+func (_options *SetInstanceHomeOptions) SetNewEndpoint(newEndpoint string) *SetInstanceHomeOptions {
+	_options.NewEndpoint = core.StringPtr(newEndpoint)
+	return _options
+}
+
+// SetNewHmacAccessKey : Allow user to set NewHmacAccessKey
+func (_options *SetInstanceHomeOptions) SetNewHmacAccessKey(newHmacAccessKey string) *SetInstanceHomeOptions {
+	_options.NewHmacAccessKey = core.StringPtr(newHmacAccessKey)
+	return _options
+}
+
+// SetNewHmacSecretKey : Allow user to set NewHmacSecretKey
+func (_options *SetInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey string) *SetInstanceHomeOptions {
+	_options.NewHmacSecretKey = core.StringPtr(newHmacSecretKey)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SetInstanceHomeOptions) SetHeaders(param map[string]string) *SetInstanceHomeOptions {
+	options.Headers = param
+	return options
+}
+
+// SparkHistoryServerResponse : State of the Spark history server.
 type SparkHistoryServerResponse struct {
-	// State of Spark history server.
+	// State of the Spark history server.
 	State *string `json:"state,omitempty"`
 
-	// Number of cores used for the Spark history server.
+	// Number of cpu cores used by the Spark history server.
 	Cores *string `json:"cores,omitempty"`
 
-	// Memory used for the Spark history server.
+	// Amount of memory used by the Spark history server.
 	Memory *string `json:"memory,omitempty"`
 
 	// Time when the Spark history server was started.
@@ -2228,15 +2153,15 @@ func UnmarshalSparkHistoryServerResponse(m map[string]json.RawMessage, result in
 	return
 }
 
-// SparkHistoryServerStartResponse : Spark history server started response.
+// SparkHistoryServerStartResponse : Response of the request to start the Spark history server.
 type SparkHistoryServerStartResponse struct {
-	// State of Spark history server.
+	// State of the Spark history server.
 	State *string `json:"state,omitempty"`
 
-	// Number of cores used for the Spark history server.
+	// Number of cpu cores used by the Spark history server.
 	Cores *string `json:"cores,omitempty"`
 
-	// Memory used for the Spark history server.
+	// Amount of memory used by the Spark history server.
 	Memory *string `json:"memory,omitempty"`
 
 	// Time when the Spark history server was started.
@@ -2268,7 +2193,7 @@ func UnmarshalSparkHistoryServerStartResponse(m map[string]json.RawMessage, resu
 
 // StartSparkHistoryServerOptions : The StartSparkHistoryServer options.
 type StartSparkHistoryServerOptions struct {
-	// The identifier of the instance for which the Spark history server is started.
+	// The ID of the Analytics Engine instance whose Spark history server is to be started.
 	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
@@ -2296,7 +2221,7 @@ func (options *StartSparkHistoryServerOptions) SetHeaders(param map[string]strin
 
 // StopSparkHistoryServerOptions : The StopSparkHistoryServer options.
 type StopSparkHistoryServerOptions struct {
-	// The identifier of the instance for which the Spark history server is stopped.
+	// The ID of the Analytics Engine instance whose Spark history server is to be stopped.
 	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests

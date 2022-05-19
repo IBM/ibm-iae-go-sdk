@@ -42,36 +42,36 @@ import (
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
 //
-const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
-
-var (
-	ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
-	config       map[string]string
-	configLoaded bool = false
-)
-
-func shouldSkipTest() {
-	if !configLoaded {
-		Skip("External configuration is not available, skipping tests...")
-	}
-}
-
 var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
+
+	const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
+
+	var (
+		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
+		config       map[string]string
+	)
+
+	var shouldSkipTest = func() {
+		Skip("External configuration is not available, skipping examples...")
+	}
+
 	Describe(`External configuration`, func() {
 		It("Successfully load the configuration", func() {
 			var err error
 			_, err = os.Stat(externalConfigFile)
 			if err != nil {
-				Skip("External configuration file not found, skipping tests: " + err.Error())
+				Skip("External configuration file not found, skipping examples: " + err.Error())
 			}
 
 			os.Setenv("IBM_CREDENTIALS_FILE", externalConfigFile)
 			config, err = core.GetServiceProperties(ibmanalyticsengineapiv3.DefaultServiceName)
 			if err != nil {
-				Skip("Error loading service properties, skipping tests: " + err.Error())
+				Skip("Error loading service properties, skipping examples: " + err.Error())
+			} else if len(config) == 0 {
+				Skip("Unable to load service properties, skipping examples")
 			}
 
-			configLoaded = len(config) > 0
+			shouldSkipTest = func() {}
 		})
 	})
 
@@ -146,22 +146,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(instanceGetStateResponse).ToNot(BeNil())
 
 		})
-		It(`CreateInstanceHome request example`, func() {
-			fmt.Println("\nCreateInstanceHome() result:")
-			// begin-create_instance_home
+		It(`SetInstanceHome request example`, func() {
+			fmt.Println("\nSetInstanceHome() result:")
+			// begin-set_instance_home
 
-			createInstanceHomeOptions := ibmAnalyticsEngineApiService.NewCreateInstanceHomeOptions(
+			setInstanceHomeOptions := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
-			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptions)
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptions)
 			if err != nil {
 				panic(err)
 			}
 			b, _ := json.MarshalIndent(instanceHomeResponse, "", "  ")
 			fmt.Println(string(b))
 
-			// end-create_instance_home
+			// end-set_instance_home
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
@@ -362,27 +362,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 
 			// end-stop_spark_history_server
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-
-		})
-		It(`DeleteLoggingConfiguration request example`, func() {
-			// begin-delete_logging_configuration
-
-			deleteLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewDeleteLoggingConfigurationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-			)
-
-			response, err := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptions)
-			if err != nil {
-				panic(err)
-			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteLoggingConfiguration(): %d\n", response.StatusCode)
-			}
-
-			// end-delete_logging_configuration
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
