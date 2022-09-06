@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.5-e0ec19e2-20220124-172004
+ * IBM OpenAPI SDK Code Generator Version: 3.54.1-1d9808a7-20220817-143039
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -288,25 +288,26 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceStateWithContex
 	return
 }
 
-// CreateInstanceHome : Edit instance home details
-// Update details of the Object Storage associated as 'instance home' for an Analytics Engine instance.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
-	return ibmAnalyticsEngineApi.CreateInstanceHomeWithContext(context.Background(), createInstanceHomeOptions)
+// SetInstanceHome : Set instance home
+// Provide the details of the Cloud Object Storage instance to associate with the Analytics Engine instance and use as
+// 'instance home' if 'instance home' has not already been set.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.SetInstanceHomeWithContext(context.Background(), setInstanceHomeOptions)
 }
 
-// CreateInstanceHomeWithContext is an alternate form of the CreateInstanceHome method which supports a Context parameter
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithContext(ctx context.Context, createInstanceHomeOptions *CreateInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(createInstanceHomeOptions, "createInstanceHomeOptions cannot be nil")
+// SetInstanceHomeWithContext is an alternate form of the SetInstanceHome method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHomeWithContext(ctx context.Context, setInstanceHomeOptions *SetInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(setInstanceHomeOptions, "setInstanceHomeOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(createInstanceHomeOptions, "createInstanceHomeOptions")
+	err = core.ValidateStruct(setInstanceHomeOptions, "setInstanceHomeOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *createInstanceHomeOptions.InstanceID,
+		"instance_id": *setInstanceHomeOptions.InstanceID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -317,11 +318,11 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithCont
 		return
 	}
 
-	for headerName, headerValue := range createInstanceHomeOptions.Headers {
+	for headerName, headerValue := range setInstanceHomeOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "CreateInstanceHome")
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "SetInstanceHome")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -329,26 +330,26 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithCont
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if createInstanceHomeOptions.NewInstanceID != nil {
-		body["instance_id"] = createInstanceHomeOptions.NewInstanceID
+	if setInstanceHomeOptions.NewInstanceID != nil {
+		body["instance_id"] = setInstanceHomeOptions.NewInstanceID
 	}
-	if createInstanceHomeOptions.NewProvider != nil {
-		body["provider"] = createInstanceHomeOptions.NewProvider
+	if setInstanceHomeOptions.NewProvider != nil {
+		body["provider"] = setInstanceHomeOptions.NewProvider
 	}
-	if createInstanceHomeOptions.NewType != nil {
-		body["type"] = createInstanceHomeOptions.NewType
+	if setInstanceHomeOptions.NewType != nil {
+		body["type"] = setInstanceHomeOptions.NewType
 	}
-	if createInstanceHomeOptions.NewRegion != nil {
-		body["region"] = createInstanceHomeOptions.NewRegion
+	if setInstanceHomeOptions.NewRegion != nil {
+		body["region"] = setInstanceHomeOptions.NewRegion
 	}
-	if createInstanceHomeOptions.NewEndpoint != nil {
-		body["endpoint"] = createInstanceHomeOptions.NewEndpoint
+	if setInstanceHomeOptions.NewEndpoint != nil {
+		body["endpoint"] = setInstanceHomeOptions.NewEndpoint
 	}
-	if createInstanceHomeOptions.NewHmacAccessKey != nil {
-		body["hmac_access_key"] = createInstanceHomeOptions.NewHmacAccessKey
+	if setInstanceHomeOptions.NewHmacAccessKey != nil {
+		body["hmac_access_key"] = setInstanceHomeOptions.NewHmacAccessKey
 	}
-	if createInstanceHomeOptions.NewHmacSecretKey != nil {
-		body["hmac_secret_key"] = createInstanceHomeOptions.NewHmacSecretKey
+	if setInstanceHomeOptions.NewHmacSecretKey != nil {
+		body["hmac_secret_key"] = setInstanceHomeOptions.NewHmacSecretKey
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -372,6 +373,165 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateInstanceHomeWithCont
 		}
 		response.Result = result
 	}
+
+	return
+}
+
+// GetInstanceDefaultConfigs : Get instance default Spark configurations
+// Get the default Spark configuration properties that will be applied to all applications of the instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions *GetInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetInstanceDefaultConfigsWithContext(context.Background(), getInstanceDefaultConfigsOptions)
+}
+
+// GetInstanceDefaultConfigsWithContext is an alternate form of the GetInstanceDefaultConfigs method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceDefaultConfigsWithContext(ctx context.Context, getInstanceDefaultConfigsOptions *GetInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getInstanceDefaultConfigsOptions, "getInstanceDefaultConfigsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getInstanceDefaultConfigsOptions, "getInstanceDefaultConfigsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getInstanceDefaultConfigsOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/default_configs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getInstanceDefaultConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetInstanceDefaultConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &result)
+
+	return
+}
+
+// ReplaceInstanceDefaultConfigs : Replace instance default Spark configurations
+// Replace the default Spark configuration properties that will be applied to all applications of the instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions *ReplaceInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ReplaceInstanceDefaultConfigsWithContext(context.Background(), replaceInstanceDefaultConfigsOptions)
+}
+
+// ReplaceInstanceDefaultConfigsWithContext is an alternate form of the ReplaceInstanceDefaultConfigs method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceInstanceDefaultConfigsWithContext(ctx context.Context, replaceInstanceDefaultConfigsOptions *ReplaceInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(replaceInstanceDefaultConfigsOptions, "replaceInstanceDefaultConfigsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(replaceInstanceDefaultConfigsOptions, "replaceInstanceDefaultConfigsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *replaceInstanceDefaultConfigsOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/default_configs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range replaceInstanceDefaultConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "ReplaceInstanceDefaultConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	_, err = builder.SetBodyContentJSON(replaceInstanceDefaultConfigsOptions.Body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &result)
+
+	return
+}
+
+// UpdateInstanceDefaultConfigs : Update instance default Spark configurations
+// Update the default Spark configuration properties that will be applied to all applications of the instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions *UpdateInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.UpdateInstanceDefaultConfigsWithContext(context.Background(), updateInstanceDefaultConfigsOptions)
+}
+
+// UpdateInstanceDefaultConfigsWithContext is an alternate form of the UpdateInstanceDefaultConfigs method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) UpdateInstanceDefaultConfigsWithContext(ctx context.Context, updateInstanceDefaultConfigsOptions *UpdateInstanceDefaultConfigsOptions) (result map[string]string, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateInstanceDefaultConfigsOptions, "updateInstanceDefaultConfigsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateInstanceDefaultConfigsOptions, "updateInstanceDefaultConfigsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *updateInstanceDefaultConfigsOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/default_configs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateInstanceDefaultConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "UpdateInstanceDefaultConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/merge-patch+json")
+
+	_, err = builder.SetBodyContentJSON(updateInstanceDefaultConfigsOptions.Body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &result)
 
 	return
 }
@@ -715,7 +875,208 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	return
 }
 
-// ConfigurePlatformLogging : Enable or disable log fowarding
+// GetCurrentResourceConsumption : Get current resource consumption
+// Gives the total memory and virtual processor cores allotted to all the applications running in the service instance
+// at this point in time. When auto-scaled applications are running, the resources allotted will change over time, based
+// on the applications's demands. Note: The consumption is not an indication of actual resource consumption by Spark
+// processes. It is the sum of resources allocated to the currently running applications at the time of application
+// submission.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions *GetCurrentResourceConsumptionOptions) (result *CurrentResourceConsumptionResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetCurrentResourceConsumptionWithContext(context.Background(), getCurrentResourceConsumptionOptions)
+}
+
+// GetCurrentResourceConsumptionWithContext is an alternate form of the GetCurrentResourceConsumption method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetCurrentResourceConsumptionWithContext(ctx context.Context, getCurrentResourceConsumptionOptions *GetCurrentResourceConsumptionOptions) (result *CurrentResourceConsumptionResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getCurrentResourceConsumptionOptions, "getCurrentResourceConsumptionOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getCurrentResourceConsumptionOptions, "getCurrentResourceConsumptionOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getCurrentResourceConsumptionOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/current_resource_consumption`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getCurrentResourceConsumptionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetCurrentResourceConsumption")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentResourceConsumptionResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ReplaceLogForwardingConfig : Replace log forwarding configuration
+// Modify the configuration for forwarding logs from the Analytics Engine instance to IBM Log Analysis server. Use this
+// endpoint to enable or disable log forwarding.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions *ReplaceLogForwardingConfigOptions) (result *LogForwardingConfigResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ReplaceLogForwardingConfigWithContext(context.Background(), replaceLogForwardingConfigOptions)
+}
+
+// ReplaceLogForwardingConfigWithContext is an alternate form of the ReplaceLogForwardingConfig method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceLogForwardingConfigWithContext(ctx context.Context, replaceLogForwardingConfigOptions *ReplaceLogForwardingConfigOptions) (result *LogForwardingConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(replaceLogForwardingConfigOptions, "replaceLogForwardingConfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(replaceLogForwardingConfigOptions, "replaceLogForwardingConfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *replaceLogForwardingConfigOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/log_forwarding_config`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range replaceLogForwardingConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "ReplaceLogForwardingConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if replaceLogForwardingConfigOptions.Enabled != nil {
+		body["enabled"] = replaceLogForwardingConfigOptions.Enabled
+	}
+	if replaceLogForwardingConfigOptions.Sources != nil {
+		body["sources"] = replaceLogForwardingConfigOptions.Sources
+	}
+	if replaceLogForwardingConfigOptions.Tags != nil {
+		body["tags"] = replaceLogForwardingConfigOptions.Tags
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLogForwardingConfigResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetLogForwardingConfig : Get log forwarding configuration
+// Retrieve the log forwarding configuration of the Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLogForwardingConfig(getLogForwardingConfigOptions *GetLogForwardingConfigOptions) (result *LogForwardingConfigResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetLogForwardingConfigWithContext(context.Background(), getLogForwardingConfigOptions)
+}
+
+// GetLogForwardingConfigWithContext is an alternate form of the GetLogForwardingConfig method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLogForwardingConfigWithContext(ctx context.Context, getLogForwardingConfigOptions *GetLogForwardingConfigOptions) (result *LogForwardingConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getLogForwardingConfigOptions, "getLogForwardingConfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getLogForwardingConfigOptions, "getLogForwardingConfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getLogForwardingConfigOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/log_forwarding_config`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getLogForwardingConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetLogForwardingConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLogForwardingConfigResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ConfigurePlatformLogging : Enable or disable log forwarding
 // Enable or disable log forwarding from IBM Analytics Engine to IBM Log Analysis server.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ConfigurePlatformLoggingWithContext(context.Background(), configurePlatformLoggingOptions)
@@ -845,54 +1206,6 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfigurationWit
 	return
 }
 
-// DeleteLoggingConfiguration : Delete logging configuration of a given instance id
-// Delete the logging configuration of a given Analytics Engine instance.
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfiguration(deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
-	return ibmAnalyticsEngineApi.DeleteLoggingConfigurationWithContext(context.Background(), deleteLoggingConfigurationOptions)
-}
-
-// DeleteLoggingConfigurationWithContext is an alternate form of the DeleteLoggingConfiguration method which supports a Context parameter
-func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteLoggingConfigurationWithContext(ctx context.Context, deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(deleteLoggingConfigurationOptions, "deleteLoggingConfigurationOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"instance_guid": *deleteLoggingConfigurationOptions.InstanceGuid,
-	}
-
-	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_guid}/logging`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range deleteLoggingConfigurationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "DeleteLoggingConfiguration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
-
-	return
-}
-
 // Application : Details of a Spark application.
 type Application struct {
 	// Identifier provided by Analytics Engine service for the Spark application.
@@ -904,11 +1217,17 @@ type Application struct {
 	// Identifier provided by Apache Spark for the application.
 	SparkApplicationID *string `json:"spark_application_id,omitempty"`
 
+	// Name of the Spark application.
+	SparkApplicationName *string `json:"spark_application_name,omitempty"`
+
 	// Status of the application.
 	State *string `json:"state,omitempty"`
 
 	// Time when the application was started.
 	StartTime *string `json:"start_time,omitempty"`
+
+	// Time when the application run ended in success, failure or was stopped.
+	EndTime *string `json:"end_time,omitempty"`
 
 	// Time when the application was completed.
 	FinishTime *string `json:"finish_time,omitempty"`
@@ -929,11 +1248,19 @@ func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "spark_application_name", &obj.SparkApplicationName)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "end_time", &obj.EndTime)
 	if err != nil {
 		return
 	}
@@ -1061,6 +1388,12 @@ type ApplicationGetResponse struct {
 	// Application ID.
 	ID *string `json:"id,omitempty"`
 
+	// Identifier provided by Apache Spark for the application.
+	SparkApplicationID *string `json:"spark_application_id,omitempty"`
+
+	// Name of the Spark application.
+	SparkApplicationName *string `json:"spark_application_name,omitempty"`
+
 	// Application state.
 	State *string `json:"state,omitempty"`
 
@@ -1068,6 +1401,9 @@ type ApplicationGetResponse struct {
 	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
 	// Application end time in the format YYYY-MM-DDTHH:mm:ssZ.
+	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
+
+	// Application finish time in the format YYYY-MM-DDTHH:mm:ssZ.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
 }
 
@@ -1082,11 +1418,23 @@ func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "spark_application_id", &obj.SparkApplicationID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "spark_application_name", &obj.SparkApplicationName)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "end_time", &obj.EndTime)
 	if err != nil {
 		return
 	}
@@ -1109,6 +1457,9 @@ type ApplicationGetStateResponse struct {
 	// Time when the application was started.
 	StartTime *string `json:"start_time,omitempty"`
 
+	// Time when the application run ended in success, failure or was stopped.
+	EndTime *string `json:"end_time,omitempty"`
+
 	// Time when the application was completed.
 	FinishTime *string `json:"finish_time,omitempty"`
 }
@@ -1125,6 +1476,10 @@ func UnmarshalApplicationGetStateResponse(m map[string]json.RawMessage, result i
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "end_time", &obj.EndTime)
 	if err != nil {
 		return
 	}
@@ -1336,95 +1691,28 @@ func (options *CreateApplicationOptions) SetHeaders(param map[string]string) *Cr
 	return options
 }
 
-// CreateInstanceHomeOptions : The CreateInstanceHome options.
-type CreateInstanceHomeOptions struct {
-	// GUID of the Analytics Engine instance for which 'instance home' is to be updated.
-	InstanceID *string `json:"-" validate:"required,ne="`
+// CurrentResourceConsumptionResponse : Current resource consumption of the instance.
+type CurrentResourceConsumptionResponse struct {
+	// Number of virtual processor cores used.
+	Cores *string `json:"cores,omitempty"`
 
-	// UUID of the instance home storage instance.
-	NewInstanceID *string `json:"instance_id,omitempty"`
-
-	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
-	NewProvider *string `json:"provider,omitempty"`
-
-	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
-	NewType *string `json:"type,omitempty"`
-
-	// Region of the Cloud Object Storage instance.
-	NewRegion *string `json:"region,omitempty"`
-
-	// Endpoint to access the Cloud Object Storage instance.
-	NewEndpoint *string `json:"endpoint,omitempty"`
-
-	// Cloud Object Storage access key.
-	NewHmacAccessKey *string `json:"hmac_access_key,omitempty"`
-
-	// Cloud Object Storage secret key.
-	NewHmacSecretKey *string `json:"hmac_secret_key,omitempty"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
+	// Amount of memory used.
+	Memory *string `json:"memory,omitempty"`
 }
 
-// NewCreateInstanceHomeOptions : Instantiate CreateInstanceHomeOptions
-func (*IbmAnalyticsEngineApiV3) NewCreateInstanceHomeOptions(instanceID string) *CreateInstanceHomeOptions {
-	return &CreateInstanceHomeOptions{
-		InstanceID: core.StringPtr(instanceID),
+// UnmarshalCurrentResourceConsumptionResponse unmarshals an instance of CurrentResourceConsumptionResponse from the specified map of raw messages.
+func UnmarshalCurrentResourceConsumptionResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CurrentResourceConsumptionResponse)
+	err = core.UnmarshalPrimitive(m, "cores", &obj.Cores)
+	if err != nil {
+		return
 	}
-}
-
-// SetInstanceID : Allow user to set InstanceID
-func (_options *CreateInstanceHomeOptions) SetInstanceID(instanceID string) *CreateInstanceHomeOptions {
-	_options.InstanceID = core.StringPtr(instanceID)
-	return _options
-}
-
-// SetNewInstanceID : Allow user to set NewInstanceID
-func (_options *CreateInstanceHomeOptions) SetNewInstanceID(newInstanceID string) *CreateInstanceHomeOptions {
-	_options.NewInstanceID = core.StringPtr(newInstanceID)
-	return _options
-}
-
-// SetNewProvider : Allow user to set NewProvider
-func (_options *CreateInstanceHomeOptions) SetNewProvider(newProvider string) *CreateInstanceHomeOptions {
-	_options.NewProvider = core.StringPtr(newProvider)
-	return _options
-}
-
-// SetNewType : Allow user to set NewType
-func (_options *CreateInstanceHomeOptions) SetNewType(newType string) *CreateInstanceHomeOptions {
-	_options.NewType = core.StringPtr(newType)
-	return _options
-}
-
-// SetNewRegion : Allow user to set NewRegion
-func (_options *CreateInstanceHomeOptions) SetNewRegion(newRegion string) *CreateInstanceHomeOptions {
-	_options.NewRegion = core.StringPtr(newRegion)
-	return _options
-}
-
-// SetNewEndpoint : Allow user to set NewEndpoint
-func (_options *CreateInstanceHomeOptions) SetNewEndpoint(newEndpoint string) *CreateInstanceHomeOptions {
-	_options.NewEndpoint = core.StringPtr(newEndpoint)
-	return _options
-}
-
-// SetNewHmacAccessKey : Allow user to set NewHmacAccessKey
-func (_options *CreateInstanceHomeOptions) SetNewHmacAccessKey(newHmacAccessKey string) *CreateInstanceHomeOptions {
-	_options.NewHmacAccessKey = core.StringPtr(newHmacAccessKey)
-	return _options
-}
-
-// SetNewHmacSecretKey : Allow user to set NewHmacSecretKey
-func (_options *CreateInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey string) *CreateInstanceHomeOptions {
-	_options.NewHmacSecretKey = core.StringPtr(newHmacSecretKey)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *CreateInstanceHomeOptions) SetHeaders(param map[string]string) *CreateInstanceHomeOptions {
-	options.Headers = param
-	return options
+	err = core.UnmarshalPrimitive(m, "memory", &obj.Memory)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // DeleteApplicationOptions : The DeleteApplication options.
@@ -1461,34 +1749,6 @@ func (_options *DeleteApplicationOptions) SetApplicationID(applicationID string)
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteApplicationOptions) SetHeaders(param map[string]string) *DeleteApplicationOptions {
-	options.Headers = param
-	return options
-}
-
-// DeleteLoggingConfigurationOptions : The DeleteLoggingConfiguration options.
-type DeleteLoggingConfigurationOptions struct {
-	// GUID of the instance for which log configuration is to be deleted.
-	InstanceGuid *string `json:"instance_guid" validate:"required,ne="`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewDeleteLoggingConfigurationOptions : Instantiate DeleteLoggingConfigurationOptions
-func (*IbmAnalyticsEngineApiV3) NewDeleteLoggingConfigurationOptions(instanceGuid string) *DeleteLoggingConfigurationOptions {
-	return &DeleteLoggingConfigurationOptions{
-		InstanceGuid: core.StringPtr(instanceGuid),
-	}
-}
-
-// SetInstanceGuid : Allow user to set InstanceGuid
-func (_options *DeleteLoggingConfigurationOptions) SetInstanceGuid(instanceGuid string) *DeleteLoggingConfigurationOptions {
-	_options.InstanceGuid = core.StringPtr(instanceGuid)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *DeleteLoggingConfigurationOptions) SetHeaders(param map[string]string) *DeleteLoggingConfigurationOptions {
 	options.Headers = param
 	return options
 }
@@ -1569,6 +1829,62 @@ func (options *GetApplicationStateOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
+// GetCurrentResourceConsumptionOptions : The GetCurrentResourceConsumption options.
+type GetCurrentResourceConsumptionOptions struct {
+	// ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetCurrentResourceConsumptionOptions : Instantiate GetCurrentResourceConsumptionOptions
+func (*IbmAnalyticsEngineApiV3) NewGetCurrentResourceConsumptionOptions(instanceID string) *GetCurrentResourceConsumptionOptions {
+	return &GetCurrentResourceConsumptionOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetCurrentResourceConsumptionOptions) SetInstanceID(instanceID string) *GetCurrentResourceConsumptionOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetCurrentResourceConsumptionOptions) SetHeaders(param map[string]string) *GetCurrentResourceConsumptionOptions {
+	options.Headers = param
+	return options
+}
+
+// GetInstanceDefaultConfigsOptions : The GetInstanceDefaultConfigs options.
+type GetInstanceDefaultConfigsOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetInstanceDefaultConfigsOptions : Instantiate GetInstanceDefaultConfigsOptions
+func (*IbmAnalyticsEngineApiV3) NewGetInstanceDefaultConfigsOptions(instanceID string) *GetInstanceDefaultConfigsOptions {
+	return &GetInstanceDefaultConfigsOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetInstanceDefaultConfigsOptions) SetInstanceID(instanceID string) *GetInstanceDefaultConfigsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetInstanceDefaultConfigsOptions) SetHeaders(param map[string]string) *GetInstanceDefaultConfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // GetInstanceOptions : The GetInstance options.
 type GetInstanceOptions struct {
 	// GUID of the Analytics Engine service instance to retrieve.
@@ -1621,6 +1937,34 @@ func (_options *GetInstanceStateOptions) SetInstanceID(instanceID string) *GetIn
 
 // SetHeaders : Allow user to set Headers
 func (options *GetInstanceStateOptions) SetHeaders(param map[string]string) *GetInstanceStateOptions {
+	options.Headers = param
+	return options
+}
+
+// GetLogForwardingConfigOptions : The GetLogForwardingConfig options.
+type GetLogForwardingConfigOptions struct {
+	// ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetLogForwardingConfigOptions : Instantiate GetLogForwardingConfigOptions
+func (*IbmAnalyticsEngineApiV3) NewGetLogForwardingConfigOptions(instanceID string) *GetLogForwardingConfigOptions {
+	return &GetLogForwardingConfigOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetLogForwardingConfigOptions) SetInstanceID(instanceID string) *GetLogForwardingConfigOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetLogForwardingConfigOptions) SetHeaders(param map[string]string) *GetLogForwardingConfigOptions {
 	options.Headers = param
 	return options
 }
@@ -1939,6 +2283,61 @@ func (options *ListApplicationsOptions) SetHeaders(param map[string]string) *Lis
 	return options
 }
 
+// LogForwardingConfigResponse : Log forwarding configuration details.
+type LogForwardingConfigResponse struct {
+	// List of sources of logs that are being forwarded.
+	Sources []string `json:"sources,omitempty"`
+
+	// List of tags that are applied to the logs being forwarded.
+	Tags []string `json:"tags,omitempty"`
+
+	// Log server properties.
+	LogServer *LogForwardingConfigResponseLogServer `json:"log_server,omitempty"`
+
+	// Indicates whether log forwarding is enabled or not.
+	Enabled *bool `json:"enabled,omitempty"`
+}
+
+// UnmarshalLogForwardingConfigResponse unmarshals an instance of LogForwardingConfigResponse from the specified map of raw messages.
+func UnmarshalLogForwardingConfigResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LogForwardingConfigResponse)
+	err = core.UnmarshalPrimitive(m, "sources", &obj.Sources)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "log_server", &obj.LogServer, UnmarshalLogForwardingConfigResponseLogServer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// LogForwardingConfigResponseLogServer : Log server properties.
+type LogForwardingConfigResponseLogServer struct {
+	// Type of the log server.
+	Type *string `json:"type,omitempty"`
+}
+
+// UnmarshalLogForwardingConfigResponseLogServer unmarshals an instance of LogForwardingConfigResponseLogServer from the specified map of raw messages.
+func UnmarshalLogForwardingConfigResponseLogServer(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LogForwardingConfigResponseLogServer)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // LoggingConfigurationResponse : Response of logging API.
 type LoggingConfigurationResponse struct {
 	// component array.
@@ -1985,4 +2384,228 @@ func UnmarshalLoggingConfigurationResponseLogServer(m map[string]json.RawMessage
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// ReplaceInstanceDefaultConfigsOptions : The ReplaceInstanceDefaultConfigs options.
+type ReplaceInstanceDefaultConfigsOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Spark configuration properties to replace existing instance default Spark configurations.
+	Body map[string]string `json:"body" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewReplaceInstanceDefaultConfigsOptions : Instantiate ReplaceInstanceDefaultConfigsOptions
+func (*IbmAnalyticsEngineApiV3) NewReplaceInstanceDefaultConfigsOptions(instanceID string, body map[string]string) *ReplaceInstanceDefaultConfigsOptions {
+	return &ReplaceInstanceDefaultConfigsOptions{
+		InstanceID: core.StringPtr(instanceID),
+		Body: body,
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *ReplaceInstanceDefaultConfigsOptions) SetInstanceID(instanceID string) *ReplaceInstanceDefaultConfigsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetBody : Allow user to set Body
+func (_options *ReplaceInstanceDefaultConfigsOptions) SetBody(body map[string]string) *ReplaceInstanceDefaultConfigsOptions {
+	_options.Body = body
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ReplaceInstanceDefaultConfigsOptions) SetHeaders(param map[string]string) *ReplaceInstanceDefaultConfigsOptions {
+	options.Headers = param
+	return options
+}
+
+// ReplaceLogForwardingConfigOptions : The ReplaceLogForwardingConfig options.
+type ReplaceLogForwardingConfigOptions struct {
+	// ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Enable or disable log forwarding.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// List of sources of logs that will be forwarded. By default, only 'spark-driver' logs are forwarded.
+	Sources []string `json:"sources,omitempty"`
+
+	// List of tags to be applied to the logs being forwarded. They can be used to filter the logs in the IBM Log Analysis
+	// server.
+	Tags []string `json:"tags,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewReplaceLogForwardingConfigOptions : Instantiate ReplaceLogForwardingConfigOptions
+func (*IbmAnalyticsEngineApiV3) NewReplaceLogForwardingConfigOptions(instanceID string) *ReplaceLogForwardingConfigOptions {
+	return &ReplaceLogForwardingConfigOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *ReplaceLogForwardingConfigOptions) SetInstanceID(instanceID string) *ReplaceLogForwardingConfigOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *ReplaceLogForwardingConfigOptions) SetEnabled(enabled bool) *ReplaceLogForwardingConfigOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetSources : Allow user to set Sources
+func (_options *ReplaceLogForwardingConfigOptions) SetSources(sources []string) *ReplaceLogForwardingConfigOptions {
+	_options.Sources = sources
+	return _options
+}
+
+// SetTags : Allow user to set Tags
+func (_options *ReplaceLogForwardingConfigOptions) SetTags(tags []string) *ReplaceLogForwardingConfigOptions {
+	_options.Tags = tags
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ReplaceLogForwardingConfigOptions) SetHeaders(param map[string]string) *ReplaceLogForwardingConfigOptions {
+	options.Headers = param
+	return options
+}
+
+// SetInstanceHomeOptions : The SetInstanceHome options.
+type SetInstanceHomeOptions struct {
+	// The ID of the Analytics Engine instance for which 'instance home' is to be set.
+	InstanceID *string `json:"-" validate:"required,ne="`
+
+	// UUID of the instance home storage instance.
+	NewInstanceID *string `json:"instance_id,omitempty"`
+
+	// Currently only ibm-cos (IBM Cloud Object Storage) is supported.
+	NewProvider *string `json:"provider,omitempty"`
+
+	// Type of the instance home storage. Currently, only objectstore (Cloud Object Storage) is supported.
+	NewType *string `json:"type,omitempty"`
+
+	// Region of the Cloud Object Storage instance.
+	NewRegion *string `json:"region,omitempty"`
+
+	// Endpoint to access the Cloud Object Storage instance.
+	NewEndpoint *string `json:"endpoint,omitempty"`
+
+	// Cloud Object Storage access key.
+	NewHmacAccessKey *string `json:"hmac_access_key,omitempty"`
+
+	// Cloud Object Storage secret key.
+	NewHmacSecretKey *string `json:"hmac_secret_key,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewSetInstanceHomeOptions : Instantiate SetInstanceHomeOptions
+func (*IbmAnalyticsEngineApiV3) NewSetInstanceHomeOptions(instanceID string) *SetInstanceHomeOptions {
+	return &SetInstanceHomeOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *SetInstanceHomeOptions) SetInstanceID(instanceID string) *SetInstanceHomeOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetNewInstanceID : Allow user to set NewInstanceID
+func (_options *SetInstanceHomeOptions) SetNewInstanceID(newInstanceID string) *SetInstanceHomeOptions {
+	_options.NewInstanceID = core.StringPtr(newInstanceID)
+	return _options
+}
+
+// SetNewProvider : Allow user to set NewProvider
+func (_options *SetInstanceHomeOptions) SetNewProvider(newProvider string) *SetInstanceHomeOptions {
+	_options.NewProvider = core.StringPtr(newProvider)
+	return _options
+}
+
+// SetNewType : Allow user to set NewType
+func (_options *SetInstanceHomeOptions) SetNewType(newType string) *SetInstanceHomeOptions {
+	_options.NewType = core.StringPtr(newType)
+	return _options
+}
+
+// SetNewRegion : Allow user to set NewRegion
+func (_options *SetInstanceHomeOptions) SetNewRegion(newRegion string) *SetInstanceHomeOptions {
+	_options.NewRegion = core.StringPtr(newRegion)
+	return _options
+}
+
+// SetNewEndpoint : Allow user to set NewEndpoint
+func (_options *SetInstanceHomeOptions) SetNewEndpoint(newEndpoint string) *SetInstanceHomeOptions {
+	_options.NewEndpoint = core.StringPtr(newEndpoint)
+	return _options
+}
+
+// SetNewHmacAccessKey : Allow user to set NewHmacAccessKey
+func (_options *SetInstanceHomeOptions) SetNewHmacAccessKey(newHmacAccessKey string) *SetInstanceHomeOptions {
+	_options.NewHmacAccessKey = core.StringPtr(newHmacAccessKey)
+	return _options
+}
+
+// SetNewHmacSecretKey : Allow user to set NewHmacSecretKey
+func (_options *SetInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey string) *SetInstanceHomeOptions {
+	_options.NewHmacSecretKey = core.StringPtr(newHmacSecretKey)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SetInstanceHomeOptions) SetHeaders(param map[string]string) *SetInstanceHomeOptions {
+	options.Headers = param
+	return options
+}
+
+// UpdateInstanceDefaultConfigsOptions : The UpdateInstanceDefaultConfigs options.
+type UpdateInstanceDefaultConfigsOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Spark configuration properties to be updated. Properties will be merged with existing configuration properties. Set
+	// a property value to `null` in order to unset it.
+	Body map[string]interface{} `json:"body" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateInstanceDefaultConfigsOptions : Instantiate UpdateInstanceDefaultConfigsOptions
+func (*IbmAnalyticsEngineApiV3) NewUpdateInstanceDefaultConfigsOptions(instanceID string, body map[string]interface{}) *UpdateInstanceDefaultConfigsOptions {
+	return &UpdateInstanceDefaultConfigsOptions{
+		InstanceID: core.StringPtr(instanceID),
+		Body: body,
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *UpdateInstanceDefaultConfigsOptions) SetInstanceID(instanceID string) *UpdateInstanceDefaultConfigsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetBody : Allow user to set Body
+func (_options *UpdateInstanceDefaultConfigsOptions) SetBody(body map[string]interface{}) *UpdateInstanceDefaultConfigsOptions {
+	_options.Body = body
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateInstanceDefaultConfigsOptions) SetHeaders(param map[string]string) *UpdateInstanceDefaultConfigsOptions {
+	options.Headers = param
+	return options
 }

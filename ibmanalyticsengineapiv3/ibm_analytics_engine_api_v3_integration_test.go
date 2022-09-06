@@ -39,7 +39,6 @@ import (
  */
 
 var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
-
 	const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
 
 	var (
@@ -47,11 +46,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
 		serviceURL   string
 		config       map[string]string
-		instanceGuid string
-        applicationId string
-		instanceGuidInstanceHome string
-		hmacAccessKey string
-		hmacSecretKey string
 	)
 
 	var shouldSkipTest = func() {
@@ -74,11 +68,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			if serviceURL == "" {
 				Skip("Unable to load service URL configuration property, skipping tests")
 			}
-			instanceGuid = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID")
-			instanceGuidInstanceHome = os.Getenv("IBM_ANALYTICS_ENGINE_INSTANCE_GUID_INSTANCE_HOME")
-			hmacAccessKey = os.Getenv("HMAC_ACCESS_KEY")
-			hmacSecretKey = os.Getenv("HMAC_SECRET_KEY")
-			fmt.Printf("Service URL: %s\n", serviceURL)
+
+			fmt.Fprintf(GinkgoWriter, "Service URL: %v\n", serviceURL)
 			shouldSkipTest = func() {}
 		})
 	})
@@ -88,11 +79,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It("Successfully construct the service client instance", func() {
-
 			ibmAnalyticsEngineApiServiceOptions := &ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{}
 
 			ibmAnalyticsEngineApiService, err = ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3UsingExternalConfig(ibmAnalyticsEngineApiServiceOptions)
-
 			Expect(err).To(BeNil())
 			Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 			Expect(ibmAnalyticsEngineApiService.Service.Options.URL).To(Equal(serviceURL))
@@ -107,27 +96,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetInstance(getInstanceOptions *GetInstanceOptions)`, func() {
-
 			getInstanceOptions := &ibmanalyticsengineapiv3.GetInstanceOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 			}
 
 			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instance).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -136,63 +112,87 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetInstanceState(getInstanceStateOptions *GetInstanceStateOptions)`, func() {
-
 			getInstanceStateOptions := &ibmanalyticsengineapiv3.GetInstanceStateOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 			}
 
 			instanceGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetInstanceState(getInstanceStateOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceGetStateResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
-	Describe(`CreateInstanceHome - Edit instance home details`, func() {
+	Describe(`SetInstanceHome - Set instance home`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`CreateInstanceHome(createInstanceHomeOptions *CreateInstanceHomeOptions)`, func() {
-
-			createInstanceHomeOptions := &ibmanalyticsengineapiv3.CreateInstanceHomeOptions{
-				InstanceID: core.StringPtr(instanceGuidInstanceHome),
+		It(`SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions)`, func() {
+			setInstanceHomeOptions := &ibmanalyticsengineapiv3.SetInstanceHomeOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 				NewInstanceID: core.StringPtr("testString"),
 				NewProvider: core.StringPtr("ibm-cos"),
 				NewType: core.StringPtr("objectstore"),
 				NewRegion: core.StringPtr("us-south"),
 				NewEndpoint: core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud"),
-				NewHmacAccessKey: core.StringPtr(hmacAccessKey),
-				NewHmacSecretKey: core.StringPtr(hmacSecretKey),
+				NewHmacAccessKey: core.StringPtr("821**********0ae"),
+				NewHmacSecretKey: core.StringPtr("03e****************4fc3"),
 			}
 
-			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptions)
-
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceHomeResponse).ToNot(BeNil())
+		})
+	})
 
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
+	Describe(`GetInstanceDefaultConfigs - Get instance default Spark configurations`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions *GetInstanceDefaultConfigsOptions)`, func() {
+			getInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.GetInstanceDefaultConfigsOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+			}
+
+			result, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ReplaceInstanceDefaultConfigs - Replace instance default Spark configurations`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions *ReplaceInstanceDefaultConfigsOptions)`, func() {
+			replaceInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.ReplaceInstanceDefaultConfigsOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				Body: make(map[string]string),
+			}
+
+			result, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateInstanceDefaultConfigs - Update instance default Spark configurations`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions *UpdateInstanceDefaultConfigsOptions)`, func() {
+			updateInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				Body: make(map[string]interface{}),
+			}
+
+			result, response, err := ibmAnalyticsEngineApiService.UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
 		})
 	})
 
@@ -201,40 +201,25 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateApplication(createApplicationOptions *CreateApplicationOptions)`, func() {
-
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
-				// Jars: core.StringPtr("cos://cloud-object-storage/jars/tests.jar"),
-				// Packages: core.StringPtr("testString"),
-				// Repositories: core.StringPtr("testString"),
-				// Files: core.StringPtr("testString"),
-				// Archives: core.StringPtr("testString"),
-				// Name: core.StringPtr("spark-app"),
-				// Class: core.StringPtr("com.company.path.ClassName"),
-				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
-				// Conf: make(map[string]interface{}),
-				// Env: make(map[string]interface{}),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				Application: core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py"),
+				Jars: core.StringPtr("cos://cloud-object-storage/jars/tests.jar"),
+				Packages: core.StringPtr("testString"),
+				Repositories: core.StringPtr("testString"),
+				Files: core.StringPtr("testString"),
+				Archives: core.StringPtr("testString"),
+				Name: core.StringPtr("spark-app"),
+				Class: core.StringPtr("com.company.path.ClassName"),
+				Arguments: []string{"[arg1, arg2, arg3]"},
+				Conf: make(map[string]interface{}),
+				Env: make(map[string]interface{}),
 			}
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
-
-			applicationId = *applicationResponse.ID
-			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -243,27 +228,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions)`, func() {
-
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 			}
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -272,28 +244,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetApplication(getApplicationOptions *GetApplicationOptions)`, func() {
-
 			getApplicationOptions := &ibmanalyticsengineapiv3.GetApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				ApplicationID: core.StringPtr(applicationId),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				ApplicationID: core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b"),
 			}
 
 			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplication(getApplicationOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -302,58 +261,83 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetApplicationState(getApplicationStateOptions *GetApplicationStateOptions)`, func() {
-
 			getApplicationStateOptions := &ibmanalyticsengineapiv3.GetApplicationStateOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				ApplicationID: core.StringPtr(applicationId),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				ApplicationID: core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b"),
 			}
 
 			applicationGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetStateResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
-	Describe(`ConfigurePlatformLogging - Enable or disable log fowarding`, func() {
+	Describe(`GetCurrentResourceConsumption - Get current resource consumption`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions *GetCurrentResourceConsumptionOptions)`, func() {
+			getCurrentResourceConsumptionOptions := &ibmanalyticsengineapiv3.GetCurrentResourceConsumptionOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+			}
+
+			currentResourceConsumptionResponse, response, err := ibmAnalyticsEngineApiService.GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(currentResourceConsumptionResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ReplaceLogForwardingConfig - Replace log forwarding configuration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions *ReplaceLogForwardingConfigOptions)`, func() {
+			replaceLogForwardingConfigOptions := &ibmanalyticsengineapiv3.ReplaceLogForwardingConfigOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				Enabled: core.BoolPtr(true),
+				Sources: []string{"spark-driver", "spark-executor"},
+				Tags: []string{"<tag_1>", "<tag_2>", "<tag_n"},
+			}
+
+			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(logForwardingConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetLogForwardingConfig - Get log forwarding configuration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetLogForwardingConfig(getLogForwardingConfigOptions *GetLogForwardingConfigOptions)`, func() {
+			getLogForwardingConfigOptions := &ibmanalyticsengineapiv3.GetLogForwardingConfigOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+			}
+
+			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.GetLogForwardingConfig(getLogForwardingConfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(logForwardingConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ConfigurePlatformLogging - Enable or disable log forwarding`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions)`, func() {
-
 			configurePlatformLoggingOptions := &ibmanalyticsengineapiv3.ConfigurePlatformLoggingOptions{
-				InstanceGuid: core.StringPtr(instanceGuid),
+				InstanceGuid: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 				Enable: core.BoolPtr(true),
 			}
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -362,55 +346,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetLoggingConfiguration(getLoggingConfigurationOptions *GetLoggingConfigurationOptions)`, func() {
-
 			getLoggingConfigurationOptions := &ibmanalyticsengineapiv3.GetLoggingConfigurationOptions{
-				InstanceGuid: core.StringPtr(instanceGuid),
+				InstanceGuid: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 			}
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.GetLoggingConfiguration(getLoggingConfigurationOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
-		})
-	})
-
-	Describe(`DeleteLoggingConfiguration - Delete logging configuration of a given instance id`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`DeleteLoggingConfiguration(deleteLoggingConfigurationOptions *DeleteLoggingConfigurationOptions)`, func() {
-
-			deleteLoggingConfigurationOptions := &ibmanalyticsengineapiv3.DeleteLoggingConfigurationOptions{
-				InstanceGuid: core.StringPtr(instanceGuid),
-			}
-
-			response, err := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptions)
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 
@@ -419,27 +362,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`DeleteApplication(deleteApplicationOptions *DeleteApplicationOptions)`, func() {
-
 			deleteApplicationOptions := &ibmanalyticsengineapiv3.DeleteApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				ApplicationID: core.StringPtr(applicationId),
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				ApplicationID: core.StringPtr("ff48cc19-0e7e-4627-aac6-0b4ad080397b"),
 			}
 
 			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
-
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
-
-			//
-			// The following status codes aren't covered by tests.
-			// Please provide integration tests for these too.
-			//
-			// 400
-			// 401
-			// 403
-			// 404
-			// 500
-			//
 		})
 	})
 })
