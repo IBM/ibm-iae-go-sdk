@@ -43,9 +43,10 @@ Service Name | Package name
 
 **NOTE**
 
-IBM Analytics Engine v2 is for the classic plans : Lite, Standard Hourly and Standard monthly
+IBM Analytics Engine v2 is for the classic plans : Lite, Standard Hourly and Standard monthly.
+These plans are now deprecated.
 
-IBM Analytics Engine v3 is for the Standard Serverless Spark plan
+IBM Analytics Engine v3 is for the Standard Serverless for Apache Spark plan
 
 ## Prerequisites
 
@@ -53,7 +54,7 @@ IBM Analytics Engine v3 is for the Standard Serverless Spark plan
 
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.13 or above.
+* Go version 1.17 or above.
 
 ## Installation
 The current version of this SDK: 0.5.0
