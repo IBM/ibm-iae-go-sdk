@@ -21,4 +21,4 @@
     ```
     go test ./...
     ```
-    and execute
+    and execute away
