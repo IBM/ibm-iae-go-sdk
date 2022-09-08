@@ -42,36 +42,36 @@ import (
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
 //
-const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
-
-var (
-	ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
-	config       map[string]string
-	configLoaded bool = false
-)
-
-func shouldSkipTest() {
-	if !configLoaded {
-		Skip("External configuration is not available, skipping tests...")
-	}
-}
-
 var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
+
+	const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
+
+	var (
+		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
+		config       map[string]string
+	)
+
+	var shouldSkipTest = func() {
+		Skip("External configuration is not available, skipping examples...")
+	}
+
 	Describe(`External configuration`, func() {
 		It("Successfully load the configuration", func() {
 			var err error
 			_, err = os.Stat(externalConfigFile)
 			if err != nil {
-				Skip("External configuration file not found, skipping tests: " + err.Error())
+				Skip("External configuration file not found, skipping examples: " + err.Error())
 			}
 
 			os.Setenv("IBM_CREDENTIALS_FILE", externalConfigFile)
 			config, err = core.GetServiceProperties(ibmanalyticsengineapiv3.DefaultServiceName)
 			if err != nil {
-				Skip("Error loading service properties, skipping tests: " + err.Error())
+				Skip("Error loading service properties, skipping examples: " + err.Error())
+			} else if len(config) == 0 {
+				Skip("Unable to load service properties, skipping examples")
 			}
 
-			configLoaded = len(config) > 0
+			shouldSkipTest = func() {}
 		})
 	})
 
@@ -122,7 +122,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instance).ToNot(BeNil())
-
 		})
 		It(`GetInstanceState request example`, func() {
 			fmt.Println("\nGetInstanceState() result:")
@@ -144,29 +143,92 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceGetStateResponse).ToNot(BeNil())
-
 		})
-		It(`CreateInstanceHome request example`, func() {
-			fmt.Println("\nCreateInstanceHome() result:")
-			// begin-create_instance_home
+		It(`SetInstanceHome request example`, func() {
+			fmt.Println("\nSetInstanceHome() result:")
+			// begin-set_instance_home
 
-			createInstanceHomeOptions := ibmAnalyticsEngineApiService.NewCreateInstanceHomeOptions(
+			setInstanceHomeOptions := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(
 				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
-			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.CreateInstanceHome(createInstanceHomeOptions)
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptions)
 			if err != nil {
 				panic(err)
 			}
 			b, _ := json.MarshalIndent(instanceHomeResponse, "", "  ")
 			fmt.Println(string(b))
 
-			// end-create_instance_home
+			// end-set_instance_home
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceHomeResponse).ToNot(BeNil())
+		})
+		It(`GetInstanceDefaultConfigs request example`, func() {
+			fmt.Println("\nGetInstanceDefaultConfigs() result:")
+			// begin-get_instance_default_configs
 
+			getInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewGetInstanceDefaultConfigsOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceDefaultConfigs, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_instance_default_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceDefaultConfigs).ToNot(BeNil())
+		})
+		It(`ReplaceInstanceDefaultConfigs request example`, func() {
+			fmt.Println("\nReplaceInstanceDefaultConfigs() result:")
+			// begin-replace_instance_default_configs
+
+			replaceInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultConfigsOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				make(map[string]string),
+			)
+
+			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceDefaultConfigs, "", "  ")
+			fmt.Println(string(b))
+
+			// end-replace_instance_default_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceDefaultConfigs).ToNot(BeNil())
+		})
+		It(`UpdateInstanceDefaultConfigs request example`, func() {
+			fmt.Println("\nUpdateInstanceDefaultConfigs() result:")
+			// begin-update_instance_default_configs
+
+			updateInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewUpdateInstanceDefaultConfigsOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				make(map[string]interface{}),
+			)
+
+			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceDefaultConfigs, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_instance_default_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceDefaultConfigs).ToNot(BeNil())
 		})
 		It(`CreateApplication request example`, func() {
 			fmt.Println("\nCreateApplication() result:")
@@ -188,7 +250,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(applicationResponse).ToNot(BeNil())
-
 		})
 		It(`ListApplications request example`, func() {
 			fmt.Println("\nListApplications() result:")
@@ -210,7 +271,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationCollection).ToNot(BeNil())
-
 		})
 		It(`GetApplication request example`, func() {
 			fmt.Println("\nGetApplication() result:")
@@ -233,7 +293,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetResponse).ToNot(BeNil())
-
 		})
 		It(`GetApplicationState request example`, func() {
 			fmt.Println("\nGetApplicationState() result:")
@@ -256,7 +315,69 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(applicationGetStateResponse).ToNot(BeNil())
+		})
+		It(`GetCurrentResourceConsumption request example`, func() {
+			fmt.Println("\nGetCurrentResourceConsumption() result:")
+			// begin-get_current_resource_consumption
 
+			getCurrentResourceConsumptionOptions := ibmAnalyticsEngineApiService.NewGetCurrentResourceConsumptionOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			currentResourceConsumptionResponse, response, err := ibmAnalyticsEngineApiService.GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(currentResourceConsumptionResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_current_resource_consumption
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(currentResourceConsumptionResponse).ToNot(BeNil())
+		})
+		It(`ReplaceLogForwardingConfig request example`, func() {
+			fmt.Println("\nReplaceLogForwardingConfig() result:")
+			// begin-replace_log_forwarding_config
+
+			replaceLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewReplaceLogForwardingConfigOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(logForwardingConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-replace_log_forwarding_config
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(logForwardingConfigResponse).ToNot(BeNil())
+		})
+		It(`GetLogForwardingConfig request example`, func() {
+			fmt.Println("\nGetLogForwardingConfig() result:")
+			// begin-get_log_forwarding_config
+
+			getLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewGetLogForwardingConfigOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.GetLogForwardingConfig(getLogForwardingConfigOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(logForwardingConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_log_forwarding_config
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(logForwardingConfigResponse).ToNot(BeNil())
 		})
 		It(`ConfigurePlatformLogging request example`, func() {
 			fmt.Println("\nConfigurePlatformLogging() result:")
@@ -278,7 +399,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
 		})
 		It(`GetLoggingConfiguration request example`, func() {
 			fmt.Println("\nGetLoggingConfiguration() result:")
@@ -300,26 +420,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
-
-		})
-		It(`DeleteLoggingConfiguration request example`, func() {
-			// begin-delete_logging_configuration
-
-			deleteLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewDeleteLoggingConfigurationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-			)
-
-			response, err := ibmAnalyticsEngineApiService.DeleteLoggingConfiguration(deleteLoggingConfigurationOptions)
-			if err != nil {
-				panic(err)
-			}
-
-			// end-delete_logging_configuration
-			fmt.Printf("\nDeleteLoggingConfiguration() response status code: %d\n", response.StatusCode)
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-
 		})
 		It(`DeleteApplication request example`, func() {
 			// begin-delete_application
@@ -333,13 +433,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			if err != nil {
 				panic(err)
 			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteApplication(): %d\n", response.StatusCode)
+			}
 
 			// end-delete_application
-			fmt.Printf("\nDeleteApplication() response status code: %d\n", response.StatusCode)
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
-
 		})
 	})
 })
