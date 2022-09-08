@@ -1,3 +1,28 @@
+# [1.0.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.5.0...v1.0.0) (2022-09-08)
+
+
+### Features
+
+* add sdk methods for v3 api and update deps ([0134264](https://github.com/IBM/ibm-iae-go-sdk/commit/013426459ba1319e51c1fe53a5f81611a138b04e))
+
+
+### BREAKING CHANGES
+
+* `CreateInstanceHome` replaced by `SetInstanceHome`
+
+Method `IbmAnalyticsEngineApiV3.CreateInstanceHome` has been replaced by `IbmAnalyticsEngineApiV3.SetInstanceHome`.
+`SetInstanceHome` describes the api action better.
+Accordingly, options class names have also been updated.
+
+Deprecated: `IbmAnalyticsEngineApiV3.getPlatformLogging` and `IbmAnalyticsEngineApiV3.configurePlatformLogging`
+
+Methods `IbmAnalyticsEngineApiV3.getPlatformLogging` and `IbmAnalyticsEngineApiV3.configurePlatformLogging` are now deprecated.
+You can instead use the new methods:
+- `IbmAnalyticsEngineApiV3.GetLogForwardingConfig`
+- `IbmAnalyticsEngineApiV3.ReplaceLogForwardingConfig`
+
+Signed-off-by: Subin Shekhar <subinpc@gmail.com>
+
 # [0.5.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.4.5...v0.5.0) (2022-02-11)
 
 
