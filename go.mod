@@ -1,6 +1,6 @@
 module github.com/IBM/ibm-iae-go-sdk
 
-go 1.18
+go 1.17
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.10.2
