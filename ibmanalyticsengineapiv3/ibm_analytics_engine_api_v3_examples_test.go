@@ -107,7 +107,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance
 
 			getInstanceOptions := ibmAnalyticsEngineApiService.NewGetInstanceOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
@@ -128,7 +128,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance_state
 
 			getInstanceStateOptions := ibmAnalyticsEngineApiService.NewGetInstanceStateOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			instanceGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetInstanceState(getInstanceStateOptions)
@@ -149,8 +149,10 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-set_instance_home
 
 			setInstanceHomeOptions := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-			)
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			  )
+			setInstanceHomeOptions.SetNewHmacAccessKey("b9****************************4b")
+			setInstanceHomeOptions.SetNewHmacSecretKey("fa********************************************8a")
 
 			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptions)
 			if err != nil {
@@ -170,7 +172,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance_default_configs
 
 			getInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewGetInstanceDefaultConfigsOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions)
@@ -190,9 +192,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			fmt.Println("\nReplaceInstanceDefaultConfigs() result:")
 			// begin-replace_instance_default_configs
 
+			defaultConfigs := map[string]string {
+				"spark.driver.memory": "8G",
+				"spark.driver.cores": "2",
+			}
+			
 			replaceInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultConfigsOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				make(map[string]string),
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				defaultConfigs,
 			)
 
 			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions)
@@ -212,9 +219,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			fmt.Println("\nUpdateInstanceDefaultConfigs() result:")
 			// begin-update_instance_default_configs
 
+			defaultConfigs := map[string]interface{} {
+				"ae.spark.history-server.cores": "1",
+				"ae.spark.history-server.memory": "4G",
+			}
+
 			updateInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewUpdateInstanceDefaultConfigsOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				make(map[string]interface{}),
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				defaultConfigs,
 			)
 
 			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions)
@@ -230,13 +242,61 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceDefaultConfigs).ToNot(BeNil())
 		})
+		It(`GetInstanceDefaultRuntime request example`, func() {
+			fmt.Println("\nGetInstanceDefaultRuntime() result:")
+			// begin-get_instance_default_runtime
+
+			getInstanceDefaultRuntimeOptions := ibmAnalyticsEngineApiService.NewGetInstanceDefaultRuntimeOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+
+			runtime, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(runtime, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_instance_default_runtime
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(runtime).ToNot(BeNil())
+		})
+		It(`ReplaceInstanceDefaultRuntime request example`, func() {
+			fmt.Println("\nReplaceInstanceDefaultRuntime() result:")
+			// begin-replace_instance_default_runtime
+
+			replaceInstanceDefaultRuntimeOptions := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultRuntimeOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+			replaceInstanceDefaultRuntimeOptions.SetSparkVersion("3.3")
+
+			runtime, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(runtime, "", "  ")
+			fmt.Println(string(b))
+
+			// end-replace_instance_default_runtime
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(runtime).ToNot(BeNil())
+		})
 		It(`CreateApplication request example`, func() {
 			fmt.Println("\nCreateApplication() result:")
 			// begin-create_application
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
+			createApplicationOptions.SetApplication("/opt/ibm/spark/examples/src/main/python/wordcount.py")
+			createApplicationOptions.SetArguments([]string{"/opt/ibm/spark/examples/src/main/resources/people.txt"})
+			createApplicationOptions.SetRuntime(&ibmanalyticsengineapiv3.Runtime{
+				SparkVersion: core.StringPtr("3.3"),
+			})
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
 			if err != nil {
@@ -256,8 +316,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-list_applications
 
 			listApplicationsOptions := ibmAnalyticsEngineApiService.NewListApplicationsOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
+			listApplicationsOptions.SetState([]string{"accepted", "submitted", "waiting", "running", "finished", "failed"})
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
 			if err != nil {
@@ -277,8 +338,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_application
 
 			getApplicationOptions := ibmAnalyticsEngineApiService.NewGetApplicationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
 			)
 
 			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplication(getApplicationOptions)
@@ -299,8 +360,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_application_state
 
 			getApplicationStateOptions := ibmAnalyticsEngineApiService.NewGetApplicationStateOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
 			)
 
 			applicationGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptions)
@@ -321,7 +382,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_current_resource_consumption
 
 			getCurrentResourceConsumptionOptions := ibmAnalyticsEngineApiService.NewGetCurrentResourceConsumptionOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			currentResourceConsumptionResponse, response, err := ibmAnalyticsEngineApiService.GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions)
@@ -337,12 +398,33 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(currentResourceConsumptionResponse).ToNot(BeNil())
 		})
+		It(`GetResourceConsumptionLimits request example`, func() {
+			fmt.Println("\nGetResourceConsumptionLimits() result:")
+			// begin-get_resource_consumption_limits
+
+			getResourceConsumptionLimitsOptions := ibmAnalyticsEngineApiService.NewGetResourceConsumptionLimitsOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+
+			resourceConsumptionLimitsResponse, response, err := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(resourceConsumptionLimitsResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_resource_consumption_limits
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(resourceConsumptionLimitsResponse).ToNot(BeNil())
+		})
 		It(`ReplaceLogForwardingConfig request example`, func() {
 			fmt.Println("\nReplaceLogForwardingConfig() result:")
 			// begin-replace_log_forwarding_config
 
 			replaceLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewReplaceLogForwardingConfigOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions)
@@ -363,7 +445,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_log_forwarding_config
 
 			getLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewGetLogForwardingConfigOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.GetLogForwardingConfig(getLogForwardingConfigOptions)
@@ -384,7 +466,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-configure_platform_logging
 
 			configurePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewConfigurePlatformLoggingOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
@@ -405,7 +487,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_logging_configuration
 
 			getLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewGetLoggingConfigurationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.GetLoggingConfiguration(getLoggingConfigurationOptions)
@@ -425,8 +507,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-delete_application
 
 			deleteApplicationOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
 			)
 
 			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)

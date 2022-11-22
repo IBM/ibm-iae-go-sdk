@@ -27,6 +27,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
@@ -291,6 +292,8 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceStateWithContex
 // SetInstanceHome : Set instance home
 // Provide the details of the Cloud Object Storage instance to associate with the Analytics Engine instance and use as
 // 'instance home' if 'instance home' has not already been set.
+//
+// **Note**: You can set 'instance home' again if the instance is in 'instance_home_creation_failure' state.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.SetInstanceHomeWithContext(context.Background(), setInstanceHomeOptions)
 }
@@ -536,6 +539,136 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) UpdateInstanceDefaultConfi
 	return
 }
 
+// GetInstanceDefaultRuntime : Get instance default runtime
+// Get the default runtime environment on which all workloads of the instance will run.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions *GetInstanceDefaultRuntimeOptions) (result *Runtime, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetInstanceDefaultRuntimeWithContext(context.Background(), getInstanceDefaultRuntimeOptions)
+}
+
+// GetInstanceDefaultRuntimeWithContext is an alternate form of the GetInstanceDefaultRuntime method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetInstanceDefaultRuntimeWithContext(ctx context.Context, getInstanceDefaultRuntimeOptions *GetInstanceDefaultRuntimeOptions) (result *Runtime, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getInstanceDefaultRuntimeOptions, "getInstanceDefaultRuntimeOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getInstanceDefaultRuntimeOptions, "getInstanceDefaultRuntimeOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getInstanceDefaultRuntimeOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/default_runtime`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getInstanceDefaultRuntimeOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetInstanceDefaultRuntime")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalRuntime)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ReplaceInstanceDefaultRuntime : Replace instance default runtime
+// Replace the default runtime environment on which all workloads of the instance will run.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions) (result *Runtime, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.ReplaceInstanceDefaultRuntimeWithContext(context.Background(), replaceInstanceDefaultRuntimeOptions)
+}
+
+// ReplaceInstanceDefaultRuntimeWithContext is an alternate form of the ReplaceInstanceDefaultRuntime method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ReplaceInstanceDefaultRuntimeWithContext(ctx context.Context, replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions) (result *Runtime, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(replaceInstanceDefaultRuntimeOptions, "replaceInstanceDefaultRuntimeOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(replaceInstanceDefaultRuntimeOptions, "replaceInstanceDefaultRuntimeOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *replaceInstanceDefaultRuntimeOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/default_runtime`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range replaceInstanceDefaultRuntimeOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "ReplaceInstanceDefaultRuntime")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if replaceInstanceDefaultRuntimeOptions.SparkVersion != nil {
+		body["spark_version"] = replaceInstanceDefaultRuntimeOptions.SparkVersion
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalRuntime)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // CreateApplication : Deploy a Spark application
 // Deploys a Spark application on a given serverless Spark instance.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplication(createApplicationOptions *CreateApplicationOptions) (result *ApplicationResponse, response *core.DetailedResponse, err error) {
@@ -582,6 +715,9 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	application_details := make(map[string]interface{})
 	if createApplicationOptions.Application != nil {
 		application_details["application"] = createApplicationOptions.Application
+	}
+	if createApplicationOptions.Runtime != nil {
+		application_details["runtime"] = createApplicationOptions.Runtime
 	}
 	if createApplicationOptions.Jars != nil {
 		application_details["jars"] = createApplicationOptions.Jars
@@ -643,8 +779,9 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) CreateApplicationWithConte
 	return
 }
 
-// ListApplications : Retrieve all Spark applications
-// Gets all applications submitted in an instance with a specified instance-id.
+// ListApplications : List all Spark applications
+// Returns a list of all Spark applications submitted to the specified Analytics Engine instance. The result can be
+// filtered by specifying query parameters.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplications(listApplicationsOptions *ListApplicationsOptions) (result *ApplicationCollection, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ListApplicationsWithContext(context.Background(), listApplicationsOptions)
 }
@@ -681,6 +818,10 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplicationsWithContex
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+
+	if listApplicationsOptions.State != nil {
+		builder.AddQuery("state", strings.Join(listApplicationsOptions.State, ","))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -930,6 +1071,67 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetCurrentResourceConsumpt
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentResourceConsumptionResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetResourceConsumptionLimits : Get resource consumption limits
+// Returns the maximum total memory and virtual processor cores that can be allotted across all the applications running
+// in the service instance at any point in time.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions *GetResourceConsumptionLimitsOptions) (result *ResourceConsumptionLimitsResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetResourceConsumptionLimitsWithContext(context.Background(), getResourceConsumptionLimitsOptions)
+}
+
+// GetResourceConsumptionLimitsWithContext is an alternate form of the GetResourceConsumptionLimits method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetResourceConsumptionLimitsWithContext(ctx context.Context, getResourceConsumptionLimitsOptions *GetResourceConsumptionLimitsOptions) (result *ResourceConsumptionLimitsResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getResourceConsumptionLimitsOptions, "getResourceConsumptionLimitsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getResourceConsumptionLimitsOptions, "getResourceConsumptionLimitsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getResourceConsumptionLimitsOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/resource_consumption_limits`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getResourceConsumptionLimitsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetResourceConsumptionLimits")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalResourceConsumptionLimitsResponse)
 		if err != nil {
 			return
 		}
@@ -1214,13 +1416,16 @@ type Application struct {
 	// Full URL of the resource.
 	Href *string `json:"href,omitempty"`
 
+	// Runtime enviroment for applications and other workloads.
+	Runtime *Runtime `json:"runtime,omitempty"`
+
 	// Identifier provided by Apache Spark for the application.
 	SparkApplicationID *string `json:"spark_application_id,omitempty"`
 
 	// Name of the Spark application.
 	SparkApplicationName *string `json:"spark_application_name,omitempty"`
 
-	// Status of the application.
+	// State of the Spark application.
 	State *string `json:"state,omitempty"`
 
 	// Time when the application was started.
@@ -1233,6 +1438,22 @@ type Application struct {
 	FinishTime *string `json:"finish_time,omitempty"`
 }
 
+// Constants associated with the Application.State property.
+// State of the Spark application.
+const (
+	Application_State_Accepted = "accepted"
+	Application_State_AutoTerminated = "auto_terminated"
+	Application_State_Error = "error"
+	Application_State_Failed = "failed"
+	Application_State_Finished = "finished"
+	Application_State_OpsTerminated = "ops_terminated"
+	Application_State_Running = "running"
+	Application_State_Stopped = "stopped"
+	Application_State_Submitted = "submitted"
+	Application_State_Unknown = "unknown"
+	Application_State_Waiting = "waiting"
+)
+
 // UnmarshalApplication unmarshals an instance of Application from the specified map of raw messages.
 func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Application)
@@ -1241,6 +1462,10 @@ func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "runtime", &obj.Runtime, UnmarshalRuntime)
 	if err != nil {
 		return
 	}
@@ -1294,6 +1519,9 @@ type ApplicationDetails struct {
 	// Path of the application to run.
 	Application *string `json:"application,omitempty"`
 
+	// Runtime enviroment for applications and other workloads.
+	Runtime *Runtime `json:"runtime,omitempty"`
+
 	// Path of the jar files containing the application.
 	Jars *string `json:"jars,omitempty"`
 
@@ -1333,6 +1561,10 @@ type ApplicationDetails struct {
 func UnmarshalApplicationDetails(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApplicationDetails)
 	err = core.UnmarshalPrimitive(m, "application", &obj.Application)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "runtime", &obj.Runtime, UnmarshalRuntime)
 	if err != nil {
 		return
 	}
@@ -1394,8 +1626,11 @@ type ApplicationGetResponse struct {
 	// Name of the Spark application.
 	SparkApplicationName *string `json:"spark_application_name,omitempty"`
 
-	// Application state.
+	// State of the Spark application.
 	State *string `json:"state,omitempty"`
+
+	// List of additional information messages on the current state of the application.
+	StateDetails []ApplicationGetResponseStateDetailsItem `json:"state_details,omitempty"`
 
 	// Application start time in the format YYYY-MM-DDTHH:mm:ssZ.
 	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
@@ -1406,6 +1641,22 @@ type ApplicationGetResponse struct {
 	// Application finish time in the format YYYY-MM-DDTHH:mm:ssZ.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
 }
+
+// Constants associated with the ApplicationGetResponse.State property.
+// State of the Spark application.
+const (
+	ApplicationGetResponse_State_Accepted = "accepted"
+	ApplicationGetResponse_State_AutoTerminated = "auto_terminated"
+	ApplicationGetResponse_State_Error = "error"
+	ApplicationGetResponse_State_Failed = "failed"
+	ApplicationGetResponse_State_Finished = "finished"
+	ApplicationGetResponse_State_OpsTerminated = "ops_terminated"
+	ApplicationGetResponse_State_Running = "running"
+	ApplicationGetResponse_State_Stopped = "stopped"
+	ApplicationGetResponse_State_Submitted = "submitted"
+	ApplicationGetResponse_State_Unknown = "unknown"
+	ApplicationGetResponse_State_Waiting = "waiting"
+)
 
 // UnmarshalApplicationGetResponse unmarshals an instance of ApplicationGetResponse from the specified map of raw messages.
 func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -1430,6 +1681,10 @@ func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "state_details", &obj.StateDetails, UnmarshalApplicationGetResponseStateDetailsItem)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
 	if err != nil {
 		return
@@ -1446,12 +1701,51 @@ func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interf
 	return
 }
 
+// ApplicationGetResponseStateDetailsItem : Additional information message on the current state of the application.
+type ApplicationGetResponseStateDetailsItem struct {
+	// Type of the message.
+	Type *string `json:"type,omitempty"`
+
+	// Fixed code for the message.
+	Code *string `json:"code,omitempty"`
+
+	// A descriptive message providing additional information on the current application state.
+	Message *string `json:"message,omitempty"`
+}
+
+// Constants associated with the ApplicationGetResponseStateDetailsItem.Type property.
+// Type of the message.
+const (
+	ApplicationGetResponseStateDetailsItem_Type_Info = "info"
+	ApplicationGetResponseStateDetailsItem_Type_ServerError = "server_error"
+	ApplicationGetResponseStateDetailsItem_Type_UserError = "user_error"
+)
+
+// UnmarshalApplicationGetResponseStateDetailsItem unmarshals an instance of ApplicationGetResponseStateDetailsItem from the specified map of raw messages.
+func UnmarshalApplicationGetResponseStateDetailsItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ApplicationGetResponseStateDetailsItem)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ApplicationGetStateResponse : State of a given application.
 type ApplicationGetStateResponse struct {
 	// Identifier of the application.
 	ID *string `json:"id,omitempty"`
 
-	// Status of the application.
+	// State of the Spark application.
 	State *string `json:"state,omitempty"`
 
 	// Time when the application was started.
@@ -1463,6 +1757,22 @@ type ApplicationGetStateResponse struct {
 	// Time when the application was completed.
 	FinishTime *string `json:"finish_time,omitempty"`
 }
+
+// Constants associated with the ApplicationGetStateResponse.State property.
+// State of the Spark application.
+const (
+	ApplicationGetStateResponse_State_Accepted = "accepted"
+	ApplicationGetStateResponse_State_AutoTerminated = "auto_terminated"
+	ApplicationGetStateResponse_State_Error = "error"
+	ApplicationGetStateResponse_State_Failed = "failed"
+	ApplicationGetStateResponse_State_Finished = "finished"
+	ApplicationGetStateResponse_State_OpsTerminated = "ops_terminated"
+	ApplicationGetStateResponse_State_Running = "running"
+	ApplicationGetStateResponse_State_Stopped = "stopped"
+	ApplicationGetStateResponse_State_Submitted = "submitted"
+	ApplicationGetStateResponse_State_Unknown = "unknown"
+	ApplicationGetStateResponse_State_Waiting = "waiting"
+)
 
 // UnmarshalApplicationGetStateResponse unmarshals an instance of ApplicationGetStateResponse from the specified map of raw messages.
 func UnmarshalApplicationGetStateResponse(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -1496,16 +1806,24 @@ type ApplicationResponse struct {
 	// Identifier of the application that was submitted.
 	ID *string `json:"id,omitempty"`
 
-	// State of the submitted application.
+	// State of the Spark application.
 	State *string `json:"state,omitempty"`
 }
 
 // Constants associated with the ApplicationResponse.State property.
-// State of the submitted application.
+// State of the Spark application.
 const (
 	ApplicationResponse_State_Accepted = "accepted"
+	ApplicationResponse_State_AutoTerminated = "auto_terminated"
 	ApplicationResponse_State_Error = "error"
 	ApplicationResponse_State_Failed = "failed"
+	ApplicationResponse_State_Finished = "finished"
+	ApplicationResponse_State_OpsTerminated = "ops_terminated"
+	ApplicationResponse_State_Running = "running"
+	ApplicationResponse_State_Stopped = "stopped"
+	ApplicationResponse_State_Submitted = "submitted"
+	ApplicationResponse_State_Unknown = "unknown"
+	ApplicationResponse_State_Waiting = "waiting"
 )
 
 // UnmarshalApplicationResponse unmarshals an instance of ApplicationResponse from the specified map of raw messages.
@@ -1562,11 +1880,14 @@ func (options *ConfigurePlatformLoggingOptions) SetHeaders(param map[string]stri
 
 // CreateApplicationOptions : The CreateApplication options.
 type CreateApplicationOptions struct {
-	// The identifier of the instance where the Spark application is submitted.
+	// The identifier of the Analytics Engine instance associated with the Spark application(s).
 	InstanceID *string `json:"instance_id" validate:"required,ne="`
 
 	// Path of the application to run.
 	Application *string `json:"application,omitempty"`
+
+	// Runtime enviroment for applications and other workloads.
+	Runtime *Runtime `json:"runtime,omitempty"`
 
 	// Path of the jar files containing the application.
 	Jars *string `json:"jars,omitempty"`
@@ -1622,6 +1943,12 @@ func (_options *CreateApplicationOptions) SetInstanceID(instanceID string) *Crea
 // SetApplication : Allow user to set Application
 func (_options *CreateApplicationOptions) SetApplication(application string) *CreateApplicationOptions {
 	_options.Application = core.StringPtr(application)
+	return _options
+}
+
+// SetRuntime : Allow user to set Runtime
+func (_options *CreateApplicationOptions) SetRuntime(runtime *Runtime) *CreateApplicationOptions {
+	_options.Runtime = runtime
 	return _options
 }
 
@@ -1885,6 +2212,34 @@ func (options *GetInstanceDefaultConfigsOptions) SetHeaders(param map[string]str
 	return options
 }
 
+// GetInstanceDefaultRuntimeOptions : The GetInstanceDefaultRuntime options.
+type GetInstanceDefaultRuntimeOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetInstanceDefaultRuntimeOptions : Instantiate GetInstanceDefaultRuntimeOptions
+func (*IbmAnalyticsEngineApiV3) NewGetInstanceDefaultRuntimeOptions(instanceID string) *GetInstanceDefaultRuntimeOptions {
+	return &GetInstanceDefaultRuntimeOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetInstanceDefaultRuntimeOptions) SetInstanceID(instanceID string) *GetInstanceDefaultRuntimeOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetInstanceDefaultRuntimeOptions) SetHeaders(param map[string]string) *GetInstanceDefaultRuntimeOptions {
+	options.Headers = param
+	return options
+}
+
 // GetInstanceOptions : The GetInstance options.
 type GetInstanceOptions struct {
 	// GUID of the Analytics Engine service instance to retrieve.
@@ -1997,6 +2352,34 @@ func (options *GetLoggingConfigurationOptions) SetHeaders(param map[string]strin
 	return options
 }
 
+// GetResourceConsumptionLimitsOptions : The GetResourceConsumptionLimits options.
+type GetResourceConsumptionLimitsOptions struct {
+	// ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetResourceConsumptionLimitsOptions : Instantiate GetResourceConsumptionLimitsOptions
+func (*IbmAnalyticsEngineApiV3) NewGetResourceConsumptionLimitsOptions(instanceID string) *GetResourceConsumptionLimitsOptions {
+	return &GetResourceConsumptionLimitsOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetResourceConsumptionLimitsOptions) SetInstanceID(instanceID string) *GetResourceConsumptionLimitsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetResourceConsumptionLimitsOptions) SetHeaders(param map[string]string) *GetResourceConsumptionLimitsOptions {
+	options.Headers = param
+	return options
+}
+
 // Instance : Details of Analytics Engine instance.
 type Instance struct {
 	// GUID of the Analytics Engine instance.
@@ -2005,14 +2388,14 @@ type Instance struct {
 	// Full URL of the resource.
 	Href *string `json:"href,omitempty"`
 
-	// Instance state.
+	// State of the Analytics Engine instance.
 	State *string `json:"state,omitempty"`
 
 	// Timestamp when the state of the instance was changed, in the format YYYY-MM-DDTHH:mm:ssZ.
 	StateChangeTime *strfmt.DateTime `json:"state_change_time,omitempty"`
 
-	// Specifies the default runtime to use for all workloads that run in this instance.
-	DefaultRuntime *InstanceDefaultRuntime `json:"default_runtime,omitempty"`
+	// Runtime enviroment for applications and other workloads.
+	DefaultRuntime *Runtime `json:"default_runtime,omitempty"`
 
 	// Object storage instance that acts as the home for custom libraries and Spark events.
 	InstanceHome *InstanceHome `json:"instance_home,omitempty"`
@@ -2022,11 +2405,15 @@ type Instance struct {
 }
 
 // Constants associated with the Instance.State property.
-// Instance state.
+// State of the Analytics Engine instance.
 const (
-	Instance_State_Created = "created"
+	Instance_State_Active = "active"
+	Instance_State_CreationAccepted = "creation_accepted"
+	Instance_State_CreationFailed = "creation_failed"
 	Instance_State_Deleted = "deleted"
-	Instance_State_Failed = "failed"
+	Instance_State_Disabled = "disabled"
+	Instance_State_Initialized = "initialized"
+	Instance_State_Preparing = "preparing"
 )
 
 // UnmarshalInstance unmarshals an instance of Instance from the specified map of raw messages.
@@ -2048,7 +2435,7 @@ func UnmarshalInstance(m map[string]json.RawMessage, result interface{}) (err er
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "default_runtime", &obj.DefaultRuntime, UnmarshalInstanceDefaultRuntime)
+	err = core.UnmarshalModel(m, "default_runtime", &obj.DefaultRuntime, UnmarshalRuntime)
 	if err != nil {
 		return
 	}
@@ -2081,38 +2468,25 @@ func UnmarshalInstanceDefaultConfig(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// InstanceDefaultRuntime : Specifies the default runtime to use for all workloads that run in this instance.
-type InstanceDefaultRuntime struct {
-	// Version of Spark runtime to use. Currently, only 3.1 is supported.
-	SparkVersion *string `json:"spark_version,omitempty"`
-}
-
-// UnmarshalInstanceDefaultRuntime unmarshals an instance of InstanceDefaultRuntime from the specified map of raw messages.
-func UnmarshalInstanceDefaultRuntime(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(InstanceDefaultRuntime)
-	err = core.UnmarshalPrimitive(m, "spark_version", &obj.SparkVersion)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // InstanceGetStateResponse : State details of Analytics Engine instance.
 type InstanceGetStateResponse struct {
 	// GUID of the Analytics Engine instance.
 	ID *string `json:"id,omitempty"`
 
-	// Instance state.
+	// State of the Analytics Engine instance.
 	State *string `json:"state,omitempty"`
 }
 
 // Constants associated with the InstanceGetStateResponse.State property.
-// Instance state.
+// State of the Analytics Engine instance.
 const (
-	InstanceGetStateResponse_State_Created = "created"
+	InstanceGetStateResponse_State_Active = "active"
+	InstanceGetStateResponse_State_CreationAccepted = "creation_accepted"
+	InstanceGetStateResponse_State_CreationFailed = "creation_failed"
 	InstanceGetStateResponse_State_Deleted = "deleted"
-	InstanceGetStateResponse_State_Failed = "failed"
+	InstanceGetStateResponse_State_Disabled = "disabled"
+	InstanceGetStateResponse_State_Initialized = "initialized"
+	InstanceGetStateResponse_State_Preparing = "preparing"
 )
 
 // UnmarshalInstanceGetStateResponse unmarshals an instance of InstanceGetStateResponse from the specified map of raw messages.
@@ -2257,12 +2631,31 @@ func UnmarshalInstanceHomeResponse(m map[string]json.RawMessage, result interfac
 
 // ListApplicationsOptions : The ListApplications options.
 type ListApplicationsOptions struct {
-	// Identifier of the instance where the applications run.
+	// The identifier of the Analytics Engine instance associated with the Spark application(s).
 	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// List of Spark application states that will be used to filter the response.
+	State []string `json:"state,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
+
+// Constants associated with the ListApplicationsOptions.State property.
+// State of the Spark application.
+const (
+	ListApplicationsOptions_State_Accepted = "accepted"
+	ListApplicationsOptions_State_AutoTerminated = "auto_terminated"
+	ListApplicationsOptions_State_Error = "error"
+	ListApplicationsOptions_State_Failed = "failed"
+	ListApplicationsOptions_State_Finished = "finished"
+	ListApplicationsOptions_State_OpsTerminated = "ops_terminated"
+	ListApplicationsOptions_State_Running = "running"
+	ListApplicationsOptions_State_Stopped = "stopped"
+	ListApplicationsOptions_State_Submitted = "submitted"
+	ListApplicationsOptions_State_Unknown = "unknown"
+	ListApplicationsOptions_State_Waiting = "waiting"
+)
 
 // NewListApplicationsOptions : Instantiate ListApplicationsOptions
 func (*IbmAnalyticsEngineApiV3) NewListApplicationsOptions(instanceID string) *ListApplicationsOptions {
@@ -2274,6 +2667,12 @@ func (*IbmAnalyticsEngineApiV3) NewListApplicationsOptions(instanceID string) *L
 // SetInstanceID : Allow user to set InstanceID
 func (_options *ListApplicationsOptions) SetInstanceID(instanceID string) *ListApplicationsOptions {
 	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetState : Allow user to set State
+func (_options *ListApplicationsOptions) SetState(state []string) *ListApplicationsOptions {
+	_options.State = state
 	return _options
 }
 
@@ -2424,6 +2823,43 @@ func (options *ReplaceInstanceDefaultConfigsOptions) SetHeaders(param map[string
 	return options
 }
 
+// ReplaceInstanceDefaultRuntimeOptions : The ReplaceInstanceDefaultRuntime options.
+type ReplaceInstanceDefaultRuntimeOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Spark version of the runtime environment.
+	SparkVersion *string `json:"spark_version,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewReplaceInstanceDefaultRuntimeOptions : Instantiate ReplaceInstanceDefaultRuntimeOptions
+func (*IbmAnalyticsEngineApiV3) NewReplaceInstanceDefaultRuntimeOptions(instanceID string) *ReplaceInstanceDefaultRuntimeOptions {
+	return &ReplaceInstanceDefaultRuntimeOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *ReplaceInstanceDefaultRuntimeOptions) SetInstanceID(instanceID string) *ReplaceInstanceDefaultRuntimeOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetSparkVersion : Allow user to set SparkVersion
+func (_options *ReplaceInstanceDefaultRuntimeOptions) SetSparkVersion(sparkVersion string) *ReplaceInstanceDefaultRuntimeOptions {
+	_options.SparkVersion = core.StringPtr(sparkVersion)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ReplaceInstanceDefaultRuntimeOptions) SetHeaders(param map[string]string) *ReplaceInstanceDefaultRuntimeOptions {
+	options.Headers = param
+	return options
+}
+
 // ReplaceLogForwardingConfigOptions : The ReplaceLogForwardingConfig options.
 type ReplaceLogForwardingConfigOptions struct {
 	// ID of the Analytics Engine instance.
@@ -2478,6 +2914,47 @@ func (_options *ReplaceLogForwardingConfigOptions) SetTags(tags []string) *Repla
 func (options *ReplaceLogForwardingConfigOptions) SetHeaders(param map[string]string) *ReplaceLogForwardingConfigOptions {
 	options.Headers = param
 	return options
+}
+
+// ResourceConsumptionLimitsResponse : Resource consumption limits for the instance.
+type ResourceConsumptionLimitsResponse struct {
+	// Maximum number of virtual processor cores that be used in the instance.
+	MaxCores *string `json:"max_cores,omitempty"`
+
+	// Maximum memory that can be used in the instance.
+	MaxMemory *string `json:"max_memory,omitempty"`
+}
+
+// UnmarshalResourceConsumptionLimitsResponse unmarshals an instance of ResourceConsumptionLimitsResponse from the specified map of raw messages.
+func UnmarshalResourceConsumptionLimitsResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResourceConsumptionLimitsResponse)
+	err = core.UnmarshalPrimitive(m, "max_cores", &obj.MaxCores)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_memory", &obj.MaxMemory)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Runtime : Runtime enviroment for applications and other workloads.
+type Runtime struct {
+	// Spark version of the runtime environment.
+	SparkVersion *string `json:"spark_version,omitempty"`
+}
+
+// UnmarshalRuntime unmarshals an instance of Runtime from the specified map of raw messages.
+func UnmarshalRuntime(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Runtime)
+	err = core.UnmarshalPrimitive(m, "spark_version", &obj.SparkVersion)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // SetInstanceHomeOptions : The SetInstanceHome options.

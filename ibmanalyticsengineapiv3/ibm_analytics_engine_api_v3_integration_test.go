@@ -175,9 +175,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions *ReplaceInstanceDefaultConfigsOptions)`, func() {
+			defaultConfigs := map[string]string {
+				"spark.driver.memory": "8G",
+				"spark.driver.cores": "2",
+			}
 			replaceInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.ReplaceInstanceDefaultConfigsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				Body: make(map[string]string),
+				Body: defaultConfigs,
 			}
 
 			result, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions)
@@ -204,15 +208,53 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`GetInstanceDefaultRuntime - Get instance default runtime`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions *GetInstanceDefaultRuntimeOptions)`, func() {
+			getInstanceDefaultRuntimeOptions := &ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			runtime, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(runtime).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ReplaceInstanceDefaultRuntime - Replace instance default runtime`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions)`, func() {
+			replaceInstanceDefaultRuntimeOptions := &ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+				SparkVersion: core.StringPtr("3.3"),
+			}
+
+			runtime, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(runtime).ToNot(BeNil())
+		})
+	})
+
 	Describe(`CreateApplication - Deploy a Spark application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`CreateApplication(createApplicationOptions *CreateApplicationOptions)`, func() {
+			runtimeModel := &ibmanalyticsengineapiv3.Runtime{
+				SparkVersion: core.StringPtr("3.1"),
+			}
+
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
 				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
+				Runtime: runtimeModel,
 			}
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
@@ -232,6 +274,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions)`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
+				State: []string{"accepted","submitted","waiting","finished","failed"},
 			}
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
@@ -288,6 +331,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(currentResourceConsumptionResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetResourceConsumptionLimits - Get resource consumption limits`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions *GetResourceConsumptionLimitsOptions)`, func() {
+			getResourceConsumptionLimitsOptions := &ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			resourceConsumptionLimitsResponse, response, err := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(resourceConsumptionLimitsResponse).ToNot(BeNil())
 		})
 	})
 
