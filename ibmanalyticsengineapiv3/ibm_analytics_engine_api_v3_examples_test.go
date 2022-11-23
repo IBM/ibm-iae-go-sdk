@@ -426,6 +426,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			replaceLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewReplaceLogForwardingConfigOptions(
 				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
+			replaceLogForwardingConfigOptions.SetEnabled(true)
 
 			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions)
 			if err != nil {
