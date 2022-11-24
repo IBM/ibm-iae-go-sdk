@@ -233,7 +233,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "href": "Href", "state": "created", "state_change_time": "2021-01-30T08:30:00.000Z", "default_runtime": {"spark_version": "SparkVersion"}, "instance_home": {"id": "ID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "bucket": "Bucket", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}, "default_config": {"key": "Key"}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "href": "Href", "state": "creation_accepted", "state_change_time": "2021-01-30T08:30:00.000Z", "default_runtime": {"spark_version": "3.1"}, "instance_home": {"id": "ID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "bucket": "Bucket", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}, "default_config": {"key": "Key"}}`)
 				}))
 			})
 			It(`Invoke GetInstance successfully with retries`, func() {
@@ -287,7 +287,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "href": "Href", "state": "created", "state_change_time": "2021-01-30T08:30:00.000Z", "default_runtime": {"spark_version": "SparkVersion"}, "instance_home": {"id": "ID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "bucket": "Bucket", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}, "default_config": {"key": "Key"}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "href": "Href", "state": "creation_accepted", "state_change_time": "2021-01-30T08:30:00.000Z", "default_runtime": {"spark_version": "3.1"}, "instance_home": {"id": "ID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "bucket": "Bucket", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}, "default_config": {"key": "Key"}}`)
 				}))
 			})
 			It(`Invoke GetInstance successfully`, func() {
@@ -445,7 +445,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "created"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "creation_accepted"}`)
 				}))
 			})
 			It(`Invoke GetInstanceState successfully with retries`, func() {
@@ -499,7 +499,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "created"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "creation_accepted"}`)
 				}))
 			})
 			It(`Invoke GetInstanceState successfully`, func() {
@@ -1447,6 +1447,467 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
+	Describe(`GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions *GetInstanceDefaultRuntimeOptions) - Operation response error`, func() {
+		getInstanceDefaultRuntimePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/default_runtime"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetInstanceDefaultRuntime with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				getInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				getInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions *GetInstanceDefaultRuntimeOptions)`, func() {
+		getInstanceDefaultRuntimePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/default_runtime"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"spark_version": "3.1"}`)
+				}))
+			})
+			It(`Invoke GetInstanceDefaultRuntime successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				getInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				getInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntimeWithContext(ctx, getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.GetInstanceDefaultRuntimeWithContext(ctx, getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"spark_version": "3.1"}`)
+				}))
+			})
+			It(`Invoke GetInstanceDefaultRuntime successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				getInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				getInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetInstanceDefaultRuntime with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				getInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				getInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetInstanceDefaultRuntimeOptions model with no property values
+				getInstanceDefaultRuntimeOptionsModelNew := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetInstanceDefaultRuntime successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				getInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.GetInstanceDefaultRuntimeOptions)
+				getInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions) - Operation response error`, func() {
+		replaceInstanceDefaultRuntimePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/default_runtime"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ReplaceInstanceDefaultRuntime with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				replaceInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				replaceInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SparkVersion = core.StringPtr("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions)`, func() {
+		replaceInstanceDefaultRuntimePath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/default_runtime"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"spark_version": "3.1"}`)
+				}))
+			})
+			It(`Invoke ReplaceInstanceDefaultRuntime successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				replaceInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				replaceInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SparkVersion = core.StringPtr("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntimeWithContext(ctx, replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntimeWithContext(ctx, replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceInstanceDefaultRuntimePath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"spark_version": "3.1"}`)
+				}))
+			})
+			It(`Invoke ReplaceInstanceDefaultRuntime successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				replaceInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				replaceInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SparkVersion = core.StringPtr("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ReplaceInstanceDefaultRuntime with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				replaceInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				replaceInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SparkVersion = core.StringPtr("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ReplaceInstanceDefaultRuntimeOptions model with no property values
+				replaceInstanceDefaultRuntimeOptionsModelNew := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ReplaceInstanceDefaultRuntime successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				replaceInstanceDefaultRuntimeOptionsModel := new(ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions)
+				replaceInstanceDefaultRuntimeOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SparkVersion = core.StringPtr("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`CreateApplication(createApplicationOptions *CreateApplicationOptions) - Operation response error`, func() {
 		createApplicationPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_applications"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -1470,10 +1931,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Runtime = runtimeModel
 				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
@@ -1536,7 +2002,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "accepted"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished"}`)
 				}))
 			})
 			It(`Invoke CreateApplication successfully with retries`, func() {
@@ -1548,10 +2014,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
 
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Runtime = runtimeModel
 				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
@@ -1617,7 +2088,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "accepted"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished"}`)
 				}))
 			})
 			It(`Invoke CreateApplication successfully`, func() {
@@ -1634,10 +2105,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Runtime = runtimeModel
 				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
@@ -1665,10 +2141,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Runtime = runtimeModel
 				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
@@ -1717,10 +2198,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
 
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Runtime = runtimeModel
 				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
@@ -1772,6 +2258,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.State = []string{"finished"}
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptionsModel)
@@ -1808,7 +2295,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "State", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully with retries`, func() {
@@ -1823,6 +2310,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.State = []string{"finished"}
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1862,7 +2350,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "State", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully`, func() {
@@ -1882,6 +2370,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.State = []string{"finished"}
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1902,6 +2391,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.State = []string{"finished"}
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -1943,6 +2433,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.State = []string{"finished"}
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2021,7 +2512,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully with retries`, func() {
@@ -2076,7 +2567,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "accepted", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully`, func() {
@@ -2308,7 +2799,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "State", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
 				}))
 			})
 			It(`Invoke GetApplicationState successfully with retries`, func() {
@@ -2363,7 +2854,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "State", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
 				}))
 			})
 			It(`Invoke GetApplicationState successfully`, func() {
@@ -2663,6 +3154,218 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 
 				// Invoke operation
 				result, response, operationErr := ibmAnalyticsEngineApiService.GetCurrentResourceConsumption(getCurrentResourceConsumptionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions *GetResourceConsumptionLimitsOptions) - Operation response error`, func() {
+		getResourceConsumptionLimitsPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/resource_consumption_limits"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getResourceConsumptionLimitsPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetResourceConsumptionLimits with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				getResourceConsumptionLimitsOptionsModel := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				getResourceConsumptionLimitsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions *GetResourceConsumptionLimitsOptions)`, func() {
+		getResourceConsumptionLimitsPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/resource_consumption_limits"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getResourceConsumptionLimitsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"max_cores": "MaxCores", "max_memory": "MaxMemory"}`)
+				}))
+			})
+			It(`Invoke GetResourceConsumptionLimits successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				getResourceConsumptionLimitsOptionsModel := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				getResourceConsumptionLimitsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimitsWithContext(ctx, getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.GetResourceConsumptionLimitsWithContext(ctx, getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getResourceConsumptionLimitsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"max_cores": "MaxCores", "max_memory": "MaxMemory"}`)
+				}))
+			})
+			It(`Invoke GetResourceConsumptionLimits successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				getResourceConsumptionLimitsOptionsModel := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				getResourceConsumptionLimitsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetResourceConsumptionLimits with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				getResourceConsumptionLimitsOptionsModel := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				getResourceConsumptionLimitsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetResourceConsumptionLimitsOptions model with no property values
+				getResourceConsumptionLimitsOptionsModelNew := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetResourceConsumptionLimits successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				getResourceConsumptionLimitsOptionsModel := new(ibmanalyticsengineapiv3.GetResourceConsumptionLimitsOptions)
+				getResourceConsumptionLimitsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -3625,11 +4328,18 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(configurePlatformLoggingOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateApplicationOptions successfully`, func() {
+				// Construct an instance of the Runtime model
+				runtimeModel := new(ibmanalyticsengineapiv3.Runtime)
+				Expect(runtimeModel).ToNot(BeNil())
+				runtimeModel.SparkVersion = core.StringPtr("3.1")
+				Expect(runtimeModel.SparkVersion).To(Equal(core.StringPtr("3.1")))
+
 				// Construct an instance of the CreateApplicationOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
 				createApplicationOptionsModel := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(instanceID)
 				createApplicationOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				createApplicationOptionsModel.SetApplication("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.SetRuntime(runtimeModel)
 				createApplicationOptionsModel.SetJars("cos://cloud-object-storage/jars/tests.jar")
 				createApplicationOptionsModel.SetPackages("testString")
 				createApplicationOptionsModel.SetRepositories("testString")
@@ -3644,6 +4354,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")))
+				Expect(createApplicationOptionsModel.Runtime).To(Equal(runtimeModel))
 				Expect(createApplicationOptionsModel.Jars).To(Equal(core.StringPtr("cos://cloud-object-storage/jars/tests.jar")))
 				Expect(createApplicationOptionsModel.Packages).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Repositories).To(Equal(core.StringPtr("testString")))
@@ -3715,6 +4426,16 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(getInstanceDefaultConfigsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(getInstanceDefaultConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetInstanceDefaultRuntimeOptions successfully`, func() {
+				// Construct an instance of the GetInstanceDefaultRuntimeOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				getInstanceDefaultRuntimeOptionsModel := ibmAnalyticsEngineApiService.NewGetInstanceDefaultRuntimeOptions(instanceID)
+				getInstanceDefaultRuntimeOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getInstanceDefaultRuntimeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getInstanceDefaultRuntimeOptionsModel).ToNot(BeNil())
+				Expect(getInstanceDefaultRuntimeOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(getInstanceDefaultRuntimeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetInstanceOptions successfully`, func() {
 				// Construct an instance of the GetInstanceOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
@@ -3755,14 +4476,26 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(getLoggingConfigurationOptionsModel.InstanceGuid).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(getLoggingConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetResourceConsumptionLimitsOptions successfully`, func() {
+				// Construct an instance of the GetResourceConsumptionLimitsOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				getResourceConsumptionLimitsOptionsModel := ibmAnalyticsEngineApiService.NewGetResourceConsumptionLimitsOptions(instanceID)
+				getResourceConsumptionLimitsOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getResourceConsumptionLimitsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getResourceConsumptionLimitsOptionsModel).ToNot(BeNil())
+				Expect(getResourceConsumptionLimitsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(getResourceConsumptionLimitsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListApplicationsOptions successfully`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
 				listApplicationsOptionsModel := ibmAnalyticsEngineApiService.NewListApplicationsOptions(instanceID)
 				listApplicationsOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				listApplicationsOptionsModel.SetState([]string{"finished"})
 				listApplicationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listApplicationsOptionsModel).ToNot(BeNil())
 				Expect(listApplicationsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(listApplicationsOptionsModel.State).To(Equal([]string{"finished"}))
 				Expect(listApplicationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewReplaceInstanceDefaultConfigsOptions successfully`, func() {
@@ -3777,6 +4510,18 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(replaceInstanceDefaultConfigsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(replaceInstanceDefaultConfigsOptionsModel.Body).To(Equal(make(map[string]string)))
 				Expect(replaceInstanceDefaultConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewReplaceInstanceDefaultRuntimeOptions successfully`, func() {
+				// Construct an instance of the ReplaceInstanceDefaultRuntimeOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				replaceInstanceDefaultRuntimeOptionsModel := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultRuntimeOptions(instanceID)
+				replaceInstanceDefaultRuntimeOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				replaceInstanceDefaultRuntimeOptionsModel.SetSparkVersion("3.1")
+				replaceInstanceDefaultRuntimeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(replaceInstanceDefaultRuntimeOptionsModel).ToNot(BeNil())
+				Expect(replaceInstanceDefaultRuntimeOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(replaceInstanceDefaultRuntimeOptionsModel.SparkVersion).To(Equal(core.StringPtr("3.1")))
+				Expect(replaceInstanceDefaultRuntimeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewReplaceLogForwardingConfigOptions successfully`, func() {
 				// Construct an instance of the ReplaceLogForwardingConfigOptions model
