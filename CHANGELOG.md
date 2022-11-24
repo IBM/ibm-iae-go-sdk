@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v1.0.0...v1.1.0) (2022-11-24)
+
+
+### Bug Fixes
+
+* remove ioutil ([0705b83](https://github.com/IBM/ibm-iae-go-sdk/commit/0705b8301f22a8659f730ab1fb79230a0e317f10))
+
+
+### Features
+
+* add sdk methods and update existing ([005f927](https://github.com/IBM/ibm-iae-go-sdk/commit/005f92761a7b69ecc06af550b59569c3f33515a7))
+
 # [1.0.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v0.5.0...v1.0.0) (2022-09-08)
 
 
