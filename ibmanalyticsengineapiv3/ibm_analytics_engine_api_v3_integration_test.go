@@ -267,14 +267,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListApplications - Retrieve all Spark applications`, func() {
+	Describe(`ListApplications - List all Spark applications`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions)`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				State: []string{"accepted","submitted","waiting","finished","failed"},
+				State: []string{"accepted","running","finished","failed"},
 			}
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
@@ -415,6 +415,53 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`StartSparkHistoryServer - Start Spark history server`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions)`, func() {
+			startSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StartSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(sparkHistoryServerResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetSparkHistoryServer - Get Spark history server details`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions)`, func() {
+			getSparkHistoryServerOptions := &ibmanalyticsengineapiv3.GetSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(sparkHistoryServerResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`StopSparkHistoryServer - Stop Spark history server`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
+			stopSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StopSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 		})
 	})
 

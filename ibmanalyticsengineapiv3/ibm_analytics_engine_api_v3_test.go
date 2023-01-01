@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -626,8 +627,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
 				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
 				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("b9****************************4b")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("fa********************************************8a")
 				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptionsModel)
@@ -700,8 +701,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
 				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
 				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("b9****************************4b")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("fa********************************************8a")
 				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -782,8 +783,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
 				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
 				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("b9****************************4b")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("fa********************************************8a")
 				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -809,8 +810,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
 				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
 				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("b9****************************4b")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("fa********************************************8a")
 				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -857,8 +858,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.NewType = core.StringPtr("objectstore")
 				setInstanceHomeOptionsModel.NewRegion = core.StringPtr("us-south")
 				setInstanceHomeOptionsModel.NewEndpoint = core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("821**********0ae")
-				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("03e****************4fc3")
+				setInstanceHomeOptionsModel.NewHmacAccessKey = core.StringPtr("b9****************************4b")
+				setInstanceHomeOptionsModel.NewHmacSecretKey = core.StringPtr("fa********************************************8a")
 				setInstanceHomeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1938,15 +1939,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
 				createApplicationOptionsModel.Runtime = runtimeModel
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.Jars = core.StringPtr("testString")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
 				createApplicationOptionsModel.Files = core.StringPtr("testString")
 				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
-				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
+				createApplicationOptionsModel.Name = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -2021,15 +2022,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
 				createApplicationOptionsModel.Runtime = runtimeModel
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.Jars = core.StringPtr("testString")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
 				createApplicationOptionsModel.Files = core.StringPtr("testString")
 				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
-				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
+				createApplicationOptionsModel.Name = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -2112,15 +2113,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
 				createApplicationOptionsModel.Runtime = runtimeModel
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.Jars = core.StringPtr("testString")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
 				createApplicationOptionsModel.Files = core.StringPtr("testString")
 				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
-				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
+				createApplicationOptionsModel.Name = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -2148,15 +2149,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
 				createApplicationOptionsModel.Runtime = runtimeModel
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.Jars = core.StringPtr("testString")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
 				createApplicationOptionsModel.Files = core.StringPtr("testString")
 				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
-				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
+				createApplicationOptionsModel.Name = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -2205,15 +2206,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the CreateApplicationOptions model
 				createApplicationOptionsModel := new(ibmanalyticsengineapiv3.CreateApplicationOptions)
 				createApplicationOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.Application = core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.Application = core.StringPtr("testString")
 				createApplicationOptionsModel.Runtime = runtimeModel
-				createApplicationOptionsModel.Jars = core.StringPtr("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.Jars = core.StringPtr("testString")
 				createApplicationOptionsModel.Packages = core.StringPtr("testString")
 				createApplicationOptionsModel.Repositories = core.StringPtr("testString")
 				createApplicationOptionsModel.Files = core.StringPtr("testString")
 				createApplicationOptionsModel.Archives = core.StringPtr("testString")
-				createApplicationOptionsModel.Name = core.StringPtr("spark-app")
-				createApplicationOptionsModel.Class = core.StringPtr("com.company.path.ClassName")
+				createApplicationOptionsModel.Name = core.StringPtr("testString")
+				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
 				createApplicationOptionsModel.Conf = make(map[string]interface{})
 				createApplicationOptionsModel.Env = make(map[string]interface{})
@@ -2295,7 +2296,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully with retries`, func() {
@@ -2350,7 +2351,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully`, func() {
@@ -2512,7 +2513,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully with retries`, func() {
@@ -2567,7 +2568,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully`, func() {
@@ -2799,7 +2800,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplicationState successfully with retries`, func() {
@@ -2854,7 +2855,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "StartTime", "end_time": "EndTime", "finish_time": "FinishTime"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "state": "finished", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplicationState successfully`, func() {
@@ -4309,6 +4310,498 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
+	Describe(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) - Operation response error`, func() {
+		startSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions)`, func() {
+		startSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"state": "started", "cores": "1", "memory": "4G", "start_time": "2022-12-02T08:30:00.000Z", "stop_time": "2022-12-02T10:30:00.000Z", "auto_termination_time": "2022-12-05T08:30:00.000Z"}`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServerWithContext(ctx, startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServerWithContext(ctx, startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(startSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"state": "started", "cores": "1", "memory": "4G", "start_time": "2022-12-02T08:30:00.000Z", "stop_time": "2022-12-02T10:30:00.000Z", "auto_termination_time": "2022-12-05T08:30:00.000Z"}`)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke StartSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the StartSparkHistoryServerOptions model with no property values
+				startSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke StartSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				startSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StartSparkHistoryServerOptions)
+				startSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions) - Operation response error`, func() {
+		getSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions)`, func() {
+		getSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "started", "cores": "1", "memory": "4G", "start_time": "2022-12-02T08:30:00.000Z", "stop_time": "2022-12-02T10:30:00.000Z", "auto_termination_time": "2022-12-05T08:30:00.000Z"}`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServerWithContext(ctx, getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServerWithContext(ctx, getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"state": "started", "cores": "1", "memory": "4G", "start_time": "2022-12-02T08:30:00.000Z", "stop_time": "2022-12-02T10:30:00.000Z", "auto_termination_time": "2022-12-05T08:30:00.000Z"}`)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSparkHistoryServerOptions model with no property values
+				getSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				getSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.GetSparkHistoryServerOptions)
+				getSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
+		stopSparkHistoryServerPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/spark_history_server"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopSparkHistoryServerPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke StopSparkHistoryServer successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := ibmAnalyticsEngineApiService.StopSparkHistoryServer(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				stopSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				stopSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke StopSparkHistoryServer with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				stopSparkHistoryServerOptionsModel := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				stopSparkHistoryServerOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the StopSparkHistoryServerOptions model with no property values
+				stopSparkHistoryServerOptionsModelNew := new(ibmanalyticsengineapiv3.StopSparkHistoryServerOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			ibmAnalyticsEngineApiService, _ := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
@@ -4338,30 +4831,30 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
 				createApplicationOptionsModel := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(instanceID)
 				createApplicationOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				createApplicationOptionsModel.SetApplication("cos://bucket_name.my_cos/my_spark_app.py")
+				createApplicationOptionsModel.SetApplication("testString")
 				createApplicationOptionsModel.SetRuntime(runtimeModel)
-				createApplicationOptionsModel.SetJars("cos://cloud-object-storage/jars/tests.jar")
+				createApplicationOptionsModel.SetJars("testString")
 				createApplicationOptionsModel.SetPackages("testString")
 				createApplicationOptionsModel.SetRepositories("testString")
 				createApplicationOptionsModel.SetFiles("testString")
 				createApplicationOptionsModel.SetArchives("testString")
-				createApplicationOptionsModel.SetName("spark-app")
-				createApplicationOptionsModel.SetClass("com.company.path.ClassName")
+				createApplicationOptionsModel.SetName("testString")
+				createApplicationOptionsModel.SetClass("testString")
 				createApplicationOptionsModel.SetArguments([]string{"[arg1, arg2, arg3]"})
 				createApplicationOptionsModel.SetConf(make(map[string]interface{}))
 				createApplicationOptionsModel.SetEnv(make(map[string]interface{}))
 				createApplicationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
-				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("cos://bucket_name.my_cos/my_spark_app.py")))
+				Expect(createApplicationOptionsModel.Application).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Runtime).To(Equal(runtimeModel))
-				Expect(createApplicationOptionsModel.Jars).To(Equal(core.StringPtr("cos://cloud-object-storage/jars/tests.jar")))
+				Expect(createApplicationOptionsModel.Jars).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Packages).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Repositories).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Files).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Archives).To(Equal(core.StringPtr("testString")))
-				Expect(createApplicationOptionsModel.Name).To(Equal(core.StringPtr("spark-app")))
-				Expect(createApplicationOptionsModel.Class).To(Equal(core.StringPtr("com.company.path.ClassName")))
+				Expect(createApplicationOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createApplicationOptionsModel.Class).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Arguments).To(Equal([]string{"[arg1, arg2, arg3]"}))
 				Expect(createApplicationOptionsModel.Conf).To(Equal(make(map[string]interface{})))
 				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))
@@ -4486,6 +4979,16 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(getResourceConsumptionLimitsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(getResourceConsumptionLimitsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the GetSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				getSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewGetSparkHistoryServerOptions(instanceID)
+				getSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				getSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(getSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(getSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListApplicationsOptions successfully`, func() {
 				// Construct an instance of the ListApplicationsOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
@@ -4549,8 +5052,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				setInstanceHomeOptionsModel.SetNewType("objectstore")
 				setInstanceHomeOptionsModel.SetNewRegion("us-south")
 				setInstanceHomeOptionsModel.SetNewEndpoint("s3.direct.us-south.cloud-object-storage.appdomain.cloud")
-				setInstanceHomeOptionsModel.SetNewHmacAccessKey("821**********0ae")
-				setInstanceHomeOptionsModel.SetNewHmacSecretKey("03e****************4fc3")
+				setInstanceHomeOptionsModel.SetNewHmacAccessKey("b9****************************4b")
+				setInstanceHomeOptionsModel.SetNewHmacSecretKey("fa********************************************8a")
 				setInstanceHomeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(setInstanceHomeOptionsModel).ToNot(BeNil())
 				Expect(setInstanceHomeOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
@@ -4559,9 +5062,29 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(setInstanceHomeOptionsModel.NewType).To(Equal(core.StringPtr("objectstore")))
 				Expect(setInstanceHomeOptionsModel.NewRegion).To(Equal(core.StringPtr("us-south")))
 				Expect(setInstanceHomeOptionsModel.NewEndpoint).To(Equal(core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud")))
-				Expect(setInstanceHomeOptionsModel.NewHmacAccessKey).To(Equal(core.StringPtr("821**********0ae")))
-				Expect(setInstanceHomeOptionsModel.NewHmacSecretKey).To(Equal(core.StringPtr("03e****************4fc3")))
+				Expect(setInstanceHomeOptionsModel.NewHmacAccessKey).To(Equal(core.StringPtr("b9****************************4b")))
+				Expect(setInstanceHomeOptionsModel.NewHmacSecretKey).To(Equal(core.StringPtr("fa********************************************8a")))
 				Expect(setInstanceHomeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewStartSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the StartSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				startSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewStartSparkHistoryServerOptions(instanceID)
+				startSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				startSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(startSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(startSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(startSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewStopSparkHistoryServerOptions successfully`, func() {
+				// Construct an instance of the StopSparkHistoryServerOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				stopSparkHistoryServerOptionsModel := ibmAnalyticsEngineApiService.NewStopSparkHistoryServerOptions(instanceID)
+				stopSparkHistoryServerOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				stopSparkHistoryServerOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(stopSparkHistoryServerOptionsModel).ToNot(BeNil())
+				Expect(stopSparkHistoryServerOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(stopSparkHistoryServerOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateInstanceDefaultConfigsOptions successfully`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
@@ -4618,7 +5141,7 @@ func CreateMockUUID(mockData string) *strfmt.UUID {
 }
 
 func CreateMockReader(mockData string) io.ReadCloser {
-	return io.NopCloser(bytes.NewReader([]byte(mockData)))
+	return ioutil.NopCloser(bytes.NewReader([]byte(mockData)))
 }
 
 func CreateMockDate(mockData string) *strfmt.Date {
