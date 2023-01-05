@@ -1,3 +1,24 @@
+# [2.0.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v1.1.0...v2.0.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* remove ioutil dependency ([8003ec4](https://github.com/IBM/ibm-iae-go-sdk/commit/8003ec45531baedc680ea097aab2317a489f8284))
+
+
+### Features
+
+* add spark history server api ([be912fa](https://github.com/IBM/ibm-iae-go-sdk/commit/be912fac18ca074d65167bb4f26b2337e520ad7d))
+
+
+### BREAKING CHANGES
+
+* Type of timestamp fields in Application response models has been changed to `*strfmt.DateTime`.
+
+The type of timestamp fields like StartTime, EndTime in `ApplicationGetResponse`, `ApplicationGetStateResponse` and `Application` models has been changed from `*string` to `*strfmt.DateTime`.
+
+Signed-off-by: Subin Shekhar <subinpc@gmail.com>
+
 # [1.1.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v1.0.0...v1.1.0) (2022-11-24)
 
 
