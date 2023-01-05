@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1280,6 +1280,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLogForwardingConfigWith
 
 // ConfigurePlatformLogging : Enable or disable log forwarding
 // Enable or disable log forwarding from IBM Analytics Engine to IBM Log Analysis server.
+// *Note:* Deprecated. Use the log forwarding config api instead.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ConfigurePlatformLoggingWithContext(context.Background(), configurePlatformLoggingOptions)
 }
@@ -1350,6 +1351,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLoggingWi
 
 // GetLoggingConfiguration : Retrieve the logging configuration for a given instance id
 // Retrieve the logging configuration of a given Analytics Engine instance.
+// *Note:* Deprecated. Use the log forwarding config api instead.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfiguration(getLoggingConfigurationOptions *GetLoggingConfigurationOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetLoggingConfigurationWithContext(context.Background(), getLoggingConfigurationOptions)
 }
@@ -1408,6 +1410,174 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfigurationWit
 	return
 }
 
+// StartSparkHistoryServer : Start Spark history server
+// Start the Spark history server for the given Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServer(startSparkHistoryServerOptions *StartSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.StartSparkHistoryServerWithContext(context.Background(), startSparkHistoryServerOptions)
+}
+
+// StartSparkHistoryServerWithContext is an alternate form of the StartSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StartSparkHistoryServerWithContext(ctx context.Context, startSparkHistoryServerOptions *StartSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(startSparkHistoryServerOptions, "startSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(startSparkHistoryServerOptions, "startSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *startSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range startSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "StartSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSparkHistoryServerResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetSparkHistoryServer : Get Spark history server details
+// Get the details of the Spark history server of the given Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServer(getSparkHistoryServerOptions *GetSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.GetSparkHistoryServerWithContext(context.Background(), getSparkHistoryServerOptions)
+}
+
+// GetSparkHistoryServerWithContext is an alternate form of the GetSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetSparkHistoryServerWithContext(ctx context.Context, getSparkHistoryServerOptions *GetSparkHistoryServerOptions) (result *SparkHistoryServerResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getSparkHistoryServerOptions, "getSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getSparkHistoryServerOptions, "getSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *getSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "GetSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSparkHistoryServerResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// StopSparkHistoryServer : Stop Spark history server
+// Stop the Spark history server of the given Analytics Engine instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions) (response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.StopSparkHistoryServerWithContext(context.Background(), stopSparkHistoryServerOptions)
+}
+
+// StopSparkHistoryServerWithContext is an alternate form of the StopSparkHistoryServer method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) StopSparkHistoryServerWithContext(ctx context.Context, stopSparkHistoryServerOptions *StopSparkHistoryServerOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(stopSparkHistoryServerOptions, "stopSparkHistoryServerOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(stopSparkHistoryServerOptions, "stopSparkHistoryServerOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *stopSparkHistoryServerOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/spark_history_server`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range stopSparkHistoryServerOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "StopSparkHistoryServer")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, nil)
+
+	return
+}
+
 // Application : Details of a Spark application.
 type Application struct {
 	// Identifier provided by Analytics Engine service for the Spark application.
@@ -1428,14 +1598,23 @@ type Application struct {
 	// State of the Spark application.
 	State *string `json:"state,omitempty"`
 
+	// URL of the Apache Spark web UI that is available when the application is running.
+	SparkUi *string `json:"spark_ui,omitempty"`
+
+	// Time when the application was submitted.
+	SubmissionTime *strfmt.DateTime `json:"submission_time,omitempty"`
+
 	// Time when the application was started.
-	StartTime *string `json:"start_time,omitempty"`
+	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
 	// Time when the application run ended in success, failure or was stopped.
-	EndTime *string `json:"end_time,omitempty"`
+	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
-	// Time when the application was completed.
-	FinishTime *string `json:"finish_time,omitempty"`
+	// (deprecated) Time when the application was completed.
+	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
+
+	// Time when the application will be automatically stopped by the service.
+	AutoTerminationTime *strfmt.DateTime `json:"auto_termination_time,omitempty"`
 }
 
 // Constants associated with the Application.State property.
@@ -1443,15 +1622,11 @@ type Application struct {
 const (
 	Application_State_Accepted = "accepted"
 	Application_State_AutoTerminated = "auto_terminated"
-	Application_State_Error = "error"
 	Application_State_Failed = "failed"
 	Application_State_Finished = "finished"
 	Application_State_OpsTerminated = "ops_terminated"
 	Application_State_Running = "running"
 	Application_State_Stopped = "stopped"
-	Application_State_Submitted = "submitted"
-	Application_State_Unknown = "unknown"
-	Application_State_Waiting = "waiting"
 )
 
 // UnmarshalApplication unmarshals an instance of Application from the specified map of raw messages.
@@ -1481,6 +1656,14 @@ func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "spark_ui", &obj.SparkUi)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "submission_time", &obj.SubmissionTime)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
 	if err != nil {
 		return
@@ -1490,6 +1673,10 @@ func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "finish_time", &obj.FinishTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_termination_time", &obj.AutoTerminationTime)
 	if err != nil {
 		return
 	}
@@ -1629,17 +1816,26 @@ type ApplicationGetResponse struct {
 	// State of the Spark application.
 	State *string `json:"state,omitempty"`
 
+	// URL of the Apache Spark web UI that is available when the application is running.
+	SparkUi *string `json:"spark_ui,omitempty"`
+
 	// List of additional information messages on the current state of the application.
 	StateDetails []ApplicationGetResponseStateDetailsItem `json:"state_details,omitempty"`
 
-	// Application start time in the format YYYY-MM-DDTHH:mm:ssZ.
+	// Time when the application was submitted.
+	SubmissionTime *strfmt.DateTime `json:"submission_time,omitempty"`
+
+	// Time when the application started, in the format YYYY-MM-DDTHH:mm:ssZ.
 	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
-	// Application end time in the format YYYY-MM-DDTHH:mm:ssZ.
+	// Time when the application ended either in success or failure, in the format YYYY-MM-DDTHH:mm:ssZ.
 	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
-	// Application finish time in the format YYYY-MM-DDTHH:mm:ssZ.
+	// (deprecated) Time when the application completed successfully, in the format YYYY-MM-DDTHH:mm:ssZ.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
+
+	// Time when the application will be automatically stopped by the service.
+	AutoTerminationTime *strfmt.DateTime `json:"auto_termination_time,omitempty"`
 }
 
 // Constants associated with the ApplicationGetResponse.State property.
@@ -1647,15 +1843,11 @@ type ApplicationGetResponse struct {
 const (
 	ApplicationGetResponse_State_Accepted = "accepted"
 	ApplicationGetResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationGetResponse_State_Error = "error"
 	ApplicationGetResponse_State_Failed = "failed"
 	ApplicationGetResponse_State_Finished = "finished"
 	ApplicationGetResponse_State_OpsTerminated = "ops_terminated"
 	ApplicationGetResponse_State_Running = "running"
 	ApplicationGetResponse_State_Stopped = "stopped"
-	ApplicationGetResponse_State_Submitted = "submitted"
-	ApplicationGetResponse_State_Unknown = "unknown"
-	ApplicationGetResponse_State_Waiting = "waiting"
 )
 
 // UnmarshalApplicationGetResponse unmarshals an instance of ApplicationGetResponse from the specified map of raw messages.
@@ -1681,7 +1873,15 @@ func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "spark_ui", &obj.SparkUi)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "state_details", &obj.StateDetails, UnmarshalApplicationGetResponseStateDetailsItem)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "submission_time", &obj.SubmissionTime)
 	if err != nil {
 		return
 	}
@@ -1694,6 +1894,10 @@ func UnmarshalApplicationGetResponse(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "finish_time", &obj.FinishTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_termination_time", &obj.AutoTerminationTime)
 	if err != nil {
 		return
 	}
@@ -1749,13 +1953,16 @@ type ApplicationGetStateResponse struct {
 	State *string `json:"state,omitempty"`
 
 	// Time when the application was started.
-	StartTime *string `json:"start_time,omitempty"`
+	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
 	// Time when the application run ended in success, failure or was stopped.
-	EndTime *string `json:"end_time,omitempty"`
+	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
-	// Time when the application was completed.
-	FinishTime *string `json:"finish_time,omitempty"`
+	// (deprecated) Time when the application was completed.
+	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
+
+	// Time when the application will be automatically stopped by the service.
+	AutoTerminationTime *strfmt.DateTime `json:"auto_termination_time,omitempty"`
 }
 
 // Constants associated with the ApplicationGetStateResponse.State property.
@@ -1763,15 +1970,11 @@ type ApplicationGetStateResponse struct {
 const (
 	ApplicationGetStateResponse_State_Accepted = "accepted"
 	ApplicationGetStateResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationGetStateResponse_State_Error = "error"
 	ApplicationGetStateResponse_State_Failed = "failed"
 	ApplicationGetStateResponse_State_Finished = "finished"
 	ApplicationGetStateResponse_State_OpsTerminated = "ops_terminated"
 	ApplicationGetStateResponse_State_Running = "running"
 	ApplicationGetStateResponse_State_Stopped = "stopped"
-	ApplicationGetStateResponse_State_Submitted = "submitted"
-	ApplicationGetStateResponse_State_Unknown = "unknown"
-	ApplicationGetStateResponse_State_Waiting = "waiting"
 )
 
 // UnmarshalApplicationGetStateResponse unmarshals an instance of ApplicationGetStateResponse from the specified map of raw messages.
@@ -1797,6 +2000,10 @@ func UnmarshalApplicationGetStateResponse(m map[string]json.RawMessage, result i
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "auto_termination_time", &obj.AutoTerminationTime)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -1815,15 +2022,11 @@ type ApplicationResponse struct {
 const (
 	ApplicationResponse_State_Accepted = "accepted"
 	ApplicationResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationResponse_State_Error = "error"
 	ApplicationResponse_State_Failed = "failed"
 	ApplicationResponse_State_Finished = "finished"
 	ApplicationResponse_State_OpsTerminated = "ops_terminated"
 	ApplicationResponse_State_Running = "running"
 	ApplicationResponse_State_Stopped = "stopped"
-	ApplicationResponse_State_Submitted = "submitted"
-	ApplicationResponse_State_Unknown = "unknown"
-	ApplicationResponse_State_Waiting = "waiting"
 )
 
 // UnmarshalApplicationResponse unmarshals an instance of ApplicationResponse from the specified map of raw messages.
@@ -2380,6 +2583,34 @@ func (options *GetResourceConsumptionLimitsOptions) SetHeaders(param map[string]
 	return options
 }
 
+// GetSparkHistoryServerOptions : The GetSparkHistoryServer options.
+type GetSparkHistoryServerOptions struct {
+	// The ID of the Analytics Engine instance to which the Spark history server belongs.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetSparkHistoryServerOptions : Instantiate GetSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewGetSparkHistoryServerOptions(instanceID string) *GetSparkHistoryServerOptions {
+	return &GetSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *GetSparkHistoryServerOptions) SetInstanceID(instanceID string) *GetSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetSparkHistoryServerOptions) SetHeaders(param map[string]string) *GetSparkHistoryServerOptions {
+	options.Headers = param
+	return options
+}
+
 // Instance : Details of Analytics Engine instance.
 type Instance struct {
 	// GUID of the Analytics Engine instance.
@@ -2646,15 +2877,11 @@ type ListApplicationsOptions struct {
 const (
 	ListApplicationsOptions_State_Accepted = "accepted"
 	ListApplicationsOptions_State_AutoTerminated = "auto_terminated"
-	ListApplicationsOptions_State_Error = "error"
 	ListApplicationsOptions_State_Failed = "failed"
 	ListApplicationsOptions_State_Finished = "finished"
 	ListApplicationsOptions_State_OpsTerminated = "ops_terminated"
 	ListApplicationsOptions_State_Running = "running"
 	ListApplicationsOptions_State_Stopped = "stopped"
-	ListApplicationsOptions_State_Submitted = "submitted"
-	ListApplicationsOptions_State_Unknown = "unknown"
-	ListApplicationsOptions_State_Waiting = "waiting"
 )
 
 // NewListApplicationsOptions : Instantiate ListApplicationsOptions
@@ -2737,7 +2964,7 @@ func UnmarshalLogForwardingConfigResponseLogServer(m map[string]json.RawMessage,
 	return
 }
 
-// LoggingConfigurationResponse : Response of logging API.
+// LoggingConfigurationResponse : (deprecated) Response of logging API.
 type LoggingConfigurationResponse struct {
 	// component array.
 	Components []string `json:"components,omitempty"`
@@ -3044,6 +3271,121 @@ func (_options *SetInstanceHomeOptions) SetNewHmacSecretKey(newHmacSecretKey str
 
 // SetHeaders : Allow user to set Headers
 func (options *SetInstanceHomeOptions) SetHeaders(param map[string]string) *SetInstanceHomeOptions {
+	options.Headers = param
+	return options
+}
+
+// SparkHistoryServerResponse : Status of the Spark history server.
+type SparkHistoryServerResponse struct {
+	// State of the Spark history server.
+	State *string `json:"state,omitempty"`
+
+	// Number of cpu cores used by the Spark history server.
+	Cores *string `json:"cores,omitempty"`
+
+	// Amount of memory used by the Spark history server.
+	Memory *string `json:"memory,omitempty"`
+
+	// Time when the Spark history server was started.
+	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
+
+	// Time when the Spark history server was stopped.
+	StopTime *strfmt.DateTime `json:"stop_time,omitempty"`
+
+	// Time when the Spark history server will be stopped automatically.
+	AutoTerminationTime *strfmt.DateTime `json:"auto_termination_time,omitempty"`
+}
+
+// Constants associated with the SparkHistoryServerResponse.State property.
+// State of the Spark history server.
+const (
+	SparkHistoryServerResponse_State_Started = "started"
+	SparkHistoryServerResponse_State_Stopped = "stopped"
+)
+
+// UnmarshalSparkHistoryServerResponse unmarshals an instance of SparkHistoryServerResponse from the specified map of raw messages.
+func UnmarshalSparkHistoryServerResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SparkHistoryServerResponse)
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cores", &obj.Cores)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "memory", &obj.Memory)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "stop_time", &obj.StopTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_termination_time", &obj.AutoTerminationTime)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// StartSparkHistoryServerOptions : The StartSparkHistoryServer options.
+type StartSparkHistoryServerOptions struct {
+	// The ID of the Analytics Engine instance to which the Spark history server belongs.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewStartSparkHistoryServerOptions : Instantiate StartSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewStartSparkHistoryServerOptions(instanceID string) *StartSparkHistoryServerOptions {
+	return &StartSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *StartSparkHistoryServerOptions) SetInstanceID(instanceID string) *StartSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StartSparkHistoryServerOptions) SetHeaders(param map[string]string) *StartSparkHistoryServerOptions {
+	options.Headers = param
+	return options
+}
+
+// StopSparkHistoryServerOptions : The StopSparkHistoryServer options.
+type StopSparkHistoryServerOptions struct {
+	// The ID of the Analytics Engine instance to which the Spark history server belongs.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewStopSparkHistoryServerOptions : Instantiate StopSparkHistoryServerOptions
+func (*IbmAnalyticsEngineApiV3) NewStopSparkHistoryServerOptions(instanceID string) *StopSparkHistoryServerOptions {
+	return &StopSparkHistoryServerOptions{
+		InstanceID: core.StringPtr(instanceID),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *StopSparkHistoryServerOptions) SetInstanceID(instanceID string) *StopSparkHistoryServerOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StopSparkHistoryServerOptions) SetHeaders(param map[string]string) *StopSparkHistoryServerOptions {
 	options.Headers = param
 	return options
 }

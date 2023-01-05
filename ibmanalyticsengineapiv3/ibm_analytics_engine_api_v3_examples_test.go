@@ -150,7 +150,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 
 			setInstanceHomeOptions := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(
 				"dc0e9889-eab2-4t9e-9441-566209499546",
-			  )
+			)
 			setInstanceHomeOptions.SetNewHmacAccessKey("b9****************************4b")
 			setInstanceHomeOptions.SetNewHmacSecretKey("fa********************************************8a")
 
@@ -318,7 +318,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			listApplicationsOptions := ibmAnalyticsEngineApiService.NewListApplicationsOptions(
 				"dc0e9889-eab2-4t9e-9441-566209499546",
 			)
-			listApplicationsOptions.SetState([]string{"accepted", "submitted", "waiting", "running", "finished", "failed"})
+			listApplicationsOptions.SetState([]string{"accepted", "running", "finished", "failed"})
 
 			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
 			if err != nil {
@@ -503,6 +503,68 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(loggingConfigurationResponse).ToNot(BeNil())
+		})
+		It(`StartSparkHistoryServer request example`, func() {
+			fmt.Println("\nStartSparkHistoryServer() result:")
+			// begin-start_spark_history_server
+
+			startSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewStartSparkHistoryServerOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+
+			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(sparkHistoryServerResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-start_spark_history_server
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(sparkHistoryServerResponse).ToNot(BeNil())
+		})
+		It(`GetSparkHistoryServer request example`, func() {
+			fmt.Println("\nGetSparkHistoryServer() result:")
+			// begin-get_spark_history_server
+
+			getSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewGetSparkHistoryServerOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+
+			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(sparkHistoryServerResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_spark_history_server
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(sparkHistoryServerResponse).ToNot(BeNil())
+		})
+		It(`StopSparkHistoryServer request example`, func() {
+			// begin-stop_spark_history_server
+
+			stopSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewStopSparkHistoryServerOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+			)
+
+			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from StopSparkHistoryServer(): %d\n", response.StatusCode)
+			}
+
+			// end-stop_spark_history_server
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 		})
 		It(`DeleteApplication request example`, func() {
 			// begin-delete_application
