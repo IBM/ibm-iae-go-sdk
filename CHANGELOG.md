@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.0.0...v2.0.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* update module name for major version change ([bb81971](https://github.com/IBM/ibm-iae-go-sdk/commit/bb8197110fa0706837a70ff766ea883fec2169e8))
+
 # [2.0.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v1.1.0...v2.0.0) (2023-01-05)
 
 
