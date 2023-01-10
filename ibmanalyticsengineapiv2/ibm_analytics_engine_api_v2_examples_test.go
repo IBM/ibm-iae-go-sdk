@@ -24,7 +24,7 @@ import (
 	"os"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/ibm-iae-go-sdk/ibmanalyticsengineapiv2"
+	"github.com/IBM/ibm-iae-go-sdk/v2/ibmanalyticsengineapiv2"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

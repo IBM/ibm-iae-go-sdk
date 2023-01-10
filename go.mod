@@ -1,4 +1,4 @@
-module github.com/IBM/ibm-iae-go-sdk
+module github.com/IBM/ibm-iae-go-sdk/v2
 
 go 1.17
 
