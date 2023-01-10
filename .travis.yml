@@ -28,17 +28,13 @@ script:
 
 # To enable semantic-release, uncomment these sections.
 before_deploy:
-  - nvm install 18
-  - npm install -g npm@8.x
-  - npm install @semantic-release/changelog
-  - npm install @semantic-release/exec
-  - npm install @semantic-release/git
-  - npm install @semantic-release/github
+  - nvm install 14
+  - npm install
   - pip install --user bump2version
 
 deploy:
   - provider: script
-    script: npx semantic-release
+    script: npm run semantic-release
     skip_cleanup: true
     on:
       go: '1.17.13'
