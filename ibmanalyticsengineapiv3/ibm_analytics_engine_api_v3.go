@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.54.1-1d9808a7-20220817-143039
+ * IBM OpenAPI SDK Code Generator Version: 3.66.0-d6c2d7e0-20230215-221247
  */
 
 // Package ibmanalyticsengineapiv3 : Operations and models for the IbmAnalyticsEngineApiV3 service
@@ -353,6 +353,84 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) SetInstanceHomeWithContext
 	}
 	if setInstanceHomeOptions.NewHmacSecretKey != nil {
 		body["hmac_secret_key"] = setInstanceHomeOptions.NewHmacSecretKey
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = ibmAnalyticsEngineApi.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceHomeResponse)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateInstanceHomeCredentials : Update instance home credentials
+// Update the HMAC credentials used to access the instance home, if the instance home was set earlier. Credentials must
+// have write access to the object storage used as instance home.
+//
+// **Note**: Your running applications and the Spark history server would continue to use the old credentials after
+// updating the HMAC credentials. Before revoking the old credentials, you must either wait for them to finish running
+// or stop them.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	return ibmAnalyticsEngineApi.UpdateInstanceHomeCredentialsWithContext(context.Background(), updateInstanceHomeCredentialsOptions)
+}
+
+// UpdateInstanceHomeCredentialsWithContext is an alternate form of the UpdateInstanceHomeCredentials method which supports a Context parameter
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) UpdateInstanceHomeCredentialsWithContext(ctx context.Context, updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions) (result *InstanceHomeResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateInstanceHomeCredentialsOptions, "updateInstanceHomeCredentialsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateInstanceHomeCredentialsOptions, "updateInstanceHomeCredentialsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"instance_id": *updateInstanceHomeCredentialsOptions.InstanceID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = ibmAnalyticsEngineApi.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(ibmAnalyticsEngineApi.Service.Options.URL, `/v3/analytics_engines/{instance_id}/instance_home`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateInstanceHomeCredentialsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("ibm_analytics_engine_api", "V3", "UpdateInstanceHomeCredentials")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateInstanceHomeCredentialsOptions.HmacAccessKey != nil {
+		body["hmac_access_key"] = updateInstanceHomeCredentialsOptions.HmacAccessKey
+	}
+	if updateInstanceHomeCredentialsOptions.HmacSecretKey != nil {
+		body["hmac_secret_key"] = updateInstanceHomeCredentialsOptions.HmacSecretKey
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -1281,12 +1359,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLogForwardingConfigWith
 // ConfigurePlatformLogging : Enable or disable log forwarding
 // Enable or disable log forwarding from IBM Analytics Engine to IBM Log Analysis server.
 // *Note:* Deprecated. Use the log forwarding config api instead.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.ConfigurePlatformLoggingWithContext(context.Background(), configurePlatformLoggingOptions)
 }
 
 // ConfigurePlatformLoggingWithContext is an alternate form of the ConfigurePlatformLogging method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLoggingWithContext(ctx context.Context, configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: ConfigurePlatformLogging")
 	err = core.ValidateNotNil(configurePlatformLoggingOptions, "configurePlatformLoggingOptions cannot be nil")
 	if err != nil {
 		return
@@ -1352,12 +1433,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ConfigurePlatformLoggingWi
 // GetLoggingConfiguration : Retrieve the logging configuration for a given instance id
 // Retrieve the logging configuration of a given Analytics Engine instance.
 // *Note:* Deprecated. Use the log forwarding config api instead.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfiguration(getLoggingConfigurationOptions *GetLoggingConfigurationOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetLoggingConfigurationWithContext(context.Background(), getLoggingConfigurationOptions)
 }
 
 // GetLoggingConfigurationWithContext is an alternate form of the GetLoggingConfiguration method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetLoggingConfigurationWithContext(ctx context.Context, getLoggingConfigurationOptions *GetLoggingConfigurationOptions) (result *LoggingConfigurationResponse, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: GetLoggingConfiguration")
 	err = core.ValidateNotNil(getLoggingConfigurationOptions, "getLoggingConfigurationOptions cannot be nil")
 	if err != nil {
 		return
@@ -1611,6 +1695,7 @@ type Application struct {
 	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
 	// (deprecated) Time when the application was completed.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
 
 	// Time when the application will be automatically stopped by the service.
@@ -1832,6 +1917,7 @@ type ApplicationGetResponse struct {
 	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
 	// (deprecated) Time when the application completed successfully, in the format YYYY-MM-DDTHH:mm:ssZ.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
 
 	// Time when the application will be automatically stopped by the service.
@@ -1959,6 +2045,7 @@ type ApplicationGetStateResponse struct {
 	EndTime *strfmt.DateTime `json:"end_time,omitempty"`
 
 	// (deprecated) Time when the application was completed.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	FinishTime *strfmt.DateTime `json:"finish_time,omitempty"`
 
 	// Time when the application will be automatically stopped by the service.
@@ -3186,7 +3273,7 @@ func UnmarshalRuntime(m map[string]json.RawMessage, result interface{}) (err err
 
 // SetInstanceHomeOptions : The SetInstanceHome options.
 type SetInstanceHomeOptions struct {
-	// The ID of the Analytics Engine instance for which 'instance home' is to be set.
+	// The ID of the Analytics Engine instance.
 	InstanceID *string `json:"-" validate:"required,ne="`
 
 	// UUID of the instance home storage instance.
@@ -3425,6 +3512,54 @@ func (_options *UpdateInstanceDefaultConfigsOptions) SetBody(body map[string]int
 
 // SetHeaders : Allow user to set Headers
 func (options *UpdateInstanceDefaultConfigsOptions) SetHeaders(param map[string]string) *UpdateInstanceDefaultConfigsOptions {
+	options.Headers = param
+	return options
+}
+
+// UpdateInstanceHomeCredentialsOptions : The UpdateInstanceHomeCredentials options.
+type UpdateInstanceHomeCredentialsOptions struct {
+	// The ID of the Analytics Engine instance.
+	InstanceID *string `json:"instance_id" validate:"required,ne="`
+
+	// Cloud Object Storage access key.
+	HmacAccessKey *string `json:"hmac_access_key" validate:"required"`
+
+	// Cloud Object Storage secret key.
+	HmacSecretKey *string `json:"hmac_secret_key" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateInstanceHomeCredentialsOptions : Instantiate UpdateInstanceHomeCredentialsOptions
+func (*IbmAnalyticsEngineApiV3) NewUpdateInstanceHomeCredentialsOptions(instanceID string, hmacAccessKey string, hmacSecretKey string) *UpdateInstanceHomeCredentialsOptions {
+	return &UpdateInstanceHomeCredentialsOptions{
+		InstanceID: core.StringPtr(instanceID),
+		HmacAccessKey: core.StringPtr(hmacAccessKey),
+		HmacSecretKey: core.StringPtr(hmacSecretKey),
+	}
+}
+
+// SetInstanceID : Allow user to set InstanceID
+func (_options *UpdateInstanceHomeCredentialsOptions) SetInstanceID(instanceID string) *UpdateInstanceHomeCredentialsOptions {
+	_options.InstanceID = core.StringPtr(instanceID)
+	return _options
+}
+
+// SetHmacAccessKey : Allow user to set HmacAccessKey
+func (_options *UpdateInstanceHomeCredentialsOptions) SetHmacAccessKey(hmacAccessKey string) *UpdateInstanceHomeCredentialsOptions {
+	_options.HmacAccessKey = core.StringPtr(hmacAccessKey)
+	return _options
+}
+
+// SetHmacSecretKey : Allow user to set HmacSecretKey
+func (_options *UpdateInstanceHomeCredentialsOptions) SetHmacSecretKey(hmacSecretKey string) *UpdateInstanceHomeCredentialsOptions {
+	_options.HmacSecretKey = core.StringPtr(hmacSecretKey)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateInstanceHomeCredentialsOptions) SetHeaders(param map[string]string) *UpdateInstanceHomeCredentialsOptions {
 	options.Headers = param
 	return options
 }

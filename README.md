@@ -54,7 +54,7 @@ IBM Analytics Engine v3 is for the Standard Serverless for Apache Spark plan
 
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.17 or above.
+* Go version 1.18 or above.
 
 ## Installation
 The current version of this SDK: 2.0.1

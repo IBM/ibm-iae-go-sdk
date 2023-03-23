@@ -1,7 +1,7 @@
 // +build examples
 
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,7 +107,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance
 
 			getInstanceOptions := ibmAnalyticsEngineApiService.NewGetInstanceOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			instance, response, err := ibmAnalyticsEngineApiService.GetInstance(getInstanceOptions)
@@ -128,7 +128,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance_state
 
 			getInstanceStateOptions := ibmAnalyticsEngineApiService.NewGetInstanceStateOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			instanceGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetInstanceState(getInstanceStateOptions)
@@ -149,7 +149,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-set_instance_home
 
 			setInstanceHomeOptions := ibmAnalyticsEngineApiService.NewSetInstanceHomeOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 			setInstanceHomeOptions.SetNewHmacAccessKey("b9****************************4b")
 			setInstanceHomeOptions.SetNewHmacSecretKey("fa********************************************8a")
@@ -167,12 +167,35 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceHomeResponse).ToNot(BeNil())
 		})
+		It(`UpdateInstanceHomeCredentials request example`, func() {
+			fmt.Println("\nUpdateInstanceHomeCredentials() result:")
+			// begin-update_instance_home_credentials
+
+			updateInstanceHomeCredentialsOptions := ibmAnalyticsEngineApiService.NewUpdateInstanceHomeCredentialsOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"b9****************************4b",
+				"fa********************************************8a",
+			)
+
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceHomeResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_instance_home_credentials
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceHomeResponse).ToNot(BeNil())
+		})
 		It(`GetInstanceDefaultConfigs request example`, func() {
 			fmt.Println("\nGetInstanceDefaultConfigs() result:")
 			// begin-get_instance_default_configs
 
 			getInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewGetInstanceDefaultConfigsOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			instanceDefaultConfigs, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions)
@@ -198,7 +221,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 			
 			replaceInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultConfigsOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 				defaultConfigs,
 			)
 
@@ -225,7 +248,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 
 			updateInstanceDefaultConfigsOptions := ibmAnalyticsEngineApiService.NewUpdateInstanceDefaultConfigsOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 				defaultConfigs,
 			)
 
@@ -247,7 +270,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_instance_default_runtime
 
 			getInstanceDefaultRuntimeOptions := ibmAnalyticsEngineApiService.NewGetInstanceDefaultRuntimeOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			runtime, response, err := ibmAnalyticsEngineApiService.GetInstanceDefaultRuntime(getInstanceDefaultRuntimeOptions)
@@ -268,7 +291,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-replace_instance_default_runtime
 
 			replaceInstanceDefaultRuntimeOptions := ibmAnalyticsEngineApiService.NewReplaceInstanceDefaultRuntimeOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 			replaceInstanceDefaultRuntimeOptions.SetSparkVersion("3.3")
 
@@ -290,8 +313,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-create_application
 
 			createApplicationOptions := ibmAnalyticsEngineApiService.NewCreateApplicationOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
+
 			createApplicationOptions.SetApplication("/opt/ibm/spark/examples/src/main/python/wordcount.py")
 			createApplicationOptions.SetArguments([]string{"/opt/ibm/spark/examples/src/main/resources/people.txt"})
 			createApplicationOptions.SetRuntime(&ibmanalyticsengineapiv3.Runtime{
@@ -316,7 +340,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-list_applications
 
 			listApplicationsOptions := ibmAnalyticsEngineApiService.NewListApplicationsOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 			listApplicationsOptions.SetState([]string{"accepted", "running", "finished", "failed"})
 
@@ -338,8 +362,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_application
 
 			getApplicationOptions := ibmAnalyticsEngineApiService.NewGetApplicationOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
-				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
 			applicationGetResponse, response, err := ibmAnalyticsEngineApiService.GetApplication(getApplicationOptions)
@@ -360,8 +384,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_application_state
 
 			getApplicationStateOptions := ibmAnalyticsEngineApiService.NewGetApplicationStateOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
-				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
 			applicationGetStateResponse, response, err := ibmAnalyticsEngineApiService.GetApplicationState(getApplicationStateOptions)
@@ -382,7 +406,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_current_resource_consumption
 
 			getCurrentResourceConsumptionOptions := ibmAnalyticsEngineApiService.NewGetCurrentResourceConsumptionOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			currentResourceConsumptionResponse, response, err := ibmAnalyticsEngineApiService.GetCurrentResourceConsumption(getCurrentResourceConsumptionOptions)
@@ -403,7 +427,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_resource_consumption_limits
 
 			getResourceConsumptionLimitsOptions := ibmAnalyticsEngineApiService.NewGetResourceConsumptionLimitsOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			resourceConsumptionLimitsResponse, response, err := ibmAnalyticsEngineApiService.GetResourceConsumptionLimits(getResourceConsumptionLimitsOptions)
@@ -424,7 +448,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-replace_log_forwarding_config
 
 			replaceLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewReplaceLogForwardingConfigOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 			replaceLogForwardingConfigOptions.SetEnabled(true)
 
@@ -446,7 +470,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_log_forwarding_config
 
 			getLogForwardingConfigOptions := ibmAnalyticsEngineApiService.NewGetLogForwardingConfigOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.GetLogForwardingConfig(getLogForwardingConfigOptions)
@@ -467,7 +491,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-configure_platform_logging
 
 			configurePlatformLoggingOptions := ibmAnalyticsEngineApiService.NewConfigurePlatformLoggingOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
@@ -488,7 +512,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_logging_configuration
 
 			getLoggingConfigurationOptions := ibmAnalyticsEngineApiService.NewGetLoggingConfigurationOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.GetLoggingConfiguration(getLoggingConfigurationOptions)
@@ -509,7 +533,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-start_spark_history_server
 
 			startSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewStartSparkHistoryServerOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.StartSparkHistoryServer(startSparkHistoryServerOptions)
@@ -530,7 +554,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// begin-get_spark_history_server
 
 			getSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewGetSparkHistoryServerOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
 			)
 
 			sparkHistoryServerResponse, response, err := ibmAnalyticsEngineApiService.GetSparkHistoryServer(getSparkHistoryServerOptions)
@@ -546,32 +570,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(sparkHistoryServerResponse).ToNot(BeNil())
 		})
-		It(`StopSparkHistoryServer request example`, func() {
-			// begin-stop_spark_history_server
-
-			stopSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewStopSparkHistoryServerOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
-			)
-
-			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
-			if err != nil {
-				panic(err)
-			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from StopSparkHistoryServer(): %d\n", response.StatusCode)
-			}
-
-			// end-stop_spark_history_server
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
 		It(`DeleteApplication request example`, func() {
 			// begin-delete_application
 
 			deleteApplicationOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationOptions(
-				"dc0e9889-eab2-4t9e-9441-566209499546",
-				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+				"ff48cc19-0e7e-4627-aac6-0b4ad080397b",
 			)
 
 			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
@@ -583,6 +587,26 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 
 			// end-delete_application
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`StopSparkHistoryServer request example`, func() {
+			// begin-stop_spark_history_server
+
+			stopSparkHistoryServerOptions := ibmAnalyticsEngineApiService.NewStopSparkHistoryServerOptions(
+				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
+			)
+
+			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from StopSparkHistoryServer(): %d\n", response.StatusCode)
+			}
+
+			// end-stop_spark_history_server
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

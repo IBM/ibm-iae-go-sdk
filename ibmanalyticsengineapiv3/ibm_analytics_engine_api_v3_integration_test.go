@@ -1,7 +1,7 @@
 // +build integration
 
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
         applicationId string
 		hmacAccessKey string
 		hmacSecretKey string
+		alternateHmacAccessKey string
+		alternateHmacSecretKey string
 	)
 
 	var shouldSkipTest = func() {
@@ -77,6 +79,10 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			instanceGuidWithoutInstanceHome = config["INSTANCE_GUID_WO_INSTANCE_HOME"]
 			hmacAccessKey = config["HMAC_ACCESS_KEY"]
 			hmacSecretKey = config["HMAC_SECRET_KEY"]
+			alternateHmacAccessKey = config["ALTERNATE_HMAC_ACCESS_KEY"]
+			alternateHmacSecretKey = config["ALTERNATE_HMAC_SECRET_KEY"]
+
+
 			fmt.Fprintf(GinkgoWriter, "Service URL: %v\n", serviceURL)
 			shouldSkipTest = func() {}
 		})
@@ -148,6 +154,24 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.SetInstanceHome(setInstanceHomeOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceHomeResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateInstanceHomeCredentials - Update instance home credentials`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions)`, func() {
+			updateInstanceHomeCredentialsOptions := &ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+				HmacAccessKey: core.StringPtr(alternateHmacAccessKey),
+				HmacSecretKey: core.StringPtr(alternateHmacSecretKey),
+			}
+
+			instanceHomeResponse, response, err := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceHomeResponse).ToNot(BeNil())
@@ -450,21 +474,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`StopSparkHistoryServer - Stop Spark history server`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
-			stopSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StopSparkHistoryServerOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-			}
-
-			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
-	})
-
 	Describe(`DeleteApplication - Stop application`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -476,6 +485,21 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 
 			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`StopSparkHistoryServer - Stop Spark history server`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StopSparkHistoryServer(stopSparkHistoryServerOptions *StopSparkHistoryServerOptions)`, func() {
+			stopSparkHistoryServerOptions := &ibmanalyticsengineapiv3.StopSparkHistoryServerOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+			}
+
+			response, err := ibmAnalyticsEngineApiService.StopSparkHistoryServer(stopSparkHistoryServerOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})

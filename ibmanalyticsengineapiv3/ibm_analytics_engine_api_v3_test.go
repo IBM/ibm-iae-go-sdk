@@ -874,6 +874,260 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 		})
 	})
+	Describe(`UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions) - Operation response error`, func() {
+		updateInstanceHomeCredentialsPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateInstanceHomeCredentialsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateInstanceHomeCredentials with error: Operation response processing error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				updateInstanceHomeCredentialsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				updateInstanceHomeCredentialsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.HmacAccessKey = core.StringPtr("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.HmacSecretKey = core.StringPtr("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+				result, response, operationErr = ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions)`, func() {
+		updateInstanceHomeCredentialsPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/instance_home"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateInstanceHomeCredentialsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"instance_id": "InstanceID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}`)
+				}))
+			})
+			It(`Invoke UpdateInstanceHomeCredentials successfully with retries`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+				ibmAnalyticsEngineApiService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				updateInstanceHomeCredentialsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				updateInstanceHomeCredentialsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.HmacAccessKey = core.StringPtr("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.HmacSecretKey = core.StringPtr("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentialsWithContext(ctx, updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				ibmAnalyticsEngineApiService.DisableRetries()
+				result, response, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentialsWithContext(ctx, updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateInstanceHomeCredentialsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"instance_id": "InstanceID", "provider": "Provider", "type": "Type", "region": "Region", "endpoint": "Endpoint", "hmac_access_key": "HmacAccessKey", "hmac_secret_key": "HmacSecretKey"}`)
+				}))
+			})
+			It(`Invoke UpdateInstanceHomeCredentials successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				updateInstanceHomeCredentialsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				updateInstanceHomeCredentialsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.HmacAccessKey = core.StringPtr("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.HmacSecretKey = core.StringPtr("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateInstanceHomeCredentials with error: Operation validation and request error`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				updateInstanceHomeCredentialsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				updateInstanceHomeCredentialsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.HmacAccessKey = core.StringPtr("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.HmacSecretKey = core.StringPtr("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := ibmAnalyticsEngineApiService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateInstanceHomeCredentialsOptions model with no property values
+				updateInstanceHomeCredentialsOptionsModelNew := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateInstanceHomeCredentials successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				updateInstanceHomeCredentialsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions)
+				updateInstanceHomeCredentialsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.HmacAccessKey = core.StringPtr("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.HmacSecretKey = core.StringPtr("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := ibmAnalyticsEngineApiService.UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetInstanceDefaultConfigs(getInstanceDefaultConfigsOptions *GetInstanceDefaultConfigsOptions)`, func() {
 		getInstanceDefaultConfigsPath := "/v3/analytics_engines/e64c907a-e82f-46fd-addc-ccfafbd28b09/default_configs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5097,6 +5351,22 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(updateInstanceDefaultConfigsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(updateInstanceDefaultConfigsOptionsModel.Body).To(Equal(make(map[string]interface{})))
 				Expect(updateInstanceDefaultConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateInstanceHomeCredentialsOptions successfully`, func() {
+				// Construct an instance of the UpdateInstanceHomeCredentialsOptions model
+				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
+				updateInstanceHomeCredentialsOptionsHmacAccessKey := "b9****************************4b"
+				updateInstanceHomeCredentialsOptionsHmacSecretKey := "fa********************************************8a"
+				updateInstanceHomeCredentialsOptionsModel := ibmAnalyticsEngineApiService.NewUpdateInstanceHomeCredentialsOptions(instanceID, updateInstanceHomeCredentialsOptionsHmacAccessKey, updateInstanceHomeCredentialsOptionsHmacSecretKey)
+				updateInstanceHomeCredentialsOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
+				updateInstanceHomeCredentialsOptionsModel.SetHmacAccessKey("b9****************************4b")
+				updateInstanceHomeCredentialsOptionsModel.SetHmacSecretKey("fa********************************************8a")
+				updateInstanceHomeCredentialsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateInstanceHomeCredentialsOptionsModel).ToNot(BeNil())
+				Expect(updateInstanceHomeCredentialsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
+				Expect(updateInstanceHomeCredentialsOptionsModel.HmacAccessKey).To(Equal(core.StringPtr("b9****************************4b")))
+				Expect(updateInstanceHomeCredentialsOptionsModel.HmacSecretKey).To(Equal(core.StringPtr("fa********************************************8a")))
+				Expect(updateInstanceHomeCredentialsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 		})
 	})
