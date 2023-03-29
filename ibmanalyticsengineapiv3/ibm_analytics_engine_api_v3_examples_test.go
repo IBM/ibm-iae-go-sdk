@@ -338,24 +338,28 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 		It(`ListApplications request example`, func() {
 			fmt.Println("\nListApplications() result:")
 			// begin-list_applications
+			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
+				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+				State: []string{"accepted", "running", "finished", "failed"},
+				Limit: core.Int64Ptr(int64(10)),
+			}
 
-			listApplicationsOptions := ibmAnalyticsEngineApiService.NewListApplicationsOptions(
-				"e64c907a-e82f-46fd-addc-ccfafbd28b09",
-			)
-			listApplicationsOptions.SetState([]string{"accepted", "running", "finished", "failed"})
-
-			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
+			pager, err := ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(applicationCollection, "", "  ")
+
+			var allResults []ibmanalyticsengineapiv3.Application
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
 			fmt.Println(string(b))
-
 			// end-list_applications
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(applicationCollection).ToNot(BeNil())
 		})
 		It(`GetApplication request example`, func() {
 			fmt.Println("\nGetApplication() result:")
@@ -546,7 +550,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			// end-start_spark_history_server
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
+			Expect(response.StatusCode).To(Equal(202))
 			Expect(sparkHistoryServerResponse).ToNot(BeNil())
 		})
 		It(`GetSparkHistoryServer request example`, func() {
@@ -607,6 +611,27 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			}
 
 			// end-stop_spark_history_server
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteApplication request example`, func() {
+			// begin-delete_application
+
+			deleteApplicationOptions := ibmAnalyticsEngineApiService.NewDeleteApplicationOptions(
+				"dc0e9889-eab2-4t9e-9441-566209499546",
+				"db933645-0b68-4dcb-80d8-7b71a6c8e542",
+			)
+
+			response, err := ibmAnalyticsEngineApiService.DeleteApplication(deleteApplicationOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteApplication(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_application
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
