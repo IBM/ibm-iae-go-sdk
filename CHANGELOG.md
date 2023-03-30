@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.0.1...v2.1.0) (2023-03-30)
+
+
+### Features
+
+* add new sdk method to update instance home credentials ([#31](https://github.com/IBM/ibm-iae-go-sdk/issues/31)) ([391309f](https://github.com/IBM/ibm-iae-go-sdk/commit/391309f1eb4ecab9c4bf6bd38ade57c35fb98783))
+
 ## [2.0.1](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.0.0...v2.0.1) (2023-01-10)
 
 
