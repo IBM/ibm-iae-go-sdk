@@ -327,7 +327,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
 				State: []string{"accepted","running","finished","stopped","failed"},
-				Limit: core.Int64Ptr(int64(10)),
+				Limit: core.Int64Ptr(int64(25)),
 			}
 
 			// Test GetNext().

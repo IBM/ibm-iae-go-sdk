@@ -341,7 +341,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Examples Tests`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
 				State: []string{"accepted", "running", "finished", "failed"},
-				Limit: core.Int64Ptr(int64(10)),
+				Limit: core.Int64Ptr(int64(25)),
 			}
 
 			pager, err := ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptions)
