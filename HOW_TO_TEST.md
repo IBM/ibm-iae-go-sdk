@@ -1,6 +1,7 @@
 # How to run tests
 
 ## Pre-requisites
+1. Install `go` 1.20, `make`.
 1. You must create 2 instances of Analytics Engine service - Serverless plan.
 1. Provide instance home details in the 1st instance.
 1. Don't provide instance home details in the 2nd instance.
@@ -19,6 +20,7 @@
     1. `IBM_ANALYTICS_ENGINE_API_ALTERNATE_HMAC_SECRET_KEY`=`<HMAC secret key of the cos instance to be used as instance home>`
 4. In root directory `ibm-iae-go-sdk/`. Run the following:
     ```
+    make all
     go test ./ibmanalyticsengineapiv3 -tags=integration -v
     ```
 
