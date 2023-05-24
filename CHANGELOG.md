@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.1.0...v2.2.0) (2023-05-24)
+
+
+### Features
+
+* support pagination in application list method ([b19261a](https://github.com/IBM/ibm-iae-go-sdk/commit/b19261a20488d0dbdbedbd97bf6908609d5c58ac))
+
 # [2.1.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.0.1...v2.1.0) (2023-03-30)
 
 
