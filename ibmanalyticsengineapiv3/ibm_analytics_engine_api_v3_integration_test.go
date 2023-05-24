@@ -295,16 +295,65 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions)`, func() {
+		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) with pagination`, func(){
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				State: []string{"accepted","running","finished","failed"},
+				State: []string{"accepted","running","finished","stopped","failed"},
+				Limit: core.Int64Ptr(int64(10)),
+				Start: core.StringPtr("testString"),
 			}
 
-			applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
+			listApplicationsOptions.Start = nil
+			listApplicationsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []ibmanalyticsengineapiv3.Application
+			for {
+				applicationCollection, response, err := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(applicationCollection).ToNot(BeNil())
+				allResults = append(allResults, applicationCollection.Applications...)
+
+				listApplicationsOptions.Start, err = applicationCollection.GetNextStart()
+				Expect(err).To(BeNil())
+
+				if listApplicationsOptions.Start == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) using ApplicationsPager`, func(){
+			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
+				InstanceID: core.StringPtr(instanceGuid),
+				State: []string{"accepted","running","finished","stopped","failed"},
+				Limit: core.Int64Ptr(int64(25)),
+			}
+
+			// Test GetNext().
+			pager, err := ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(applicationCollection).ToNot(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []ibmanalyticsengineapiv3.Application
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				Expect(err).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListApplications() returned a total of %d item(s) using ApplicationsPager.\n", len(allResults))
 		})
 	})
 

@@ -1546,7 +1546,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
 				updateInstanceDefaultConfigsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions)
 				updateInstanceDefaultConfigsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				updateInstanceDefaultConfigsOptionsModel.Body = make(map[string]interface{})
+				updateInstanceDefaultConfigsOptionsModel.Body = map[string]interface{}{"anyKey": "anyValue"}
 				updateInstanceDefaultConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1622,7 +1622,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
 				updateInstanceDefaultConfigsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions)
 				updateInstanceDefaultConfigsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				updateInstanceDefaultConfigsOptionsModel.Body = make(map[string]interface{})
+				updateInstanceDefaultConfigsOptionsModel.Body = map[string]interface{}{"anyKey": "anyValue"}
 				updateInstanceDefaultConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1643,7 +1643,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
 				updateInstanceDefaultConfigsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions)
 				updateInstanceDefaultConfigsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				updateInstanceDefaultConfigsOptionsModel.Body = make(map[string]interface{})
+				updateInstanceDefaultConfigsOptionsModel.Body = map[string]interface{}{"anyKey": "anyValue"}
 				updateInstanceDefaultConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -1685,7 +1685,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
 				updateInstanceDefaultConfigsOptionsModel := new(ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions)
 				updateInstanceDefaultConfigsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				updateInstanceDefaultConfigsOptionsModel.Body = make(map[string]interface{})
+				updateInstanceDefaultConfigsOptionsModel.Body = map[string]interface{}{"anyKey": "anyValue"}
 				updateInstanceDefaultConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2202,8 +2202,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.Name = core.StringPtr("testString")
 				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
-				createApplicationOptionsModel.Conf = make(map[string]interface{})
-				createApplicationOptionsModel.Env = make(map[string]interface{})
+				createApplicationOptionsModel.Conf = map[string]interface{}{"anyKey": "anyValue"}
+				createApplicationOptionsModel.Env = map[string]interface{}{"anyKey": "anyValue"}
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptionsModel)
@@ -2285,8 +2285,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.Name = core.StringPtr("testString")
 				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
-				createApplicationOptionsModel.Conf = make(map[string]interface{})
-				createApplicationOptionsModel.Env = make(map[string]interface{})
+				createApplicationOptionsModel.Conf = map[string]interface{}{"anyKey": "anyValue"}
+				createApplicationOptionsModel.Env = map[string]interface{}{"anyKey": "anyValue"}
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2376,8 +2376,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.Name = core.StringPtr("testString")
 				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
-				createApplicationOptionsModel.Conf = make(map[string]interface{})
-				createApplicationOptionsModel.Env = make(map[string]interface{})
+				createApplicationOptionsModel.Conf = map[string]interface{}{"anyKey": "anyValue"}
+				createApplicationOptionsModel.Env = map[string]interface{}{"anyKey": "anyValue"}
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2412,8 +2412,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.Name = core.StringPtr("testString")
 				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
-				createApplicationOptionsModel.Conf = make(map[string]interface{})
-				createApplicationOptionsModel.Env = make(map[string]interface{})
+				createApplicationOptionsModel.Conf = map[string]interface{}{"anyKey": "anyValue"}
+				createApplicationOptionsModel.Env = map[string]interface{}{"anyKey": "anyValue"}
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -2469,8 +2469,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.Name = core.StringPtr("testString")
 				createApplicationOptionsModel.Class = core.StringPtr("testString")
 				createApplicationOptionsModel.Arguments = []string{"[arg1, arg2, arg3]"}
-				createApplicationOptionsModel.Conf = make(map[string]interface{})
-				createApplicationOptionsModel.Env = make(map[string]interface{})
+				createApplicationOptionsModel.Conf = map[string]interface{}{"anyKey": "anyValue"}
+				createApplicationOptionsModel.Env = map[string]interface{}{"anyKey": "anyValue"}
 				createApplicationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2496,6 +2496,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listApplicationsPath))
 					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["start"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -2513,6 +2515,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.State = []string{"finished"}
+				listApplicationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listApplicationsOptionsModel.Start = core.StringPtr("testString")
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmAnalyticsEngineApiService.ListApplications(listApplicationsOptionsModel)
@@ -2543,13 +2547,15 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listApplicationsPath))
 					Expect(req.Method).To(Equal("GET"))
 
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["start"]).To(Equal([]string{"testString"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}], "first": {"href": "Href", "start": "Start"}, "next": {"href": "Href", "start": "Start"}, "previous": {"href": "Href", "start": "Start"}, "limit": 1}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully with retries`, func() {
@@ -2565,6 +2571,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.State = []string{"finished"}
+				listApplicationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listApplicationsOptionsModel.Start = core.StringPtr("testString")
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2601,10 +2609,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listApplicationsPath))
 					Expect(req.Method).To(Equal("GET"))
 
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["start"]).To(Equal([]string{"testString"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"applications": [{"id": "ID", "href": "Href", "runtime": {"spark_version": "3.1"}, "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}], "first": {"href": "Href", "start": "Start"}, "next": {"href": "Href", "start": "Start"}, "previous": {"href": "Href", "start": "Start"}, "limit": 1}`)
 				}))
 			})
 			It(`Invoke ListApplications successfully`, func() {
@@ -2625,6 +2635,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.State = []string{"finished"}
+				listApplicationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listApplicationsOptionsModel.Start = core.StringPtr("testString")
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2646,6 +2658,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.State = []string{"finished"}
+				listApplicationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listApplicationsOptionsModel.Start = core.StringPtr("testString")
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmAnalyticsEngineApiService.SetServiceURL("")
@@ -2688,6 +2702,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := new(ibmanalyticsengineapiv3.ListApplicationsOptions)
 				listApplicationsOptionsModel.InstanceID = core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.State = []string{"finished"}
+				listApplicationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listApplicationsOptionsModel.Start = core.StringPtr("testString")
 				listApplicationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2700,6 +2716,99 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			})
 			AfterEach(func() {
 				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextStart successfully`, func() {
+				responseObject := new(ibmanalyticsengineapiv3.ApplicationCollection)
+				nextObject := new(ibmanalyticsengineapiv3.PageLink)
+				nextObject.Start = core.StringPtr("abc-123")
+				responseObject.Next = nextObject
+	
+				value, err := responseObject.GetNextStart()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.StringPtr("abc-123")))
+			})
+			It(`Invoke GetNextStart without a "Next" property in the response`, func() {
+				responseObject := new(ibmanalyticsengineapiv3.ApplicationCollection)
+	
+				value, err := responseObject.GetNextStart()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listApplicationsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"start":"1"},"total_count":2,"limit":1,"applications":[{"id":"ID","href":"Href","runtime":{"spark_version":"3.1"},"spark_application_id":"SparkApplicationID","spark_application_name":"SparkApplicationName","state":"finished","spark_ui":"SparkUi","submission_time":"2021-01-30T08:30:00.000Z","start_time":"2021-01-30T08:30:00.000Z","end_time":"2021-01-30T08:30:00.000Z","finish_time":"2021-01-30T08:30:00.000Z","auto_termination_time":"2021-01-30T08:30:00.000Z"}]}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"applications":[{"id":"ID","href":"Href","runtime":{"spark_version":"3.1"},"spark_application_id":"SparkApplicationID","spark_application_name":"SparkApplicationName","state":"finished","spark_ui":"SparkUi","submission_time":"2021-01-30T08:30:00.000Z","start_time":"2021-01-30T08:30:00.000Z","end_time":"2021-01-30T08:30:00.000Z","finish_time":"2021-01-30T08:30:00.000Z","auto_termination_time":"2021-01-30T08:30:00.000Z"}]}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use ApplicationsPager.GetNext successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				listApplicationsOptionsModel := &ibmanalyticsengineapiv3.ListApplicationsOptions{
+					InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+					State: []string{"finished"},
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []ibmanalyticsengineapiv3.Application
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use ApplicationsPager.GetAll successfully`, func() {
+				ibmAnalyticsEngineApiService, serviceErr := ibmanalyticsengineapiv3.NewIbmAnalyticsEngineApiV3(&ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(ibmAnalyticsEngineApiService).ToNot(BeNil())
+
+				listApplicationsOptionsModel := &ibmanalyticsengineapiv3.ListApplicationsOptions{
+					InstanceID: core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09"),
+					State: []string{"finished"},
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := ibmAnalyticsEngineApiService.NewApplicationsPager(listApplicationsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -2766,7 +2875,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"anyKey": "anyValue"}, "env": {"anyKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully with retries`, func() {
@@ -2821,7 +2930,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"mapKey": "anyValue"}, "env": {"mapKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
+					fmt.Fprintf(res, "%s", `{"application_details": {"application": "cos://bucket_name.my_cos/my_spark_app.py", "runtime": {"spark_version": "3.1"}, "jars": "cos://cloud-object-storage/jars/tests.jar", "packages": "Packages", "repositories": "Repositories", "files": "Files", "archives": "Archives", "name": "spark-app", "class": "com.company.path.ClassName", "arguments": ["[arg1, arg2, arg3]"], "conf": {"anyKey": "anyValue"}, "env": {"anyKey": "anyValue"}}, "id": "2b83d31c-397b-48ad-ad76-b83347c982db", "spark_application_id": "SparkApplicationID", "spark_application_name": "SparkApplicationName", "state": "finished", "spark_ui": "SparkUi", "state_details": [{"type": "server_error", "code": "server_error", "message": "Message"}], "submission_time": "2021-01-30T08:30:00.000Z", "start_time": "2021-01-30T08:30:00.000Z", "end_time": "2021-01-30T08:30:00.000Z", "finish_time": "2021-01-30T08:30:00.000Z", "auto_termination_time": "2021-01-30T08:30:00.000Z"}`)
 				}))
 			})
 			It(`Invoke GetApplication successfully`, func() {
@@ -5094,8 +5203,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				createApplicationOptionsModel.SetName("testString")
 				createApplicationOptionsModel.SetClass("testString")
 				createApplicationOptionsModel.SetArguments([]string{"[arg1, arg2, arg3]"})
-				createApplicationOptionsModel.SetConf(make(map[string]interface{}))
-				createApplicationOptionsModel.SetEnv(make(map[string]interface{}))
+				createApplicationOptionsModel.SetConf(map[string]interface{}{"anyKey": "anyValue"})
+				createApplicationOptionsModel.SetEnv(map[string]interface{}{"anyKey": "anyValue"})
 				createApplicationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createApplicationOptionsModel).ToNot(BeNil())
 				Expect(createApplicationOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
@@ -5109,8 +5218,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				Expect(createApplicationOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Class).To(Equal(core.StringPtr("testString")))
 				Expect(createApplicationOptionsModel.Arguments).To(Equal([]string{"[arg1, arg2, arg3]"}))
-				Expect(createApplicationOptionsModel.Conf).To(Equal(make(map[string]interface{})))
-				Expect(createApplicationOptionsModel.Env).To(Equal(make(map[string]interface{})))
+				Expect(createApplicationOptionsModel.Conf).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(createApplicationOptionsModel.Env).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(createApplicationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteApplicationOptions successfully`, func() {
@@ -5248,10 +5357,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 				listApplicationsOptionsModel := ibmAnalyticsEngineApiService.NewListApplicationsOptions(instanceID)
 				listApplicationsOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
 				listApplicationsOptionsModel.SetState([]string{"finished"})
+				listApplicationsOptionsModel.SetLimit(int64(10))
+				listApplicationsOptionsModel.SetStart("testString")
 				listApplicationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listApplicationsOptionsModel).ToNot(BeNil())
 				Expect(listApplicationsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
 				Expect(listApplicationsOptionsModel.State).To(Equal([]string{"finished"}))
+				Expect(listApplicationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(listApplicationsOptionsModel.Start).To(Equal(core.StringPtr("testString")))
 				Expect(listApplicationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewReplaceInstanceDefaultConfigsOptions successfully`, func() {
@@ -5342,14 +5455,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3`, func() {
 			It(`Invoke NewUpdateInstanceDefaultConfigsOptions successfully`, func() {
 				// Construct an instance of the UpdateInstanceDefaultConfigsOptions model
 				instanceID := "e64c907a-e82f-46fd-addc-ccfafbd28b09"
-				body := make(map[string]interface{})
+				body := map[string]interface{}{"anyKey": "anyValue"}
 				updateInstanceDefaultConfigsOptionsModel := ibmAnalyticsEngineApiService.NewUpdateInstanceDefaultConfigsOptions(instanceID, body)
 				updateInstanceDefaultConfigsOptionsModel.SetInstanceID("e64c907a-e82f-46fd-addc-ccfafbd28b09")
-				updateInstanceDefaultConfigsOptionsModel.SetBody(make(map[string]interface{}))
+				updateInstanceDefaultConfigsOptionsModel.SetBody(map[string]interface{}{"anyKey": "anyValue"})
 				updateInstanceDefaultConfigsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateInstanceDefaultConfigsOptionsModel).ToNot(BeNil())
 				Expect(updateInstanceDefaultConfigsOptionsModel.InstanceID).To(Equal(core.StringPtr("e64c907a-e82f-46fd-addc-ccfafbd28b09")))
-				Expect(updateInstanceDefaultConfigsOptionsModel.Body).To(Equal(make(map[string]interface{})))
+				Expect(updateInstanceDefaultConfigsOptionsModel.Body).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(updateInstanceDefaultConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateInstanceHomeCredentialsOptions successfully`, func() {

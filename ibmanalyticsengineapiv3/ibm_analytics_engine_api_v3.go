@@ -900,6 +900,12 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplicationsWithContex
 	if listApplicationsOptions.State != nil {
 		builder.AddQuery("state", strings.Join(listApplicationsOptions.State, ","))
 	}
+	if listApplicationsOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*listApplicationsOptions.Limit))
+	}
+	if listApplicationsOptions.Start != nil {
+		builder.AddQuery("start", fmt.Sprint(*listApplicationsOptions.Start))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1769,10 +1775,22 @@ func UnmarshalApplication(m map[string]json.RawMessage, result interface{}) (err
 	return
 }
 
-// ApplicationCollection : An array of application details.
+// ApplicationCollection : A paginated collection of applications.
 type ApplicationCollection struct {
 	// List of applications.
-	Applications []Application `json:"applications,omitempty"`
+	Applications []Application `json:"applications" validate:"required"`
+
+	// A reference to a page in a paginated collection.
+	First *PageLink `json:"first,omitempty"`
+
+	// A reference to a page in a paginated collection.
+	Next *PageLink `json:"next,omitempty"`
+
+	// A reference to a page in a paginated collection.
+	Previous *PageLink `json:"previous,omitempty"`
+
+	// The maximum number of results in this page of the collection.
+	Limit *int64 `json:"limit" validate:"required"`
 }
 
 // UnmarshalApplicationCollection unmarshals an instance of ApplicationCollection from the specified map of raw messages.
@@ -1782,8 +1800,32 @@ func UnmarshalApplicationCollection(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPageLink)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPageLink)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPageLink)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *ApplicationCollection) GetNextStart() (*string, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	return resp.Next.Start, nil
 }
 
 // ApplicationDetails : Application details.
@@ -2955,6 +2997,12 @@ type ListApplicationsOptions struct {
 	// List of Spark application states that will be used to filter the response.
 	State []string `json:"state,omitempty"`
 
+	// Number of application entries to be included in the response.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// Token used to fetch the next or the previous page of the applications list.
+	Start *string `json:"start,omitempty"`
+
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
@@ -2987,6 +3035,18 @@ func (_options *ListApplicationsOptions) SetInstanceID(instanceID string) *ListA
 // SetState : Allow user to set State
 func (_options *ListApplicationsOptions) SetState(state []string) *ListApplicationsOptions {
 	_options.State = state
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *ListApplicationsOptions) SetLimit(limit int64) *ListApplicationsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetStart : Allow user to set Start
+func (_options *ListApplicationsOptions) SetStart(start string) *ListApplicationsOptions {
+	_options.Start = core.StringPtr(start)
 	return _options
 }
 
@@ -3092,6 +3152,30 @@ type LoggingConfigurationResponseLogServer struct {
 func UnmarshalLoggingConfigurationResponseLogServer(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(LoggingConfigurationResponseLogServer)
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PageLink : A reference to a page in a paginated collection.
+type PageLink struct {
+	// A url which returns a specific page of a collection.
+	Href *string `json:"href" validate:"required"`
+
+	// A token which loads a specific page of a collection when it is provided the url of the collection.
+	Start *string `json:"start,omitempty"`
+}
+
+// UnmarshalPageLink unmarshals an instance of PageLink from the specified map of raw messages.
+func UnmarshalPageLink(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PageLink)
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start", &obj.Start)
 	if err != nil {
 		return
 	}
@@ -3562,4 +3646,85 @@ func (_options *UpdateInstanceHomeCredentialsOptions) SetHmacSecretKey(hmacSecre
 func (options *UpdateInstanceHomeCredentialsOptions) SetHeaders(param map[string]string) *UpdateInstanceHomeCredentialsOptions {
 	options.Headers = param
 	return options
+}
+
+//
+// ApplicationsPager can be used to simplify the use of the "ListApplications" method.
+//
+type ApplicationsPager struct {
+	hasNext bool
+	options *ListApplicationsOptions
+	client  *IbmAnalyticsEngineApiV3
+	pageContext struct {
+		next *string
+	}
+}
+
+// NewApplicationsPager returns a new ApplicationsPager instance.
+func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) NewApplicationsPager(options *ListApplicationsOptions) (pager *ApplicationsPager, err error) {
+	if options.Start != nil && *options.Start != "" {
+		err = fmt.Errorf("the 'options.Start' field should not be set")
+		return
+	}
+
+	var optionsCopy ListApplicationsOptions = *options
+	pager = &ApplicationsPager{
+		hasNext: true,
+		options: &optionsCopy,
+		client:  ibmAnalyticsEngineApi,
+	}
+	return
+}
+
+// HasNext returns true if there are potentially more results to be retrieved.
+func (pager *ApplicationsPager) HasNext() bool {
+	return pager.hasNext
+}
+
+// GetNextWithContext returns the next page of results using the specified Context.
+func (pager *ApplicationsPager) GetNextWithContext(ctx context.Context) (page []Application, err error) {
+	if !pager.HasNext() {
+		return nil, fmt.Errorf("no more results available")
+	}
+
+	pager.options.Start = pager.pageContext.next
+
+	result, _, err := pager.client.ListApplicationsWithContext(ctx, pager.options)
+	if err != nil {
+		return
+	}
+
+	var next *string
+	if result.Next != nil {
+		next = result.Next.Start
+	}
+	pager.pageContext.next = next
+	pager.hasNext = (pager.pageContext.next != nil)
+	page = result.Applications
+
+	return
+}
+
+// GetAllWithContext returns all results by invoking GetNextWithContext() repeatedly
+// until all pages of results have been retrieved.
+func (pager *ApplicationsPager) GetAllWithContext(ctx context.Context) (allItems []Application, err error) {
+	for pager.HasNext() {
+		var nextPage []Application
+		nextPage, err = pager.GetNextWithContext(ctx)
+		if err != nil {
+			return
+		}
+		allItems = append(allItems, nextPage...)
+	}
+	return
+}
+
+// GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
+func (pager *ApplicationsPager) GetNext() (page []Application, err error) {
+	return pager.GetNextWithContext(context.Background())
+}
+
+// GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
+func (pager *ApplicationsPager) GetAll() (allItems []Application, err error) {
+	return pager.GetAllWithContext(context.Background())
 }
