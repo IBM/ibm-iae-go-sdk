@@ -900,6 +900,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplicationsWithContex
 	if listApplicationsOptions.State != nil {
 		builder.AddQuery("state", strings.Join(listApplicationsOptions.State, ","))
 	}
+	if listApplicationsOptions.StartTimeInterval != nil {
+		builder.AddQuery("start_time_interval", fmt.Sprint(*listApplicationsOptions.StartTimeInterval))
+	}
+	if listApplicationsOptions.SubmissionTimeInterval != nil {
+		builder.AddQuery("submission_time_interval", fmt.Sprint(*listApplicationsOptions.SubmissionTimeInterval))
+	}
+	if listApplicationsOptions.EndTimeInterval != nil {
+		builder.AddQuery("end_time_interval", fmt.Sprint(*listApplicationsOptions.EndTimeInterval))
+	}
 	if listApplicationsOptions.Limit != nil {
 		builder.AddQuery("limit", fmt.Sprint(*listApplicationsOptions.Limit))
 	}
@@ -2997,6 +3006,24 @@ type ListApplicationsOptions struct {
 	// List of Spark application states that will be used to filter the response.
 	State []string `json:"state,omitempty"`
 
+	// Time interval to use for filtering applications by their start time. Interval is specified in the format `<lower
+	// timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	StartTimeInterval *string `json:"start_time_interval,omitempty"`
+
+	// Time interval to use for filtering applications by their submission time. Interval is specified in the format
+	// `<lower timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	SubmissionTimeInterval *string `json:"submission_time_interval,omitempty"`
+
+	// Time interval to use for filtering applications by their end time. Interval is specified in the format `<lower
+	// timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	EndTimeInterval *string `json:"end_time_interval,omitempty"`
+
 	// Number of application entries to be included in the response.
 	Limit *int64 `json:"limit,omitempty"`
 
@@ -3035,6 +3062,24 @@ func (_options *ListApplicationsOptions) SetInstanceID(instanceID string) *ListA
 // SetState : Allow user to set State
 func (_options *ListApplicationsOptions) SetState(state []string) *ListApplicationsOptions {
 	_options.State = state
+	return _options
+}
+
+// SetStartTimeInterval : Allow user to set StartTimeInterval
+func (_options *ListApplicationsOptions) SetStartTimeInterval(startTimeInterval string) *ListApplicationsOptions {
+	_options.StartTimeInterval = core.StringPtr(startTimeInterval)
+	return _options
+}
+
+// SetSubmissionTimeInterval : Allow user to set SubmissionTimeInterval
+func (_options *ListApplicationsOptions) SetSubmissionTimeInterval(submissionTimeInterval string) *ListApplicationsOptions {
+	_options.SubmissionTimeInterval = core.StringPtr(submissionTimeInterval)
+	return _options
+}
+
+// SetEndTimeInterval : Allow user to set EndTimeInterval
+func (_options *ListApplicationsOptions) SetEndTimeInterval(endTimeInterval string) *ListApplicationsOptions {
+	_options.EndTimeInterval = core.StringPtr(endTimeInterval)
 	return _options
 }
 
