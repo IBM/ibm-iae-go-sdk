@@ -47,7 +47,7 @@ type IbmAnalyticsEngineApiV2 struct {
 const DefaultServiceURL = "https://ibm-analytics-engine-api.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
-const DefaultServiceName = "ibm_analytics_engine_api"
+const DefaultServiceName = "ibm_analytics_engine_api" //#nosec G101
 
 // IbmAnalyticsEngineApiV2Options : Service options
 type IbmAnalyticsEngineApiV2Options struct {
@@ -207,10 +207,13 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAllAnalyticsEnginesWith
 // GetAnalyticsEngineByID : Get details of Analytics Engine
 // Retrieves the following details of the IBM Analytics Engine service instance:
 // * Hardware size and software package
-//  * Timestamps at which the cluster was created, deleted or updated
-//  * Service endpoint URLs
 //
-//  **NOTE:** No credentials are returned. You can get the IBM Analytics Engine service instance credentials by invoking
+//   - Timestamps at which the cluster was created, deleted or updated
+//
+//   - Service endpoint URLs
+//
+//     **NOTE:** No credentials are returned. You can get the IBM Analytics Engine service instance credentials by invoking
+//
 // the reset_password REST API.
 func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetAnalyticsEngineByID(getAnalyticsEngineByIdOptions *GetAnalyticsEngineByIdOptions) (result *AnalyticsEngine, response *core.DetailedResponse, err error) {
 	return ibmAnalyticsEngineApi.GetAnalyticsEngineByIDWithContext(context.Background(), getAnalyticsEngineByIdOptions)
@@ -490,7 +493,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV2) GetCustomizationRequestByI
 
 	pathParamsMap := map[string]string{
 		"instance_guid": *getCustomizationRequestByIdOptions.InstanceGuid,
-		"request_id": *getCustomizationRequestByIdOptions.RequestID,
+		"request_id":    *getCustomizationRequestByIdOptions.RequestID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1198,10 +1201,10 @@ type AnalyticsEngineCustomActionScript struct {
 // Constants associated with the AnalyticsEngineCustomActionScript.SourceType property.
 // Defines where to access the customization script.
 const (
-	AnalyticsEngineCustomActionScript_SourceType_Bluemixswift = "BluemixSwift"
-	AnalyticsEngineCustomActionScript_SourceType_Coss3 = "CosS3"
-	AnalyticsEngineCustomActionScript_SourceType_Http = "http"
-	AnalyticsEngineCustomActionScript_SourceType_Https = "https"
+	AnalyticsEngineCustomActionScript_SourceType_Bluemixswift   = "BluemixSwift"
+	AnalyticsEngineCustomActionScript_SourceType_Coss3          = "CosS3"
+	AnalyticsEngineCustomActionScript_SourceType_Http           = "http"
+	AnalyticsEngineCustomActionScript_SourceType_Https          = "https"
 	AnalyticsEngineCustomActionScript_SourceType_Softlayerswift = "SoftLayerSwift"
 )
 
@@ -1345,9 +1348,9 @@ type AnalyticsEngineLoggingConfigStatus struct {
 // Constants associated with the AnalyticsEngineLoggingConfigStatus.NodeType property.
 // Node type.
 const (
-	AnalyticsEngineLoggingConfigStatus_NodeType_Data = "data"
+	AnalyticsEngineLoggingConfigStatus_NodeType_Data       = "data"
 	AnalyticsEngineLoggingConfigStatus_NodeType_Management = "management"
-	AnalyticsEngineLoggingConfigStatus_NodeType_Task = "task"
+	AnalyticsEngineLoggingConfigStatus_NodeType_Task       = "task"
 )
 
 // UnmarshalAnalyticsEngineLoggingConfigStatus unmarshals an instance of AnalyticsEngineLoggingConfigStatus from the specified map of raw messages.
@@ -1385,33 +1388,33 @@ type AnalyticsEngineLoggingNodeSpec struct {
 // Constants associated with the AnalyticsEngineLoggingNodeSpec.NodeType property.
 // Node type.
 const (
-	AnalyticsEngineLoggingNodeSpec_NodeType_Data = "data"
+	AnalyticsEngineLoggingNodeSpec_NodeType_Data       = "data"
 	AnalyticsEngineLoggingNodeSpec_NodeType_Management = "management"
-	AnalyticsEngineLoggingNodeSpec_NodeType_Task = "task"
+	AnalyticsEngineLoggingNodeSpec_NodeType_Task       = "task"
 )
 
 // Constants associated with the AnalyticsEngineLoggingNodeSpec.Components property.
 // Node components to be logged.
 const (
-	AnalyticsEngineLoggingNodeSpec_Components_AmbariServer = "ambari-server"
+	AnalyticsEngineLoggingNodeSpec_Components_AmbariServer    = "ambari-server"
 	AnalyticsEngineLoggingNodeSpec_Components_HadoopMapreduce = "hadoop-mapreduce"
-	AnalyticsEngineLoggingNodeSpec_Components_HadoopYarn = "hadoop-yarn"
-	AnalyticsEngineLoggingNodeSpec_Components_Hbase = "hbase"
-	AnalyticsEngineLoggingNodeSpec_Components_Hdfs = "hdfs"
-	AnalyticsEngineLoggingNodeSpec_Components_HdfsAudit = "hdfs-audit"
-	AnalyticsEngineLoggingNodeSpec_Components_Hive = "hive"
-	AnalyticsEngineLoggingNodeSpec_Components_Jnbg = "jnbg"
-	AnalyticsEngineLoggingNodeSpec_Components_Knox = "knox"
-	AnalyticsEngineLoggingNodeSpec_Components_KnoxAudit = "knox-audit"
-	AnalyticsEngineLoggingNodeSpec_Components_Livy2 = "livy2"
-	AnalyticsEngineLoggingNodeSpec_Components_Spark2 = "spark2"
-	AnalyticsEngineLoggingNodeSpec_Components_YarnApps = "yarn-apps"
+	AnalyticsEngineLoggingNodeSpec_Components_HadoopYarn      = "hadoop-yarn"
+	AnalyticsEngineLoggingNodeSpec_Components_Hbase           = "hbase"
+	AnalyticsEngineLoggingNodeSpec_Components_Hdfs            = "hdfs"
+	AnalyticsEngineLoggingNodeSpec_Components_HdfsAudit       = "hdfs-audit"
+	AnalyticsEngineLoggingNodeSpec_Components_Hive            = "hive"
+	AnalyticsEngineLoggingNodeSpec_Components_Jnbg            = "jnbg"
+	AnalyticsEngineLoggingNodeSpec_Components_Knox            = "knox"
+	AnalyticsEngineLoggingNodeSpec_Components_KnoxAudit       = "knox-audit"
+	AnalyticsEngineLoggingNodeSpec_Components_Livy2           = "livy2"
+	AnalyticsEngineLoggingNodeSpec_Components_Spark2          = "spark2"
+	AnalyticsEngineLoggingNodeSpec_Components_YarnApps        = "yarn-apps"
 )
 
 // NewAnalyticsEngineLoggingNodeSpec : Instantiate AnalyticsEngineLoggingNodeSpec (Generic Model Constructor)
 func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingNodeSpec(nodeType string, components []string) (_model *AnalyticsEngineLoggingNodeSpec, err error) {
 	_model = &AnalyticsEngineLoggingNodeSpec{
-		NodeType: core.StringPtr(nodeType),
+		NodeType:   core.StringPtr(nodeType),
 		Components: components,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -1460,10 +1463,10 @@ const (
 // NewAnalyticsEngineLoggingServer : Instantiate AnalyticsEngineLoggingServer (Generic Model Constructor)
 func (*IbmAnalyticsEngineApiV2) NewAnalyticsEngineLoggingServer(typeVar string, credential string, apiHost string, logHost string) (_model *AnalyticsEngineLoggingServer, err error) {
 	_model = &AnalyticsEngineLoggingServer{
-		Type: core.StringPtr(typeVar),
+		Type:       core.StringPtr(typeVar),
 		Credential: core.StringPtr(credential),
-		ApiHost: core.StringPtr(apiHost),
-		LogHost: core.StringPtr(logHost),
+		ApiHost:    core.StringPtr(apiHost),
+		LogHost:    core.StringPtr(logHost),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -1690,8 +1693,8 @@ type ConfigureLoggingOptions struct {
 func (*IbmAnalyticsEngineApiV2) NewConfigureLoggingOptions(instanceGuid string, logSpecs []AnalyticsEngineLoggingNodeSpec, logServer *AnalyticsEngineLoggingServer) *ConfigureLoggingOptions {
 	return &ConfigureLoggingOptions{
 		InstanceGuid: core.StringPtr(instanceGuid),
-		LogSpecs: logSpecs,
-		LogServer: logServer,
+		LogSpecs:     logSpecs,
+		LogServer:    logServer,
 	}
 }
 
@@ -1737,17 +1740,17 @@ type CreateCustomizationRequestOptions struct {
 // Constants associated with the CreateCustomizationRequestOptions.Target property.
 // Type of nodes to target for this customization.
 const (
-	CreateCustomizationRequestOptions_Target_All = "all"
-	CreateCustomizationRequestOptions_Target_Data = "data"
+	CreateCustomizationRequestOptions_Target_All              = "all"
+	CreateCustomizationRequestOptions_Target_Data             = "data"
 	CreateCustomizationRequestOptions_Target_MasterManagement = "master-management"
-	CreateCustomizationRequestOptions_Target_Task = "task"
+	CreateCustomizationRequestOptions_Target_Task             = "task"
 )
 
 // NewCreateCustomizationRequestOptions : Instantiate CreateCustomizationRequestOptions
 func (*IbmAnalyticsEngineApiV2) NewCreateCustomizationRequestOptions(instanceGuid string, target string, customActions []AnalyticsEngineCustomAction) *CreateCustomizationRequestOptions {
 	return &CreateCustomizationRequestOptions{
-		InstanceGuid: core.StringPtr(instanceGuid),
-		Target: core.StringPtr(target),
+		InstanceGuid:  core.StringPtr(instanceGuid),
+		Target:        core.StringPtr(target),
 		CustomActions: customActions,
 	}
 }
@@ -1922,7 +1925,7 @@ type GetCustomizationRequestByIdOptions struct {
 func (*IbmAnalyticsEngineApiV2) NewGetCustomizationRequestByIdOptions(instanceGuid string, requestID string) *GetCustomizationRequestByIdOptions {
 	return &GetCustomizationRequestByIdOptions{
 		InstanceGuid: core.StringPtr(instanceGuid),
-		RequestID: core.StringPtr(requestID),
+		RequestID:    core.StringPtr(requestID),
 	}
 }
 
@@ -2017,7 +2020,7 @@ type ResizeClusterOptions struct {
 func (*IbmAnalyticsEngineApiV2) NewResizeClusterOptions(instanceGuid string, body ResizeClusterRequestIntf) *ResizeClusterOptions {
 	return &ResizeClusterOptions{
 		InstanceGuid: core.StringPtr(instanceGuid),
-		Body: body,
+		Body:         body,
 	}
 }
 
@@ -2050,6 +2053,7 @@ type ResizeClusterRequest struct {
 	// Expected number of task nodes in the cluster after the resize operation.
 	TaskNodesCount *int64 `json:"task_nodes_count,omitempty"`
 }
+
 func (*ResizeClusterRequest) isaResizeClusterRequest() bool {
 	return true
 }
@@ -2178,7 +2182,7 @@ type UpdatePrivateEndpointWhitelistOptions struct {
 // Constants associated with the UpdatePrivateEndpointWhitelistOptions.Action property.
 // Update Whitelist IP ranges. Add (or) Delete.
 const (
-	UpdatePrivateEndpointWhitelistOptions_Action_Add = "add"
+	UpdatePrivateEndpointWhitelistOptions_Action_Add    = "add"
 	UpdatePrivateEndpointWhitelistOptions_Action_Delete = "delete"
 )
 
@@ -2186,8 +2190,8 @@ const (
 func (*IbmAnalyticsEngineApiV2) NewUpdatePrivateEndpointWhitelistOptions(instanceGuid string, ipRanges []string, action string) *UpdatePrivateEndpointWhitelistOptions {
 	return &UpdatePrivateEndpointWhitelistOptions{
 		InstanceGuid: core.StringPtr(instanceGuid),
-		IpRanges: ipRanges,
-		Action: core.StringPtr(action),
+		IpRanges:     ipRanges,
+		Action:       core.StringPtr(action),
 	}
 }
 

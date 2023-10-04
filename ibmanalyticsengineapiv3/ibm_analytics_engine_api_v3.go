@@ -46,7 +46,7 @@ type IbmAnalyticsEngineApiV3 struct {
 const DefaultServiceURL = "https://api.us-south.ae.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
-const DefaultServiceName = "ibm_analytics_engine_api"
+const DefaultServiceName = "ibm_analytics_engine_api" //#nosec G101
 
 // IbmAnalyticsEngineApiV3Options : Service options
 type IbmAnalyticsEngineApiV3Options struct {
@@ -114,7 +114,7 @@ func NewIbmAnalyticsEngineApiV3(options *IbmAnalyticsEngineApiV3Options) (servic
 func GetServiceURLForRegion(region string) (string, error) {
 	var endpoints = map[string]string{
 		"us-south": "https://api.us-south.ae.cloud.ibm.com",
-		"eu-de": "https://api.eu-de.ae.cloud.ibm.com",
+		"eu-de":    "https://api.eu-de.ae.cloud.ibm.com",
 	}
 
 	if url, ok := endpoints[region]; ok {
@@ -900,6 +900,15 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) ListApplicationsWithContex
 	if listApplicationsOptions.State != nil {
 		builder.AddQuery("state", strings.Join(listApplicationsOptions.State, ","))
 	}
+	if listApplicationsOptions.StartTimeInterval != nil {
+		builder.AddQuery("start_time_interval", fmt.Sprint(*listApplicationsOptions.StartTimeInterval))
+	}
+	if listApplicationsOptions.SubmissionTimeInterval != nil {
+		builder.AddQuery("submission_time_interval", fmt.Sprint(*listApplicationsOptions.SubmissionTimeInterval))
+	}
+	if listApplicationsOptions.EndTimeInterval != nil {
+		builder.AddQuery("end_time_interval", fmt.Sprint(*listApplicationsOptions.EndTimeInterval))
+	}
 	if listApplicationsOptions.Limit != nil {
 		builder.AddQuery("limit", fmt.Sprint(*listApplicationsOptions.Limit))
 	}
@@ -946,7 +955,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationWithContext(
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *getApplicationOptions.InstanceID,
+		"instance_id":    *getApplicationOptions.InstanceID,
 		"application_id": *getApplicationOptions.ApplicationID,
 	}
 
@@ -1008,7 +1017,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) DeleteApplicationWithConte
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *deleteApplicationOptions.InstanceID,
+		"instance_id":    *deleteApplicationOptions.InstanceID,
 		"application_id": *deleteApplicationOptions.ApplicationID,
 	}
 
@@ -1057,7 +1066,7 @@ func (ibmAnalyticsEngineApi *IbmAnalyticsEngineApiV3) GetApplicationStateWithCon
 	}
 
 	pathParamsMap := map[string]string{
-		"instance_id": *getApplicationStateOptions.InstanceID,
+		"instance_id":    *getApplicationStateOptions.InstanceID,
 		"application_id": *getApplicationStateOptions.ApplicationID,
 	}
 
@@ -1711,13 +1720,13 @@ type Application struct {
 // Constants associated with the Application.State property.
 // State of the Spark application.
 const (
-	Application_State_Accepted = "accepted"
+	Application_State_Accepted       = "accepted"
 	Application_State_AutoTerminated = "auto_terminated"
-	Application_State_Failed = "failed"
-	Application_State_Finished = "finished"
-	Application_State_OpsTerminated = "ops_terminated"
-	Application_State_Running = "running"
-	Application_State_Stopped = "stopped"
+	Application_State_Failed         = "failed"
+	Application_State_Finished       = "finished"
+	Application_State_OpsTerminated  = "ops_terminated"
+	Application_State_Running        = "running"
+	Application_State_Stopped        = "stopped"
 )
 
 // UnmarshalApplication unmarshals an instance of Application from the specified map of raw messages.
@@ -1969,13 +1978,13 @@ type ApplicationGetResponse struct {
 // Constants associated with the ApplicationGetResponse.State property.
 // State of the Spark application.
 const (
-	ApplicationGetResponse_State_Accepted = "accepted"
+	ApplicationGetResponse_State_Accepted       = "accepted"
 	ApplicationGetResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationGetResponse_State_Failed = "failed"
-	ApplicationGetResponse_State_Finished = "finished"
-	ApplicationGetResponse_State_OpsTerminated = "ops_terminated"
-	ApplicationGetResponse_State_Running = "running"
-	ApplicationGetResponse_State_Stopped = "stopped"
+	ApplicationGetResponse_State_Failed         = "failed"
+	ApplicationGetResponse_State_Finished       = "finished"
+	ApplicationGetResponse_State_OpsTerminated  = "ops_terminated"
+	ApplicationGetResponse_State_Running        = "running"
+	ApplicationGetResponse_State_Stopped        = "stopped"
 )
 
 // UnmarshalApplicationGetResponse unmarshals an instance of ApplicationGetResponse from the specified map of raw messages.
@@ -2048,9 +2057,9 @@ type ApplicationGetResponseStateDetailsItem struct {
 // Constants associated with the ApplicationGetResponseStateDetailsItem.Type property.
 // Type of the message.
 const (
-	ApplicationGetResponseStateDetailsItem_Type_Info = "info"
+	ApplicationGetResponseStateDetailsItem_Type_Info        = "info"
 	ApplicationGetResponseStateDetailsItem_Type_ServerError = "server_error"
-	ApplicationGetResponseStateDetailsItem_Type_UserError = "user_error"
+	ApplicationGetResponseStateDetailsItem_Type_UserError   = "user_error"
 )
 
 // UnmarshalApplicationGetResponseStateDetailsItem unmarshals an instance of ApplicationGetResponseStateDetailsItem from the specified map of raw messages.
@@ -2097,13 +2106,13 @@ type ApplicationGetStateResponse struct {
 // Constants associated with the ApplicationGetStateResponse.State property.
 // State of the Spark application.
 const (
-	ApplicationGetStateResponse_State_Accepted = "accepted"
+	ApplicationGetStateResponse_State_Accepted       = "accepted"
 	ApplicationGetStateResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationGetStateResponse_State_Failed = "failed"
-	ApplicationGetStateResponse_State_Finished = "finished"
-	ApplicationGetStateResponse_State_OpsTerminated = "ops_terminated"
-	ApplicationGetStateResponse_State_Running = "running"
-	ApplicationGetStateResponse_State_Stopped = "stopped"
+	ApplicationGetStateResponse_State_Failed         = "failed"
+	ApplicationGetStateResponse_State_Finished       = "finished"
+	ApplicationGetStateResponse_State_OpsTerminated  = "ops_terminated"
+	ApplicationGetStateResponse_State_Running        = "running"
+	ApplicationGetStateResponse_State_Stopped        = "stopped"
 )
 
 // UnmarshalApplicationGetStateResponse unmarshals an instance of ApplicationGetStateResponse from the specified map of raw messages.
@@ -2149,13 +2158,13 @@ type ApplicationResponse struct {
 // Constants associated with the ApplicationResponse.State property.
 // State of the Spark application.
 const (
-	ApplicationResponse_State_Accepted = "accepted"
+	ApplicationResponse_State_Accepted       = "accepted"
 	ApplicationResponse_State_AutoTerminated = "auto_terminated"
-	ApplicationResponse_State_Failed = "failed"
-	ApplicationResponse_State_Finished = "finished"
-	ApplicationResponse_State_OpsTerminated = "ops_terminated"
-	ApplicationResponse_State_Running = "running"
-	ApplicationResponse_State_Stopped = "stopped"
+	ApplicationResponse_State_Failed         = "failed"
+	ApplicationResponse_State_Finished       = "finished"
+	ApplicationResponse_State_OpsTerminated  = "ops_terminated"
+	ApplicationResponse_State_Running        = "running"
+	ApplicationResponse_State_Stopped        = "stopped"
 )
 
 // UnmarshalApplicationResponse unmarshals an instance of ApplicationResponse from the specified map of raw messages.
@@ -2389,7 +2398,7 @@ type DeleteApplicationOptions struct {
 // NewDeleteApplicationOptions : Instantiate DeleteApplicationOptions
 func (*IbmAnalyticsEngineApiV3) NewDeleteApplicationOptions(instanceID string, applicationID string) *DeleteApplicationOptions {
 	return &DeleteApplicationOptions{
-		InstanceID: core.StringPtr(instanceID),
+		InstanceID:    core.StringPtr(instanceID),
 		ApplicationID: core.StringPtr(applicationID),
 	}
 }
@@ -2427,7 +2436,7 @@ type GetApplicationOptions struct {
 // NewGetApplicationOptions : Instantiate GetApplicationOptions
 func (*IbmAnalyticsEngineApiV3) NewGetApplicationOptions(instanceID string, applicationID string) *GetApplicationOptions {
 	return &GetApplicationOptions{
-		InstanceID: core.StringPtr(instanceID),
+		InstanceID:    core.StringPtr(instanceID),
 		ApplicationID: core.StringPtr(applicationID),
 	}
 }
@@ -2465,7 +2474,7 @@ type GetApplicationStateOptions struct {
 // NewGetApplicationStateOptions : Instantiate GetApplicationStateOptions
 func (*IbmAnalyticsEngineApiV3) NewGetApplicationStateOptions(instanceID string, applicationID string) *GetApplicationStateOptions {
 	return &GetApplicationStateOptions{
-		InstanceID: core.StringPtr(instanceID),
+		InstanceID:    core.StringPtr(instanceID),
 		ApplicationID: core.StringPtr(applicationID),
 	}
 }
@@ -2767,13 +2776,13 @@ type Instance struct {
 // Constants associated with the Instance.State property.
 // State of the Analytics Engine instance.
 const (
-	Instance_State_Active = "active"
+	Instance_State_Active           = "active"
 	Instance_State_CreationAccepted = "creation_accepted"
-	Instance_State_CreationFailed = "creation_failed"
-	Instance_State_Deleted = "deleted"
-	Instance_State_Disabled = "disabled"
-	Instance_State_Initialized = "initialized"
-	Instance_State_Preparing = "preparing"
+	Instance_State_CreationFailed   = "creation_failed"
+	Instance_State_Deleted          = "deleted"
+	Instance_State_Disabled         = "disabled"
+	Instance_State_Initialized      = "initialized"
+	Instance_State_Preparing        = "preparing"
 )
 
 // UnmarshalInstance unmarshals an instance of Instance from the specified map of raw messages.
@@ -2840,13 +2849,13 @@ type InstanceGetStateResponse struct {
 // Constants associated with the InstanceGetStateResponse.State property.
 // State of the Analytics Engine instance.
 const (
-	InstanceGetStateResponse_State_Active = "active"
+	InstanceGetStateResponse_State_Active           = "active"
 	InstanceGetStateResponse_State_CreationAccepted = "creation_accepted"
-	InstanceGetStateResponse_State_CreationFailed = "creation_failed"
-	InstanceGetStateResponse_State_Deleted = "deleted"
-	InstanceGetStateResponse_State_Disabled = "disabled"
-	InstanceGetStateResponse_State_Initialized = "initialized"
-	InstanceGetStateResponse_State_Preparing = "preparing"
+	InstanceGetStateResponse_State_CreationFailed   = "creation_failed"
+	InstanceGetStateResponse_State_Deleted          = "deleted"
+	InstanceGetStateResponse_State_Disabled         = "disabled"
+	InstanceGetStateResponse_State_Initialized      = "initialized"
+	InstanceGetStateResponse_State_Preparing        = "preparing"
 )
 
 // UnmarshalInstanceGetStateResponse unmarshals an instance of InstanceGetStateResponse from the specified map of raw messages.
@@ -2997,6 +3006,24 @@ type ListApplicationsOptions struct {
 	// List of Spark application states that will be used to filter the response.
 	State []string `json:"state,omitempty"`
 
+	// Time interval to use for filtering applications by their start time. Interval is specified in the format `<lower
+	// timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	StartTimeInterval *string `json:"start_time_interval,omitempty"`
+
+	// Time interval to use for filtering applications by their submission time. Interval is specified in the format
+	// `<lower timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	SubmissionTimeInterval *string `json:"submission_time_interval,omitempty"`
+
+	// Time interval to use for filtering applications by their end time. Interval is specified in the format `<lower
+	// timestamp limit>,<upper timestamp limit>`. Each timestamp value must be ISO 8601 compliant. You may also use
+	// keywords `BEGINNING` as a placeholder value for lower timestamp limit and `CURRENT` as a placeholder value for upper
+	// timestamp limit. Note: The lower timestamp limit is inclusive, whereas the upper timestamp limit is exclusive.
+	EndTimeInterval *string `json:"end_time_interval,omitempty"`
+
 	// Number of application entries to be included in the response.
 	Limit *int64 `json:"limit,omitempty"`
 
@@ -3010,13 +3037,13 @@ type ListApplicationsOptions struct {
 // Constants associated with the ListApplicationsOptions.State property.
 // State of the Spark application.
 const (
-	ListApplicationsOptions_State_Accepted = "accepted"
+	ListApplicationsOptions_State_Accepted       = "accepted"
 	ListApplicationsOptions_State_AutoTerminated = "auto_terminated"
-	ListApplicationsOptions_State_Failed = "failed"
-	ListApplicationsOptions_State_Finished = "finished"
-	ListApplicationsOptions_State_OpsTerminated = "ops_terminated"
-	ListApplicationsOptions_State_Running = "running"
-	ListApplicationsOptions_State_Stopped = "stopped"
+	ListApplicationsOptions_State_Failed         = "failed"
+	ListApplicationsOptions_State_Finished       = "finished"
+	ListApplicationsOptions_State_OpsTerminated  = "ops_terminated"
+	ListApplicationsOptions_State_Running        = "running"
+	ListApplicationsOptions_State_Stopped        = "stopped"
 )
 
 // NewListApplicationsOptions : Instantiate ListApplicationsOptions
@@ -3035,6 +3062,24 @@ func (_options *ListApplicationsOptions) SetInstanceID(instanceID string) *ListA
 // SetState : Allow user to set State
 func (_options *ListApplicationsOptions) SetState(state []string) *ListApplicationsOptions {
 	_options.State = state
+	return _options
+}
+
+// SetStartTimeInterval : Allow user to set StartTimeInterval
+func (_options *ListApplicationsOptions) SetStartTimeInterval(startTimeInterval string) *ListApplicationsOptions {
+	_options.StartTimeInterval = core.StringPtr(startTimeInterval)
+	return _options
+}
+
+// SetSubmissionTimeInterval : Allow user to set SubmissionTimeInterval
+func (_options *ListApplicationsOptions) SetSubmissionTimeInterval(submissionTimeInterval string) *ListApplicationsOptions {
+	_options.SubmissionTimeInterval = core.StringPtr(submissionTimeInterval)
+	return _options
+}
+
+// SetEndTimeInterval : Allow user to set EndTimeInterval
+func (_options *ListApplicationsOptions) SetEndTimeInterval(endTimeInterval string) *ListApplicationsOptions {
+	_options.EndTimeInterval = core.StringPtr(endTimeInterval)
 	return _options
 }
 
@@ -3199,7 +3244,7 @@ type ReplaceInstanceDefaultConfigsOptions struct {
 func (*IbmAnalyticsEngineApiV3) NewReplaceInstanceDefaultConfigsOptions(instanceID string, body map[string]string) *ReplaceInstanceDefaultConfigsOptions {
 	return &ReplaceInstanceDefaultConfigsOptions{
 		InstanceID: core.StringPtr(instanceID),
-		Body: body,
+		Body:       body,
 	}
 }
 
@@ -3578,7 +3623,7 @@ type UpdateInstanceDefaultConfigsOptions struct {
 func (*IbmAnalyticsEngineApiV3) NewUpdateInstanceDefaultConfigsOptions(instanceID string, body map[string]interface{}) *UpdateInstanceDefaultConfigsOptions {
 	return &UpdateInstanceDefaultConfigsOptions{
 		InstanceID: core.StringPtr(instanceID),
-		Body: body,
+		Body:       body,
 	}
 }
 
@@ -3618,7 +3663,7 @@ type UpdateInstanceHomeCredentialsOptions struct {
 // NewUpdateInstanceHomeCredentialsOptions : Instantiate UpdateInstanceHomeCredentialsOptions
 func (*IbmAnalyticsEngineApiV3) NewUpdateInstanceHomeCredentialsOptions(instanceID string, hmacAccessKey string, hmacSecretKey string) *UpdateInstanceHomeCredentialsOptions {
 	return &UpdateInstanceHomeCredentialsOptions{
-		InstanceID: core.StringPtr(instanceID),
+		InstanceID:    core.StringPtr(instanceID),
 		HmacAccessKey: core.StringPtr(hmacAccessKey),
 		HmacSecretKey: core.StringPtr(hmacSecretKey),
 	}
@@ -3648,13 +3693,11 @@ func (options *UpdateInstanceHomeCredentialsOptions) SetHeaders(param map[string
 	return options
 }
 
-//
 // ApplicationsPager can be used to simplify the use of the "ListApplications" method.
-//
 type ApplicationsPager struct {
-	hasNext bool
-	options *ListApplicationsOptions
-	client  *IbmAnalyticsEngineApiV3
+	hasNext     bool
+	options     *ListApplicationsOptions
+	client      *IbmAnalyticsEngineApiV3
 	pageContext struct {
 		next *string
 	}

@@ -1,3 +1,4 @@
+//go:build integration
 // +build integration
 
 /**
@@ -42,17 +43,17 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 	const externalConfigFile = "../ibm_analytics_engine_api_v3.env"
 
 	var (
-		err          error
-		ibmAnalyticsEngineApiService *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
-		serviceURL   string
-		config       map[string]string
-		instanceGuid string
+		err                             error
+		ibmAnalyticsEngineApiService    *ibmanalyticsengineapiv3.IbmAnalyticsEngineApiV3
+		serviceURL                      string
+		config                          map[string]string
+		instanceGuid                    string
 		instanceGuidWithoutInstanceHome string
-        applicationId string
-		hmacAccessKey string
-		hmacSecretKey string
-		alternateHmacAccessKey string
-		alternateHmacSecretKey string
+		applicationId                   string
+		hmacAccessKey                   string
+		hmacSecretKey                   string
+		alternateHmacAccessKey          string
+		alternateHmacSecretKey          string
 	)
 
 	var shouldSkipTest = func() {
@@ -81,7 +82,6 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			hmacSecretKey = config["HMAC_SECRET_KEY"]
 			alternateHmacAccessKey = config["ALTERNATE_HMAC_ACCESS_KEY"]
 			alternateHmacSecretKey = config["ALTERNATE_HMAC_SECRET_KEY"]
-
 
 			fmt.Fprintf(GinkgoWriter, "Service URL: %v\n", serviceURL)
 			shouldSkipTest = func() {}
@@ -143,12 +143,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`SetInstanceHome(setInstanceHomeOptions *SetInstanceHomeOptions)`, func() {
 			setInstanceHomeOptions := &ibmanalyticsengineapiv3.SetInstanceHomeOptions{
-				InstanceID: core.StringPtr(instanceGuidWithoutInstanceHome),
-				NewInstanceID: core.StringPtr("testString"),
-				NewProvider: core.StringPtr("ibm-cos"),
-				NewType: core.StringPtr("objectstore"),
-				NewRegion: core.StringPtr("us-south"),
-				NewEndpoint: core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud"),
+				InstanceID:       core.StringPtr(instanceGuidWithoutInstanceHome),
+				NewInstanceID:    core.StringPtr("testString"),
+				NewProvider:      core.StringPtr("ibm-cos"),
+				NewType:          core.StringPtr("objectstore"),
+				NewRegion:        core.StringPtr("us-south"),
+				NewEndpoint:      core.StringPtr("s3.direct.us-south.cloud-object-storage.appdomain.cloud"),
 				NewHmacAccessKey: core.StringPtr(hmacAccessKey),
 				NewHmacSecretKey: core.StringPtr(hmacSecretKey),
 			}
@@ -166,7 +166,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`UpdateInstanceHomeCredentials(updateInstanceHomeCredentialsOptions *UpdateInstanceHomeCredentialsOptions)`, func() {
 			updateInstanceHomeCredentialsOptions := &ibmanalyticsengineapiv3.UpdateInstanceHomeCredentialsOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID:    core.StringPtr(instanceGuid),
 				HmacAccessKey: core.StringPtr(alternateHmacAccessKey),
 				HmacSecretKey: core.StringPtr(alternateHmacSecretKey),
 			}
@@ -199,13 +199,13 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions *ReplaceInstanceDefaultConfigsOptions)`, func() {
-			defaultConfigs := map[string]string {
+			defaultConfigs := map[string]string{
 				"spark.driver.memory": "8G",
-				"spark.driver.cores": "2",
+				"spark.driver.cores":  "2",
 			}
 			replaceInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.ReplaceInstanceDefaultConfigsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				Body: defaultConfigs,
+				Body:       defaultConfigs,
 			}
 
 			result, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultConfigs(replaceInstanceDefaultConfigsOptions)
@@ -222,7 +222,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		It(`UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions *UpdateInstanceDefaultConfigsOptions)`, func() {
 			updateInstanceDefaultConfigsOptions := &ibmanalyticsengineapiv3.UpdateInstanceDefaultConfigsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				Body: make(map[string]interface{}),
+				Body:       make(map[string]interface{}),
 			}
 
 			result, response, err := ibmAnalyticsEngineApiService.UpdateInstanceDefaultConfigs(updateInstanceDefaultConfigsOptions)
@@ -254,8 +254,8 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions *ReplaceInstanceDefaultRuntimeOptions)`, func() {
 			replaceInstanceDefaultRuntimeOptions := &ibmanalyticsengineapiv3.ReplaceInstanceDefaultRuntimeOptions{
-				InstanceID: core.StringPtr(instanceGuid),
-				SparkVersion: core.StringPtr("3.3"),
+				InstanceID:   core.StringPtr(instanceGuid),
+				SparkVersion: core.StringPtr("3.4"),
 			}
 
 			runtime, response, err := ibmAnalyticsEngineApiService.ReplaceInstanceDefaultRuntime(replaceInstanceDefaultRuntimeOptions)
@@ -271,14 +271,14 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`CreateApplication(createApplicationOptions *CreateApplicationOptions)`, func() {
 			runtimeModel := &ibmanalyticsengineapiv3.Runtime{
-				SparkVersion: core.StringPtr("3.1"),
+				SparkVersion: core.StringPtr("3.3"),
 			}
 
 			createApplicationOptions := &ibmanalyticsengineapiv3.CreateApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID:  core.StringPtr(instanceGuid),
 				Application: core.StringPtr("/opt/ibm/spark/examples/src/main/python/wordcount.py"),
-				Arguments: []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
-				Runtime: runtimeModel,
+				Arguments:   []string{"/opt/ibm/spark/examples/src/main/resources/people.txt"},
+				Runtime:     runtimeModel,
 			}
 
 			applicationResponse, response, err := ibmAnalyticsEngineApiService.CreateApplication(createApplicationOptions)
@@ -287,7 +287,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			Expect(applicationResponse).ToNot(BeNil())
 
 			applicationId = *applicationResponse.ID
-			fmt.Printf("applicationResponse application_id : %v \n",applicationId)	
+			fmt.Printf("applicationResponse application_id : %v \n", applicationId)
 		})
 	})
 
@@ -295,12 +295,12 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) with pagination`, func(){
+		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) with pagination`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				State: []string{"accepted","running","finished","stopped","failed"},
-				Limit: core.Int64Ptr(int64(10)),
-				Start: core.StringPtr("testString"),
+				State:      []string{"accepted", "running", "finished", "stopped", "failed"},
+				Limit:      core.Int64Ptr(int64(10)),
+				Start:      core.StringPtr("testString"),
 			}
 
 			listApplicationsOptions.Start = nil
@@ -323,11 +323,11 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) using ApplicationsPager`, func(){
+		It(`ListApplications(listApplicationsOptions *ListApplicationsOptions) using ApplicationsPager`, func() {
 			listApplicationsOptions := &ibmanalyticsengineapiv3.ListApplicationsOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				State: []string{"accepted","running","finished","stopped","failed"},
-				Limit: core.Int64Ptr(int64(25)),
+				State:      []string{"accepted", "running", "finished", "stopped", "failed"},
+				Limit:      core.Int64Ptr(int64(25)),
 			}
 
 			// Test GetNext().
@@ -363,7 +363,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`GetApplication(getApplicationOptions *GetApplicationOptions)`, func() {
 			getApplicationOptions := &ibmanalyticsengineapiv3.GetApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID:    core.StringPtr(instanceGuid),
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
@@ -380,7 +380,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`GetApplicationState(getApplicationStateOptions *GetApplicationStateOptions)`, func() {
 			getApplicationStateOptions := &ibmanalyticsengineapiv3.GetApplicationStateOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID:    core.StringPtr(instanceGuid),
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
@@ -430,9 +430,9 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		It(`ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions *ReplaceLogForwardingConfigOptions)`, func() {
 			replaceLogForwardingConfigOptions := &ibmanalyticsengineapiv3.ReplaceLogForwardingConfigOptions{
 				InstanceID: core.StringPtr(instanceGuid),
-				Enabled: core.BoolPtr(true),
-				Sources: []string{"spark-driver", "spark-executor"},
-				Tags: []string{"<tag_1>", "<tag_2>", "<tag_n"},
+				Enabled:    core.BoolPtr(true),
+				Sources:    []string{"spark-driver", "spark-executor"},
+				Tags:       []string{"<tag_1>", "<tag_2>", "<tag_n"},
 			}
 
 			logForwardingConfigResponse, response, err := ibmAnalyticsEngineApiService.ReplaceLogForwardingConfig(replaceLogForwardingConfigOptions)
@@ -465,7 +465,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		It(`ConfigurePlatformLogging(configurePlatformLoggingOptions *ConfigurePlatformLoggingOptions)`, func() {
 			configurePlatformLoggingOptions := &ibmanalyticsengineapiv3.ConfigurePlatformLoggingOptions{
 				InstanceGuid: core.StringPtr(instanceGuid),
-				Enable: core.BoolPtr(true),
+				Enable:       core.BoolPtr(true),
 			}
 
 			loggingConfigurationResponse, response, err := ibmAnalyticsEngineApiService.ConfigurePlatformLogging(configurePlatformLoggingOptions)
@@ -529,7 +529,7 @@ var _ = Describe(`IbmAnalyticsEngineApiV3 Integration Tests`, func() {
 		})
 		It(`DeleteApplication(deleteApplicationOptions *DeleteApplicationOptions)`, func() {
 			deleteApplicationOptions := &ibmanalyticsengineapiv3.DeleteApplicationOptions{
-				InstanceID: core.StringPtr(instanceGuid),
+				InstanceID:    core.StringPtr(instanceGuid),
 				ApplicationID: core.StringPtr(applicationId),
 			}
 
