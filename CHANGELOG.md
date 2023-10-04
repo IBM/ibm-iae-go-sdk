@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.2.0...v2.3.0) (2023-10-04)
+
+
+### Features
+
+* add support for time based application list filters ([b941c02](https://github.com/IBM/ibm-iae-go-sdk/commit/b941c02766ebac07994329ff530f43ba1d3ef985))
+
 # [2.2.0](https://github.com/IBM/ibm-iae-go-sdk/compare/v2.1.0...v2.2.0) (2023-05-24)
 
 
